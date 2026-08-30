@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://044edq6qinl7"]
+
+[ext_resource type="Texture2D" uid="uid://ddj4tqwewvfve" path="res://assets/environments/world_map.png" id="1_qqero"]
+[ext_resource type="PackedScene" uid="uid://dmcfp1e1xvqp8" path="res://world_points/map_point.tscn" id="2_u82pb"]
+[ext_resource type="PackedScene" path="res://world_map_player/world_map_player.tscn" id="3_u82pb"]
+
+[node name="WorldMap" type="Node2D" unique_id=1750420017]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1894785909]
+texture = ExtResource("1_qqero")
+
+[node name="Points" type="Node2D" parent="." unique_id=913954944]
+
+[node name="Point01" parent="Points" unique_id=732026459 node_paths=PackedStringArray("right") instance=ExtResource("2_u82pb")]
+position = Vector2(-30, -481)
+right = NodePath("../Point02")
+
+[node name="Point02" parent="Points" unique_id=1372352239 node_paths=PackedStringArray("down", "left") instance=ExtResource("2_u82pb")]
+position = Vector2(129, -383)
+down = NodePath("../Point03")
+left = NodePath("../Point01")
+
+[node name="Point03" parent="Points" unique_id=2088280830 node_paths=PackedStringArray("up", "down") instance=ExtResource("2_u82pb")]
+position = Vector2(-7, -276)
+up = NodePath("../Point02")
+down = NodePath("../Point04")
+
+[node name="Point04" parent="Points" unique_id=1874257807 node_paths=PackedStringArray("up", "left", "right") instance=ExtResource("2_u82pb")]
+position = Vector2(131, -77)
+up = NodePath("../Point03")
+left = NodePath("../Point05")
+right = NodePath("../Point06")
+
+[node name="Point05" parent="Points" unique_id=2092664179 node_paths=PackedStringArray("right") instance=ExtResource("2_u82pb")]
+position = Vector2(-18, -119)
+right = NodePath("../Point04")
+
+[node name="Point06" parent="Points" unique_id=1363173087 node_paths=PackedStringArray("down", "left") instance=ExtResource("2_u82pb")]
+position = Vector2(322, 89)
+down = NodePath("../Point07")
+left = NodePath("../Point04")
+
+[node name="Point07" parent="Points" unique_id=1391824063 node_paths=PackedStringArray("up") instance=ExtResource("2_u82pb")]
+position = Vector2(218, 196)
+up = NodePath("../Point06")
+
+[node name="Point08" parent="Points" unique_id=367058251 instance=ExtResource("2_u82pb")]
+position = Vector2(276, 377)
+
+[node name="Point09" parent="Points" unique_id=1439840318 instance=ExtResource("2_u82pb")]
+position = Vector2(-58, 428)
+
+[node name="Point10" parent="Points" unique_id=1106087663 instance=ExtResource("2_u82pb")]
+position = Vector2(179, 547)
+
+[node name="WorldMapPlayer" parent="." unique_id=102030016 node_paths=PackedStringArray("start_point") instance=ExtResource("3_u82pb")]
+start_point = NodePath("../Points/Point01")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=440896139]
+zoom = Vector2(0.5, 0.5)

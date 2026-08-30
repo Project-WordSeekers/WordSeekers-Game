@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dmcfp1e1xvqp8"]
+
+[ext_resource type="Texture2D" uid="uid://8dy5jqnq4c67" path="res://assets/environments/map_token.svg" id="1_3a50i"]
+[ext_resource type="Script" uid="uid://dqytxfqx21wgv" path="res://world_points/map_point.gd" id="1_htdyy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3wy0o"]
+radius = 16.0
+
+[node name="map_point" type="Area2D" unique_id=732026459]
+script = ExtResource("1_htdyy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=481014703]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_3a50i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1203650330]
+shape = SubResource("CircleShape2D_3wy0o")
