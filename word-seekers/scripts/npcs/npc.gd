@@ -14,7 +14,7 @@ func _ready() -> void:
 func on_player_tile_changed(player_tile: Vector2i) -> void:
 	# Considera os 8 quadrados ao redor como adjacentes.
 	var delta := player_tile - grid_tile
-	var adjacent := max(abs(delta.x), abs(delta.y)) == 1
+	var adjacent: bool = max(abs(delta.x), abs(delta.y)) == 1
 
 	if adjacent and not player_was_adjacent:
 		say(greeting)
