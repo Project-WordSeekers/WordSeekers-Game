@@ -11,7 +11,11 @@ func _ready() -> void:
 	_build_floor()
 	player.grid_size = Vector2i(GRID_WIDTH, GRID_HEIGHT)
 	player.tile_spacing = TILE_SPACING
-	player.blocked_tiles = [npc.grid_tile]
+
+	var blocked: Array[Vector2i] = []
+    blocked.append(npc.grid_tile)
+    player.blocked_tiles = blocked
+
 	player.tile_changed.connect(npc.on_player_tile_changed)
 	# O sinal inicial do Player pode ocorrer antes da conexão acima.
 	npc.on_player_tile_changed(player.current_tile)
