@@ -11,8 +11,9 @@ texture = ExtResource("1_qqero")
 
 [node name="Points" type="Node2D" parent="." unique_id=913954944]
 
-[node name="Point01" parent="Points" unique_id=732026459 node_paths=PackedStringArray("right") instance=ExtResource("2_u82pb")]
+[node name="Point01" parent="Points" unique_id=732026459 node_paths=PackedStringArray("down", "right") instance=ExtResource("2_u82pb")]
 position = Vector2(-30, -481)
+down = NodePath("../Point03")
 right = NodePath("../Point02")
 
 [node name="Point02" parent="Points" unique_id=1372352239 node_paths=PackedStringArray("down", "left") instance=ExtResource("2_u82pb")]
@@ -20,10 +21,11 @@ position = Vector2(129, -383)
 down = NodePath("../Point03")
 left = NodePath("../Point01")
 
-[node name="Point03" parent="Points" unique_id=2088280830 node_paths=PackedStringArray("up", "down") instance=ExtResource("2_u82pb")]
+[node name="Point03" parent="Points" unique_id=2088280830 node_paths=PackedStringArray("up", "down", "right") instance=ExtResource("2_u82pb")]
 position = Vector2(-7, -276)
-up = NodePath("../Point02")
+up = NodePath("../Point01")
 down = NodePath("../Point04")
+right = NodePath("../Point02")
 
 [node name="Point04" parent="Points" unique_id=1874257807 node_paths=PackedStringArray("up", "left", "right") instance=ExtResource("2_u82pb")]
 position = Vector2(131, -77)
