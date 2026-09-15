@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/npcs/npc.gd" id="1_npc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_npc"]
+size = Vector3(0.9, 1.5, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="Material_npc"]
+albedo_color = Color(0.82, 0.42, 0.18, 1)
+roughness = 0.9
+
+[sub_resource type="BoxShape3D" id="BoxShape_npc"]
+size = Vector3(0.9, 1.5, 0.9)
+
+[node name="NPC" type="StaticBody3D"]
+script = ExtResource("1_npc")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_npc")
+material_override = SubResource("Material_npc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape_npc")
+
+[node name="Speech" type="Label3D" parent="."]
+position = Vector3(0, 1.45, 0)
+text = "oi"
+font_size = 48
+outline_size = 12
+billboard = 1
+no_depth_test = true
