@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="WordSeekers"
-run/main_scene="res://scenes/cena1.tscn"
+run/main_scene="res://scenes/world/world_map.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameState="*res://scripts/systems/game_state.gd"
+SceneTransition="*res://scripts/systems/scene_transition.gd"
 
 [display]
 

@@ -1,31 +1,38 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://2mcfjb48ord5"]
 
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://ct7wdxmtuaojx" path="res://scripts/player/player.gd" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://dml0ttxb2ulp4" path="res://assets/characters/player/overworld/player_walk.png" id="2_texture"]
+[ext_resource type="Script" uid="uid://cnae6857j3fq4" path="res://scripts/systems/player_camera.gd" id="3_camera"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
-radius = 0.42
-height = 1.4
+[sub_resource type="CapsuleShape2D" id="CapsulePlayer"]
+radius = 5.0
+height = 16.0
 
-[sub_resource type="StandardMaterial3D" id="Material_player"]
-albedo_color = Color(0.18, 0.45, 0.9, 1)
-roughness = 0.85
+[sub_resource type="CircleShape2D" id="InteractionShape"]
+radius = 32.0
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape_player"]
-radius = 0.42
-height = 1.4
-
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody2D" unique_id=1308245873]
 script = ExtResource("1_player")
 
-[node name="Mesh" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_player")
-material_override = SubResource("Material_player")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1040897189]
+texture_filter = 1
+position = Vector2(0, -20)
+scale = Vector2(0.11, 0.082)
+texture = ExtResource("2_texture")
+hframes = 4
+vframes = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape_player")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=335377897]
+shape = SubResource("CapsulePlayer")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-position = Vector3(10, 12, 10)
-rotation_degrees = Vector3(-35, 45, 0)
-current = true
-fov = 48.0
+[node name="InteractionArea" type="Area2D" parent="." unique_id=344257948]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=380348103]
+shape = SubResource("InteractionShape")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1307129706]
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+script = ExtResource("3_camera")
+visible_scene_fraction = 0.12

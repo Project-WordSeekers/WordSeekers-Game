@@ -1,0 +1,389 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/cena1/biblioteca/library.jpg" id="1_5hne4"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_blutl"]
+[ext_resource type="Script" path="res://scripts/npcs/professor.gd" id="2_qd40r"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/biblioteca/bibliotecario.png" id="3_dh2li"]
+[ext_resource type="AudioStream" path="res://assets/audio/cena1/biblioteca/biblioteca.ogg" id="5_mf01h"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="6_portal"]
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="7_music_loop"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ly40g"]
+radius = 13.0
+height = 68.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_50kor"]
+radius = 39.0
+height = 92.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_50kor"]
+size = Vector2(1241, 162)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ly40g"]
+size = Vector2(30, 725.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_suspq"]
+size = Vector2(61, 820.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2wegn"]
+size = Vector2(117, 351)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxi8q"]
+size = Vector2(153, 138.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lq24"]
+size = Vector2(600, 42.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_786mh"]
+size = Vector2(605, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gyhli"]
+size = Vector2(138, 134)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f78w5"]
+size = Vector2(326, 348)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jprew"]
+size = Vector2(211.5, 148)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vc1wi"]
+size = Vector2(151, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utyc3"]
+size = Vector2(83, 76.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ll5eg"]
+size = Vector2(39.5, 46.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yjqgb"]
+size = Vector2(40.125, 27.625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mkuus"]
+size = Vector2(245.625, 125.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0rhtv"]
+size = Vector2(363.5, 89.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3m1l3"]
+size = Vector2(159, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m74li"]
+size = Vector2(32, 151)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wtnp"]
+size = Vector2(41, 126)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qpndv"]
+size = Vector2(48, 268)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63am8"]
+size = Vector2(45, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_53nc7"]
+size = Vector2(367, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p88lt"]
+size = Vector2(94, 116)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_quxua"]
+size = Vector2(56, 129)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jxuie"]
+size = Vector2(101, 29)
+
+[node name="Biblioteca" type="Node2D" unique_id=205530898]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1337453125]
+position = Vector2(642, 409.4375)
+scale = Vector2(1.2524413, 0.9423411)
+texture = ExtResource("1_5hne4")
+
+[node name="Professor" type="CharacterBody2D" parent="." unique_id=1870855469]
+script = ExtResource("2_qd40r")
+
+[node name="Sprite2D" type="Sprite2D" parent="Professor" unique_id=715429714]
+position = Vector2(641, 142)
+scale = Vector2(0.7717386, 0.6774193)
+texture = ExtResource("3_dh2li")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Professor" unique_id=801846990]
+position = Vector2(643, 138)
+shape = SubResource("CapsuleShape2D_ly40g")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1794397753]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1146787772]
+position = Vector2(642, 140)
+shape = SubResource("CapsuleShape2D_50kor")
+
+[node name="Player" parent="." unique_id=218410659 instance=ExtResource("2_blutl")]
+position = Vector2(677.00006, 649)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=582027516]
+
+[node name="InteractionLabel" type="Panel" parent="UI" unique_id=56443884]
+visible = false
+offset_left = 511.0
+offset_top = 53.0
+offset_right = 784.0
+offset_bottom = 93.0
+
+[node name="Label" type="Label" parent="UI/InteractionLabel" unique_id=1914128708]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 5.0
+offset_right = 268.0
+offset_bottom = 28.0
+text = "Pressione E para conversar"
+
+[node name="DialoguePanel" type="Panel" parent="UI" unique_id=1356358428]
+visible = false
+anchors_preset = -1
+anchor_left = 0.523
+anchor_top = 0.057000004
+anchor_right = 0.65800005
+anchor_bottom = 0.24900001
+offset_left = -0.44000244
+offset_top = 33.96
+offset_right = 61.75995
+offset_bottom = -1.280014
+
+[node name="DialogueLabel" type="Label" parent="UI/DialoguePanel" unique_id=1044207341]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 6.0
+offset_right = -5.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuizPanel" type="Panel" parent="UI" unique_id=196774945]
+visible = false
+offset_left = 669.0
+offset_top = 75.0
+offset_right = 1012.0
+offset_bottom = 213.0
+
+[node name="QuestionLabel" type="Label" parent="UI/QuizPanel" unique_id=1032442646]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 336.0
+offset_bottom = 25.0
+text = "What is the correct translation of \"library\"?"
+
+[node name="AnswerButton1" type="Button" parent="UI/QuizPanel" unique_id=843787988]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 28.0
+offset_right = 45.0
+offset_bottom = 51.0
+text = "A) Escola"
+
+[node name="AnswerButton2" type="Button" parent="UI/QuizPanel" unique_id=511574440]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 54.0
+offset_right = 45.0
+offset_bottom = 77.0
+text = "B) Biblioteca"
+
+[node name="AnswerButton3" type="Button" parent="UI/QuizPanel" unique_id=1595692968]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 80.0
+offset_right = 45.0
+offset_bottom = 103.0
+text = "C) Professor"
+
+[node name="AnswerButton4" type="Button" parent="UI/QuizPanel" unique_id=1386644008]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 106.0
+offset_right = 45.0
+offset_bottom = 129.0
+text = "D) Livro"
+
+[node name="victoryLabel" type="Label" parent="UI/QuizPanel" unique_id=1159733684]
+visible = false
+layout_mode = 0
+offset_left = 115.0
+offset_top = 30.0
+offset_right = 155.0
+offset_bottom = 53.0
+text = "You won! 🎉
+Great job!
+You answered correctly!"
+
+[node name="Paredes" type="StaticBody2D" parent="." unique_id=600319386]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paredes" unique_id=1172012254]
+position = Vector2(630.5, 71)
+shape = SubResource("RectangleShape2D_50kor")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Paredes" unique_id=637293141]
+position = Vector2(30, 436.25)
+shape = SubResource("RectangleShape2D_ly40g")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Paredes" unique_id=2039157345]
+position = Vector2(1277, 399.75)
+shape = SubResource("RectangleShape2D_suspq")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Paredes" unique_id=530800484]
+position = Vector2(392.5, 324.5)
+shape = SubResource("RectangleShape2D_2wegn")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Paredes" unique_id=317233342]
+position = Vector2(529.5, 277.875)
+shape = SubResource("RectangleShape2D_qxi8q")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Paredes" unique_id=1137094037]
+position = Vector2(320, 808)
+shape = SubResource("RectangleShape2D_0lq24")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Paredes" unique_id=1499731889]
+position = Vector2(968.5, 799)
+shape = SubResource("RectangleShape2D_786mh")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Paredes" unique_id=1080722870]
+position = Vector2(755, 278)
+shape = SubResource("RectangleShape2D_gyhli")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Paredes" unique_id=854170331]
+position = Vector2(997, 327)
+shape = SubResource("RectangleShape2D_f78w5")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Paredes" unique_id=2091504297]
+position = Vector2(643.25, 547)
+shape = SubResource("RectangleShape2D_jprew")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Paredes" unique_id=210387659]
+position = Vector2(642, 816.5)
+shape = SubResource("RectangleShape2D_vc1wi")
+
+[node name="Mesas" type="StaticBody2D" parent="." unique_id=200018567]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mesas" unique_id=1047773225]
+position = Vector2(205, 471.75)
+shape = SubResource("RectangleShape2D_utyc3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Mesas" unique_id=1032028206]
+position = Vector2(210, 222)
+shape = SubResource("RectangleShape2D_utyc3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Mesas" unique_id=930942518]
+position = Vector2(208, 705)
+shape = SubResource("RectangleShape2D_utyc3")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Mesas" unique_id=188521514]
+position = Vector2(1081, 706)
+shape = SubResource("RectangleShape2D_utyc3")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Mesas" unique_id=1410783658]
+position = Vector2(1076, 181)
+shape = SubResource("RectangleShape2D_utyc3")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Mesas" unique_id=1043138883]
+position = Vector2(808.25, 763.625)
+shape = SubResource("RectangleShape2D_ll5eg")
+
+[node name="Central" type="StaticBody2D" parent="." unique_id=1266338331]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Central" unique_id=634538238]
+position = Vector2(600, 772)
+shape = SubResource("RectangleShape2D_yjqgb")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Central" unique_id=1162364239]
+position = Vector2(560, 772)
+shape = SubResource("RectangleShape2D_yjqgb")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Central" unique_id=1569336469]
+position = Vector2(476, 756)
+shape = SubResource("RectangleShape2D_yjqgb")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Central" unique_id=39241394]
+position = Vector2(475, 774)
+shape = SubResource("RectangleShape2D_yjqgb")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Central" unique_id=1556559064]
+position = Vector2(521, 761)
+shape = SubResource("RectangleShape2D_yjqgb")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Central" unique_id=692273614]
+position = Vector2(726, 772)
+shape = SubResource("RectangleShape2D_yjqgb")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Central" unique_id=655701202]
+position = Vector2(685, 771.1875)
+shape = SubResource("RectangleShape2D_yjqgb")
+
+[node name="Estantes" type="StaticBody2D" parent="." unique_id=753060010]
+visible = false
+position = Vector2(647, 547)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Estantes" unique_id=1507511982]
+position = Vector2(-397.5625, -192.5)
+shape = SubResource("RectangleShape2D_mkuus")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Estantes" unique_id=1179488202]
+position = Vector2(-420.75, 36.375)
+shape = SubResource("RectangleShape2D_0rhtv")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Estantes" unique_id=1166274768]
+position = Vector2(-319.5, 93)
+shape = SubResource("RectangleShape2D_3m1l3")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Estantes" unique_id=1676979496]
+position = Vector2(-584, 157.5)
+shape = SubResource("RectangleShape2D_m74li")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Estantes" unique_id=2003511757]
+position = Vector2(-172.5, -138)
+shape = SubResource("RectangleShape2D_5wtnp")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Estantes" unique_id=909800659]
+position = Vector2(-591, -124)
+shape = SubResource("RectangleShape2D_qpndv")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Estantes" unique_id=1743549734]
+position = Vector2(-547.5, 98)
+shape = SubResource("RectangleShape2D_63am8")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Estantes" unique_id=162610556]
+position = Vector2(412.5, 53)
+shape = SubResource("RectangleShape2D_53nc7")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Estantes" unique_id=1870266390]
+position = Vector2(556, -197)
+shape = SubResource("RectangleShape2D_p88lt")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Estantes" unique_id=646111140]
+position = Vector2(171, -138.5)
+shape = SubResource("RectangleShape2D_quxua")
+
+[node name="SaidaBiblioteca" type="Area2D" parent="." unique_id=499901015]
+script = ExtResource("6_portal")
+target_scene_path = "res://scenes/locations/cena1/cena1.tscn"
+target_spawn_name = &"BibliotecaReturn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaBiblioteca" unique_id=432506594]
+position = Vector2(642, 805)
+shape = SubResource("RectangleShape2D_jxuie")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1938738185]
+stream = ExtResource("5_mf01h")
+autoplay = true
+script = ExtResource("7_music_loop")
+loop_enabled = true
+
+[connection signal="body_entered" from="InteractionArea" to="Professor" method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="Professor" method="_on_interaction_area_body_exited"]
+[connection signal="pressed" from="UI/QuizPanel/AnswerButton1" to="Professor" method="_on_answer_button_1_pressed"]
+[connection signal="pressed" from="UI/QuizPanel/AnswerButton2" to="Professor" method="_on_answer_button_2_pressed"]
+[connection signal="pressed" from="UI/QuizPanel/AnswerButton3" to="Professor" method="_on_answer_button_3_pressed"]
+[connection signal="pressed" from="UI/QuizPanel/AnswerButton4" to="Professor" method="_on_answer_button_4_pressed"]
