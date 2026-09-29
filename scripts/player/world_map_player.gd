@@ -1,5 +1,8 @@
 extends Node2D
 
+const MALE_TEXTURE: Texture2D = preload("res://assets/characters/player/world/player_world.png")
+const FEMALE_TEXTURE: Texture2D = preload("res://assets/characters/player/female/player_female.png")
+
 @export var start_point: Area2D
 @export var speed: float = 180.0
 @export var animation_fps: float = 8.0
@@ -12,17 +15,33 @@ extends Node2D
 
 var current_point: Area2D
 var target_point: Area2D
-var moving := false
+var moving: bool = false
 
-var animation_row := 0
-var animation_frame := 0
-var animation_time := 0.0
+var animation_row: int = 0
+var animation_frame: int = 0
+var animation_time: float = 0.0
+var walk_frame_count: int = 4
 
 func _ready() -> void:
 	ensure_input_actions()
+	apply_selected_appearance()
 	restore_world_position()
 	set_idle_frame()
 	update_direction_indicators()
+
+func apply_selected_appearance() -> void:
+	sprite.vframes = 4
+	if GameState.player_appearance == GameState.APPEARANCE_FEMALE:
+		sprite.texture = FEMALE_TEXTURE
+		sprite.hframes = 3
+		sprite.scale = Vector2(0.32, 0.24)
+		walk_frame_count = 3
+	else:
+		sprite.texture = MALE_TEXTURE
+		sprite.hframes = 4
+		sprite.scale = Vector2(0.25, 0.25)
+		walk_frame_count = 4
+	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 
 func _process(delta: float) -> void:
 	if moving:
@@ -69,7 +88,7 @@ func animate_walk(delta: float) -> void:
 	animation_time += delta
 	if animation_time >= 1.0 / animation_fps:
 		animation_time = 0.0
-		animation_frame = (animation_frame + 1) % 4
+		animation_frame = (animation_frame + 1) % walk_frame_count
 		sprite.frame_coords = Vector2i(animation_frame, animation_row)
 
 func set_idle_frame() -> void:
@@ -107,12 +126,12 @@ func ensure_input_actions() -> void:
 		return
 
 	InputMap.add_action("interact")
-	var interact_key := InputEventKey.new()
+	var interact_key: InputEventKey = InputEventKey.new()
 	interact_key.physical_keycode = KEY_E
 	InputMap.action_add_event("interact", interact_key)
 
 func restore_world_position() -> void:
-	var points := get_parent().get_node_or_null("Points")
+	var points: Node = get_parent().get_node_or_null("Points")
 	var saved_point: Area2D = null
 
 	if points != null:

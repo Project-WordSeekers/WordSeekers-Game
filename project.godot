@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="WordSeekers"
-run/main_scene="res://scenes/world/world_map.tscn"
+run/main_scene="res://scenes/ui/character_selection/character_selection.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
