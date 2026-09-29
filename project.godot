@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="WordSeekers"
-run/main_scene="res://scenes/ui/character_selection/character_selection.tscn"
+run/main_scene="res://scenes/ui/intro/intro.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -26,6 +26,7 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
 
 [physics]
 

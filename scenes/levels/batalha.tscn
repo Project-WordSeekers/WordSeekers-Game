@@ -1,0 +1,157 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/batalha.gd" id="1_battle"]
+[ext_resource type="Texture2D" path="res://assets/environments/arena.png" id="2_arena"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/Esqueleto.png" id="3_skeleton"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="4_player"]
+
+[sub_resource type="RectangleShape2D" id="ArenaWallShape"]
+size = Vector2(711, 274)
+
+[sub_resource type="RectangleShape2D" id="EnemyInteractionShape"]
+size = Vector2(183.20604, 182.7923)
+
+[node name="Batalha" type="Node2D"]
+script = ExtResource("1_battle")
+
+[node name="FundoBatalha" type="Sprite2D" parent="."]
+position = Vector2(360, 510)
+scale = Vector2(0.41955745, 0.4435441)
+texture = ExtResource("2_arena")
+
+[node name="parede" type="Area2D" parent="FundoBatalha"]
+visible = false
+position = Vector2(-858.047, -1149.8293)
+scale = Vector2(2.3834639, 2.2545674)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FundoBatalha/parede"]
+position = Vector2(360.5, 436)
+shape = SubResource("ArenaWallShape")
+
+[node name="Inimigo" type="Sprite2D" parent="."]
+position = Vector2(472.00003, 603)
+scale = Vector2(0.2620001, 0.22976878)
+texture = ExtResource("3_skeleton")
+
+[node name="InteractionArea" type="Area2D" parent="Inimigo"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inimigo/InteractionArea"]
+position = Vector2(3.8170166, 0)
+shape = SubResource("EnemyInteractionShape")
+
+[node name="Player" parent="." instance=ExtResource("4_player")]
+position = Vector2(105, 609)
+
+[node name="StartBattlePanel" type="Panel" parent="."]
+visible = false
+offset_left = 314.0
+offset_top = 623.0
+offset_right = 565.0
+offset_bottom = 654.0
+
+[node name="StartBattleLabel" type="Label" parent="StartBattlePanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 9.0
+offset_right = 93.5
+offset_bottom = -8.0
+theme_override_font_sizes/font_size = 12
+text = "Do you want to start the battle?"
+
+[node name="PlayerHPLabel" type="Label" parent="."]
+visible = false
+offset_left = 360.0
+offset_top = 576.0
+offset_right = 453.0
+offset_bottom = 599.0
+theme_override_font_sizes/font_size = 12
+text = "Player HP: 3"
+
+[node name="EnemyHPLabel" type="Label" parent="."]
+visible = false
+anchors_preset = -1
+anchor_top = -0.78400004
+anchor_right = 1.0
+offset_left = 483.0
+offset_top = 574.0
+offset_right = 579.0
+offset_bottom = 597.0
+theme_override_font_sizes/font_size = 12
+text = "Enemy HP: 3"
+
+[node name="QuestionPanel" type="Panel" parent="."]
+visible = false
+offset_left = 489.0
+offset_top = 596.0
+offset_right = 640.0
+offset_bottom = 614.0
+
+[node name="QuestionLabel" type="Label" parent="QuestionPanel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -3.0
+offset_right = 131.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 12
+text = "A pencil is  _____."
+
+[node name="AnswerInput" type="LineEdit" parent="."]
+visible = false
+offset_left = 490.0
+offset_top = 614.0
+offset_right = 638.0
+offset_bottom = 636.0
+theme_override_font_sizes/font_size = 10
+placeholder_text = "Type your answer..."
+
+[node name="AttackButton" type="Button" parent="."]
+visible = false
+offset_left = 525.0
+offset_top = 635.0
+offset_right = 547.0
+offset_bottom = 650.0
+theme_override_font_sizes/font_size = 10
+text = "Attack!"
+
+[node name="InteractionLabel" type="Label" parent="."]
+visible = false
+offset_left = 373.0
+offset_top = 567.0
+offset_right = 508.0
+offset_bottom = 590.0
+theme_override_font_sizes/font_size = 10
+text = "Press E para falar"
+
+[node name="YesButton" type="Button" parent="."]
+visible = false
+offset_left = 375.0
+offset_top = 655.0
+offset_right = 411.0
+offset_bottom = 677.0
+theme_override_font_sizes/font_size = 10
+text = "YES"
+
+[node name="NoButton" type="Button" parent="."]
+visible = false
+offset_left = 471.0
+offset_top = 655.0
+offset_right = 505.0
+offset_bottom = 677.0
+theme_override_font_sizes/font_size = 10
+text = "NO"
+
+[node name="ResultLabel" type="Label" parent="."]
+visible = false
+offset_left = 295.0
+offset_top = 625.0
+offset_right = 460.0
+offset_bottom = 648.0
+
+[connection signal="body_entered" from="Inimigo/InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="Inimigo/InteractionArea" to="." method="_on_interaction_area_body_exited"]
+[connection signal="pressed" from="AttackButton" to="." method="_on_attack_button_pressed"]
+[connection signal="pressed" from="YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="NoButton" to="." method="_on_no_button_pressed"]
