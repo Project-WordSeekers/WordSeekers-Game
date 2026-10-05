@@ -27,7 +27,6 @@ window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
-
 [physics]
 
 3d/physics_engine="GodotPhysics3D"

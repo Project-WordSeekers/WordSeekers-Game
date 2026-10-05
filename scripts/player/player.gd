@@ -8,6 +8,7 @@ const FEMALE_TEXTURE: Texture2D = preload("res://assets/characters/player/female
 
 var facing_row: int = 0
 var anim_timer: float = 0.0
+var input_locked: bool = false
 
 func _ready() -> void:
 	apply_selected_appearance()
@@ -23,7 +24,19 @@ func apply_selected_appearance() -> void:
 	else:
 		sprite.texture = MALE_TEXTURE
 
+func set_input_locked(locked: bool) -> void:
+	input_locked = locked
+	if locked:
+		velocity = Vector2.ZERO
+		anim_timer = 0.0
+		sprite.frame = facing_row * 3
+
 func _physics_process(delta: float) -> void:
+	if input_locked:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
 	var x: float = 0.0
 	var y: float = 0.0
 	if Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_LEFT):
