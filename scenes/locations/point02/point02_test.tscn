@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=16 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/environments/point02/point02_test_map.jpg" id="1_map"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" path="res://assets/characters/npcs/point02/green_dragon01.png" id="5_dragon"]
 [ext_resource type="Script" path="res://scripts/npcs/simple_dialogue_npc.gd" id="6_npc"]
 [ext_resource type="Script" path="res://scripts/systems/simple_dialogue_ui.gd" id="7_dialogue"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/point02/baron_abbot.png" id="8_baron_tex"]
+[ext_resource type="Script" path="res://scripts/npcs/baron_abbot.gd" id="9_baron_script"]
 
 [sub_resource type="RectangleShape2D" id="TransitionShape"]
 size = Vector2(96, 28)
@@ -145,6 +147,29 @@ offset_left = -34.0
 offset_top = -68.0
 offset_right = 35.0
 offset_bottom = -45.0
+theme_override_colors/font_color = Color(1, 0.92, 0.55, 1)
+theme_override_font_sizes/font_size = 14
+text = "[E] Falar"
+horizontal_alignment = 1
+
+[node name="BaronAbbot" type="Area2D" parent="NPCs"]
+position = Vector2(756, 520)
+script = ExtResource("9_baron_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="NPCs/BaronAbbot"]
+texture_filter = 1
+position = Vector2(0, -42)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_baron_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/BaronAbbot"]
+shape = SubResource("NpcInteractionShape")
+
+[node name="Prompt" type="Label" parent="NPCs/BaronAbbot"]
+offset_left = -42.0
+offset_top = -103.0
+offset_right = 43.0
+offset_bottom = -80.0
 theme_override_colors/font_color = Color(1, 0.92, 0.55, 1)
 theme_override_font_sizes/font_size = 14
 text = "[E] Falar"

@@ -50,6 +50,8 @@ func _process(delta: float) -> void:
 		check_input()
 
 func check_input() -> void:
+	if GameHUD.is_modal_open() or DialogueUI.is_open():
+		return
 	if current_point == null:
 		return
 

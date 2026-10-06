@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" path="res://scenes/player/world_map_player.tscn" id="3_u82pb"]
 [ext_resource type="PackedScene" uid="uid://by5wt2urpvcvo" path="res://scenes/locations/cena1/cena1.tscn" id="4_cena1"]
 [ext_resource type="PackedScene" path="res://scenes/locations/point02/point02_test.tscn" id="5_point02"]
+[ext_resource type="PackedScene" path="res://scenes/locations/cidade_fantasia/cidade_fantasia.tscn" id="6_cidade_fantasia"]
 
 [node name="WorldMap" type="Node2D" unique_id=1750420017]
 
@@ -30,6 +31,7 @@ position = Vector2(-7, -276)
 up = NodePath("../Point01")
 down = NodePath("../Point04")
 right = NodePath("../Point02")
+destination_scene = ExtResource("6_cidade_fantasia")
 
 [node name="Point04" parent="Points" unique_id=1874257807 node_paths=PackedStringArray("up", "left", "right") instance=ExtResource("2_u82pb")]
 position = Vector2(131, -77)

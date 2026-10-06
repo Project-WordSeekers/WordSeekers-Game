@@ -29,6 +29,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("interact"):
 		confirmed = true
 		GameState.set_player_appearance(selected_appearance)
+		GameState.world_map_point_name = &"Point01"
+		GameState.restore_full_health()
+		GameState.reset_inventory()
 		instruction.text = "Aparência escolhida!"
 		SceneTransition.change_scene_to_file(WORLD_MAP_SCENE)
 		get_viewport().set_input_as_handled()

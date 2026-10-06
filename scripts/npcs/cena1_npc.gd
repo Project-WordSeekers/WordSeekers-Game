@@ -1,38 +1,39 @@
 extends CharacterBody2D
 
-var player: Node2D
-var talking := false
+var player: Node2D = null
+var talking: bool = false
 @onready var prompt: Label = $Prompt
 
 func _ready() -> void:
-	player = get_tree().get_first_node_in_group("player")
+	player = get_tree().get_first_node_in_group("player") as Node2D
 	add_to_group("npc")
-	prompt.visible = false
+	prompt.text = "[E] Falar"
+	prompt.add_theme_color_override("font_color", Color(1.0, 0.92, 0.55, 1.0))
+	prompt.hide()
 
 func _process(_delta: float) -> void:
 	if player == null:
-		player = get_tree().get_first_node_in_group("player")
+		player = get_tree().get_first_node_in_group("player") as Node2D
 		return
-
-	var close := global_position.distance_to(player.global_position) < 90.0
-	prompt.visible = close and not talking
+	var close: bool = global_position.distance_to(player.global_position) < 90.0
+	prompt.visible = close and not talking and not DialogueUI.is_open()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if talking or player == null:
+	if player == null or talking or DialogueUI.is_open():
 		return
-
 	if not event.is_action_pressed("interact"):
 		return
-
-	var close := global_position.distance_to(player.global_position) < 90.0
-	if not close:
+	if global_position.distance_to(player.global_position) >= 90.0:
 		return
 
 	talking = true
-	prompt.visible = false
-
-	var ui = get_tree().get_first_node_in_group("dialogue")
-	if ui:
-		ui.show_dialogue("Morador", "Hello there!\nWelcome to our village!\nThis is a good place to learn English.")
-
+	prompt.hide()
+	DialogueUI.show_dialogue(
+		"Morador",
+		"Olá! Bem-vindo à vila!\nUse WASD ou as setas para andar.\nChegue perto de mim e aperte E para conversar.",
+		Callable(self, "_on_dialogue_closed")
+	)
 	get_viewport().set_input_as_handled()
+
+func _on_dialogue_closed() -> void:
+	talking = false

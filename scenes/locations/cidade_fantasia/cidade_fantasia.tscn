@@ -1,0 +1,352 @@
+[gd_scene format=3 uid="uid://cpq50apk5qt8a"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/cidade_fantasia/cidade_fantasia.png" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+
+[sub_resource type="RectangleShape2D" id="BuildingLibrary"]
+size = Vector2(106, 285)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_j5k5y"]
+a = Vector2(-67, 56)
+b = Vector2(47, 54)
+
+[sub_resource type="RectangleShape2D" id="BuildingTemple"]
+size = Vector2(114, 285)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4oi2"]
+size = Vector2(170, 67)
+
+[sub_resource type="RectangleShape2D" id="BuildingMill"]
+size = Vector2(127, 183)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5k5y"]
+size = Vector2(127, 170)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ou3o"]
+size = Vector2(211, 145)
+
+[sub_resource type="RectangleShape2D" id="BuildingShop"]
+size = Vector2(164.5, 227)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgflu"]
+size = Vector2(112, 163)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vx5p1"]
+size = Vector2(168, 129)
+
+[sub_resource type="RectangleShape2D" id="BuildingBlue"]
+size = Vector2(101, 173)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6sok"]
+size = Vector2(132, 206.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3yd3j"]
+size = Vector2(180, 102)
+
+[sub_resource type="RectangleShape2D" id="BuildingFarmHouse"]
+size = Vector2(69.5, 129)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_2ou3o"]
+a = Vector2(-31, 73)
+b = Vector2(47, 71)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_13357"]
+size = Vector2(124, 123)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wex5h"]
+size = Vector2(148, 81)
+
+[sub_resource type="RectangleShape2D" id="FarmField"]
+size = Vector2(274.5, 93)
+
+[sub_resource type="CircleShape2D" id="Fountain"]
+radius = 55.00909
+
+[sub_resource type="RectangleShape2D" id="TreeGarden1"]
+size = Vector2(37, 69.5)
+
+[sub_resource type="RectangleShape2D" id="TreeGarden2"]
+size = Vector2(30, 72.5)
+
+[sub_resource type="RectangleShape2D" id="TreeGarden3"]
+size = Vector2(33, 72.25)
+
+[sub_resource type="RectangleShape2D" id="TreeGarden4"]
+size = Vector2(37, 66.25)
+
+[sub_resource type="RectangleShape2D" id="TopWall"]
+size = Vector2(1230, 48)
+
+[sub_resource type="RectangleShape2D" id="LeftWall"]
+size = Vector2(29, 1130)
+
+[sub_resource type="RectangleShape2D" id="RightWall"]
+size = Vector2(32, 1130)
+
+[sub_resource type="RectangleShape2D" id="BottomWallLeft"]
+size = Vector2(485, 42)
+
+[sub_resource type="RectangleShape2D" id="BottomWallRight"]
+size = Vector2(485, 42)
+
+[sub_resource type="RectangleShape2D" id="WaterLeft"]
+size = Vector2(360, 300)
+
+[sub_resource type="RectangleShape2D" id="WaterBottom"]
+size = Vector2(1050, 178)
+
+[sub_resource type="RectangleShape2D" id="Pier"]
+size = Vector2(170, 95)
+
+[sub_resource type="RectangleShape2D" id="Lighthouse"]
+size = Vector2(55, 80)
+
+[sub_resource type="RectangleShape2D" id="WallCastleLeft"]
+size = Vector2(175, 210)
+
+[sub_resource type="RectangleShape2D" id="WallCastleRight"]
+size = Vector2(168, 292)
+
+[sub_resource type="RectangleShape2D" id="FarmFence"]
+size = Vector2(182, 164.25)
+
+[sub_resource type="RectangleShape2D" id="PortGate"]
+size = Vector2(85, 30)
+
+[sub_resource type="RectangleShape2D" id="ExitPortalShape"]
+size = Vector2(120, 90)
+
+[node name="Cidade" type="Node2D" unique_id=1230676398]
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=1139270166]
+texture_filter = 1
+position = Vector2(656, 599.5)
+texture = ExtResource("1_map")
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=1847455534]
+
+[node name="Biblioteca" type="StaticBody2D" parent="Colisoes" unique_id=1999329369]
+position = Vector2(245, 215)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Biblioteca" unique_id=424587662]
+position = Vector2(97, 0)
+shape = SubResource("BuildingLibrary")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/Biblioteca" unique_id=1262012248]
+shape = SubResource("SegmentShape2D_j5k5y")
+
+[node name="Templo" type="StaticBody2D" parent="Colisoes" unique_id=883130705]
+position = Vector2(1060, 205)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Templo" unique_id=1279671532]
+position = Vector2(-93, 0)
+shape = SubResource("BuildingTemple")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/Templo" unique_id=1644852553]
+position = Vector2(14, 23.5)
+shape = SubResource("RectangleShape2D_i4oi2")
+
+[node name="Moinho" type="StaticBody2D" parent="Colisoes" unique_id=57487588]
+position = Vector2(655, 170)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Moinho" unique_id=1501630782]
+position = Vector2(-101.5, 68.5)
+shape = SubResource("BuildingMill")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/Moinho" unique_id=1352013093]
+position = Vector2(99.5, 75)
+shape = SubResource("RectangleShape2D_j5k5y")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Colisoes/Moinho" unique_id=1468079182]
+position = Vector2(6.5, -28.5)
+shape = SubResource("RectangleShape2D_2ou3o")
+
+[node name="Loja" type="StaticBody2D" parent="Colisoes" unique_id=1541253493]
+position = Vector2(215, 520)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Loja" unique_id=1720063125]
+position = Vector2(-119.75, 37.5)
+shape = SubResource("BuildingShop")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/Loja" unique_id=323871759]
+position = Vector2(108, 71.5)
+shape = SubResource("RectangleShape2D_sgflu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Colisoes/Loja" unique_id=601258465]
+position = Vector2(20, -11.5)
+shape = SubResource("RectangleShape2D_vx5p1")
+
+[node name="CasaAzul" type="StaticBody2D" parent="Colisoes" unique_id=607502987]
+position = Vector2(1075, 505)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/CasaAzul" unique_id=866394700]
+position = Vector2(-65.5, 42.5)
+shape = SubResource("BuildingBlue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/CasaAzul" unique_id=425995289]
+position = Vector2(136, 28.25)
+shape = SubResource("RectangleShape2D_p6sok")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Colisoes/CasaAzul" unique_id=290705089]
+position = Vector2(27, -41)
+shape = SubResource("RectangleShape2D_3yd3j")
+
+[node name="CasaFazenda" type="StaticBody2D" parent="Colisoes" unique_id=1380760541]
+position = Vector2(960, 760)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/CasaFazenda" unique_id=1526710034]
+position = Vector2(-57.25, 21.5)
+shape = SubResource("BuildingFarmHouse")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/CasaFazenda" unique_id=1937024847]
+shape = SubResource("SegmentShape2D_2ou3o")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Colisoes/CasaFazenda" unique_id=1113023526]
+position = Vector2(107, 23.5)
+shape = SubResource("RectangleShape2D_13357")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Colisoes/CasaFazenda" unique_id=828481256]
+position = Vector2(26, -17.5)
+shape = SubResource("RectangleShape2D_wex5h")
+
+[node name="Plantacao" type="StaticBody2D" parent="Colisoes" unique_id=510588824]
+position = Vector2(1115, 850)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Plantacao" unique_id=1932885895]
+position = Vector2(35.75, 79.5)
+shape = SubResource("FarmField")
+
+[node name="Fonte" type="StaticBody2D" parent="Colisoes" unique_id=627111601]
+position = Vector2(655, 520)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Fonte" unique_id=728099002]
+position = Vector2(-22, 21)
+shape = SubResource("Fountain")
+
+[node name="Jardim1" type="StaticBody2D" parent="Colisoes" unique_id=1814649847]
+position = Vector2(480, 455)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Jardim1" unique_id=538924590]
+position = Vector2(4.5, -12.75)
+shape = SubResource("TreeGarden1")
+
+[node name="Jardim2" type="StaticBody2D" parent="Colisoes" unique_id=568321872]
+position = Vector2(780, 455)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Jardim2" unique_id=1151051813]
+position = Vector2(5, -11.25)
+shape = SubResource("TreeGarden2")
+
+[node name="Jardim3" type="StaticBody2D" parent="Colisoes" unique_id=907512638]
+position = Vector2(550, 700)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Jardim3" unique_id=1193514213]
+position = Vector2(16, -3.125)
+shape = SubResource("TreeGarden3")
+
+[node name="Jardim4" type="StaticBody2D" parent="Colisoes" unique_id=506684955]
+position = Vector2(725, 700)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Jardim4" unique_id=1015175364]
+position = Vector2(-22.5, -4.125)
+shape = SubResource("TreeGarden4")
+
+[node name="MuralhaTopo" type="StaticBody2D" parent="Colisoes" unique_id=1602673252]
+position = Vector2(656, 52)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/MuralhaTopo" unique_id=1382257534]
+shape = SubResource("TopWall")
+
+[node name="MuralhaEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=1022262598]
+position = Vector2(27, 600)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/MuralhaEsquerda" unique_id=1692379390]
+position = Vector2(-6.5, 0)
+shape = SubResource("LeftWall")
+
+[node name="MuralhaDireita" type="StaticBody2D" parent="Colisoes" unique_id=1568889937]
+position = Vector2(1285, 600)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/MuralhaDireita" unique_id=1460908735]
+position = Vector2(5, 0)
+shape = SubResource("RightWall")
+
+[node name="MuralhaBaixoEsq" type="StaticBody2D" parent="Colisoes" unique_id=562269728]
+position = Vector2(300, 1125)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/MuralhaBaixoEsq" unique_id=939166895]
+shape = SubResource("BottomWallLeft")
+
+[node name="MuralhaBaixoDir" type="StaticBody2D" parent="Colisoes" unique_id=1668557469]
+position = Vector2(1010, 1125)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/MuralhaBaixoDir" unique_id=744256327]
+shape = SubResource("BottomWallRight")
+
+[node name="AguaEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=958087172]
+position = Vector2(180, 930)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/AguaEsquerda" unique_id=2032275038]
+shape = SubResource("WaterLeft")
+
+[node name="AguaBaixo" type="StaticBody2D" parent="Colisoes" unique_id=426213428]
+position = Vector2(750, 1110)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/AguaBaixo" unique_id=306343943]
+position = Vector2(0, 6)
+shape = SubResource("WaterBottom")
+
+[node name="Pier" type="StaticBody2D" parent="Colisoes" unique_id=1852174304]
+position = Vector2(190, 860)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Pier" unique_id=2011143326]
+shape = SubResource("Pier")
+
+[node name="Farol" type="StaticBody2D" parent="Colisoes" unique_id=1479265715]
+position = Vector2(48, 850)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Farol" unique_id=1337638108]
+shape = SubResource("Lighthouse")
+
+[node name="MuralhaInternaEsq" type="StaticBody2D" parent="Colisoes" unique_id=1696199560]
+position = Vector2(150, 140)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/MuralhaInternaEsq" unique_id=580530146]
+position = Vector2(-47.5, 124)
+shape = SubResource("WallCastleLeft")
+
+[node name="MuralhaInternaDir" type="StaticBody2D" parent="Colisoes" unique_id=1532762457]
+position = Vector2(1160, 140)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/MuralhaInternaDir" unique_id=1692395328]
+position = Vector2(38, 56)
+shape = SubResource("WallCastleRight")
+
+[node name="CercaFazenda" type="StaticBody2D" parent="Colisoes" unique_id=1856213121]
+position = Vector2(1110, 820)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/CercaFazenda" unique_id=1409413870]
+position = Vector2(84, -17.875)
+shape = SubResource("FarmFence")
+
+[node name="Entrada" type="StaticBody2D" parent="Colisoes" unique_id=1348216564]
+position = Vector2(656, 1010)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Entrada" unique_id=507407592]
+position = Vector2(-17, -11)
+shape = SubResource("PortGate")
+
+[node name="Player" parent="." unique_id=2037137348 instance=ExtResource("2_player")]
+position = Vector2(640, 883)
+
+[node name="CameraBounds" type="Node2D" parent="." unique_id=1068578156]
+
+
+[node name="WorldMapExit" type="Area2D" parent="."]
+position = Vector2(656, 978)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
+shape = SubResource("ExitPortalShape")

@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 GameState="*res://scripts/systems/game_state.gd"
 SceneTransition="*res://scripts/systems/scene_transition.gd"
+GameHUD="*res://scenes/ui/game_hud/game_hud.tscn"
+DialogueUI="*res://scenes/ui/dialogue/dialogue_ui.tscn"
 
 [display]
 
