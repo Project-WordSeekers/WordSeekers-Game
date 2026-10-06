@@ -5,17 +5,33 @@ extends CanvasLayer
 @onready var text_label: Label = $Panel/Text
 
 func _ready() -> void:
-    add_to_group("dialogue")
-    box.visible = false
+	add_to_group("dialogue")
+	box.visible = false
 
 func show_dialogue(who: String, text: String) -> void:
-    name_label.text = who
-    text_label.text = text
-    box.visible = true
+	name_label.text = who
+	text_label.text = text
+	box.visible = true
 
-func _unhandled_input(event: InputEvent) -> void:
-    if box.visible and event is InputEventKey and event.pressed and event.keycode == KEY_E:
-        box.visible = false
-        var npc = get_tree().get_first_node_in_group("npc")
-        if npc:
-            npc.talking = false
+	var player = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("set_input_locked"):
+		player.set_input_locked(true)
+
+func _input(event: InputEvent) -> void:
+	if not box.visible:
+		return
+
+	if not event.is_action_pressed("interact"):
+		return
+
+	box.visible = false
+
+	var npc = get_tree().get_first_node_in_group("npc")
+	if npc:
+		npc.talking = false
+
+	var player = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("set_input_locked"):
+		player.set_input_locked(false)
+
+	get_viewport().set_input_as_handled()

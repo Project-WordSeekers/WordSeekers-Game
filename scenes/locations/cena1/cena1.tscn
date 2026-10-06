@@ -361,17 +361,17 @@ text = "[E] Conversar"
 script = ExtResource("5_dialogue")
 
 [node name="Panel" type="Panel" parent="Dialogue" unique_id=820354690]
-offset_left = 422.0
-offset_top = 1020.0
-offset_right = 950.0
-offset_bottom = 1109.0
+offset_left = 180.0
+offset_top = 520.0
+offset_right = 1100.0
+offset_bottom = 680.0
 theme_override_styles/panel = SubResource("DialogStyle")
 
 [node name="Name" type="Label" parent="Dialogue/Panel" unique_id=1517279465]
 layout_mode = 0
 offset_left = 18.0
 offset_top = 10.0
-offset_right = 180.0
+offset_right = 300.0
 offset_bottom = 38.0
 theme_override_colors/font_color = Color(1, 0.9, 0.55, 1)
 theme_override_font_sizes/font_size = 16
@@ -381,12 +381,12 @@ text = "Morador"
 [node name="Text" type="Label" parent="Dialogue/Panel" unique_id=2135216112]
 layout_mode = 0
 offset_left = 27.0
-offset_top = 35.0
-offset_right = 665.0
-offset_bottom = 88.0
+offset_top = 50.0
+offset_right = 890.0
+offset_bottom = 120.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 15
-text = "Olá!"
+theme_override_font_sizes/font_size = 17
+text = "Hello!"
 autowrap_mode = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dialogue/Panel" unique_id=586926429]
