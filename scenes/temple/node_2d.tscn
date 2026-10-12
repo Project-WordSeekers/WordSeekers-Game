@@ -1,0 +1,308 @@
+[gd_scene format=3 uid="uid://b80ploxvvn8ed"]
+
+[ext_resource type="PackedScene" uid="uid://2mcfjb48ord5" path="res://scenes/player/player.tscn" id="1_h846r"]
+[ext_resource type="Script" path="res://scripts/interactables/chalice.gd" id="2_chalice"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yjblj"]
+load_path = "res://.godot/imported/Templo.png-89fa90719e9d8a622b6068f08bd3cad3.ctex"
+
+[sub_resource type="RectangleShape2D" id="Rect_WallTopBot"]
+size = Vector2(1402, 56)
+
+[sub_resource type="RectangleShape2D" id="Rect_WallSide"]
+size = Vector2(80, 1122)
+
+[sub_resource type="RectangleShape2D" id="Rect_Altar"]
+size = Vector2(660, 268)
+
+[sub_resource type="RectangleShape2D" id="Rect_AltWing"]
+size = Vector2(137, 218)
+
+[sub_resource type="RectangleShape2D" id="Rect_Trans"]
+size = Vector2(130, 32)
+
+[sub_resource type="RectangleShape2D" id="Rect_InnWall"]
+size = Vector2(35, 596)
+
+[sub_resource type="RectangleShape2D" id="Rect_Statue"]
+size = Vector2(105, 170)
+
+[sub_resource type="RectangleShape2D" id="Rect_Fountain"]
+size = Vector2(150, 210)
+
+[sub_resource type="RectangleShape2D" id="Rect_Bench"]
+size = Vector2(200, 44)
+
+[sub_resource type="RectangleShape2D" id="Rect_ChalBody"]
+size = Vector2(80, 90)
+
+[sub_resource type="CircleShape2D" id="Circle_Chalice"]
+radius = 90.0
+
+[sub_resource type="RectangleShape2D" id="Rect_PotTop"]
+size = Vector2(55, 65)
+
+[sub_resource type="RectangleShape2D" id="Rect_PotBot"]
+size = Vector2(55, 70)
+
+[sub_resource type="RectangleShape2D" id="Rect_Candle"]
+size = Vector2(30, 50)
+
+[sub_resource type="RectangleShape2D" id="Rect_Muro"]
+size = Vector2(280, 35)
+
+[sub_resource type="RectangleShape2D" id="Rect_AnnexWall"]
+size = Vector2(30, 285)
+
+[sub_resource type="RectangleShape2D" id="Rect_Pilar"]
+size = Vector2(40, 65)
+
+[sub_resource type="RectangleShape2D" id="Rect_Braser"]
+size = Vector2(45, 65)
+
+[sub_resource type="RectangleShape2D" id="Rect_LampSide"]
+size = Vector2(40, 80)
+
+[sub_resource type="RectangleShape2D" id="Rect_LampCtr"]
+size = Vector2(50, 60)
+
+[node name="Node2D" type="Node2D" unique_id=539411079]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1180027882]
+
+[node name="Sprite2D" type="Sprite2D" parent="TileMapLayer" unique_id=1227834929]
+texture = SubResource("CompressedTexture2D_yjblj")
+
+[node name="Player" parent="TileMapLayer" unique_id=1308245873 instance=ExtResource("1_h846r")]
+position = Vector2(8, 492)
+scale = Vector2(2, 2)
+
+[node name="WallTop" type="StaticBody2D" parent="TileMapLayer" unique_id=300000001]
+position = Vector2(0, -533)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/WallTop" unique_id=400000001]
+shape = SubResource("Rect_WallTopBot")
+
+[node name="WallBottom" type="StaticBody2D" parent="TileMapLayer" unique_id=300000002]
+position = Vector2(0, 533)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/WallBottom" unique_id=400000002]
+shape = SubResource("Rect_WallTopBot")
+
+[node name="WallLeft" type="StaticBody2D" parent="TileMapLayer" unique_id=300000003]
+position = Vector2(-661, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/WallLeft" unique_id=400000003]
+shape = SubResource("Rect_WallSide")
+
+[node name="WallRight" type="StaticBody2D" parent="TileMapLayer" unique_id=300000004]
+position = Vector2(661, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/WallRight" unique_id=400000004]
+shape = SubResource("Rect_WallSide")
+
+[node name="Altar" type="StaticBody2D" parent="TileMapLayer" unique_id=300000005]
+position = Vector2(0, -427)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/Altar" unique_id=400000005]
+shape = SubResource("Rect_Altar")
+
+[node name="AltarWingLeft" type="StaticBody2D" parent="TileMapLayer" unique_id=300000006]
+position = Vector2(-399, -392)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/AltarWingLeft" unique_id=400000006]
+shape = SubResource("Rect_AltWing")
+
+[node name="AltarWingRight" type="StaticBody2D" parent="TileMapLayer" unique_id=300000007]
+position = Vector2(399, -392)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/AltarWingRight" unique_id=400000007]
+shape = SubResource("Rect_AltWing")
+
+[node name="TransitionLeft" type="StaticBody2D" parent="TileMapLayer" unique_id=300000008]
+position = Vector2(-396, -267)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/TransitionLeft" unique_id=400000008]
+shape = SubResource("Rect_Trans")
+
+[node name="TransitionRight" type="StaticBody2D" parent="TileMapLayer" unique_id=300000009]
+position = Vector2(396, -267)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/TransitionRight" unique_id=400000009]
+shape = SubResource("Rect_Trans")
+
+[node name="InnerWallLeft" type="StaticBody2D" parent="TileMapLayer" unique_id=300000010]
+position = Vector2(-444, 17)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/InnerWallLeft" unique_id=400000010]
+shape = SubResource("Rect_InnWall")
+
+[node name="InnerWallRight" type="StaticBody2D" parent="TileMapLayer" unique_id=300000011]
+position = Vector2(444, 17)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/InnerWallRight" unique_id=400000011]
+shape = SubResource("Rect_InnWall")
+
+[node name="StatueLeft" type="StaticBody2D" parent="TileMapLayer" unique_id=300000012]
+position = Vector2(-539, -386)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/StatueLeft" unique_id=400000012]
+shape = SubResource("Rect_Statue")
+
+[node name="StatueRight" type="StaticBody2D" parent="TileMapLayer" unique_id=300000013]
+position = Vector2(539, -386)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/StatueRight" unique_id=400000013]
+shape = SubResource("Rect_Statue")
+
+[node name="FountainLeft" type="StaticBody2D" parent="TileMapLayer" unique_id=300000014]
+position = Vector2(-543, -131)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/FountainLeft" unique_id=400000014]
+shape = SubResource("Rect_Fountain")
+
+[node name="FountainRight" type="StaticBody2D" parent="TileMapLayer" unique_id=300000015]
+position = Vector2(543, -131)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/FountainRight" unique_id=400000015]
+shape = SubResource("Rect_Fountain")
+
+[node name="LeftBench1" type="StaticBody2D" parent="TileMapLayer" unique_id=300000016]
+position = Vector2(-346, -94)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/LeftBench1" unique_id=400000016]
+shape = SubResource("Rect_Bench")
+
+[node name="LeftBench2" type="StaticBody2D" parent="TileMapLayer" unique_id=300000017]
+position = Vector2(-346, -22)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/LeftBench2" unique_id=400000017]
+shape = SubResource("Rect_Bench")
+
+[node name="LeftBench3" type="StaticBody2D" parent="TileMapLayer" unique_id=300000018]
+position = Vector2(-346, 50)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/LeftBench3" unique_id=400000018]
+shape = SubResource("Rect_Bench")
+
+[node name="LeftBench4" type="StaticBody2D" parent="TileMapLayer" unique_id=300000019]
+position = Vector2(-346, 122)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/LeftBench4" unique_id=400000019]
+shape = SubResource("Rect_Bench")
+
+[node name="LeftBench5" type="StaticBody2D" parent="TileMapLayer" unique_id=300000020]
+position = Vector2(-346, 192)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/LeftBench5" unique_id=400000020]
+shape = SubResource("Rect_Bench")
+
+[node name="RightBench1" type="StaticBody2D" parent="TileMapLayer" unique_id=300000021]
+position = Vector2(346, -94)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/RightBench1" unique_id=400000021]
+shape = SubResource("Rect_Bench")
+
+[node name="RightBench2" type="StaticBody2D" parent="TileMapLayer" unique_id=300000022]
+position = Vector2(346, -22)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/RightBench2" unique_id=400000022]
+shape = SubResource("Rect_Bench")
+
+[node name="RightBench3" type="StaticBody2D" parent="TileMapLayer" unique_id=300000023]
+position = Vector2(346, 50)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/RightBench3" unique_id=400000023]
+shape = SubResource("Rect_Bench")
+
+[node name="RightBench4" type="StaticBody2D" parent="TileMapLayer" unique_id=300000024]
+position = Vector2(346, 122)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/RightBench4" unique_id=400000024]
+shape = SubResource("Rect_Bench")
+
+[node name="RightBench5" type="StaticBody2D" parent="TileMapLayer" unique_id=300000025]
+position = Vector2(346, 192)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/RightBench5" unique_id=400000025]
+shape = SubResource("Rect_Bench")
+
+[node name="ChaliceBody" type="StaticBody2D" parent="TileMapLayer" unique_id=300000026]
+position = Vector2(0, 30)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/ChaliceBody" unique_id=400000026]
+shape = SubResource("Rect_ChalBody")
+
+[node name="FlowerPotTL" type="StaticBody2D" parent="TileMapLayer" unique_id=300000027]
+position = Vector2(-149, -134)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/FlowerPotTL" unique_id=400000027]
+shape = SubResource("Rect_PotTop")
+
+[node name="FlowerPotTR" type="StaticBody2D" parent="TileMapLayer" unique_id=300000028]
+position = Vector2(149, -134)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/FlowerPotTR" unique_id=400000028]
+shape = SubResource("Rect_PotTop")
+
+[node name="FlowerPotBL" type="StaticBody2D" parent="TileMapLayer" unique_id=300000029]
+position = Vector2(-149, 69)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/FlowerPotBL" unique_id=400000029]
+shape = SubResource("Rect_PotBot")
+
+[node name="FlowerPotBR" type="StaticBody2D" parent="TileMapLayer" unique_id=300000030]
+position = Vector2(149, 69)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/FlowerPotBR" unique_id=400000030]
+shape = SubResource("Rect_PotBot")
+
+[node name="CandleLeft" type="StaticBody2D" parent="TileMapLayer" unique_id=300000031]
+position = Vector2(-81, 69)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/CandleLeft" unique_id=400000031]
+shape = SubResource("Rect_Candle")
+
+[node name="CandleRight" type="StaticBody2D" parent="TileMapLayer" unique_id=300000032]
+position = Vector2(79, 69)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/CandleRight" unique_id=400000032]
+shape = SubResource("Rect_Candle")
+
+[node name="MuroLeft" type="StaticBody2D" parent="TileMapLayer" unique_id=300000033]
+position = Vector2(-386, 297)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/MuroLeft" unique_id=400000033]
+shape = SubResource("Rect_Muro")
+
+[node name="MuroRight" type="StaticBody2D" parent="TileMapLayer" unique_id=300000034]
+position = Vector2(384, 297)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/MuroRight" unique_id=400000034]
+shape = SubResource("Rect_Muro")
+
+[node name="AnnexWallLeft" type="StaticBody2D" parent="TileMapLayer" unique_id=300000035]
+position = Vector2(-516, 362)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/AnnexWallLeft" unique_id=400000035]
+shape = SubResource("Rect_AnnexWall")
+
+[node name="AnnexWallRight" type="StaticBody2D" parent="TileMapLayer" unique_id=300000036]
+position = Vector2(514, 362)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/AnnexWallRight" unique_id=400000036]
+shape = SubResource("Rect_AnnexWall")
+
+[node name="PilarLeft" type="StaticBody2D" parent="TileMapLayer" unique_id=300000037]
+position = Vector2(-251, 312)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/PilarLeft" unique_id=400000037]
+shape = SubResource("Rect_Pilar")
+
+[node name="PilarRight" type="StaticBody2D" parent="TileMapLayer" unique_id=300000038]
+position = Vector2(251, 312)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/PilarRight" unique_id=400000038]
+shape = SubResource("Rect_Pilar")
+
+[node name="BraserLeft" type="StaticBody2D" parent="TileMapLayer" unique_id=300000039]
+position = Vector2(-224, 317)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/BraserLeft" unique_id=400000039]
+shape = SubResource("Rect_Braser")
+
+[node name="BraserRight" type="StaticBody2D" parent="TileMapLayer" unique_id=300000040]
+position = Vector2(223, 317)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/BraserRight" unique_id=400000040]
+shape = SubResource("Rect_Braser")
+
+[node name="LampLeft" type="StaticBody2D" parent="TileMapLayer" unique_id=300000041]
+position = Vector2(-76, 359)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/LampLeft" unique_id=400000041]
+shape = SubResource("Rect_LampSide")
+
+[node name="LampRight" type="StaticBody2D" parent="TileMapLayer" unique_id=300000042]
+position = Vector2(76, 359)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/LampRight" unique_id=400000042]
+shape = SubResource("Rect_LampSide")
+
+[node name="LampCenter" type="StaticBody2D" parent="TileMapLayer" unique_id=300000043]
+position = Vector2(0, 430)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/LampCenter" unique_id=400000043]
+shape = SubResource("Rect_LampCtr")
+
+[node name="Chalice" type="Area2D" parent="TileMapLayer" unique_id=500000001]
+position = Vector2(0, -30)
+script = ExtResource("2_chalice")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/Chalice" unique_id=500000002]
+shape = SubResource("Circle_Chalice")
+
+[node name="Prompt" type="Label" parent="TileMapLayer/Chalice" unique_id=500000003]
+offset_left = -60.0
+offset_top = -110.0
+offset_right = 60.0
+offset_bottom = -90.0
+text = "[E] Cálice"
+horizontal_alignment = 1
