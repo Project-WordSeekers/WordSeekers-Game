@@ -100,6 +100,18 @@ position = Vector2(924, 882)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapBounds/BottomRight"]
 shape = SubResource("TopBottomWallShape")
 
+
+[node name="MarkedBarriers" type="StaticBody2D" parent="."]
+
+[node name="Fountain" type="CollisionPolygon2D" parent="MarkedBarriers"]
+polygon = PackedVector2Array(620, 439, 562, 468, 553, 488, 552, 511, 572, 553, 625, 569, 674, 555, 687, 539, 690, 513, 677, 468, 639, 443)
+
+[node name="LeftGarden" type="CollisionPolygon2D" parent="MarkedBarriers"]
+polygon = PackedVector2Array(279, 572, 279, 596, 292, 649, 301, 643, 293, 588, 296, 573, 414, 564, 422, 567, 430, 604, 425, 666, 429, 677, 534, 683, 541, 781, 520, 787, 431, 790, 427, 799, 465, 805, 544, 801, 541, 860, 551, 866, 560, 798, 547, 668, 441, 663, 445, 607, 433, 550, 323, 553, 308, 560, 292, 550)
+
+[node name="WagonAndFarm" type="CollisionPolygon2D" parent="MarkedBarriers"]
+polygon = PackedVector2Array(1124, 568, 1113, 571, 1112, 589, 1093, 590, 1089, 564, 1081, 558, 1062, 561, 1032, 555, 1015, 562, 1023, 571, 1074, 575, 1080, 603, 1115, 606, 1117, 644, 1109, 703, 1076, 703, 1069, 728, 1044, 731, 1028, 753, 1001, 752, 986, 770, 945, 769, 868, 749, 856, 760, 847, 755, 791, 758, 785, 769, 789, 785, 783, 788, 696, 782, 687, 808, 696, 864, 707, 861, 702, 809, 706, 798, 792, 802, 803, 796, 805, 772, 840, 770, 858, 776, 872, 766, 948, 785, 988, 785, 1000, 780, 1010, 766, 1041, 765, 1057, 742, 1081, 744, 1087, 716, 1117, 718, 1126, 707, 1132, 636)
+
 [node name="NPCs" type="Node2D" parent="."]
 
 [node name="knight01" type="Area2D" parent="NPCs"]
