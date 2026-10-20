@@ -121,9 +121,9 @@ speaker_name = "knight01"
 dialogue_text = "Hello there! Sou um cavaleiro da Távola Redonda. My name is Lance-a-lot."
 
 [node name="Sprite2D" type="Sprite2D" parent="NPCs/knight01"]
+scale = Vector2(0.18181818, 0.15094340)
 texture_filter = 1
 position = Vector2(0, -25)
-scale = Vector2(0.24, 0.24)
 texture = ExtResource("4_knight")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/knight01"]
@@ -146,9 +146,9 @@ speaker_name = "green_dragon01"
 dialogue_text = "ROAR!!!"
 
 [node name="Sprite2D" type="Sprite2D" parent="NPCs/green_dragon01"]
+scale = Vector2(0.13872832, 0.15238095)
 texture_filter = 1
 position = Vector2(0, -26)
-scale = Vector2(0.27, 0.27)
 texture = ExtResource("5_dragon")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/green_dragon01"]
@@ -169,9 +169,9 @@ position = Vector2(756, 520)
 script = ExtResource("9_baron_script")
 
 [node name="Sprite2D" type="Sprite2D" parent="NPCs/BaronAbbot"]
+scale = Vector2(0.22857143, 0.17391304)
 texture_filter = 1
 position = Vector2(0, -42)
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_baron_tex")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/BaronAbbot"]

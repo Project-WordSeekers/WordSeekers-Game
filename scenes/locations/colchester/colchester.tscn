@@ -1,0 +1,157 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/colchester/colchester.png" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/point02/baron_abbot.png" id="4_baron_texture"]
+[ext_resource type="Script" path="res://scripts/npcs/baron_abbot.gd" id="5_baron_script"]
+
+[sub_resource type="CircleShape2D" id="BaronInteraction"]
+radius = 32.0
+
+[sub_resource type="RectangleShape2D" id="Priory"]
+size = Vector2(330, 205)
+
+[sub_resource type="RectangleShape2D" id="Castle"]
+size = Vector2(485, 240)
+
+[sub_resource type="RectangleShape2D" id="RomanRuins"]
+size = Vector2(380, 290)
+
+[sub_resource type="RectangleShape2D" id="Fountain"]
+size = Vector2(115, 115)
+
+[sub_resource type="RectangleShape2D" id="LeftWall"]
+size = Vector2(65, 720)
+
+[sub_resource type="RectangleShape2D" id="RightWall"]
+size = Vector2(70, 720)
+
+[sub_resource type="RectangleShape2D" id="TopWall"]
+size = Vector2(1390, 55)
+
+[sub_resource type="RectangleShape2D" id="BottomLeftWall"]
+size = Vector2(675, 65)
+
+[sub_resource type="RectangleShape2D" id="BottomRightWall"]
+size = Vector2(600, 65)
+
+[sub_resource type="RectangleShape2D" id="WaterLeft"]
+size = Vector2(660, 190)
+
+[sub_resource type="RectangleShape2D" id="WaterRight"]
+size = Vector2(650, 190)
+
+[sub_resource type="RectangleShape2D" id="ExitShape"]
+size = Vector2(95, 30)
+
+[node name="Colchester" type="Node2D"]
+
+[node name="Mapa" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(768, 512)
+texture = ExtResource("1_map")
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="Priory" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(355, 202)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Priory"]
+shape = SubResource("Priory")
+
+[node name="Castle" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1164, 220)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Castle"]
+shape = SubResource("Castle")
+
+[node name="RomanRuins" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1220, 580)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/RomanRuins"]
+shape = SubResource("RomanRuins")
+
+[node name="Fountain" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(800, 562)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/Fountain"]
+shape = SubResource("Fountain")
+
+[node name="LeftWall" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(60, 406)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/LeftWall"]
+shape = SubResource("LeftWall")
+
+[node name="RightWall" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1477, 405)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/RightWall"]
+shape = SubResource("RightWall")
+
+[node name="TopWall" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(770, 52)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/TopWall"]
+shape = SubResource("TopWall")
+
+[node name="BottomLeftWall" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(340, 785)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/BottomLeftWall"]
+shape = SubResource("BottomLeftWall")
+
+[node name="BottomRightWall" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1190, 785)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/BottomRightWall"]
+shape = SubResource("BottomRightWall")
+
+[node name="WaterLeft" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(330, 903)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/WaterLeft"]
+shape = SubResource("WaterLeft")
+
+[node name="WaterRight" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1195, 902)
+
+[node name="Shape" type="CollisionShape2D" parent="Colisoes/WaterRight"]
+shape = SubResource("WaterRight")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(768, 730)
+
+[node name="WorldMapExit" type="Area2D" parent="."]
+position = Vector2(768, 948)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
+shape = SubResource("ExitShape")
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="BaronAbbot" type="Area2D" parent="NPCs"]
+position = Vector2(800, 690)
+script = ExtResource("5_baron_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="NPCs/BaronAbbot"]
+texture_filter = 1
+position = Vector2(0, -16)
+scale = Vector2(0.22857143, 0.17391304)
+texture = ExtResource("4_baron_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/BaronAbbot"]
+shape = SubResource("BaronInteraction")
+
+[node name="Prompt" type="Label" parent="NPCs/BaronAbbot"]
+offset_left = -45.0
+offset_top = -60.0
+offset_right = 45.0
+offset_bottom = -38.0
+theme_override_font_sizes/font_size = 12
+text = "[E] Falar"
+horizontal_alignment = 1

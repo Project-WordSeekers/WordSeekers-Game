@@ -1,0 +1,142 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/canterbury/canterbury.png" id="1_map"]
+
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+
+[sub_resource type="RectangleShape2D" id="ExitShape"]
+size = Vector2(62, 26)
+
+[node name="Cidade" type="Node2D" unique_id=1505947823]
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=1611603980]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("1_map")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=2124535863]
+
+[node name="Muro superior" type="StaticBody2D" parent="Colisoes" unique_id=2013205915]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Muro superior" unique_id=156335312]
+polygon = PackedVector2Array(163, 0, 1255, 0, 1255, 102, 1218, 102, 1218, 48, 175, 48)
+
+[node name="Muro esquerdo superior" type="StaticBody2D" parent="Colisoes" unique_id=609985689]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Muro esquerdo superior" unique_id=963567319]
+polygon = PackedVector2Array(0, 0, 180, 0, 222, 85, 224, 376, 197, 381, 190, 502, 3, 503, 0, 463, 154, 463, 2, 462, 0, 42, 0, 35)
+
+[node name="Muro esquerdo inferior" type="StaticBody2D" parent="Colisoes" unique_id=1382941429]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Muro esquerdo inferior" unique_id=832820238]
+polygon = PackedVector2Array(0, 554, 182, 563, 202, 582, 203, 707, 187, 726, 180, 920, 225, 989, 325, 1033, 325, 1199, 0, 1199)
+
+[node name="Muro inferior" type="StaticBody2D" parent="Colisoes" unique_id=429243592]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Muro inferior" unique_id=937467441]
+polygon = PackedVector2Array(195, 978, 327, 1034, 341, 1022, 362, 1039, 365, 1062, 695, 1060, 696, 1196, 774, 1194, 772, 1056, 1109, 1061, 1114, 1038, 1134, 1017, 1260, 1034, 1312, 963, 1312, 1199, 0, 1199, 0, 1090)
+
+[node name="Muro direito" type="StaticBody2D" parent="Colisoes" unique_id=688550565]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Muro direito" unique_id=2111445931]
+polygon = PackedVector2Array(1207, 0, 1312, 0, 1312, 1199, 1240, 1199, 1212, 1009, 1217, 926, 1272, 907, 1230, 175, 1205, 154, 1205, 122, 1144, 115, 1143, 78, 1123, 53)
+
+[node name="Catedral" type="StaticBody2D" parent="Colisoes" unique_id=1751218131]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Catedral" unique_id=120800387]
+polygon = PackedVector2Array(206, 122, 204, 51, 273, 49, 628, 49, 784, 42, 779, 106, 697, 105, 693, 372, 515, 377, 513, 308, 431, 306, 431, 378, 277, 380, 276, 123)
+
+[node name="Escola" type="StaticBody2D" parent="Colisoes" unique_id=1122507243]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Escola" unique_id=833710344]
+position = Vector2(34, 19)
+polygon = PackedVector2Array(721, 30, 1113, 30, 1111, 122, 1138, 147, 1151, 183, 1153, 361, 1008, 363, 1012, 283, 934, 284, 933, 369, 772, 369, 761, 360, 742, 288, 740, 140, 724, 125)
+
+[node name="Prefeitura" type="StaticBody2D" parent="Colisoes" unique_id=513592110]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Prefeitura" unique_id=1313017899]
+position = Vector2(31, 23)
+polygon = PackedVector2Array(222, 442, 320, 444, 312, 416, 347, 418, 358, 439, 397, 429, 415, 442, 484, 451, 494, 666, 392, 666, 393, 577, 308, 572, 304, 666, 222, 666)
+
+[node name="Templo" type="StaticBody2D" parent="Colisoes" unique_id=1751145761]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Templo" unique_id=1597468213]
+position = Vector2(68, 13)
+polygon = PackedVector2Array(877, 448, 1006, 450, 1021, 431, 1072, 428, 1094, 447, 1179, 448, 1192, 681, 1086, 673, 1087, 600, 1073, 588, 1050, 581, 1022, 590, 1014, 606, 1008, 669, 880, 668)
+
+[node name="Comercio" type="StaticBody2D" parent="Colisoes" unique_id=796436057]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Comercio" unique_id=1655942381]
+position = Vector2(32, 20)
+polygon = PackedVector2Array(144, 741, 485, 742, 505, 757, 502, 917, 349, 920, 344, 866, 313, 850, 280, 869, 280, 844, 346, 837, 276, 848, 283, 918, 129, 918)
+
+[node name="Biblioteca" type="StaticBody2D" parent="Colisoes" unique_id=843209470]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Biblioteca" unique_id=397149037]
+position = Vector2(37, 37)
+polygon = PackedVector2Array(879, 724, 1001, 720, 1113, 724, 1128, 701, 1173, 700, 1187, 722, 1232, 725, 1231, 820, 1241, 922, 1114, 923, 1109, 856, 1054, 853, 1042, 918, 879, 923)
+
+[node name="Torre inferior" type="StaticBody2D" parent="Colisoes" unique_id=1451510467]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Torre inferior" unique_id=1779292454]
+polygon = PackedVector2Array(607, 808, 696, 805, 701, 768, 759, 773, 761, 805, 852, 811, 852, 944, 761, 944, 760, 882, 702, 878, 703, 936, 607, 944)
+
+[node name="Estatua central" type="StaticBody2D" parent="Colisoes" unique_id=172986762]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Estatua central" unique_id=1399549181]
+position = Vector2(51, 32)
+polygon = PackedVector2Array(667, 429, 704, 428, 709, 488, 767, 547, 759, 612, 721, 652, 641, 652, 609, 608, 618, 529, 660, 488)
+
+[node name="Jardim estatua esquerdo" type="StaticBody2D" parent="Colisoes" unique_id=1698741289]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Jardim estatua esquerdo" unique_id=1526537118]
+position = Vector2(59, 68)
+polygon = PackedVector2Array(580, 501, 639, 501, 639, 558, 580, 558)
+
+[node name="Jardim estatua direito" type="StaticBody2D" parent="Colisoes" unique_id=149383090]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Jardim estatua direito" unique_id=2109651957]
+position = Vector2(51, 78)
+polygon = PackedVector2Array(728, 501, 791, 501, 791, 557, 728, 557)
+
+[node name="Jardim estatua baixo esquerdo" type="StaticBody2D" parent="Colisoes" unique_id=1817225670]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Jardim estatua baixo esquerdo" unique_id=1958185645]
+position = Vector2(74, 58)
+polygon = PackedVector2Array(576, 567, 629, 567, 629, 629, 576, 629)
+
+[node name="Jardim estatua baixo direito" type="StaticBody2D" parent="Colisoes" unique_id=1390692624]
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Jardim estatua baixo direito" unique_id=665376971]
+position = Vector2(27, 49)
+polygon = PackedVector2Array(741, 574, 791, 574, 791, 635, 741, 635)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(735, 1000)
+
+[node name="WorldMapExit" type="Area2D" parent="."]
+position = Vector2(735, 1074)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
+shape = SubResource("ExitShape")

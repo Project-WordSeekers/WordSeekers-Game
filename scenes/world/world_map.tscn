@@ -7,6 +7,13 @@
 [ext_resource type="PackedScene" path="res://scenes/locations/point02/point02_test.tscn" id="5_point02"]
 [ext_resource type="PackedScene" path="res://scenes/locations/cidade_fantasia/cidade_fantasia.tscn" id="6_cidade_fantasia"]
 
+[ext_resource type="PackedScene" path="res://scenes/locations/colchester/colchester.tscn" id="7_colchester"]
+
+[ext_resource type="PackedScene" path="res://scenes/locations/canterbury/canterbury.tscn" id="8_canterbury"]
+
+[ext_resource type="PackedScene" path="res://scenes/locations/cidade1_cambridge/cena1.tscn" id="9_cambridge"]
+[ext_resource type="PackedScene" path="res://scenes/locations/cidade13_winchester/cidade13_winchester.tscn" id="10_winchester"]
+
 [node name="WorldMap" type="Node2D" unique_id=1750420017]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1894785909]
@@ -18,7 +25,7 @@ texture = ExtResource("1_qqero")
 position = Vector2(-30, -481)
 down = NodePath("../Point03")
 right = NodePath("../Point02")
-destination_scene = ExtResource("4_cena1")
+destination_scene = ExtResource("7_colchester")
 
 [node name="Point02" parent="Points" unique_id=1372352239 node_paths=PackedStringArray("down", "left") instance=ExtResource("2_u82pb")]
 position = Vector2(129, -383)
@@ -38,15 +45,18 @@ position = Vector2(131, -77)
 up = NodePath("../Point03")
 left = NodePath("../Point05")
 right = NodePath("../Point06")
+destination_scene = ExtResource("8_canterbury")
 
 [node name="Point05" parent="Points" unique_id=2092664179 node_paths=PackedStringArray("right") instance=ExtResource("2_u82pb")]
 position = Vector2(-18, -119)
 right = NodePath("../Point04")
+destination_scene = ExtResource("9_cambridge")
 
 [node name="Point06" parent="Points" unique_id=1363173087 node_paths=PackedStringArray("down", "left") instance=ExtResource("2_u82pb")]
 position = Vector2(322, 89)
 down = NodePath("../Point07")
 left = NodePath("../Point04")
+destination_scene = ExtResource("10_winchester")
 
 [node name="Point07" parent="Points" unique_id=1391824063 node_paths=PackedStringArray("up") instance=ExtResource("2_u82pb")]
 position = Vector2(218, 196)
