@@ -6,13 +6,13 @@ signal dictionary_changed(owned: bool, uses: int, max_uses: int)
 const APPEARANCE_MALE: int = 0
 const APPEARANCE_FEMALE: int = 1
 const MAX_HEALTH: int = 10
-const CITY01_SCENE: String = "res://scenes/locations/cena1/cena1.tscn"
+const CITY01_SCENE: String = "res://scenes/locations/colchester/colchester.tscn"
 
 const DICTIONARY_NAME: String = "O Dicionário"
 const DICTIONARY_DESCRIPTION: String = "Um grimório misterioso. O dicionário tem o poder de ajudar seu usuário a desvendar o mistério das palavras."
 const DICTIONARY_MAX_USES: int = 3
 
-var world_map_point_name: StringName = &"Point01"
+var world_map_point_name: StringName = &"Colchester"
 var pending_spawn_name: StringName = &""
 var player_appearance: int = APPEARANCE_MALE
 var player_health: int = MAX_HEALTH
@@ -86,7 +86,7 @@ func reset_inventory() -> void:
 	dictionary_changed.emit(dictionary_owned, dictionary_uses, DICTIONARY_MAX_USES)
 
 func return_to_city01_after_defeat() -> void:
-	world_map_point_name = &"Point01"
+	world_map_point_name = &"Colchester"
 	pending_spawn_name = &""
 	restore_full_health()
 	SceneTransition.change_scene_to_file(CITY01_SCENE)

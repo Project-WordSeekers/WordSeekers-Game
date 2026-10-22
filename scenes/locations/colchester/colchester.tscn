@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" path="res://assets/environments/colchester/colchester.png" id="1_map"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="6_spawn"]
 
 [ext_resource type="Texture2D" path="res://assets/characters/npcs/point02/baron_abbot.png" id="4_baron_texture"]
 [ext_resource type="Script" path="res://scripts/npcs/baron_abbot.gd" id="5_baron_script"]
@@ -47,6 +48,7 @@ size = Vector2(650, 190)
 size = Vector2(95, 30)
 
 [node name="Colchester" type="Node2D"]
+script = ExtResource("6_spawn")
 
 [node name="Mapa" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -155,3 +157,19 @@ offset_bottom = -38.0
 theme_override_font_sizes/font_size = 12
 text = "[E] Falar"
 horizontal_alignment = 1
+
+[sub_resource type="RectangleShape2D" id="TempleEntranceShape"]
+size = Vector2(90, 25)
+
+[node name="TempleEntrance" type="Area2D" parent="."]
+position = Vector2(355, 331)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/Temple/temple_colchester.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempleEntrance"]
+shape = SubResource("TempleEntranceShape")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromTemple" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(355, 395)

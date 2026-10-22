@@ -22,7 +22,7 @@ position = Vector2(701, 900)
 [node name="SaidaCapela" type="Area2D" parent="."]
 position = Vector2(701, 1055)
 script = ExtResource("3_portal")
-target_scene_path = "res://scenes/locations/cidade1_cambridge/cena1.tscn"
+target_scene_path = "res://scenes/locations/cidade1_cambridge/cambridge.tscn"
 target_spawn_name = &"ChapelReturn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaCapela"]

@@ -368,7 +368,7 @@ shape = SubResource("RectangleShape2D_quxua")
 
 [node name="SaidaBiblioteca" type="Area2D" parent="." unique_id=499901015]
 script = ExtResource("6_portal")
-target_scene_path = "res://scenes/locations/cidade1_cambridge/cena1.tscn"
+target_scene_path = "res://scenes/locations/cidade1_cambridge/cambridge.tscn"
 target_spawn_name = &"BibliotecaReturn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaBiblioteca" unique_id=432506594]

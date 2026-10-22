@@ -142,3 +142,8 @@ func restore_world_position() -> void:
 	current_point = saved_point if saved_point != null else start_point
 	if current_point != null:
 		global_position = current_point.global_position
+
+func update_city_name() -> void:
+	var city_label: Label = get_parent().get_node_or_null("CityNameHUD/CityNamePanel/CityNameLabel") as Label
+	if city_label != null:
+		city_label.text = String(current_point.name) if current_point != null else ""
