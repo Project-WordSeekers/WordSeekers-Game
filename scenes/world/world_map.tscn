@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://044edq6qinl7"]
 
-[ext_resource type="Texture2D" uid="uid://ddj4tqwewvfve" path="res://assets/environments/world_map.png" id="1_qqero"]
+[ext_resource type="Texture2D" uid="uid://ddj4tqwewvfve" path="res://assets/environments/world_map/world_map.webp" id="1_qqero"]
 [ext_resource type="PackedScene" path="res://scenes/world/map_point.tscn" id="2_u82pb"]
 [ext_resource type="PackedScene" path="res://scenes/player/world_map_player.tscn" id="3_u82pb"]
-[ext_resource type="PackedScene" uid="uid://cpq50apk5qt8a" path="res://scenes/locations/cidade_fantasia/cidade_fantasia.tscn" id="6_cidade_fantasia"]
+[ext_resource type="PackedScene" uid="uid://cpq50apk5qt8a" path="res://scenes/locations/fantasy_city/cidade_fantasia.tscn" id="6_cidade_fantasia"]
 [ext_resource type="PackedScene" path="res://scenes/locations/colchester/colchester.tscn" id="7_colchester"]
 [ext_resource type="PackedScene" path="res://scenes/locations/canterbury/canterbury.tscn" id="8_canterbury"]
-[ext_resource type="PackedScene" uid="uid://by5wt2urpvcvo" path="res://scenes/locations/cidade1_cambridge/cambridge.tscn" id="9_cambridge"]
-[ext_resource type="PackedScene" uid="uid://drkvbnon8o107" path="res://scenes/locations/cidade13_winchester/cidade13_winchester.tscn" id="10_winchester"]
+[ext_resource type="PackedScene" uid="uid://by5wt2urpvcvo" path="res://scenes/locations/cambridge/cambridge.tscn" id="9_cambridge"]
+[ext_resource type="PackedScene" uid="uid://drkvbnon8o107" path="res://scenes/locations/winchester/cidade13_winchester.tscn" id="10_winchester"]
+
+[ext_resource type="PackedScene" path="res://scenes/locations/stratford/stratford.tscn" id="11_stratford"]
+[ext_resource type="PackedScene" path="res://scenes/locations/salisbury/salisbury.tscn" id="12_salisbury"]
 
 [node name="WorldMap" type="Node2D" unique_id=1750420017]
 
@@ -66,6 +69,7 @@ position = Vector2(97, -64)
 down = NodePath("../Oxford")
 left = NodePath("../Liverpool")
 right = NodePath("../Nottingham")
+destination_scene = ExtResource("11_stratford")
 
 [node name="Oxford" parent="Points" unique_id=1106087663 instance=ExtResource("2_u82pb") node_paths=PackedStringArray("up", "down", "right")]
 position = Vector2(110, 162)
@@ -90,6 +94,7 @@ position = Vector2(-32, 593)
 up = NodePath("../Bath")
 left = NodePath("../Plymouth")
 right = NodePath("../Winchester")
+destination_scene = ExtResource("12_salisbury")
 
 [node name="Winchester" parent="Points" unique_id=1524649895 instance=ExtResource("2_u82pb") node_paths=PackedStringArray("up", "left", "right")]
 position = Vector2(205, 555)
@@ -126,6 +131,6 @@ mouse_filter = 2
 
 [node name="CityNameLabel" type="Label" parent="CityNameHUD/CityNamePanel"]
 layout_mode = 2
-text = "Colchester"
+text = ""
 horizontal_alignment = 1
 vertical_alignment = 1

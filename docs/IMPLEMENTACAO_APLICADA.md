@@ -6,7 +6,7 @@
 - `WorldMapPlayer` movido para `scenes/player/` e seu script para `scripts/player/`.
 - `MapPoint` movido para `scenes/world/` com script em `scripts/systems/`.
 - `world_map.tscn` movido para `scenes/world/world_map.tscn`.
-- Asset das setas movido para `assets/ui/world_map/direction_arrow.png`.
+- Asset das setas movido para `assets/ui/icons/direction_arrow.png`.
 - Sprite do player do mapa-múndi movido para `assets/characters/player/world/player_world.png`.
 - Sprite usado pelo player interno copiado para `assets/characters/player/overworld/player_walk.png`.
 - `player.tscn` convertido do protótipo 3D para um `CharacterBody2D` reutilizável.

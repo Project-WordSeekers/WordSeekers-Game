@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="2_npc"]
+
+[node name="TempleCanterbury" instance=ExtResource("1_base")]
+
+[node name="Guardian" parent="NPCs" index="0" instance=ExtResource("2_npc")]
+position = Vector2(155, 30)
+speaker_name = "Guardião de Canterbury"
+dialogue_text = "Que a paz acompanhe sua jornada por Canterbury."

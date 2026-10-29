@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://ukabl40ehjfg"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/stratford/stratford_upon_avon.webp" id="1_17mvo"]
+[ext_resource type="PackedScene" uid="uid://2mcfjb48ord5" path="res://scenes/player/player.tscn" id="2_jonc3"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="4_spawn"]
+
+[sub_resource type="RectangleShape2D" id="DoorShape"]
+size = Vector2(60, 36)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_suspq"]
+radius = 30.565504
+
+[node name="Stratford" type="Node2D" unique_id=1561114068]
+script = ExtResource("4_spawn")
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=1394027805]
+position = Vector2(580, 162)
+texture = ExtResource("1_17mvo")
+
+[node name="Player" parent="." unique_id=1308245873 instance=ExtResource("2_jonc3")]
+position = Vector2(991, 610)
+
+[node name="Colisoes" type="StaticBody2D" parent="." unique_id=1955857934]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes" unique_id=1541177379]
+position = Vector2(115.999985, 125.81447)
+scale = Vector2(0.99999994, 0.9855372)
+polygon = PackedVector2Array(-31, 115, 100, 122, 185, 121, 177, -10, 141, -61, 68, -63, 44, -52, -20, -107, -84, -120, -113, -96, -121, -57, -96, -36, -84, -1, -92, 60, -89, 119)
+
+[node name="SaidaMapa" type="Area2D" parent="." unique_id=801398233]
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaMapa" unique_id=1680955774]
+position = Vector2(1031.5, 638)
+shape = SubResource("CircleShape2D_suspq")
+
+[node name="EntradaAnne" type="Area2D" parent="."]
+position = Vector2(120, -70)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/stratford/anne_hathaway_cottage.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntradaAnne"]
+shape = SubResource("DoorShape")
+
+[node name="EntradaShakespeare" type="Area2D" parent="."]
+position = Vector2(495, -70)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/stratford/shakespeare_birthplace.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntradaShakespeare"]
+shape = SubResource("DoorShape")
+
+[node name="EntradaTeatro" type="Area2D" parent="."]
+position = Vector2(1035, -50)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/stratford/royal_shakespeare_theatre.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntradaTeatro"]
+shape = SubResource("DoorShape")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="StratfordEntry" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(991, 580)
+
+[node name="AnneReturn" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(120, -10)
+
+[node name="ShakespeareReturn" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(495, -10)
+
+[node name="TeatroReturn" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1035, 10)

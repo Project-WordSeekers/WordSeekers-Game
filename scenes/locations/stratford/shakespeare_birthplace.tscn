@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://l8qf52giut7g"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/stratford/shakespeares_birthplace.webp" id="1_bg"]
+[ext_resource type="PackedScene" uid="uid://2mcfjb48ord5" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" uid="uid://cfq0c381aaqqy" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" uid="uid://b8jjmgtsykfdu" path="res://scripts/systems/scene_spawn.gd" id="4_spawn"]
+[ext_resource type="Texture2D" uid="uid://bujeyhxt2ktn" path="res://assets/characters/npcs/stratford/shakespeare.png" id="5_2dod1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_50kor"]
+radius = 17.0
+height = 76.0
+
+[sub_resource type="RectangleShape2D" id="ExitShape"]
+size = Vector2(160, 50)
+
+[node name="ShakespearesBirthplace" type="Node2D" unique_id=2142905838]
+script = ExtResource("4_spawn")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=268109192]
+texture_filter = 1
+position = Vector2(634, 390)
+scale = Vector2(0.82942706, 0.765625)
+texture = ExtResource("1_bg")
+
+[node name="Shakespeare" type="Area2D" parent="." unique_id=617715944]
+
+[node name="Sprite2D" type="Sprite2D" parent="Shakespeare" unique_id=1168145985]
+position = Vector2(650.00006, 185)
+scale = Vector2(0.081070594, 0.0852459)
+texture = ExtResource("5_2dod1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shakespeare" unique_id=1072659708]
+position = Vector2(647, 183)
+shape = SubResource("CapsuleShape2D_50kor")
+
+[node name="Player" parent="." unique_id=723835584 instance=ExtResource("2_player")]
+position = Vector2(644, 654)
+
+[node name="SaidaStratford" type="Area2D" parent="." unique_id=484480982]
+position = Vector2(645, 726)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/stratford/stratford.tscn"
+target_spawn_name = &"ShakespeareReturn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaStratford" unique_id=812119380]
+position = Vector2(5, -14)
+shape = SubResource("ExitShape")
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=1843801201]
+
+[node name="Entrada" type="Marker2D" parent="SpawnPoints" unique_id=2124117322]
+position = Vector2(643, 727)

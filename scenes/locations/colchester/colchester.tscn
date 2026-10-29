@@ -1,12 +1,14 @@
 [gd_scene format=3]
 
-[ext_resource type="Texture2D" path="res://assets/environments/colchester/colchester.png" id="1_map"]
+[ext_resource type="Texture2D" path="res://assets/environments/colchester/colchester.webp" id="1_map"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
 [ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="6_spawn"]
 
-[ext_resource type="Texture2D" path="res://assets/characters/npcs/point02/baron_abbot.png" id="4_baron_texture"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/colchester/baron_abbot.png" id="4_baron_texture"]
 [ext_resource type="Script" path="res://scripts/npcs/baron_abbot.gd" id="5_baron_script"]
+
+[ext_resource type="Script" path="res://scripts/minigames/roman_walls_challenge.gd" id="7_word_search"]
 
 [sub_resource type="CircleShape2D" id="BaronInteraction"]
 radius = 32.0
@@ -47,6 +49,12 @@ size = Vector2(650, 190)
 [sub_resource type="RectangleShape2D" id="ExitShape"]
 size = Vector2(95, 30)
 
+[sub_resource type="RectangleShape2D" id="TempleEntranceShape"]
+size = Vector2(90, 25)
+
+[sub_resource type="CircleShape2D" id="RomanWordsInteraction"]
+radius = 48.0
+
 [node name="Colchester" type="Node2D"]
 script = ExtResource("6_spawn")
 
@@ -60,68 +68,68 @@ texture = ExtResource("1_map")
 [node name="Priory" type="StaticBody2D" parent="Colisoes"]
 position = Vector2(355, 202)
 
-[node name="Shape" type="CollisionShape2D" parent="Colisoes/Priory"]
-shape = SubResource("Priory")
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/Priory"]
+polygon = PackedVector2Array(-165, -102.5, 165, -102.5, 165, 102.5, -165, 102.5)
 
 [node name="Castle" type="StaticBody2D" parent="Colisoes"]
 position = Vector2(1164, 220)
 
-[node name="Shape" type="CollisionShape2D" parent="Colisoes/Castle"]
-shape = SubResource("Castle")
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/Castle"]
+polygon = PackedVector2Array(-242.5, -120, 242.5, -120, 242.5, 120, -242.5, 120)
 
 [node name="RomanRuins" type="StaticBody2D" parent="Colisoes"]
 position = Vector2(1220, 580)
 
-[node name="Shape" type="CollisionShape2D" parent="Colisoes/RomanRuins"]
-shape = SubResource("RomanRuins")
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/RomanRuins"]
+polygon = PackedVector2Array(-190, -145, 190, -145, 190, 145, -190, 145)
 
 [node name="Fountain" type="StaticBody2D" parent="Colisoes"]
 position = Vector2(800, 562)
 
-[node name="Shape" type="CollisionShape2D" parent="Colisoes/Fountain"]
-shape = SubResource("Fountain")
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/Fountain"]
+polygon = PackedVector2Array(-57.5, -57.5, 57.5, -57.5, 57.5, 57.5, -57.5, 57.5)
 
 [node name="LeftWall" type="StaticBody2D" parent="Colisoes"]
 position = Vector2(60, 406)
 
-[node name="Shape" type="CollisionShape2D" parent="Colisoes/LeftWall"]
-shape = SubResource("LeftWall")
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/LeftWall"]
+polygon = PackedVector2Array(-32.5, -360, 32.5, -360, 32.5, 360, -32.5, 360)
 
 [node name="RightWall" type="StaticBody2D" parent="Colisoes"]
 position = Vector2(1477, 405)
 
-[node name="Shape" type="CollisionShape2D" parent="Colisoes/RightWall"]
-shape = SubResource("RightWall")
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/RightWall"]
+polygon = PackedVector2Array(-35, -360, 35, -360, 35, 360, -35, 360)
 
 [node name="TopWall" type="StaticBody2D" parent="Colisoes"]
 position = Vector2(770, 52)
 
-[node name="Shape" type="CollisionShape2D" parent="Colisoes/TopWall"]
-shape = SubResource("TopWall")
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/TopWall"]
+polygon = PackedVector2Array(-695, -27.5, 695, -27.5, 695, 27.5, -695, 27.5)
 
 [node name="BottomLeftWall" type="StaticBody2D" parent="Colisoes"]
 position = Vector2(340, 785)
 
-[node name="Shape" type="CollisionShape2D" parent="Colisoes/BottomLeftWall"]
-shape = SubResource("BottomLeftWall")
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/BottomLeftWall"]
+polygon = PackedVector2Array(-337.5, -32.5, 337.5, -32.5, 337.5, 32.5, -337.5, 32.5)
 
 [node name="BottomRightWall" type="StaticBody2D" parent="Colisoes"]
 position = Vector2(1190, 785)
 
-[node name="Shape" type="CollisionShape2D" parent="Colisoes/BottomRightWall"]
-shape = SubResource("BottomRightWall")
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/BottomRightWall"]
+polygon = PackedVector2Array(-300, -32.5, 300, -32.5, 300, 32.5, -300, 32.5)
 
 [node name="WaterLeft" type="StaticBody2D" parent="Colisoes"]
 position = Vector2(330, 903)
 
-[node name="Shape" type="CollisionShape2D" parent="Colisoes/WaterLeft"]
-shape = SubResource("WaterLeft")
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/WaterLeft"]
+polygon = PackedVector2Array(-330, -95, 330, -95, 330, 95, -330, 95)
 
 [node name="WaterRight" type="StaticBody2D" parent="Colisoes"]
 position = Vector2(1195, 902)
 
-[node name="Shape" type="CollisionShape2D" parent="Colisoes/WaterRight"]
-shape = SubResource("WaterRight")
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/WaterRight"]
+polygon = PackedVector2Array(-325, -95, 325, -95, 325, 95, -325, 95)
 
 [node name="Player" parent="." instance=ExtResource("2_player")]
 position = Vector2(768, 730)
@@ -158,13 +166,12 @@ theme_override_font_sizes/font_size = 12
 text = "[E] Falar"
 horizontal_alignment = 1
 
-[sub_resource type="RectangleShape2D" id="TempleEntranceShape"]
-size = Vector2(90, 25)
-
 [node name="TempleEntrance" type="Area2D" parent="."]
 position = Vector2(355, 331)
 script = ExtResource("3_portal")
-target_scene_path = "res://scenes/Temple/temple_colchester.tscn"
+target_scene_path = "res://scenes/temples/temple_colchester.tscn"
+temple_entrance = true
+temple_return_spawn = &"FromTemple"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TempleEntrance"]
 shape = SubResource("TempleEntranceShape")
@@ -173,3 +180,19 @@ shape = SubResource("TempleEntranceShape")
 
 [node name="FromTemple" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(355, 395)
+
+[node name="RomanWallsWordSearch" type="Area2D" parent="."]
+position = Vector2(990, 575)
+script = ExtResource("7_word_search")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RomanWallsWordSearch"]
+shape = SubResource("RomanWordsInteraction")
+
+[node name="Prompt" type="Label" parent="RomanWallsWordSearch"]
+offset_left = -95.0
+offset_top = -66.0
+offset_right = 95.0
+offset_bottom = -43.0
+theme_override_font_sizes/font_size = 15
+text = "[E] Diário: Roman Walls"
+horizontal_alignment = 1

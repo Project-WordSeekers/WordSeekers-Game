@@ -17,15 +17,20 @@ var current_point: Area2D
 var target_point: Area2D
 var moving: bool = false
 
+const RANDOM_BATTLE_SCENE: String = "res://scenes/minigames/battle.tscn"
+var encounter_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
 var animation_row: int = 0
 var animation_frame: int = 0
 var animation_time: float = 0.0
 var walk_frame_count: int = 4
 
 func _ready() -> void:
+	encounter_rng.randomize()
 	ensure_input_actions()
 	apply_selected_appearance()
 	restore_world_position()
+	update_city_name()
 	set_idle_frame()
 	update_direction_indicators()
 
@@ -81,10 +86,19 @@ func move_between_points(delta: float) -> void:
 	if global_position.distance_to(target_point.global_position) <= 1.0:
 		global_position = target_point.global_position
 		current_point = target_point
+		update_city_name()
 		target_point = null
 		moving = false
 		set_idle_frame()
 		update_direction_indicators()
+		# Uma rolagem por viagem: 5%, 10%, 15%, 20%... ate ocorrer batalha.
+		# O ponto de chegada ja esta salvo, permitindo retomar a viagem apos vencer.
+		var battle_started: bool = encounter_rng.randf() < GameState.get_next_battle_chance()
+		GameState.register_travel_battle_roll(battle_started)
+		if battle_started:
+			GameState.world_map_point_name = current_point.name
+			GameState.random_encounter_active = true
+			SceneTransition.change_scene_to_file(RANDOM_BATTLE_SCENE)
 
 func animate_walk(delta: float) -> void:
 	animation_time += delta
@@ -145,5 +159,10 @@ func restore_world_position() -> void:
 
 func update_city_name() -> void:
 	var city_label: Label = get_parent().get_node_or_null("CityNameHUD/CityNamePanel/CityNameLabel") as Label
-	if city_label != null:
-		city_label.text = String(current_point.name) if current_point != null else ""
+	if city_label == null:
+		return
+	if current_point == null:
+		city_label.text = ""
+		return
+	# Exibe o nome do MapPoint atual, nao um nome fixo de cidade.
+	city_label.text = String(current_point.name).replace("_", " ")

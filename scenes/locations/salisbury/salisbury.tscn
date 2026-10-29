@@ -1,0 +1,81 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/salisbury/salisbury.jpg" id="1_bg"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="4_spawn"]
+
+[sub_resource type="RectangleShape2D" id="EntradaCatedralShape"]
+size = Vector2(76, 30)
+
+[sub_resource type="RectangleShape2D" id="EntradaStonehengeShape"]
+size = Vector2(88, 38)
+
+[sub_resource type="RectangleShape2D" id="exit_shape"]
+size = Vector2(170, 48)
+
+[sub_resource type="RectangleShape2D" id="top_shape"]
+size = Vector2(1024, 30)
+
+[sub_resource type="RectangleShape2D" id="side_shape"]
+size = Vector2(30, 820)
+
+[node name="Salisbury" type="Node2D"]
+script = ExtResource("4_spawn")
+
+[node name="Mapa" type="Sprite2D" parent="."]
+position = Vector2(512, 410)
+texture_filter = 1
+texture = ExtResource("1_bg")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(512, 690)
+
+[node name="Limites" type="StaticBody2D" parent="."]
+
+[node name="Topo" type="CollisionPolygon2D" parent="Limites"]
+position = Vector2(512, 0)
+polygon = PackedVector2Array(-512, -15, 512, -15, 512, 15, -512, 15)
+
+[node name="Esquerda" type="CollisionPolygon2D" parent="Limites"]
+position = Vector2(0, 410)
+polygon = PackedVector2Array(-15, -410, 15, -410, 15, 410, -15, 410)
+
+[node name="Direita" type="CollisionPolygon2D" parent="Limites"]
+position = Vector2(1024, 410)
+polygon = PackedVector2Array(-15, -410, 15, -410, 15, 410, -15, 410)
+
+[node name="SaidaMapa" type="Area2D" parent="."]
+position = Vector2(512, 790)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaMapa"]
+shape = SubResource("exit_shape")
+
+[node name="EntradaCatedral" type="Area2D" parent="."]
+position = Vector2(453, 285)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/salisbury/catedral_salisbury.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntradaCatedral"]
+shape = SubResource("EntradaCatedralShape")
+
+[node name="EntradaStonehenge" type="Area2D" parent="."]
+position = Vector2(822, 130)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/salisbury/stonehenge.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntradaStonehenge"]
+shape = SubResource("EntradaStonehengeShape")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="SalisburyEntry" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(512, 690)
+
+[node name="CatedralReturn" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(453, 345)
+
+[node name="StonehengeReturn" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(822, 195)

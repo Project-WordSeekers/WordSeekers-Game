@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://drkvbnon8o107"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/winchester/winchester.webp" id="1_map"]
+[ext_resource type="PackedScene" uid="uid://2mcfjb48ord5" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" uid="uid://cfq0c381aaqqy" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" uid="uid://b8jjmgtsykfdu" path="res://scripts/systems/scene_spawn.gd" id="4_spawn"]
+
+[sub_resource type="RectangleShape2D" id="TopBoundaryShape"]
+size = Vector2(1402, 36)
+
+[sub_resource type="RectangleShape2D" id="LeftBoundaryShape"]
+size = Vector2(36, 1122)
+
+[sub_resource type="RectangleShape2D" id="RightBoundaryShape"]
+size = Vector2(36, 1122)
+
+[sub_resource type="RectangleShape2D" id="BottomBoundaryLeftShape"]
+size = Vector2(613, 36)
+
+[sub_resource type="RectangleShape2D" id="BottomBoundaryRightShape"]
+size = Vector2(613, 36)
+
+[sub_resource type="RectangleShape2D" id="CathedralShape"]
+size = Vector2(470, 270)
+
+[sub_resource type="RectangleShape2D" id="RoundHallShape"]
+size = Vector2(250, 230)
+
+[sub_resource type="RectangleShape2D" id="NorthwestBuildingShape"]
+size = Vector2(366, 137.5)
+
+[sub_resource type="RectangleShape2D" id="EastBuildingShape"]
+size = Vector2(250, 220)
+
+[sub_resource type="RectangleShape2D" id="SouthwestBuildingShape"]
+size = Vector2(280, 130)
+
+[sub_resource type="RectangleShape2D" id="SoutheastBuildingShape"]
+size = Vector2(302, 128.5)
+
+[sub_resource type="RectangleShape2D" id="WorldMapExitShape"]
+size = Vector2(100, 56)
+
+[node name="Cidade13Winchester" type="Node2D" unique_id=1552423944]
+script = ExtResource("4_spawn")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=20162696]
+texture_filter = 1
+position = Vector2(701, 561)
+texture = ExtResource("1_map")
+
+[node name="Player" parent="." unique_id=747202371 instance=ExtResource("2_player")]
+position = Vector2(701, 950)
+
+[node name="Collisions" type="Node2D" parent="." unique_id=757674704]
+
+[node name="TopBoundary" type="StaticBody2D" parent="Collisions" unique_id=1891171121]
+position = Vector2(701, 0)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collisions/TopBoundary" unique_id=1306872079]
+polygon = PackedVector2Array(-701, -18, 701, -18, 701, 18, -701, 18)
+
+[node name="LeftBoundary" type="StaticBody2D" parent="Collisions" unique_id=1266005387]
+position = Vector2(0, 561)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collisions/LeftBoundary" unique_id=1503804747]
+polygon = PackedVector2Array(-18, -561, 18, -561, 18, 561, -18, 561)
+
+[node name="RightBoundary" type="StaticBody2D" parent="Collisions" unique_id=1100704699]
+position = Vector2(1402, 561)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collisions/RightBoundary" unique_id=1659805916]
+polygon = PackedVector2Array(-18, -561, 18, -561, 18, 561, -18, 561)
+
+[node name="BottomBoundaryLeft" type="StaticBody2D" parent="Collisions" unique_id=1856395106]
+position = Vector2(306, 1122)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collisions/BottomBoundaryLeft" unique_id=1471552031]
+polygon = PackedVector2Array(-306.5, -18, 306.5, -18, 306.5, 18, -306.5, 18)
+
+[node name="BottomBoundaryRight" type="StaticBody2D" parent="Collisions" unique_id=1170318714]
+position = Vector2(1096, 1122)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collisions/BottomBoundaryRight" unique_id=111636926]
+polygon = PackedVector2Array(-306.5, -18, 306.5, -18, 306.5, 18, -306.5, 18)
+
+[node name="Cathedral" type="StaticBody2D" parent="Collisions" unique_id=663698153]
+position = Vector2(688, 165)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collisions/Cathedral" unique_id=1688300341]
+polygon = PackedVector2Array(-235, -135, 235, -135, 235, 135, -235, 135)
+
+[node name="GreatHall" type="StaticBody2D" parent="Collisions" unique_id=1934943302]
+position = Vector2(252, 190)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collisions/GreatHall" unique_id=321309052]
+polygon = PackedVector2Array(-125, -115, 125, -115, 125, 115, -125, 115)
+
+[node name="NorthwestBuilding" type="StaticBody2D" parent="Collisions" unique_id=1546256933]
+position = Vector2(180, 440)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collisions/NorthwestBuilding" unique_id=1984192452]
+position = Vector2(81, 188.75)
+polygon = PackedVector2Array(-183, -68.75, 183, -68.75, 183, 68.75, -183, 68.75)
+
+[node name="EastBuilding" type="StaticBody2D" parent="Collisions" unique_id=1773849468]
+position = Vector2(1060, 420)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collisions/EastBuilding" unique_id=1854781239]
+position = Vector2(-9, 112)
+polygon = PackedVector2Array(-125, -110, 125, -110, 125, 110, -125, 110)
+
+[node name="SouthwestBuilding" type="StaticBody2D" parent="Collisions" unique_id=611451798]
+position = Vector2(275, 730)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collisions/SouthwestBuilding" unique_id=1277548732]
+position = Vector2(-32, 62)
+polygon = PackedVector2Array(-140, -65, 140, -65, 140, 65, -140, 65)
+
+[node name="SoutheastBuilding" type="StaticBody2D" parent="Collisions" unique_id=1135811702]
+position = Vector2(1060, 730)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collisions/SoutheastBuilding" unique_id=1370221541]
+position = Vector2(-21, 8.25)
+polygon = PackedVector2Array(-151, -64.25, 151, -64.25, 151, 64.25, -151, 64.25)
+
+[node name="WorldMapExit" type="Area2D" parent="." unique_id=414078102]
+position = Vector2(701, 1020)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit" unique_id=322890802]
+position = Vector2(-16, 48)
+shape = SubResource("WorldMapExitShape")
+
+[node name="ExitLabel" type="Label" parent="WorldMapExit" unique_id=773000195]
+offset_left = -90.0
+offset_top = -58.0
+offset_right = 100.0
+offset_bottom = -32.0
+theme_override_colors/font_color = Color(1, 0.9, 0.45, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Return to World Map"
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=1229631758]
+
+[node name="WinchesterEntry" type="Marker2D" parent="SpawnPoints" unique_id=721281937]
+position = Vector2(701, 948)

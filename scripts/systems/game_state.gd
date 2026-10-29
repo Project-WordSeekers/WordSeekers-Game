@@ -12,8 +12,33 @@ const DICTIONARY_NAME: String = "O Dicionário"
 const DICTIONARY_DESCRIPTION: String = "Um grimório misterioso. O dicionário tem o poder de ajudar seu usuário a desvendar o mistério das palavras."
 const DICTIONARY_MAX_USES: int = 3
 
+# Encontros aleatorios: guarda o ponto de chegada para retornar apos a batalha.
+var random_encounter_active: bool = false
+# Chance inicial de 5%; aumenta 5 pontos percentuais por viagem sem batalha.
+var consecutive_travels_without_battle: int = 0
+
+func get_next_battle_chance() -> float:
+	return minf(0.05 * float(consecutive_travels_without_battle + 1), 1.0)
+
+func register_travel_battle_roll(battle_started: bool) -> void:
+	if battle_started:
+		consecutive_travels_without_battle = 0
+	else:
+		consecutive_travels_without_battle += 1
 var world_map_point_name: StringName = &"Colchester"
 var pending_spawn_name: StringName = &""
+# Retorno do templo: definido pela entrada da cidade, nunca pelo interior compartilhado.
+var temple_return_scene: String = ""
+var temple_return_spawn: StringName = &""
+
+func register_temple_origin(city_scene: String, return_spawn: StringName) -> void:
+	temple_return_scene = city_scene
+	temple_return_spawn = return_spawn
+
+func clear_temple_origin() -> void:
+	temple_return_scene = ""
+	temple_return_spawn = &""
+
 var player_appearance: int = APPEARANCE_MALE
 var player_health: int = MAX_HEALTH
 

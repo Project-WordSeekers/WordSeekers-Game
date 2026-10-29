@@ -8,6 +8,8 @@ func _ready() -> void:
 		return
 
 	var player: Node2D = get_node_or_null(player_path) as Node2D
+	if player == null:
+		player = _find_player(self)
 	var spawn_points: Node = get_node_or_null(spawn_points_path)
 	if player == null or spawn_points == null:
 		GameState.pending_spawn_name = &""
@@ -18,3 +20,12 @@ func _ready() -> void:
 		player.global_position = marker.global_position
 
 	GameState.pending_spawn_name = &""
+
+func _find_player(root: Node) -> Node2D:
+	for child in root.get_children():
+		if child is Node2D and child.is_in_group("player"):
+			return child as Node2D
+		var found: Node2D = _find_player(child)
+		if found != null:
+			return found
+	return null
