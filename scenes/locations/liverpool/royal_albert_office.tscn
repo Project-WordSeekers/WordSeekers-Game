@@ -1,0 +1,183 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/liverpool/escritorio.webp" id="1_bg"]
+[ext_resource type="PackedScene" path="res://scenes/locations/liverpool/royal_albert_office_player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/royal_albert_office.gd" id="3_script"]
+
+[sub_resource type="RectangleShape2D" id="ExitShape"]
+size = Vector2(170, 56)
+
+[node name="EscritorioPortuario" type="Node2D"]
+script = ExtResource("3_script")
+
+[node name="Mapa" type="Sprite2D" parent="."]
+texture_filter = 1
+centered = false
+texture = ExtResource("1_bg")
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="Parede_Superior" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Parede_Superior"]
+polygon = PackedVector2Array(0, 0, 1535, 0, 1535, 204, 0, 204)
+
+[node name="Parede_Esquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Parede_Esquerda"]
+polygon = PackedVector2Array(0, 204, 145, 204, 145, 842, 0, 842)
+
+[node name="Parede_Direita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Parede_Direita"]
+polygon = PackedVector2Array(1390, 204, 1535, 204, 1535, 842, 1390, 842)
+
+[node name="Parede_Inferior_Esquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Parede_Inferior_Esquerda"]
+polygon = PackedVector2Array(0, 842, 649, 842, 649, 1024, 0, 1024)
+
+[node name="Parede_Inferior_Direita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Parede_Inferior_Direita"]
+polygon = PackedVector2Array(877, 842, 1535, 842, 1535, 1024, 877, 1024)
+
+[node name="Balcao_e_Estantes" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Balcao_e_Estantes"]
+polygon = PackedVector2Array(402, 352, 450, 320, 581, 320, 639, 380, 893, 380, 952, 320, 1086, 320, 1130, 355, 1130, 523, 1091, 523, 1091, 559, 1029, 559, 1029, 592, 995, 622, 541, 622, 504, 593, 504, 559, 444, 559, 444, 523, 402, 523)
+
+[node name="Caixas_Canto_Esquerdo" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Caixas_Canto_Esquerdo"]
+polygon = PackedVector2Array(167, 225, 311, 225, 311, 315, 167, 315)
+
+[node name="Caixas_Canto_Direito" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Caixas_Canto_Direito"]
+polygon = PackedVector2Array(1222, 224, 1375, 224, 1375, 320, 1222, 320)
+
+[node name="Mesa_Esquerda_Superior" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Mesa_Esquerda_Superior"]
+polygon = PackedVector2Array(199, 512, 339, 512, 339, 615, 199, 615)
+
+[node name="Mesa_Direita_Superior" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Mesa_Direita_Superior"]
+polygon = PackedVector2Array(1196, 511, 1336, 511, 1336, 615, 1196, 615)
+
+[node name="Mesa_Esquerda_Inferior" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Mesa_Esquerda_Inferior"]
+polygon = PackedVector2Array(373, 651, 512, 651, 512, 752, 373, 752)
+
+[node name="Mesa_Direita_Inferior" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Mesa_Direita_Inferior"]
+polygon = PackedVector2Array(1025, 650, 1164, 650, 1164, 752, 1025, 752)
+
+[node name="Vaso_Parede_Esquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Vaso_Parede_Esquerda"]
+polygon = PackedVector2Array(138, 366, 199, 366, 199, 447, 138, 447)
+
+[node name="Vaso_Parede_Direita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Vaso_Parede_Direita"]
+polygon = PackedVector2Array(1336, 365, 1395, 365, 1395, 448, 1336, 448)
+
+[node name="Vaso_Inferior_Esquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Vaso_Inferior_Esquerda"]
+polygon = PackedVector2Array(96, 679, 164, 679, 164, 775, 96, 775)
+
+[node name="Vaso_Inferior_Direita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Vaso_Inferior_Direita"]
+polygon = PackedVector2Array(1370, 677, 1442, 677, 1442, 776, 1370, 776)
+
+[node name="Vaso_Superior_Esquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Vaso_Superior_Esquerda"]
+polygon = PackedVector2Array(323, 187, 385, 187, 385, 274, 323, 274)
+
+[node name="Vaso_Superior_Direita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Vaso_Superior_Direita"]
+polygon = PackedVector2Array(1155, 185, 1218, 185, 1218, 274, 1155, 274)
+
+[node name="Vaso_Porta_Esquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Vaso_Porta_Esquerda"]
+polygon = PackedVector2Array(477, 886, 534, 886, 534, 978, 477, 978)
+
+[node name="Vaso_Porta_Direita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Vaso_Porta_Direita"]
+polygon = PackedVector2Array(998, 886, 1058, 886, 1058, 979, 998, 979)
+
+[node name="Vaso_Porta_Fundo_Esquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Vaso_Porta_Fundo_Esquerda"]
+polygon = PackedVector2Array(631, 133, 698, 133, 698, 220, 631, 220)
+
+[node name="Vaso_Porta_Fundo_Direita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Vaso_Porta_Fundo_Direita"]
+polygon = PackedVector2Array(839, 132, 906, 132, 906, 220, 839, 220)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(764, 825)
+
+[node name="PortaDeSaida" type="Area2D" parent="."]
+position = Vector2(764, 946)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PortaDeSaida"]
+shape = SubResource("ExitShape")

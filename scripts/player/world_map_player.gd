@@ -93,7 +93,7 @@ func move_between_points(delta: float) -> void:
 		update_direction_indicators()
 		# Uma rolagem por viagem: 5%, 10%, 15%, 20%... ate ocorrer batalha.
 		# O ponto de chegada ja esta salvo, permitindo retomar a viagem apos vencer.
-		var battle_started: bool = encounter_rng.randf() < GameState.get_next_battle_chance()
+		var battle_started: bool = GameState.has_unused_quizzes() and encounter_rng.randf() < GameState.get_next_battle_chance()
 		GameState.register_travel_battle_roll(battle_started)
 		if battle_started:
 			GameState.world_map_point_name = current_point.name
@@ -134,6 +134,9 @@ func try_enter_location() -> void:
 	if not can_enter_current_point():
 		return
 
+	if not GameState.can_enter_city(String(current_point.name)):
+		DialogueUI.show_dialogue("World Map", "This city is locked! Talk to an NPC in each city of the previous level.")
+		return
 	GameState.world_map_point_name = current_point.name
 	SceneTransition.change_scene_to_packed(current_point.destination_scene)
 

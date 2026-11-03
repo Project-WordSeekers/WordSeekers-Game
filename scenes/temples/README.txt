@@ -1,11 +1,20 @@
-Templos reutilizáveis - WordSeekers
+Templos padrão com cálice de recuperação de HP — WordSeekers
 
-A cena scenes/temples/temple.tscn é a estrutura compartilhada (paredes, cálice, jogador e saída).
-As cenas temple_colchester.tscn, temple_canterbury.tscn e temple_winchester.tscn herdam dela e personalizam apenas NPC e destino da saída.
-A cena temple_npc.tscn e o script simple_dialogue_npc.gd são reutilizados.
+Cidades autorizadas (6): Colchester, York, Newcastle, Liverpool, Stratford e London (Londres).
 
-IMPORTANTE: O ZIP de origem não contém o PNG original do templo. A cena antiga fazia referência direta a um arquivo .ctex em .godot/imported/ que também não estava no ZIP. Essa referência inválida foi retirada para permitir a abertura da cena; será necessário reatribuir a textura original do templo em TempleBase/TileMapLayer/Sprite2D quando o PNG estiver disponível.
+Cenas: temple_colchester.tscn, temple_york.tscn, temple_newcastle.tscn,
+temple_liverpool.tscn, temple_stratford.tscn, temple_london.tscn.
 
-As cenas dos templos foram criadas sem adicionar portais nas cidades, pois o projeto não informa quais prédios/portas devem levar a elas. Abra uma cena temple_<cidade>.tscn diretamente no editor para testá-la. Ao conectar uma porta, use scene_portal.gd e aponte para a cena do templo correspondente.
+Cena compartilhada: temple.tscn (cálice, jogador, efeitos e saída).
+Cena compartilhada de NPC: temple_npc.tscn (também usada fora de templos).
 
-Os diálogos e a aparência do NPC são provisórios e podem ser personalizados em cada cena herdada.
+Cenas antigas temple_canterbury.tscn e temple_winchester.tscn foram removidas.
+Canterbury, Winchester e demais cidades fora da lista não devem receber templo padrão.
+
+Colchester já possui portal de entrada e retorno. As novas cenas dos outros cinco
+locais estão disponíveis, mas NÃO foram ligados portais sem determinar a posição
+correta das entradas nos mapas. York, Newcastle e London ainda não possuem cenas
+próprias de cidade nesta versão (utilizam placeholders). É necessário integrar
+essas cidades e conectar entradas com scene_portal.gd e spawn de retorno.
+
+Não confundir o NPC reutilizável temple_npc.tscn com uma cena de templo.

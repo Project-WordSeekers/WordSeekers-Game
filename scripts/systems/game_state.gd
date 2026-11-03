@@ -46,6 +46,7 @@ var dictionary_owned: bool = false
 var dictionary_uses: int = 0
 
 func _ready() -> void:
+	load_progress()
 	_ensure_key_action("interact", KEY_E)
 	_ensure_key_action("help", KEY_H)
 	_ensure_key_action("inventory", KEY_I)
@@ -115,3 +116,85 @@ func return_to_city01_after_defeat() -> void:
 	pending_spawn_name = &""
 	restore_full_health()
 	SceneTransition.change_scene_to_file(CITY01_SCENE)
+
+# Persistent city progression and battle quiz history.
+const CITY_LEVELS: Dictionary = {
+	"Cambridge":1,"Canterbury":1,"Birmingham":1,"Nottingham":1,"Winchester":1,
+	"York":2,"Stratford":2,"Bath":2,"London":2,"Manchester":2,
+	"Newcastle":3,"Liverpool":3,"Oxford":3,"Salisbury":3,"Plymouth":3
+}
+const PROGRESS_PATH: String = "user://wordseekers_progress.json"
+var npc_cities_completed: Dictionary = {}
+var used_quiz_ids: Dictionary = {}
+var quiz_pool: Array = []
+
+func load_progress() -> void:
+	if not FileAccess.file_exists(PROGRESS_PATH):
+		return
+	var f := FileAccess.open(PROGRESS_PATH, FileAccess.READ)
+	if f == null:
+		return
+	var parsed: Variant = JSON.parse_string(f.get_as_text())
+	if not parsed is Dictionary:
+		return
+	for city in parsed.get("npc_cities_completed", []):
+		if CITY_LEVELS.has(String(city)):
+			npc_cities_completed[String(city)] = true
+	for quiz_id in parsed.get("used_quiz_ids", []):
+		used_quiz_ids[String(quiz_id)] = true
+
+func save_progress() -> void:
+	var f := FileAccess.open(PROGRESS_PATH, FileAccess.WRITE)
+	if f == null:
+		push_warning("Unable to save progress")
+		return
+	f.store_string(JSON.stringify({"npc_cities_completed":npc_cities_completed.keys(),"used_quiz_ids":used_quiz_ids.keys()}))
+
+func register_npc_dialogue_completed(city: String) -> void:
+	if CITY_LEVELS.has(city) and not npc_cities_completed.has(city):
+		npc_cities_completed[city] = true
+		save_progress()
+
+func is_level_unlocked(level: int) -> bool:
+	if level <= 1:
+		return true
+	for city in CITY_LEVELS:
+		if int(CITY_LEVELS[city]) == level - 1 and not npc_cities_completed.has(city):
+			return false
+	return true
+
+func can_enter_city(city: String) -> bool:
+	if city == "Colchester":
+		return true
+	return CITY_LEVELS.has(city) and is_level_unlocked(int(CITY_LEVELS[city]))
+
+func load_quiz_pool() -> void:
+	if not quiz_pool.is_empty():
+		return
+	var f := FileAccess.open("res://assets/battle_quizzes.json", FileAccess.READ)
+	if f == null:
+		push_error("Missing battle quiz JSON")
+		return
+	var parsed: Variant = JSON.parse_string(f.get_as_text())
+	if parsed is Dictionary:
+		quiz_pool = parsed.get("conjuntos", [])
+
+func has_unused_quizzes() -> bool:
+	load_quiz_pool()
+	for quiz in quiz_pool:
+		if quiz is Dictionary and not used_quiz_ids.has(String(quiz.get("id", ""))):
+			return true
+	return false
+
+func reserve_random_quiz() -> Dictionary:
+	load_quiz_pool()
+	var available: Array = []
+	for quiz in quiz_pool:
+		if quiz is Dictionary and not used_quiz_ids.has(String(quiz.get("id", ""))):
+			available.append(quiz)
+	if available.is_empty():
+		return {}
+	var selected: Dictionary = available.pick_random()
+	used_quiz_ids[String(selected.get("id", ""))] = true
+	save_progress()
+	return selected

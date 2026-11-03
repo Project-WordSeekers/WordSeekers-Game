@@ -117,6 +117,8 @@ size = Vector2(85, 30)
 [sub_resource type="RectangleShape2D" id="ExitPortalShape"]
 size = Vector2(120, 90)
 
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="99_progress_npc"]
+
 [node name="Cidade" type="Node2D" unique_id=1230676398]
 
 [node name="Mapa" type="Sprite2D" parent="." unique_id=1139270166]
@@ -350,3 +352,8 @@ target_scene_path = "res://scenes/world/world_map.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
 shape = SubResource("ExitPortalShape")
+
+[node name="ProgressGuide" parent="." instance=ExtResource("99_progress_npc")]
+position = Vector2(695, 858)
+speaker_name = "Town Guide"
+dialogue_text = "Welcome, traveler! Explore our city and keep practicing your English."

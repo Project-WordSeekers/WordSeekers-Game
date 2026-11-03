@@ -41,6 +41,8 @@ size = Vector2(302, 128.5)
 [sub_resource type="RectangleShape2D" id="WorldMapExitShape"]
 size = Vector2(100, 56)
 
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="99_progress_npc"]
+
 [node name="Cidade13Winchester" type="Node2D" unique_id=1552423944]
 script = ExtResource("4_spawn")
 
@@ -147,3 +149,8 @@ text = "Return to World Map"
 
 [node name="WinchesterEntry" type="Marker2D" parent="SpawnPoints" unique_id=721281937]
 position = Vector2(701, 948)
+
+[node name="ProgressGuide" parent="." instance=ExtResource("99_progress_npc")]
+position = Vector2(756, 925)
+speaker_name = "Town Guide"
+dialogue_text = "Welcome, traveler! Explore our city and keep practicing your English."

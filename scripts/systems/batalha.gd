@@ -4,26 +4,8 @@ var enemy_hp: int = 3
 var player_perto: bool = false
 var battle_active: bool = false
 
-var perguntas: Array[Dictionary] = [
-	{
-		"prompt": "A book is a _____.",
-		"answers": ["A) livro", "B) caneta", "C) cadeira", "D) mesa"],
-		"correct": 0,
-		"wrong_feedback": "Wrong! The enemy attacks you! -1 HP"
-	},
-	{
-		"prompt": "A pen is a _____.",
-		"answers": ["A) porta", "B) livro", "C) caneta", "D) água"],
-		"correct": 2,
-		"wrong_feedback": "Wrong! The enemy attacks you! -1 HP"
-	},
-	{
-		"prompt": "The opposite of hot is _____.",
-		"answers": ["A) warm", "B) cold", "C) fast", "D) high"],
-		"correct": 1,
-		"wrong_feedback": "Wrong! The enemy attacks you! -1 HP"
-	}
-]
+var perguntas: Array[Dictionary] = []
+var selected_quiz: Dictionary = {}
 
 @onready var enemy_hp_label: Label = $EnemyHPLabel
 @onready var interaction_label: Label = $InteractionLabel
@@ -35,6 +17,8 @@ func _ready() -> void:
 	interaction_label.text = "[E] Falar"
 	interaction_label.add_theme_color_override("font_color", Color(1.0, 0.92, 0.55, 1.0))
 	interaction_label.hide()
+	if GameState.random_encounter_active:
+		_start_battle()
 
 func _hide_legacy_battle_ui() -> void:
 	var legacy_names: Array[StringName] = [
@@ -88,17 +72,28 @@ func _on_battle_choice(selected_index: int) -> void:
 		interaction_label.show()
 
 func _start_battle() -> void:
+	selected_quiz = GameState.reserve_random_quiz()
+	if selected_quiz.is_empty():
+		GameState.random_encounter_active = false
+		SceneTransition.change_scene_to_file("res://scenes/world/world_map.tscn")
+		return
+	perguntas.clear()
+	for q in selected_quiz.get("questoes", []):
+		var options: Array[String] = []
+		for letter in ["A", "B", "C", "D", "E"]:
+			options.append(letter + ") " + String(q.get("opcoes", {}).get(letter, "")))
+		perguntas.append({"prompt":String(q.get("pergunta", "")), "answers":options,
+			"correct":["A", "B", "C", "D", "E"].find(String(q.get("resposta_correta", ""))),
+			"explanation":String(q.get("explicacao", "")),
+			"wrong_feedback":String(selected_quiz.get("fala_erro", "Not quite!"))})
 	battle_active = true
 	enemy_hp = 3
 	enemy_hp_label.text = "Enemy HP: " + str(enemy_hp)
 	enemy_hp_label.show()
-	DialogueUI.show_quiz(
-		"Esqueleto",
-		perguntas,
-		Callable(self, "_on_battle_answer"),
-		Callable(self, "_on_battle_finished"),
-		"You won!"
-	)
+	DialogueUI.show_sequence("Monster", [String(selected_quiz.get("fala_inicial", "Ready for a challenge?"))], Callable(self, "_show_battle_quiz"))
+
+func _show_battle_quiz() -> void:
+	DialogueUI.show_quiz("Monster", perguntas, Callable(self, "_on_battle_answer"), Callable(self, "_on_battle_finished"), "You won!")
 
 func _on_battle_answer(_question_index: int, is_correct: bool) -> void:
 	if is_correct:
@@ -120,7 +115,13 @@ func _on_battle_finished() -> void:
 	battle_active = false
 	enemy_hp_label.hide()
 	interaction_label.hide()
+	DialogueUI.show_dialogue("Monster", String(selected_quiz.get("fala_vitoria", "Great effort! I'm running away!")), Callable(self, "_monster_flees"))
+
+func _monster_flees() -> void:
 	enemy.hide()
+	GameState.random_encounter_active = false
+	await get_tree().create_timer(0.35).timeout
+	SceneTransition.change_scene_to_file("res://scenes/world/world_map.tscn")
 
 # Compatibilidade com conexões antigas da cena; a interface legada permanece oculta.
 func _on_attack_button_pressed() -> void:

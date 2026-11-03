@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/locations/nottingham/caves.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://assets/environments/nottingham/city_of_caves.webp" id="3"]
+
+[node name="Cavernas" type="Node2D"]
+script = ExtResource("1")
+
+[node name="ArteCaverna" type="Sprite2D" parent="."]
+position = Vector2(480, 320)
+texture = ExtResource("3")
+
+[node name="Player" parent="." instance=ExtResource("2")]
+position = Vector2(480, 555)

@@ -27,6 +27,9 @@ var sequence_index: int = 0
 var quiz_questions: Array[Dictionary] = []
 var quiz_index: int = 0
 var dictionary_revealed_index: int = -1
+var quiz_pending_advance: bool = false
+var quiz_explanation: String = ""
+var choice_5: Label
 
 var finish_callback: Callable = Callable()
 var choice_callback: Callable = Callable()
@@ -35,6 +38,10 @@ var quiz_finished_callback: Callable = Callable()
 var quiz_completion_text: String = "Muito bem! Quiz concluído."
 
 func _ready() -> void:
+	choice_5 = Label.new()
+	choice_5.name = "Choice5"
+	choice_5.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	choices_box.add_child(choice_5)
 	_ensure_interact_action()
 	panel.hide()
 	_clear_callbacks()
@@ -93,6 +100,7 @@ func show_quiz(
 	name_label.text = speaker_name
 	quiz_questions = questions.duplicate(true)
 	quiz_index = 0
+	quiz_pending_advance = false
 	quiz_answer_callback = on_answer
 	quiz_finished_callback = on_finished
 	quiz_completion_text = completion_text
@@ -153,7 +161,7 @@ func _move_selection(direction: int) -> void:
 	_render_choices()
 
 func _render_choices() -> void:
-	var labels: Array[Label] = [choice_1, choice_2, choice_3, choice_4]
+	var labels: Array[Label] = [choice_1, choice_2, choice_3, choice_4, choice_5]
 	for index in range(labels.size()):
 		var label: Label = labels[index]
 		if index >= current_choices.size():
@@ -209,6 +217,11 @@ func _show_quiz_question() -> void:
 	_render_choices()
 
 func _confirm_quiz_answer() -> void:
+	if quiz_pending_advance:
+		quiz_pending_advance = false
+		quiz_index += 1
+		_show_quiz_question()
+		return
 	if quiz_index < 0 or quiz_index >= quiz_questions.size():
 		return
 
@@ -223,11 +236,10 @@ func _confirm_quiz_answer() -> void:
 		return
 
 	if not is_correct:
-		status_label.text = String(question.get("wrong_feedback", "Resposta incorreta. Tente novamente!"))
+		status_label.text = String(question.get("wrong_feedback", "Not quite! Try again.")) + "\n" + String(question.get("explanation", ""))
 		return
-
-	quiz_index += 1
-	_show_quiz_question()
+	quiz_pending_advance = true
+	status_label.text = "Correct! " + String(question.get("explanation", "")) + "\n[E] Next"
 
 func _use_dictionary_on_quiz() -> void:
 	if not GameState.dictionary_owned:
@@ -274,6 +286,10 @@ func _show_quiz_completion() -> void:
 	dictionary_revealed_index = -1
 
 func _close_and_finish() -> void:
+	if mode == Mode.DIALOGUE or mode == Mode.SEQUENCE:
+		var current_scene: Node = get_tree().current_scene
+		if current_scene != null and "/locations/" in current_scene.scene_file_path:
+			GameState.register_npc_dialogue_completed(String(GameState.world_map_point_name))
 	var callback: Callable = finish_callback
 	panel.hide()
 	mode = Mode.NONE
@@ -290,6 +306,7 @@ func _reset_state() -> void:
 	sequence_index = 0
 	quiz_questions.clear()
 	quiz_index = 0
+	quiz_pending_advance = false
 	dictionary_revealed_index = -1
 	status_label.text = ""
 	choices_box.hide()

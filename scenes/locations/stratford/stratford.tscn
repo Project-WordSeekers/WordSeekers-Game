@@ -12,6 +12,8 @@ size = Vector2(60, 36)
 [sub_resource type="CircleShape2D" id="CircleShape2D_suspq"]
 radius = 30.565504
 
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="99_progress_npc"]
+
 [node name="Stratford" type="Node2D" unique_id=1561114068]
 script = ExtResource("4_spawn")
 
@@ -74,3 +76,8 @@ position = Vector2(495, -10)
 
 [node name="TeatroReturn" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(1035, 10)
+
+[node name="ProgressGuide" parent="." instance=ExtResource("99_progress_npc")]
+position = Vector2(1046, 585)
+speaker_name = "Town Guide"
+dialogue_text = "Welcome, traveler! Explore our city and keep practicing your English."

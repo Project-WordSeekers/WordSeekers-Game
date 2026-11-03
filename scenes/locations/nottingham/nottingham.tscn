@@ -1,0 +1,265 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/nottingham/nottingham.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/locations/nottingham/portals.gd" id="3_portals"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="4_spawn"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="5_exit"]
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="6_npc"]
+[sub_resource type="RectangleShape2D" id="WorldExitShape"]
+size = Vector2(115, 40)
+
+[node name="Nottingham" type="Node2D" unique_id=1612097242]
+script = ExtResource("4_spawn")
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=1175099590]
+texture_filter = 1
+position = Vector2(5, 12)
+texture = ExtResource("1_map")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=1706680545]
+
+[node name="Castelo Nottingham" type="StaticBody2D" parent="Colisoes" unique_id=1101137473]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Castelo Nottingham" unique_id=1898604463]
+position = Vector2(-6, 3)
+polygon = PackedVector2Array(130, 0, 650, 0, 650, 188, 603, 326, 426, 333, 436, 168, 379, 146, 349, 197, 357, 333, 170, 330)
+
+[node name="Floresta norte" type="StaticBody2D" parent="Colisoes" unique_id=17092137]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Floresta norte" unique_id=1830962044]
+polygon = PackedVector2Array(660, 0, 1536, 0, 1536, 125, 1290, 125, 1250, 180, 900, 180, 900, 110, 660, 110)
+
+[node name="Wollaton Hall" type="StaticBody2D" parent="Colisoes" unique_id=139770158]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Wollaton Hall" unique_id=2135766921]
+position = Vector2(13.288452, 1.9073486e-06)
+scale = Vector2(0.98049545, 0.99999994)
+polygon = PackedVector2Array(813, 197, 850, 112, 1252, 128, 1252, 330, 1235, 365, 1146, 425, 1139, 222, 1046, 210, 1024, 210, 1014, 399, 928, 342, 914, 214)
+
+[node name="Casas oeste superior" type="StaticBody2D" parent="Colisoes" unique_id=1972787137]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Casas oeste superior" unique_id=1325762490]
+polygon = PackedVector2Array(185, 345, 453, 364, 470, 451, 185, 457)
+
+[node name="Casas oeste inferior" type="StaticBody2D" parent="Colisoes" unique_id=1448289916]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Casas oeste inferior" unique_id=306564066]
+position = Vector2(10.516777, 4)
+scale = Vector2(1.0300633, 1)
+polygon = PackedVector2Array(130, 515, 288, 515, 288, 620, 130, 620)
+
+[node name="Estatua oeste" type="StaticBody2D" parent="Colisoes" unique_id=651612660]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Estatua oeste" unique_id=550612747]
+polygon = PackedVector2Array(369, 502, 514, 502, 534, 609, 384, 625, 356, 576)
+
+[node name="Coreto central" type="StaticBody2D" parent="Colisoes" unique_id=1850881533]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Coreto central" unique_id=713204460]
+polygon = PackedVector2Array(715, 396, 823, 396, 863, 476, 825, 574, 708, 574, 680, 489)
+
+[node name="Edificio leste" type="StaticBody2D" parent="Colisoes" unique_id=1685721635]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Edificio leste" unique_id=939483368]
+polygon = PackedVector2Array(1103, 467, 1305, 463, 1322, 586, 1090, 586)
+
+[node name="Cidade das Cavernas" type="StaticBody2D" parent="Colisoes" unique_id=962804677]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Cidade das Cavernas" unique_id=2119193033]
+position = Vector2(409, 282)
+scale = Vector2(0.62139714, 0.60635966)
+polygon = PackedVector2Array(1040, 700, 1707.4427, 369.4177, 1762.1581, 567.32007, 1792.7343, 849.33093, 1778.2509, 1058.7776, 1478.9254, 1024.1447, 1504.6737, 854.27844, 1409.7264, 628.33997, 1338.9182, 875.7179, 1190.8647, 870.77026)
+
+[node name="Rio sul" type="StaticBody2D" parent="Colisoes" unique_id=1839103196]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Rio sul" unique_id=1791682696]
+polygon = PackedVector2Array(610, 890, 1182, 863, 1536, 890, 1536, 1024, 610, 1024)
+
+[node name="Borda leste" type="StaticBody2D" parent="Colisoes" unique_id=2111043736]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Borda leste" unique_id=1682939268]
+polygon = PackedVector2Array(1440, 0, 1536, 0, 1536, 1024, 1490, 1024, 1490, 790, 1440, 790)
+
+[node name="Jardim centro norte 1" type="StaticBody2D" parent="Colisoes" unique_id=1014383927]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Jardim centro norte 1" unique_id=1298332621]
+polygon = PackedVector2Array(677, 229, 735, 229, 735, 295, 677, 295)
+
+[node name="Jardim centro norte 2" type="StaticBody2D" parent="Colisoes" unique_id=1981222932]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Jardim centro norte 2" unique_id=1074689229]
+polygon = PackedVector2Array(806, 222, 867, 222, 867, 291, 806, 291)
+
+[node name="Jardim meio esquerdo" type="StaticBody2D" parent="Colisoes" unique_id=1634120008]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Jardim meio esquerdo" unique_id=2013005377]
+position = Vector2(-43, 19)
+polygon = PackedVector2Array(630, 433, 675, 433, 675, 570, 630, 570)
+
+[node name="Jardim meio direito" type="StaticBody2D" parent="Colisoes" unique_id=963606805]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Jardim meio direito" unique_id=1871940613]
+position = Vector2(-3, 14)
+polygon = PackedVector2Array(942, 435, 995, 435, 995, 573, 942, 573)
+
+[node name="Jardim sul 1" type="StaticBody2D" parent="Colisoes" unique_id=1069843189]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Jardim sul 1" unique_id=1192410206]
+position = Vector2(9, 14)
+polygon = PackedVector2Array(666, 602, 737, 602, 737, 650, 666, 650)
+
+[node name="Jardim sul 2" type="StaticBody2D" parent="Colisoes" unique_id=429978416]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Jardim sul 2" unique_id=203324160]
+position = Vector2(-3, 17)
+polygon = PackedVector2Array(803, 602, 877, 602, 877, 651, 803, 651)
+
+[node name="Rio oeste" type="StaticBody2D" parent="Colisoes" unique_id=2045763981]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Rio oeste" unique_id=1321594399]
+polygon = PackedVector2Array(0, 690, 105, 690, 105, 1024, 0, 1024)
+
+[node name="Bosque sudoeste" type="StaticBody2D" parent="Colisoes" unique_id=44967609]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Bosque sudoeste" unique_id=1454965452]
+polygon = PackedVector2Array(0, 910, 680, 910, 680, 1024, 0, 1024)
+
+[node name="Muralha sudoeste" type="StaticBody2D" parent="Colisoes" unique_id=435229215]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Muralha sudoeste" unique_id=1154713969]
+position = Vector2(-53, 242)
+polygon = PackedVector2Array(196, 353, 589, 451, 910, 508, 570, 725, 135, 725)
+
+[node name="Bosque sudeste" type="StaticBody2D" parent="Colisoes" unique_id=316889416]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Bosque sudeste" unique_id=2080973799]
+position = Vector2(395, 215)
+scale = Vector2(0.5613557, 0.7224652)
+polygon = PackedVector2Array(1020.743, 643.6295, 1483.9075, 1068.5635, 1026.0872, 653.3186, 1355.6465, 938.45337, 1467.875, 1029.8073, 1040.3384, 1051.9536, 229.80078, 1068.5635, 723.24896, 782.04443)
+
+[node name="Bosque leste" type="StaticBody2D" parent="Colisoes" unique_id=1257005150]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Bosque leste" unique_id=1301785387]
+polygon = PackedVector2Array(1370, 490, 1536, 490, 1536, 740, 1370, 740)
+
+[node name="Arvores centro leste" type="StaticBody2D" parent="Colisoes" unique_id=474640172]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Arvores centro leste" unique_id=1173471836]
+polygon = PackedVector2Array(1280, 365, 1400, 370, 1384, 463, 1267, 441)
+
+[node name="Fazendas nordeste" type="StaticBody2D" parent="Colisoes" unique_id=1594674010]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Fazendas nordeste" unique_id=378378273]
+polygon = PackedVector2Array(1200, 0, 1536, 0, 1536, 265, 1200, 265)
+
+[node name="Bosque centro norte" type="StaticBody2D" parent="Colisoes" unique_id=799233499]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Bosque centro norte" unique_id=1286548538]
+polygon = PackedVector2Array(650, 0, 715, 0, 715, 170, 650, 170)
+
+[node name="Canteiro central A" type="StaticBody2D" parent="Colisoes" unique_id=1657519800]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Canteiro central A" unique_id=203478278]
+polygon = PackedVector2Array(675, 456, 728, 456, 728, 510, 675, 510)
+
+[node name="Canteiro central B" type="StaticBody2D" parent="Colisoes" unique_id=2010116672]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Canteiro central B" unique_id=2009181395]
+polygon = PackedVector2Array(818, 455, 874, 455, 874, 509, 818, 509)
+
+[node name="Jardim superior esquerdo" type="StaticBody2D" parent="Colisoes" unique_id=1408371788]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Jardim superior esquerdo" unique_id=636499704]
+polygon = PackedVector2Array(615, 340, 688, 340, 688, 408, 615, 408)
+
+[node name="Jardim superior direito" type="StaticBody2D" parent="Colisoes" unique_id=211207719]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Jardim superior direito" unique_id=869962505]
+polygon = PackedVector2Array(847, 343, 913, 343, 913, 411, 847, 411)
+
+[node name="Canteiro oeste pequeno" type="StaticBody2D" parent="Colisoes" unique_id=1256639927]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Canteiro oeste pequeno" unique_id=1220393429]
+polygon = PackedVector2Array(350, 405, 474, 405, 474, 462, 350, 462)
+
+[node name="Fonte Wollaton" type="StaticBody2D" parent="Colisoes" unique_id=1583127601]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Fonte Wollaton" unique_id=132790228]
+polygon = PackedVector2Array(1037, 326, 1122, 326, 1122, 378, 1037, 378)
+
+[node name="Casas leste" type="StaticBody2D" parent="Colisoes" unique_id=1224208030]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Casas leste" unique_id=383974094]
+position = Vector2(26, -11)
+polygon = PackedVector2Array(1272, 270, 1363, 275, 1432, 278, 1402, 374, 1272, 374)
+
+[node name="Ponte rio oeste" type="StaticBody2D" parent="Colisoes" unique_id=27647425]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Ponte rio oeste" unique_id=1343061986]
+polygon = PackedVector2Array(0, 0, 80, 0, 181, 630, -6, 746)
+
+[node name="Arvores margem sul" type="StaticBody2D" parent="Colisoes" unique_id=494948525]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Arvores margem sul" unique_id=272408467]
+polygon = PackedVector2Array(40, 605, 135, 605, 135, 735, 40, 735)
+
+[node name="Player" parent="." unique_id=1437844174 instance=ExtResource("2_player")]
+position = Vector2(780, 705)
+
+[node name="GerenciadorDeEntradas" type="Node2D" parent="." unique_id=824718254]
+script = ExtResource("3_portals")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+[node name="FromCastle" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(391, 405)
+[node name="FromCaves" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1302, 900)
+
+[node name="WorldMapExit" type="Area2D" parent="."]
+position = Vector2(780, 987)
+script = ExtResource("5_exit")
+target_scene_path = "res://scenes/world/world_map.tscn"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
+shape = SubResource("WorldExitShape")
+
+[node name="ProgressNPC" parent="." instance=ExtResource("6_npc")]
+position = Vector2(760, 635)
+speaker_name = "Nottingham Guide"
+dialogue_text = "Welcome to Nottingham! Explore our historic castle and the City of Caves. Every place has a story."

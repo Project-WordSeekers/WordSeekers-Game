@@ -37,4 +37,5 @@ func _unhandled_input(event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 func _on_lesson_finished() -> void:
+	GameState.register_npc_dialogue_completed(String(GameState.world_map_point_name))
 	talking = false
