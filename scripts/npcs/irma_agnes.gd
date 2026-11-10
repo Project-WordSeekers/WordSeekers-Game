@@ -25,7 +25,7 @@ func _unhandled_input(event: InputEvent) -> void:
     get_viewport().set_input_as_handled()
 
 func _on_dialogue_closed() -> void:
-	GameState.register_npc_dialogue_completed(String(GameState.world_map_point_name))
+    GameState.register_npc_dialogue_completed(String(GameState.world_map_point_name))
     if player_nearby:
         prompt.show()
 

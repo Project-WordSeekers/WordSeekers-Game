@@ -2,6 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://2mcfjb48ord5" path="res://scenes/player/player.tscn" id="1_h846r"]
 [ext_resource type="Script" path="res://scripts/interactables/chalice.gd" id="2_chalice"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Texture2D" path="res://assets/environments/shared/temple_light.png" id="4_light"]
+[ext_resource type="Script" path="res://scripts/systems/chalice_sparkles.gd" id="5_sparkles"]
+[ext_resource type="Script" path="res://scripts/systems/chalice_glow_pulse.gd" id="6_glow"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yjblj"]
 load_path = "res://.godot/imported/Templo.png-89fa90719e9d8a622b6068f08bd3cad3.ctex"
@@ -87,6 +91,9 @@ size = Vector2(51, 218)
 [sub_resource type="CircleShape2D" id="Circle_Chalice"]
 radius = 56.0
 
+[sub_resource type="RectangleShape2D" id="R_Exit"]
+size = Vector2(140, 30)
+
 [node name="Node2D" type="Node2D" unique_id=539411079]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1180027882]
@@ -95,7 +102,7 @@ radius = 56.0
 texture = SubResource("CompressedTexture2D_yjblj")
 
 [node name="Player" parent="TileMapLayer" unique_id=1308245873 instance=ExtResource("1_h846r")]
-position = Vector2(8, 492)
+position = Vector2(0, 380)
 scale = Vector2(2, 2)
 
 [node name="WallTop" type="StaticBody2D" parent="TileMapLayer" unique_id=300000001]
@@ -240,6 +247,13 @@ script = ExtResource("2_chalice")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/Chalice" unique_id=500000002]
 shape = SubResource("Circle_Chalice")
 
+[node name="SaidaDoTemplo" type="Area2D" parent="TileMapLayer" unique_id=600000001]
+position = Vector2(0, 435)
+script = ExtResource("3_portal")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/SaidaDoTemplo" unique_id=600000002]
+shape = SubResource("R_Exit")
+
 [node name="Prompt" type="Label" parent="TileMapLayer/Chalice" unique_id=500000003]
 offset_left = -60.0
 offset_top = -110.0
@@ -247,3 +261,16 @@ offset_right = 60.0
 offset_bottom = -90.0
 text = "[E] Cálice"
 horizontal_alignment = 1
+
+[node name="ChaliceGlow" type="PointLight2D" parent="TileMapLayer"]
+position = Vector2(0, -45)
+color = Color(1, 0.74, 0.28, 1)
+energy = 1.25
+texture = ExtResource("4_light")
+texture_scale = 2.0
+script = ExtResource("6_glow")
+
+[node name="ChaliceSparkles" type="Node2D" parent="TileMapLayer"]
+position = Vector2(-12, -38)
+z_index = 1
+script = ExtResource("5_sparkles")

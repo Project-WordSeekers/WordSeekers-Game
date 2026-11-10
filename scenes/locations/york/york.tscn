@@ -1,0 +1,52 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/york/york.png" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scripts/systems/city_root.gd" id="4_city"]
+
+[sub_resource type="RectangleShape2D" id="ExitShape"]
+size = Vector2(60, 30)
+
+[sub_resource type="RectangleShape2D" id="TempleShape"]
+size = Vector2(60, 40)
+
+[node name="York" type="Node2D"]
+script = ExtResource("4_city")
+
+[node name="Mapa" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(701, 561)
+texture = ExtResource("1_map")
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="ColisaoVermelha1" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/ColisaoVermelha1"]
+polygon = PackedVector2Array(524.0, 282.0, 451.0, 288.0, 450.0, 342.0, 623.0, 354.0, 623.0, 432.0, 278.0, 435.0, 271.0, 513.0, 205.0, 546.0, 189.0, 573.0, 184.0, 678.0, 212.0, 690.0, 219.0, 711.0, 220.0, 744.0, 192.0, 756.0, 200.0, 810.0, 310.0, 852.0, 503.0, 855.0, 416.0, 960.0, 434.0, 999.0, 432.0, 1119.0, 481.0, 1119.0, 484.0, 1002.0, 465.0, 972.0, 531.0, 900.0, 580.0, 807.0, 661.0, 705.0, 672.0, 597.0, 644.0, 567.0, 245.0, 564.0, 315.0, 528.0, 902.0, 525.0, 902.0, 498.0, 835.0, 486.0, 952.0, 483.0, 950.0, 414.0, 1021.0, 405.0, 1017.0, 360.0, 756.0, 357.0, 771.0, 294.0, 533.0, 282.0)
+
+[node name="ColisaoVermelha2" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/ColisaoVermelha2"]
+polygon = PackedVector2Array(1196.0, 78.0, 1144.0, 84.0, 1141.0, 99.0, 1163.0, 168.0, 1205.0, 174.0, 1213.0, 312.0, 1113.0, 318.0, 1091.0, 375.0, 1023.0, 384.0, 1023.0, 426.0, 1045.0, 432.0, 1045.0, 477.0, 1153.0, 480.0, 1156.0, 495.0, 1100.0, 504.0, 1105.0, 534.0, 1233.0, 537.0, 1225.0, 573.0, 1210.0, 585.0, 759.0, 591.0, 738.0, 624.0, 754.0, 645.0, 783.0, 648.0, 782.0, 663.0, 731.0, 666.0, 681.0, 714.0, 583.0, 888.0, 550.0, 912.0, 558.0, 1116.0, 606.0, 1113.0, 599.0, 921.0, 671.0, 843.0, 674.0, 807.0, 750.0, 705.0, 939.0, 699.0, 948.0, 642.0, 1239.0, 621.0, 1262.0, 606.0, 1272.0, 555.0, 1334.0, 522.0, 1356.0, 123.0, 1356.0, 90.0, 1339.0, 78.0)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(510, 960)
+
+[node name="WorldMapExit" type="Area2D" parent="."]
+position = Vector2(510, 1110)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
+shape = SubResource("ExitShape")
+
+[node name="TempleEntrance" type="Area2D" parent="."]
+position = Vector2(991, 417)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/temple/node_2d.tscn"
+salvar_cidade = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempleEntrance"]
+shape = SubResource("TempleShape")

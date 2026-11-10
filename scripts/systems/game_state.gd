@@ -27,6 +27,14 @@ func register_travel_battle_roll(battle_started: bool) -> void:
 		consecutive_travels_without_battle += 1
 var world_map_point_name: StringName = &"Colchester"
 var pending_spawn_name: StringName = &""
+var cidade: String = ""
+# Porta do templo na cidade: o jogador volta para ela ao sair do templo.
+var cidade_porta: Vector2 = Vector2.ZERO
+var voltando_do_templo: bool = false
+
+func e_templo(cena: String) -> bool:
+	return cena.begins_with("res://scenes/temples/") or cena.begins_with("res://scenes/temple/")
+
 # Retorno do templo: definido pela entrada da cidade, nunca pelo interior compartilhado.
 var temple_return_scene: String = ""
 var temple_return_spawn: StringName = &""

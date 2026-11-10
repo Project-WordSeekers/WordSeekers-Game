@@ -16,6 +16,7 @@ const FEMALE_TEXTURE: Texture2D = preload("res://assets/characters/player/female
 var current_point: Area2D
 var target_point: Area2D
 var moving: bool = false
+var input_blocked: bool = false
 
 const RANDOM_BATTLE_SCENE: String = "res://scenes/minigames/battle.tscn"
 var encounter_rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -56,6 +57,11 @@ func _process(delta: float) -> void:
 
 func check_input() -> void:
 	if GameHUD.is_modal_open() or DialogueUI.is_open():
+		input_blocked = true
+		return
+	if input_blocked:
+		# Ignora o E que acabou de fechar o diálogo; senão ele tenta entrar de novo e reabre a mensagem.
+		input_blocked = false
 		return
 	if current_point == null:
 		return

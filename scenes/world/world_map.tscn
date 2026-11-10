@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" path="res://scenes/locations/liverpool/royal_albert_dock.tscn" id="99_liverpool_dock"]
 
 [ext_resource type="PackedScene" path="res://scenes/locations/nottingham/nottingham.tscn" id="98_nottingham"]
+[ext_resource type="PackedScene" path="res://scenes/locations/york/york.tscn" id="13_york"]
+[ext_resource type="PackedScene" path="res://scenes/locations/manchester/manchester.tscn" id="14_manchester"]
 
 [node name="WorldMap" type="Node2D" unique_id=1750420017]
 
@@ -52,7 +54,7 @@ destination_scene = ExtResource("98_nottingham")
 position = Vector2(201, -104)
 up = NodePath("../Newcastle")
 down = NodePath("../Nottingham")
-destination_scene = ExtResource("6_cidade_fantasia")
+destination_scene = ExtResource("13_york")
 
 [node name="Newcastle" parent="Points" unique_id=1363173087 instance=ExtResource("2_u82pb") node_paths=PackedStringArray("down", "left")]
 position = Vector2(93, -368)
@@ -64,7 +66,7 @@ destination_scene = ExtResource("6_cidade_fantasia")
 position = Vector2(-39, -269)
 down = NodePath("../Liverpool")
 right = NodePath("../Newcastle")
-destination_scene = ExtResource("6_cidade_fantasia")
+destination_scene = ExtResource("14_manchester")
 
 [node name="Liverpool" parent="Points" unique_id=367058251 instance=ExtResource("2_u82pb") node_paths=PackedStringArray("up", "right")]
 position = Vector2(-51, -109)
