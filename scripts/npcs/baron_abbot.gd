@@ -6,34 +6,13 @@ var player_nearby: bool = false
 var interaction_active: bool = false
 
 @export var npc_id: String = ""
-const NEW_DIALOGUE_ICON_TEXTURE: Texture2D = preload("res://assets/ui/icons/npc_new_dialogue_exclamation.png")
-var new_dialogue_icon: Sprite2D
+const NPC_INDICATOR_SCRIPT: Script = preload("res://scripts/npcs/npc_dialogue_indicator.gd")
+var npc_indicator
 
-func _ensure_new_dialogue_icon() -> void:
-	if new_dialogue_icon != null:
-		return
-	new_dialogue_icon = Sprite2D.new()
-	new_dialogue_icon.name = "NewDialogueIcon"
-	new_dialogue_icon.texture = NEW_DIALOGUE_ICON_TEXTURE
-	new_dialogue_icon.centered = true
-	new_dialogue_icon.scale = Vector2(0.33, 0.33)
-	new_dialogue_icon.position = Vector2(0, -68)
-	new_dialogue_icon.z_index = 30
-	add_child(new_dialogue_icon)
-	var float_tween := create_tween()
-	float_tween.set_loops()
-	float_tween.tween_property(new_dialogue_icon, "position:y", -72.0, 0.55).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	float_tween.tween_property(new_dialogue_icon, "position:y", -68.0, 0.55).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-func _get_npc_id() -> String:
-	if npc_id.strip_edges() != "":
-		return npc_id.strip_edges()
-	var scene_id: String = scene_file_path.get_file().get_basename() if scene_file_path != "" else "runtime"
-	return "%s::%s" % [scene_id, get_path()]
-
-func _refresh_new_dialogue_icon() -> void:
-	_ensure_new_dialogue_icon()
-	new_dialogue_icon.visible = not GameState.has_talked_to_npc(_get_npc_id())
+func _setup_npc_indicator() -> void:
+	npc_indicator = NPC_INDICATOR_SCRIPT.new()
+	add_child(npc_indicator)
+	npc_indicator.setup(self, npc_id)
 
 
 var first_dialogue_lines: Array[String] = [
@@ -62,8 +41,7 @@ var repeat_dialogue_lines: Array[String] = [
 func _ready() -> void:
 	prompt.text = "[E] Falar"
 	prompt.hide()
-	_ensure_new_dialogue_icon()
-	_refresh_new_dialogue_icon()
+	_setup_npc_indicator()
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
@@ -100,8 +78,7 @@ func _on_dialogue_finished() -> void:
 	_finish_interaction()
 
 func _finish_interaction() -> void:
-	GameState.register_npc_talked(_get_npc_id(), String(GameState.world_map_point_name))
-	_refresh_new_dialogue_icon()
+	npc_indicator.mark_talked(String(GameState.world_map_point_name))
 	interaction_active = false
 	if player_nearby and not DialogueUI.is_open():
 		prompt.show()
