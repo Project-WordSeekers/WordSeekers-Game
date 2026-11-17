@@ -82,9 +82,9 @@ polygon = PackedVector2Array(307.1, 176.1, 499.7, 176.1, 499.7, 228.3, 307.1, 22
 [node name="EastPew5" type="CollisionPolygon2D" parent="TileMapLayer/Obstacles"]
 polygon = PackedVector2Array(305.6, 271.7, 501.1, 271.7, 501.1, 341.3, 305.6, 341.3)
 
-# Centro do círculo ornamental, marcado pelo usuário na imagem (x=0, y≈20).
-# O Player tem 48x64 unidades visuais neste mapa. O corpo do cálice
-# mede aproximadamente 94x128 unidades, correspondendo ao dobro da altura.
+; Centro do círculo ornamental, marcado pelo usuário na imagem (x=0, y≈20).
+; O Player tem 48x64 unidades visuais neste mapa. O corpo do cálice
+; mede aproximadamente 94x128 unidades, correspondendo ao dobro da altura.
 [node name="Chalice" type="Area2D" parent="TileMapLayer"]
 position = Vector2(0, 20)
 collision_layer = 0
@@ -120,8 +120,8 @@ theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 25
 
-# A base física impede que o jogador atravesse o pedestal, sem ocupar o
-# entorno onde a tecla E deve funcionar.
+; A base física impede que o jogador atravesse o pedestal, sem ocupar o
+; entorno onde a tecla E deve funcionar.
 [node name="ChalicePedestal" type="StaticBody2D" parent="TileMapLayer"]
 position = Vector2(0, 67)
 collision_layer = 1

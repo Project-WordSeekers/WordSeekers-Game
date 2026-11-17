@@ -9,10 +9,38 @@ var interaction_active: bool = false
 const NPC_INDICATOR_SCRIPT: Script = preload("res://scripts/npcs/npc_dialogue_indicator.gd")
 var npc_indicator
 
+<<<<<<< HEAD
 func _setup_npc_indicator() -> void:
 	npc_indicator = NPC_INDICATOR_SCRIPT.new()
 	add_child(npc_indicator)
 	npc_indicator.setup(self, npc_id)
+=======
+func _ensure_new_dialogue_icon() -> void:
+	if new_dialogue_icon != null:
+		return
+	new_dialogue_icon = Sprite2D.new()
+	new_dialogue_icon.name = "NewDialogueIcon"
+	new_dialogue_icon.texture = NEW_DIALOGUE_ICON_TEXTURE
+	new_dialogue_icon.centered = true
+	new_dialogue_icon.scale = Vector2(0.03, 0.03)
+	new_dialogue_icon.position = Vector2(0, -80)
+	new_dialogue_icon.z_index = 30
+	add_child(new_dialogue_icon)
+	var float_tween := create_tween()
+	float_tween.set_loops()
+	float_tween.tween_property(new_dialogue_icon, "position:y", -84.0, 0.55).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	float_tween.tween_property(new_dialogue_icon, "position:y", -80.0, 0.55).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+func _get_npc_id() -> String:
+	if npc_id.strip_edges() != "":
+		return npc_id.strip_edges()
+	var scene_id: String = scene_file_path.get_file().get_basename() if scene_file_path != "" else "runtime"
+	return "%s::%s" % [scene_id, get_path()]
+
+func _refresh_new_dialogue_icon() -> void:
+	_ensure_new_dialogue_icon()
+	new_dialogue_icon.visible = not GameState.has_talked_to_npc(_get_npc_id())
+>>>>>>> d177ccc02db95598f2d303153582984d643d6959
 
 
 var first_dialogue_lines: Array[String] = [
