@@ -9,7 +9,7 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not player_nearby or not event.is_action_pressed("interact"):
+	if not player_nearby or not event.is_action_pressed("interact") or event.is_echo():
 		return
 	if DialogueUI.is_open():
 		return

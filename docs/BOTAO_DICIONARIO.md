@@ -1,0 +1,1 @@
+Botao de dicionario no lado esquerdo do quiz em telas largas, acima em telas estreitas. Aciona exatamente a mesma rotina de consumo da tecla T. Icone SVG original de livro aberto. Teste em Godot pendente.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://cgaoik5ck7kk2"]
 
 [ext_resource type="Texture2D" path="res://assets/environments/stratford/anne_hathaways_cottage.webp" id="1_bg"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
@@ -8,27 +8,46 @@
 [sub_resource type="RectangleShape2D" id="ExitShape"]
 size = Vector2(160, 50)
 
-[node name="AnneHathawaysCottage" type="Node2D"]
+[node name="AnneHathawaysCottage" type="Node2D" unique_id=1306605592]
 script = ExtResource("4_spawn")
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(768, 512)
+[node name="Background" type="Sprite2D" parent="." unique_id=1963573728]
 texture_filter = 1
+position = Vector2(855.5, 712.2)
+scale = Vector2(0.2779948, 0.30898437)
 texture = ExtResource("1_bg")
 
-[node name="Player" parent="." instance=ExtResource("2_player")]
-position = Vector2(768, 740)
+[node name="Player" parent="." unique_id=390252615 instance=ExtResource("2_player")]
+position = Vector2(852, 780)
 
-[node name="SaidaStratford" type="Area2D" parent="."]
-position = Vector2(768, 910)
+[node name="SaidaStratford" type="Area2D" parent="." unique_id=1003139894]
+position = Vector2(979, 827)
 script = ExtResource("3_portal")
 target_scene_path = "res://scenes/locations/stratford/stratford.tscn"
 target_spawn_name = &"AnneReturn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaStratford"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaStratford" unique_id=1632363935]
+position = Vector2(-104, -15)
 shape = SubResource("ExitShape")
 
-[node name="SpawnPoints" type="Node2D" parent="."]
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=279750140]
 
-[node name="Entrada" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(768, 740)
+[node name="Entrada" type="Marker2D" parent="SpawnPoints" unique_id=461695050]
+position = Vector2(853, 785)
+
+[node name="colisoes" type="StaticBody2D" parent="." unique_id=2092604600]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="colisoes" unique_id=199260708]
+polygon = PackedVector2Array(686, 666, 684, 695, 697, 699, 697, 739, 710, 741, 710, 754, 766, 757, 769, 791, 806, 790, 805, 784, 817, 784, 818, 814, 673, 799, 683, 664)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="colisoes" unique_id=1543426513]
+polygon = PackedVector2Array(686, 667, 746, 665, 748, 640, 780, 640, 782, 648, 809, 648, 810, 639, 821, 640, 823, 650, 884, 648, 891, 656, 908, 656, 913, 669, 922, 678, 943, 669, 943, 689, 953, 689, 953, 643, 782, 609)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="colisoes" unique_id=2055092935]
+polygon = PackedVector2Array(953, 643, 973, 645, 973, 636, 999, 639, 1001, 676, 1027, 677, 1030, 690, 1044, 688, 1044, 697, 963, 698, 962, 713, 1059, 705, 1028, 623, 957, 625)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="colisoes" unique_id=1467520996]
+polygon = PackedVector2Array(962, 714, 963, 762, 938, 761, 939, 792, 896, 783, 892, 801, 982, 799)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="colisoes" unique_id=1739654497]
+polygon = PackedVector2Array(810, 695, 810, 739, 826, 741, 826, 749, 834, 743, 869, 743, 870, 750, 874, 739, 888, 739, 888, 694, 885, 707, 874, 708, 872, 701, 826, 701, 825, 708, 814, 707)

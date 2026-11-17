@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/systems/batalha.gd" id="1_battle"]
-[ext_resource type="Texture2D" path="res://assets/environments/shared/arena.webp" id="2_arena"]
+[ext_resource type="Texture2D" path="res://assets/environments/shared/battle_landscape.webp" id="2_arena"]
 [ext_resource type="Texture2D" path="res://assets/characters/npcs/shared/skeleton.png" id="3_skeleton"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="4_player"]
+
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/player_damage.wav" id="5_player_damage"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/monster_damage.ogg" id="6_monster_damage"]
 
 [sub_resource type="RectangleShape2D" id="ArenaWallShape"]
 size = Vector2(711, 274)
@@ -14,23 +17,42 @@ size = Vector2(183.20604, 182.7923)
 [node name="Batalha" type="Node2D"]
 script = ExtResource("1_battle")
 
-[node name="FundoBatalha" type="Sprite2D" parent="."]
-position = Vector2(360, 510)
-scale = Vector2(0.41955745, 0.4435441)
+[node name="BattleBackground" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="FullLandscape" type="TextureRect" parent="BattleBackground"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_arena")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="parede" type="Area2D" parent="FundoBatalha"]
+[node name="PlayerDamageSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_player_damage")
+
+[node name="MonsterDamageSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_monster_damage")
+
+[node name="EnemyHPHud" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="EnemyHPBar" type="ProgressBar" parent="EnemyHPHud"]
 visible = false
-position = Vector2(-858.047, -1149.8293)
-scale = Vector2(2.3834639, 2.2545674)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FundoBatalha/parede"]
-position = Vector2(360.5, 436)
-shape = SubResource("ArenaWallShape")
+offset_right = 170.0
+offset_bottom = 20.0
+custom_minimum_size = Vector2(120, 20)
+max_value = 3.0
+value = 3.0
+show_percentage = false
+mouse_filter = 2
 
 [node name="Inimigo" type="Sprite2D" parent="."]
-position = Vector2(472.00003, 603)
-scale = Vector2(0.2620001, 0.22976878)
+position = Vector2(800, 500)
+scale = Vector2(1, 1)
 texture = ExtResource("3_skeleton")
 
 [node name="InteractionArea" type="Area2D" parent="Inimigo"]
@@ -40,7 +62,7 @@ position = Vector2(3.8170166, 0)
 shape = SubResource("EnemyInteractionShape")
 
 [node name="Player" parent="." instance=ExtResource("4_player")]
-position = Vector2(105, 609)
+position = Vector2(200, 500)
 
 [node name="StartBattlePanel" type="Panel" parent="."]
 visible = false

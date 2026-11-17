@@ -16,17 +16,6 @@ func _ready() -> void:
 	sprite.frame = 0
 	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	add_to_group("player")
-	registrar_cidade()
-
-# Guarda em que cidade o jogador está; os templos usam isso para devolvê-lo à porta certa.
-func registrar_cidade() -> void:
-	var cena: Node = get_tree().current_scene
-	if cena == null or not cena.scene_file_path.begins_with("res://scenes/locations/"):
-		return
-	if GameState.voltando_do_templo and cena.scene_file_path == GameState.cidade:
-		global_position = GameState.cidade_porta
-	GameState.voltando_do_templo = false
-	GameState.cidade = cena.scene_file_path
 
 func apply_selected_appearance() -> void:
 	if GameState.player_appearance == GameState.APPEARANCE_FEMALE:

@@ -6,6 +6,15 @@
 [ext_resource type="Script" path="res://scripts/systems/royal_albert_dock.gd" id="3_dock_script"]
 
 
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="90_city_theme"]
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="91_city_music_loop"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="180_entrance_indicator"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="190_map_exit_indicator"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="191_world_exit_portal"]
+
 [sub_resource type="RectangleShape2D" id="OfficeDoorShape"]
 size = Vector2(52, 20)
 
@@ -202,15 +211,27 @@ position = Vector2(769, 274)
 [node name="OfficeEntrance" type="Area2D" parent="."]
 position = Vector2(769, 242)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OfficeEntrance"]
 shape = SubResource("OfficeDoorShape")
 
+
+[node name="EntranceArrow" parent="OfficeEntrance" instance=ExtResource("180_entrance_indicator")]
+
 [node name="WorldMapExit" type="Area2D" parent="."]
 position = Vector2(770, 920)
+script = ExtResource("191_world_exit_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
 collision_layer = 0
-collision_mask = 2
+collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
 shape = SubResource("WorldExitShape")
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("90_city_theme")
+autoplay = true
+script = ExtResource("91_city_music_loop")
+
+[node name="MapExitIndicator" parent="WorldMapExit" instance=ExtResource("190_map_exit_indicator")]

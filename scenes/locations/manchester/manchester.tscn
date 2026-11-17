@@ -1,9 +1,14 @@
 [gd_scene format=3]
 
-[ext_resource type="Texture2D" path="res://assets/environments/manchester/manchester.png" id="1_map"]
+[ext_resource type="Texture2D" path="res://assets/environments/manchester/manchester.webp" id="1_map"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
-[ext_resource type="Script" path="res://scripts/systems/city_root.gd" id="4_city"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="4_city"]
+
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="90_city_theme"]
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="91_city_music_loop"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="190_map_exit_indicator"]
 
 [sub_resource type="RectangleShape2D" id="ExitShape"]
 size = Vector2(80, 30)
@@ -162,3 +167,12 @@ target_scene_path = "res://scenes/world/world_map.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
 shape = SubResource("ExitShape")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("90_city_theme")
+autoplay = true
+script = ExtResource("91_city_music_loop")
+
+[node name="MapExitIndicator" parent="WorldMapExit" instance=ExtResource("190_map_exit_indicator")]

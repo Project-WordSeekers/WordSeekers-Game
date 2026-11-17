@@ -2,13 +2,25 @@
 
 [ext_resource type="Texture2D" path="res://assets/environments/nottingham/nottingham.webp" id="1_map"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
-[ext_resource type="Script" path="res://scripts/locations/nottingham/portals.gd" id="3_portals"]
 
 [ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="4_spawn"]
 [ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="5_exit"]
 [ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="6_npc"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="90_city_theme"]
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="91_city_music_loop"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="180_entrance_indicator"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="190_map_exit_indicator"]
+
 [sub_resource type="RectangleShape2D" id="WorldExitShape"]
 size = Vector2(115, 40)
+
+[sub_resource type="RectangleShape2D" id="CastleDoorShape"]
+size = Vector2(76, 52)
+
+[sub_resource type="RectangleShape2D" id="CavesDoorShape"]
+size = Vector2(85, 55)
 
 [node name="Nottingham" type="Node2D" unique_id=1612097242]
 script = ExtResource("4_spawn")
@@ -243,8 +255,31 @@ polygon = PackedVector2Array(40, 605, 135, 605, 135, 735, 40, 735)
 [node name="Player" parent="." unique_id=1437844174 instance=ExtResource("2_player")]
 position = Vector2(780, 705)
 
-[node name="GerenciadorDeEntradas" type="Node2D" parent="." unique_id=824718254]
-script = ExtResource("3_portals")
+[node name="CastleEntrance" type="Area2D" parent="."]
+position = Vector2(391, 341)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_exit")
+target_scene_path = "res://scenes/locations/nottingham/castle.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CastleEntrance"]
+shape = SubResource("CastleDoorShape")
+
+
+[node name="EntranceArrow" parent="CastleEntrance" instance=ExtResource("180_entrance_indicator")]
+
+[node name="CavesEntrance" type="Area2D" parent="."]
+position = Vector2(1302, 831)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_exit")
+target_scene_path = "res://scenes/locations/nottingham/caves.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CavesEntrance"]
+shape = SubResource("CavesDoorShape")
+
+
+[node name="EntranceArrow" parent="CavesEntrance" instance=ExtResource("180_entrance_indicator")]
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 [node name="FromCastle" type="Marker2D" parent="SpawnPoints"]
@@ -263,3 +298,10 @@ shape = SubResource("WorldExitShape")
 position = Vector2(760, 635)
 speaker_name = "Nottingham Guide"
 dialogue_text = "Welcome to Nottingham! Explore our historic castle and the City of Caves. Every place has a story."
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("90_city_theme")
+autoplay = true
+script = ExtResource("91_city_music_loop")
+
+[node name="MapExitIndicator" parent="WorldMapExit" instance=ExtResource("190_map_exit_indicator")]

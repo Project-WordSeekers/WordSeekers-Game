@@ -5,17 +5,46 @@ extends Area2D
 var player_nearby: bool = false
 var interaction_active: bool = false
 
+@export var npc_id: String = ""
+const NEW_DIALOGUE_ICON_TEXTURE: Texture2D = preload("res://assets/ui/icons/npc_new_dialogue_exclamation.png")
+var new_dialogue_icon: Sprite2D
+
+func _ensure_new_dialogue_icon() -> void:
+	if new_dialogue_icon != null:
+		return
+	new_dialogue_icon = Sprite2D.new()
+	new_dialogue_icon.name = "NewDialogueIcon"
+	new_dialogue_icon.texture = NEW_DIALOGUE_ICON_TEXTURE
+	new_dialogue_icon.centered = true
+	new_dialogue_icon.scale = Vector2(0.33, 0.33)
+	new_dialogue_icon.position = Vector2(0, -68)
+	new_dialogue_icon.z_index = 30
+	add_child(new_dialogue_icon)
+	var float_tween := create_tween()
+	float_tween.set_loops()
+	float_tween.tween_property(new_dialogue_icon, "position:y", -72.0, 0.55).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	float_tween.tween_property(new_dialogue_icon, "position:y", -68.0, 0.55).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+func _get_npc_id() -> String:
+	if npc_id.strip_edges() != "":
+		return npc_id.strip_edges()
+	var scene_id: String = scene_file_path.get_file().get_basename() if scene_file_path != "" else "runtime"
+	return "%s::%s" % [scene_id, get_path()]
+
+func _refresh_new_dialogue_icon() -> void:
+	_ensure_new_dialogue_icon()
+	new_dialogue_icon.visible = not GameState.has_talked_to_npc(_get_npc_id())
+
+
 var first_dialogue_lines: Array[String] = [
 	"Olá, WordSeeker. Meu nome é Charles Abbot, 1º Barão de Colchester.",
 	"Você chegou em tempos estranhos. Após uma grande tempestade, criaturas mágicas surgiram por toda a Grã-Bretanha.",
 	"Desde então, algo ainda mais inquietante vem acontecendo: as pessoas estão esquecendo o idioma inglês!",
 	"Foi por isso que chamamos você. Um WordSeeker — um desbravador de palavras.",
 	"Sua missão é redescobrir o idioma e trazer a magia das palavras de volta ao povo.",
+	"Converse com as pessoas em todas as cidades que visitar. Cada morador guarda palavras, histórias e conhecimentos que podem nos ajudar a reconstruir o inglês.",
 	"Antes de partir, preciso explicar como se movimentar por este mundo.",
 	"Use WASD ou as setas do teclado para caminhar. Pressione E para interagir com pessoas e objetos, avançar diálogos e confirmar escolhas.",
-	"No canto superior esquerdo da tela está sua barra de HP — seus Health Points. Você começa com 10 pontos de vida.",
-	"Durante uma batalha, cada resposta errada em um quiz faz você perder 1 HP. Se chegar a zero, você retornará à Cidade 01.",
-	"Pressione H a qualquer momento para abrir a Ajuda. Pressione I para abrir sua Mochila.",
 	"Antes de seguir viagem, quero lhe confiar uma ferramenta importante: O Dicionário.",
 	"Este grimório possui 3 usos durante quizzes. Quando precisar de ajuda, pressione T — de Translate — para revelar a resposta correta da pergunta atual.",
 	"Use esses três auxílios com sabedoria. Mesmo depois que os usos acabarem, o Dicionário continuará guardado em sua mochila.",
@@ -24,7 +53,8 @@ var first_dialogue_lines: Array[String] = [
 
 var repeat_dialogue_lines: Array[String] = [
 	"WordSeeker, não se esqueça de sua missão: redescobrir o inglês e devolver ao povo a magia das palavras.",
-	"WASD ou setas movem você; E interage; H abre a Ajuda; I abre a Mochila.",
+	"Visite todas as cidades e converse com seus moradores. Cada conversa ajuda a reunir o conhecimento perdido e abre caminho para continuar sua jornada.",
+	"WASD ou setas movem você e E permite conversar e interagir.",
 	"Durante quizzes, pressione T para usar O Dicionário enquanto ainda houver usos disponíveis.",
 	"Boa sorte em sua jornada."
 ]
@@ -32,6 +62,8 @@ var repeat_dialogue_lines: Array[String] = [
 func _ready() -> void:
 	prompt.text = "[E] Falar"
 	prompt.hide()
+	_ensure_new_dialogue_icon()
+	_refresh_new_dialogue_icon()
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
@@ -68,6 +100,8 @@ func _on_dialogue_finished() -> void:
 	_finish_interaction()
 
 func _finish_interaction() -> void:
+	GameState.register_npc_talked(_get_npc_id(), String(GameState.world_map_point_name))
+	_refresh_new_dialogue_icon()
 	interaction_active = false
 	if player_nearby and not DialogueUI.is_open():
 		prompt.show()

@@ -8,4 +8,4 @@
 [node name="Guardian" parent="NPCs" index="0" instance=ExtResource("2_npc")]
 position = Vector2(155, 30)
 speaker_name = "Stratford Guardian"
-dialogue_text = "Welcome, traveler. May this chalice restore your strength."
+dialogue_text = "Welcome, traveler. May this sanctuary offer you peace."

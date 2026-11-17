@@ -15,7 +15,7 @@ func _ready() -> void:
     label.position = Vector2(350, 595)
     label.add_theme_font_size_override("font_size", 18)
     label.add_theme_color_override("font_color", Color(1, 0.92, 0.65))
-    label.text = "[E] Voltar para Nottingham"
+    label.text = "Passe pela saída para voltar a Nottingham"
     add_child(label)
     criar_colisoes()
     queue_redraw()
@@ -57,11 +57,8 @@ func criar_colisoes() -> void:
         parede(430, 185, 100, 65)
 
 func _process(_delta: float) -> void:
-    var saida := player.position.distance_to(Vector2(480, 565)) < 80
-    label.visible = saida
-    if saida and Input.is_action_just_pressed("interact"):
-        GameState.pending_spawn_name = &"FromCastle"
-        SceneTransition.change_scene_to_file("res://scenes/locations/nottingham/nottingham.tscn")
+    # A Area2D ReturnToNottingham controla automaticamente a saída.
+    label.visible = player.position.distance_to(Vector2(480, 600)) < 130.0
 
 func _draw() -> void:
     var piso := Color("776047") if ambiente == 0 else Color("3a3430")

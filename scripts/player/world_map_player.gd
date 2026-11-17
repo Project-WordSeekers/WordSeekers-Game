@@ -16,7 +16,8 @@ const FEMALE_TEXTURE: Texture2D = preload("res://assets/characters/player/female
 var current_point: Area2D
 var target_point: Area2D
 var moving: bool = false
-var input_blocked: bool = false
+# Evita que o mesmo E feche e reabra imediatamente o aviso.
+var _wait_interact_release: bool = false
 
 const RANDOM_BATTLE_SCENE: String = "res://scenes/minigames/battle.tscn"
 var encounter_rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -50,6 +51,8 @@ func apply_selected_appearance() -> void:
 	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 
 func _process(delta: float) -> void:
+	if _wait_interact_release and not Input.is_action_pressed("interact"):
+		_wait_interact_release = false
 	if moving:
 		move_between_points(delta)
 	else:
@@ -57,11 +60,6 @@ func _process(delta: float) -> void:
 
 func check_input() -> void:
 	if GameHUD.is_modal_open() or DialogueUI.is_open():
-		input_blocked = true
-		return
-	if input_blocked:
-		# Ignora o E que acabou de fechar o diálogo; senão ele tenta entrar de novo e reabre a mensagem.
-		input_blocked = false
 		return
 	if current_point == null:
 		return
@@ -74,7 +72,7 @@ func check_input() -> void:
 		start_move(current_point.left, 2)
 	elif Input.is_action_just_pressed("ui_right") and current_point.right != null:
 		start_move(current_point.right, 3)
-	elif Input.is_action_just_pressed("interact"):
+	elif Input.is_action_just_pressed("interact") and not _wait_interact_release:
 		try_enter_location()
 
 func start_move(point: Area2D, row: int) -> void:
@@ -137,14 +135,33 @@ func can_enter_current_point() -> bool:
 	return current_point != null and current_point.destination_scene != null
 
 func try_enter_location() -> void:
-	if not can_enter_current_point():
+	if current_point == null:
 		return
-
-	if not GameState.can_enter_city(String(current_point.name)):
-		DialogueUI.show_dialogue("World Map", "This city is locked! Talk to an NPC in each city of the previous level.")
+	var city_name: String = String(current_point.name)
+	# Verificar o nivel antes da existencia da cena, para todos os MapPoints.
+	if not GameState.can_enter_city(city_name):
+		_wait_interact_release = true
+		DialogueUI.show_dialogue(
+			"Cidade bloqueada",
+			"Cidade bloqueada, explore outras cidades para liberar",
+			Callable(self, "_on_map_warning_closed")
+		)
+		return
+	if current_point.destination_scene == null:
+		_wait_interact_release = true
+		DialogueUI.show_dialogue(
+			"Mapa-múndi",
+			"Esta cidade ainda não está disponível.",
+			Callable(self, "_on_map_warning_closed")
+		)
 		return
 	GameState.world_map_point_name = current_point.name
 	SceneTransition.change_scene_to_packed(current_point.destination_scene)
+
+# O E usado para fechar o aviso nunca deve reabrir o mesmo aviso no mesmo frame.
+# Volta a aceitar interacao somente depois que o jogador soltar a tecla.
+func _on_map_warning_closed() -> void:
+	_wait_interact_release = true
 
 func ensure_input_actions() -> void:
 	if InputMap.has_action("interact"):

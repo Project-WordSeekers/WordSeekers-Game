@@ -27,14 +27,6 @@ func register_travel_battle_roll(battle_started: bool) -> void:
 		consecutive_travels_without_battle += 1
 var world_map_point_name: StringName = &"Colchester"
 var pending_spawn_name: StringName = &""
-var cidade: String = ""
-# Porta do templo na cidade: o jogador volta para ela ao sair do templo.
-var cidade_porta: Vector2 = Vector2.ZERO
-var voltando_do_templo: bool = false
-
-func e_templo(cena: String) -> bool:
-	return cena.begins_with("res://scenes/temples/") or cena.begins_with("res://scenes/temple/")
-
 # Retorno do templo: definido pela entrada da cidade, nunca pelo interior compartilhado.
 var temple_return_scene: String = ""
 var temple_return_spawn: StringName = &""
@@ -133,6 +125,7 @@ const CITY_LEVELS: Dictionary = {
 }
 const PROGRESS_PATH: String = "user://wordseekers_progress.json"
 var npc_cities_completed: Dictionary = {}
+var talked_npcs: Dictionary = {}
 var used_quiz_ids: Dictionary = {}
 var quiz_pool: Array = []
 
@@ -148,6 +141,8 @@ func load_progress() -> void:
 	for city in parsed.get("npc_cities_completed", []):
 		if CITY_LEVELS.has(String(city)):
 			npc_cities_completed[String(city)] = true
+	for npc_id in parsed.get("talked_npcs", []):
+		talked_npcs[String(npc_id)] = true
 	for quiz_id in parsed.get("used_quiz_ids", []):
 		used_quiz_ids[String(quiz_id)] = true
 
@@ -156,12 +151,25 @@ func save_progress() -> void:
 	if f == null:
 		push_warning("Unable to save progress")
 		return
-	f.store_string(JSON.stringify({"npc_cities_completed":npc_cities_completed.keys(),"used_quiz_ids":used_quiz_ids.keys()}))
+	f.store_string(JSON.stringify({"npc_cities_completed": npc_cities_completed.keys(), "talked_npcs": talked_npcs.keys(), "used_quiz_ids": used_quiz_ids.keys()}))
 
-func register_npc_dialogue_completed(city: String) -> void:
+
+func has_talked_to_npc(npc_id: String) -> bool:
+	return talked_npcs.has(npc_id)
+
+func register_npc_talked(npc_id: String, city: String = String(world_map_point_name)) -> void:
+	var changed: bool = false
+	if npc_id != "" and not talked_npcs.has(npc_id):
+		talked_npcs[npc_id] = true
+		changed = true
 	if CITY_LEVELS.has(city) and not npc_cities_completed.has(city):
 		npc_cities_completed[city] = true
+		changed = true
+	if changed:
 		save_progress()
+
+func register_npc_dialogue_completed(city: String) -> void:
+	register_npc_talked("", city)
 
 func is_level_unlocked(level: int) -> bool:
 	if level <= 1:

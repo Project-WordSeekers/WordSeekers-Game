@@ -177,7 +177,7 @@ position = Vector2(764, 825)
 [node name="PortaDeSaida" type="Area2D" parent="."]
 position = Vector2(764, 946)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PortaDeSaida"]
 shape = SubResource("ExitShape")

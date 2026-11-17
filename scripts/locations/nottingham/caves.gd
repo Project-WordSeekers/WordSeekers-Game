@@ -26,7 +26,7 @@ func _ready() -> void:
     bloquear(Rect2(65, 355, 110, 100))
     bloquear(Rect2(800, 365, 95, 95))
     aviso = Label.new()
-    aviso.text = "[E] Voltar para Nottingham"
+    aviso.text = "Passe pela saída para voltar a Nottingham"
     aviso.position = Vector2(355, 594)
     aviso.add_theme_font_size_override("font_size", 20)
     aviso.add_theme_color_override("font_color", Color(1.0, 0.9, 0.65))
@@ -45,8 +45,5 @@ func bloquear(area: Rect2) -> void:
     add_child(corpo)
 
 func _process(_delta: float) -> void:
-    var perto := player.position.distance_to(Vector2(480, 565)) < 80
-    aviso.visible = perto
-    if perto and Input.is_action_just_pressed("interact"):
-        GameState.pending_spawn_name = &"FromCaves"
-        SceneTransition.change_scene_to_file("res://scenes/locations/nottingham/nottingham.tscn")
+    # A Area2D ReturnToNottingham controla automaticamente a saída.
+    aviso.visible = player.position.distance_to(Vector2(480, 600)) < 130.0

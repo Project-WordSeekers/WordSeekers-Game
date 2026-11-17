@@ -4,6 +4,13 @@
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
 
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="99_progress_npc"]
+
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="90_city_theme"]
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="91_city_music_loop"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="190_map_exit_indicator"]
+
 [sub_resource type="RectangleShape2D" id="BuildingLibrary"]
 size = Vector2(106, 285)
 
@@ -117,7 +124,6 @@ size = Vector2(85, 30)
 [sub_resource type="RectangleShape2D" id="ExitPortalShape"]
 size = Vector2(120, 90)
 
-[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="99_progress_npc"]
 
 [node name="Cidade" type="Node2D" unique_id=1230676398]
 
@@ -357,3 +363,10 @@ shape = SubResource("ExitPortalShape")
 position = Vector2(695, 858)
 speaker_name = "Town Guide"
 dialogue_text = "Welcome, traveler! Explore our city and keep practicing your English."
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("90_city_theme")
+autoplay = true
+script = ExtResource("91_city_music_loop")
+
+[node name="MapExitIndicator" parent="WorldMapExit" instance=ExtResource("190_map_exit_indicator")]

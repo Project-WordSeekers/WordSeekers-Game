@@ -10,6 +10,19 @@
 
 [ext_resource type="Script" path="res://scripts/minigames/roman_walls_challenge.gd" id="7_word_search"]
 
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="90_city_theme"]
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="91_city_music_loop"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="180_entrance_indicator"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="190_map_exit_indicator"]
+
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/colchester/guide_help_inventory.webp" id="200_help_guide_texture"]
+[ext_resource type="Script" path="res://scripts/npcs/simple_dialogue_npc.gd" id="201_help_guide_script"]
+
+[sub_resource type="CircleShape2D" id="GuideInteraction"]
+radius = 40.0
+
 [sub_resource type="CircleShape2D" id="BaronInteraction"]
 radius = 32.0
 
@@ -166,6 +179,31 @@ theme_override_font_sizes/font_size = 12
 text = "[E] Falar"
 horizontal_alignment = 1
 
+
+[node name="HelpInventoryGuide" type="Area2D" parent="NPCs"]
+position = Vector2(1210, 391)
+script = ExtResource("201_help_guide_script")
+speaker_name = "Guia de Colchester"
+dialogue_text = "Olá, WordSeeker! Quer uma dica para sua jornada?\n\nPressione H para abrir a Ajuda. Lá você pode consultar os comandos e as orientações do jogo. Pressione H novamente para fechar.\n\nPressione I para abrir sua Mochila. Nela você encontra os itens que recebeu, como O Dicionário, e pode conferir quantos usos ainda restam. Pressione I novamente para fechar.\n\nDesde que os monstros apareceram, ficou muito difícil manter contato com as outras cidades. As estradas já não são seguras, e estamos perdendo a oportunidade de compartilhar o que sabemos sobre o idioma inglês.\n\nVocê pode consultar a Ajuda e a Mochila durante sua exploração. Boa viagem!"
+npc_id = "colchester_guia_ajuda_mochila"
+
+[node name="Sprite2D" type="Sprite2D" parent="NPCs/HelpInventoryGuide"]
+position = Vector2(0, -24)
+texture_filter = 1
+texture = ExtResource("200_help_guide_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/HelpInventoryGuide"]
+shape = SubResource("GuideInteraction")
+
+[node name="Prompt" type="Label" parent="NPCs/HelpInventoryGuide"]
+offset_left = -66.0
+offset_top = -56.0
+offset_right = 66.0
+offset_bottom = -35.0
+theme_override_font_sizes/font_size = 12
+text = "[E] Falar"
+horizontal_alignment = 1
+
 [node name="TempleEntrance" type="Area2D" parent="."]
 position = Vector2(355, 331)
 script = ExtResource("3_portal")
@@ -175,6 +213,9 @@ temple_return_spawn = &"FromTemple"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TempleEntrance"]
 shape = SubResource("TempleEntranceShape")
+
+
+[node name="EntranceArrow" parent="TempleEntrance" instance=ExtResource("180_entrance_indicator")]
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 
@@ -196,3 +237,10 @@ offset_bottom = -43.0
 theme_override_font_sizes/font_size = 15
 text = "[E] Diário: Roman Walls"
 horizontal_alignment = 1
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("90_city_theme")
+autoplay = true
+script = ExtResource("91_city_music_loop")
+
+[node name="MapExitIndicator" parent="WorldMapExit" instance=ExtResource("190_map_exit_indicator")]
