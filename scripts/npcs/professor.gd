@@ -19,14 +19,14 @@ func _ensure_new_dialogue_icon() -> void:
 	new_dialogue_icon.name = "NewDialogueIcon"
 	new_dialogue_icon.texture = NEW_DIALOGUE_ICON_TEXTURE
 	new_dialogue_icon.centered = true
-	new_dialogue_icon.scale = Vector2(0.33, 0.33)
-	new_dialogue_icon.position = Vector2(0, -68)
+	new_dialogue_icon.scale = Vector2(0.03, 0.03)
+	new_dialogue_icon.position = Vector2(0, -80)
 	new_dialogue_icon.z_index = 30
 	add_child(new_dialogue_icon)
 	var float_tween := create_tween()
 	float_tween.set_loops()
-	float_tween.tween_property(new_dialogue_icon, "position:y", -72.0, 0.55).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	float_tween.tween_property(new_dialogue_icon, "position:y", -68.0, 0.55).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	float_tween.tween_property(new_dialogue_icon, "position:y", -84.0, 0.55).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	float_tween.tween_property(new_dialogue_icon, "position:y", -80.0, 0.55).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func _get_npc_id() -> String:
 	if npc_id.strip_edges() != "":

@@ -1,0 +1,202 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/bath/bath.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="4_city"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="90_city_theme"]
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="91_city_music_loop"]
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="99_npc"]
+[ext_resource type="Script" path="res://scripts/npcs/bath_storyteller_npc.gd" id="100_storyteller"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/temples/freira_livro_24x32.png" id="101_storyteller_tex"]
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="180_entrance_indicator"]
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="190_map_exit_indicator"]
+
+[sub_resource type="RectangleShape2D" id="ExitShape"]
+size = Vector2(50, 30)
+
+[sub_resource type="RectangleShape2D" id="TempleShape"]
+size = Vector2(50, 24)
+
+[node name="Bath" type="Node2D"]
+script = ExtResource("4_city")
+
+[node name="Mapa" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(701, 561)
+texture = ExtResource("1_map")
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="Topo" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Topo"]
+polygon = PackedVector2Array(0, 0, 1402, 0, 1402, 22, 0, 22)
+
+[node name="CrescentEOeste" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/CrescentEOeste"]
+polygon = PackedVector2Array(0, 0, 560, 0, 560, 105, 400, 110, 267, 120, 167, 140, 110, 180, 95, 210, 95, 855, 147, 855, 147, 982, 0, 982)
+
+[node name="CercaGramado" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/CercaGramado"]
+polygon = PackedVector2Array(527, 118, 538, 118, 538, 262, 127, 262, 127, 250, 527, 250)
+
+[node name="Circus" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Circus"]
+polygon = PackedVector2Array(578, 140, 600, 70, 660, 35, 730, 25, 800, 35, 860, 70, 880, 140, 860, 215, 800, 232, 660, 232, 600, 215)
+
+[node name="Biblioteca" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Biblioteca"]
+polygon = PackedVector2Array(880, 0, 1115, 0, 1115, 232, 925, 232, 925, 65, 880, 65)
+
+[node name="RioEPonte" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/RioEPonte"]
+polygon = PackedVector2Array(1115, 0, 1402, 0, 1402, 975, 1355, 978, 1112, 575, 1085, 530, 1082, 473, 1045, 473, 1045, 373, 1140, 373, 1192, 255, 1197, 95, 1115, 95)
+
+[node name="Abadia" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Abadia"]
+polygon = PackedVector2Array(693, 272, 1022, 272, 1022, 460, 955, 460, 955, 668, 632, 668, 632, 380, 693, 380)
+
+[node name="Termas" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Termas"]
+polygon = PackedVector2Array(230, 535, 533, 535, 533, 505, 640, 505, 667, 560, 667, 840, 480, 840, 480, 822, 380, 822, 380, 840, 207, 840, 207, 600)
+
+[node name="QuarteiraoSudeste" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/QuarteiraoSudeste"]
+polygon = PackedVector2Array(1000, 460, 1057, 460, 1057, 540, 1109, 540, 1109, 709, 1142, 722, 1142, 838, 869, 838, 869, 722, 995, 709, 995, 540)
+
+[node name="CasasSudeste" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/CasasSudeste"]
+polygon = PackedVector2Array(942, 870, 1220, 870, 1220, 982, 942, 982)
+
+[node name="CasasSudoeste" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/CasasSudoeste"]
+polygon = PackedVector2Array(233, 868, 682, 868, 682, 982, 233, 982)
+
+[node name="MuroOeste" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/MuroOeste"]
+polygon = PackedVector2Array(0, 975, 752, 975, 752, 1122, 0, 1122)
+
+[node name="MuroLeste" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/MuroLeste"]
+polygon = PackedVector2Array(797, 975, 1402, 975, 1402, 1122, 797, 1122)
+
+[node name="PredioPraca" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/PredioPraca"]
+polygon = PackedVector2Array(183, 267, 287, 267, 295, 393, 282, 450, 228, 450, 222, 400, 183, 395)
+
+[node name="Fonte" type="StaticBody2D" parent="Colisoes"]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Fonte"]
+polygon = PackedVector2Array(420, 423, 440, 400, 470, 393, 500, 400, 522, 423, 500, 448, 470, 453, 440, 448)
+
+[node name="Obstaculos" type="StaticBody2D" parent="Colisoes"]
+
+[node name="ArvorePraca1" type="CollisionPolygon2D" parent="Colisoes/Obstaculos"]
+polygon = PackedVector2Array(333, 327, 407, 327, 407, 373, 333, 373)
+
+[node name="ArvorePraca2" type="CollisionPolygon2D" parent="Colisoes/Obstaculos"]
+polygon = PackedVector2Array(533, 327, 603, 327, 603, 373, 533, 373)
+
+[node name="BarracasNorte" type="CollisionPolygon2D" parent="Colisoes/Obstaculos"]
+polygon = PackedVector2Array(579, 370, 623, 370, 623, 453, 579, 453)
+
+[node name="BarracaSul1" type="CollisionPolygon2D" parent="Colisoes/Obstaculos"]
+polygon = PackedVector2Array(640, 806, 687, 806, 687, 836, 640, 836)
+
+[node name="BarracaSul2" type="CollisionPolygon2D" parent="Colisoes/Obstaculos"]
+polygon = PackedVector2Array(702, 799, 749, 799, 749, 849, 702, 849)
+
+[node name="BarracaSul3" type="CollisionPolygon2D" parent="Colisoes/Obstaculos"]
+polygon = PackedVector2Array(792, 799, 839, 799, 839, 849, 792, 849)
+
+[node name="Canteiro1" type="CollisionPolygon2D" parent="Colisoes/Obstaculos"]
+polygon = PackedVector2Array(107, 397, 140, 397, 140, 437, 107, 437)
+
+[node name="Canteiro2" type="CollisionPolygon2D" parent="Colisoes/Obstaculos"]
+polygon = PackedVector2Array(107, 520, 140, 520, 140, 553, 107, 553)
+
+[node name="Canteiro3" type="CollisionPolygon2D" parent="Colisoes/Obstaculos"]
+polygon = PackedVector2Array(107, 685, 140, 685, 140, 722, 107, 722)
+
+[node name="Canteiro4" type="CollisionPolygon2D" parent="Colisoes/Obstaculos"]
+polygon = PackedVector2Array(107, 825, 140, 825, 140, 855, 107, 855)
+
+[node name="Canteiro5" type="CollisionPolygon2D" parent="Colisoes/Obstaculos"]
+polygon = PackedVector2Array(163, 842, 207, 842, 207, 915, 163, 915)
+
+[node name="Canteiro6" type="CollisionPolygon2D" parent="Colisoes/Obstaculos"]
+polygon = PackedVector2Array(223, 470, 257, 470, 257, 510, 223, 510)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(775, 930)
+
+[node name="WorldMapExit" type="Area2D" parent="."]
+position = Vector2(775, 1010)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
+shape = SubResource("ExitShape")
+
+[node name="MapExitIndicator" parent="WorldMapExit" instance=ExtResource("190_map_exit_indicator")]
+
+[node name="TempleEntrance" type="Area2D" parent="."]
+position = Vector2(757, 680)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/temples/temple_bath.tscn"
+temple_entrance = true
+temple_return_spawn = &"FromTemple"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempleEntrance"]
+shape = SubResource("TempleShape")
+
+[node name="EntranceArrow" parent="TempleEntrance" instance=ExtResource("180_entrance_indicator")]
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromTemple" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(757, 730)
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="CrescentGuide" parent="NPCs" instance=ExtResource("99_npc")]
+position = Vector2(330, 205)
+speaker_name = "Royal Crescent Guide"
+dialogue_text = "Welcome to Bath! These elegant houses form the Royal Crescent, built in the 1770s. Bath is famous for its golden stone, its Roman Baths and the writer Jane Austen, who lived here. Explore the Abbey, the Baths and Pulteney Bridge!"
+npc_id = "bath_crescent_guide"
+
+[node name="BathsAttendant" parent="NPCs" instance=ExtResource("99_npc")]
+position = Vector2(170, 640)
+speaker_name = "Roman Baths Attendant"
+dialogue_text = "Salve, traveler! The Romans built these baths almost two thousand years ago. The hot spring water comes from deep underground, and they dedicated the temple here to the goddess Sulis Minerva."
+npc_id = "bath_baths_attendant"
+
+[node name="Storyteller" parent="NPCs" instance=ExtResource("99_npc")]
+position = Vector2(830, 720)
+script = ExtResource("100_storyteller")
+speaker_name = "Sister Abigail"
+prompt_text = "[E] Falar"
+npc_id = "bath_storyteller"
+
+[node name="Sprite2D" parent="NPCs/Storyteller" index="0"]
+scale = Vector2(1, 1)
+texture = ExtResource("101_storyteller_tex")
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("90_city_theme")
+autoplay = true
+script = ExtResource("91_city_music_loop")

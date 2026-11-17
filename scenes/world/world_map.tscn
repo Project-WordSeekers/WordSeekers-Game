@@ -19,6 +19,7 @@
 
 [ext_resource type="PackedScene" path="res://scenes/locations/york/york.tscn" id="95_york"]
 [ext_resource type="PackedScene" path="res://scenes/locations/manchester/manchester.tscn" id="96_manchester"]
+[ext_resource type="PackedScene" path="res://scenes/locations/bath/bath.tscn" id="94_bath"]
 
 [node name="WorldMap" type="Node2D" unique_id=1750420017]
 
@@ -122,7 +123,7 @@ destination_scene = ExtResource("10_winchester")
 position = Vector2(90, 465)
 down = NodePath("../Salisbury")
 right = NodePath("../London")
-destination_scene = ExtResource("6_cidade_fantasia")
+destination_scene = ExtResource("94_bath")
 
 [node name="Plymouth" parent="Points" unique_id=425941714 instance=ExtResource("2_u82pb") node_paths=PackedStringArray("right")]
 position = Vector2(-181, 624)

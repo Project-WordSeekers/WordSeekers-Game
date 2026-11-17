@@ -7,21 +7,22 @@
 script = ExtResource("2_logic")
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(0, -72)
+position = Vector2(0, -30)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_icon")
 texture_filter = 1
 z_index = 9
 
 [node name="NearLabel" type="Label" parent="."]
-offset_left = -110.0
-offset_top = -122.0
-offset_right = 110.0
-offset_bottom = -96.0
+offset_left = -70.0
+offset_top = -66.0
+offset_right = 70.0
+offset_bottom = -48.0
 mouse_filter = 2
 text = "Saída para o mapa"
 horizontal_alignment = 1
 vertical_alignment = 1
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 10
 theme_override_colors/font_color = Color(0.72, 0.94, 1, 1)
 theme_override_colors/font_shadow_color = Color(0.03, 0.07, 0.19, 1)
 theme_override_constants/shadow_offset_x = 2

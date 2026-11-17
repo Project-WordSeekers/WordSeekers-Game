@@ -21,8 +21,8 @@ func _ready() -> void:
     _player = get_tree().get_first_node_in_group("player") as Node2D
     var bob: Tween = create_tween()
     bob.set_loops()
-    bob.tween_property(icon, "position:y", -72.0 - FLOAT_RANGE, FLOAT_DURATION).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-    bob.tween_property(icon, "position:y", -72.0 + FLOAT_RANGE, FLOAT_DURATION).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+    bob.tween_property(icon, "position:y", -30.0 - FLOAT_RANGE, FLOAT_DURATION).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+    bob.tween_property(icon, "position:y", -30.0 + FLOAT_RANGE, FLOAT_DURATION).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func _process(_delta: float) -> void:
     if not is_instance_valid(_player):
