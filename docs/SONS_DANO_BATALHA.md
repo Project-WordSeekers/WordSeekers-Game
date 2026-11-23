@@ -1,2 +1,0 @@
-# Sons de dano na batalha
-Ao responder incorretamente e perder HP, toca `player_damage.wav` (arquivo original enviado). Ao responder corretamente e reduzir HP do monstro, toca `monster_damage.ogg` (convertido do MP3 enviado). Os dois sons usam AudioStreamPlayer locais na cena battle.tscn, sem autoplay. O atraso na derrota foi ampliado para 0,85 s para permitir ouvir o dano antes da transição. Integridade ZIP verificada; execução Godot pendente.

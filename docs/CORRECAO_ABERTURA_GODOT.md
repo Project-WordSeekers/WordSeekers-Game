@@ -1,1 +1,0 @@
-Correcoes: batalha.gd agora usa somente espacos na indentacao; dictionary.png foi regravado como PNG RGBA valido. Mantidos 14 monstros, UI do quiz, dicionario e todos os demais arquivos. Integridade ZIP validada; Godot 4 nao esta instalado neste ambiente para testar a importacao.
