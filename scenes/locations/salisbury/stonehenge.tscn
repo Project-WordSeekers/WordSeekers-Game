@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://3n02kc8ukiss"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/salisbury/stonehenge.webp" id="1_bg"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="4_spawn"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/idoso1.png" id="lesson_art_idoso1"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/cidadao3.png" id="lesson_art_cidadao3"]
+
+[sub_resource type="RectangleShape2D" id="ExitShape"]
+size = Vector2(180, 52)
+
+[node name="Stonehenge" type="Node2D" unique_id=1358851410]
+script = ExtResource("4_spawn")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=2004396270]
+texture_filter = 1
+position = Vector2(768, 512)
+texture = ExtResource("1_bg")
+
+[node name="Player" parent="." unique_id=127155555 instance=ExtResource("2_player")]
+position = Vector2(768, 785)
+
+[node name="SaidaCidade" type="Area2D" parent="." unique_id=339704020]
+position = Vector2(768, 930)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/salisbury/salisbury.tscn"
+target_spawn_name = &"StonehengeReturn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaCidade" unique_id=1762604616]
+shape = SubResource("ExitShape")
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=1323495111]
+
+[node name="Entrada" type="Marker2D" parent="SpawnPoints" unique_id=1977550369]
+position = Vector2(768, 785)
+
+[node name="colisoees" type="StaticBody2D" parent="." unique_id=72354910]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="colisoees" unique_id=304330831]
+polygon = PackedVector2Array(689, 897, 685, 853, 700, 802, 696, 764, 610, 772, 521, 763, 435, 736, 413, 772, 368, 822, 235, 767, 219, 698, 259, 689, 252, 664, 179, 623, 138, 569, 107, 522, 97, 470, 98, 431, 112, 396, 130, 364, 159, 346, 188, 355, 202, 388, 261, 401, 264, 366, 278, 326, 207, 303, 195, 330, 154, 313, 116, 336, 113, 312, 145, 268, 131, 243, 218, 186, 309, 154, 420, 137, 420, 155, 421, 184, 451, 188, 470, 181, 502, 167, 573, 161, 583, 181, 564, 253, 554, 215, 523, 216, 513, 260, 481, 243, 455, 249, 438, 222, 412, 282, 384, 311, 394, 338, 384, 451, 403, 468, 396, 535, 428, 537, 451, 562, 448, 595, 554, 626, 574, 596, 557, 510, 475, 435, 476, 413, 505, 386, 517, 307, 558, 284, 582, 308, 639, 293, 739, 283, 735, 172, 733, 134, 290, 76, 41, 316, 140, 890)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="colisoees" unique_id=869804326]
+polygon = PackedVector2Array(319, 702, 334, 694, 328, 673, 363, 671, 351, 696, 371, 708, 366, 738, 333, 742, 318, 723)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="colisoees" unique_id=1484481271]
+polygon = PackedVector2Array(183, 520, 206, 516, 247, 574, 215, 574, 186, 548)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="colisoees" unique_id=997828273]
+polygon = PackedVector2Array(322, 378, 301, 389, 295, 477, 326, 508, 347, 492)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="colisoees" unique_id=1953899127]
+polygon = PackedVector2Array(645, 568, 633, 589, 632, 625, 643, 632, 640, 659, 713, 668, 718, 645, 673, 630, 665, 576)
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="colisoees" unique_id=1770714876]
+polygon = PackedVector2Array(838, 579, 870, 620, 887, 532, 921, 521, 936, 542, 941, 631, 956, 672, 915, 673, 915, 641, 827, 628)
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="colisoees" unique_id=1361195160]
+polygon = PackedVector2Array(830, 896, 830, 860, 845, 860, 831, 795, 832, 760, 852, 775, 912, 770, 913, 759, 926, 769, 1003, 762, 1007, 749, 1024, 761, 1094, 741, 1093, 726, 1103, 726, 1105, 768, 1080, 761, 1012, 784, 928, 786, 916, 801, 900, 788, 848, 793, 858, 858, 908, 841, 947, 867, 957, 853, 998, 847, 1021, 868, 1066, 856, 1097, 821, 1149, 847, 1181, 848, 1197, 817, 1244, 799, 1277, 774, 1329, 790, 1337, 734, 1265, 733, 1290, 691, 1288, 673, 1304, 655, 1314, 664, 1348, 621, 1394, 570, 1419, 515, 1436, 466, 1431, 432, 1424, 389, 1404, 352, 1381, 320, 1340, 330, 1339, 365, 1333, 382, 1321, 367, 1273, 372, 1276, 386, 1249, 327, 1324, 303, 1335, 319, 1421, 264, 1392, 239, 1354, 217, 1307, 181, 1223, 163, 1189, 164, 1190, 184, 1223, 180, 1268, 206, 1254, 230, 1187, 200, 1139, 175, 1105, 188, 1070, 174, 986, 161, 988, 202, 1000, 255, 1013, 232, 1038, 291, 1049, 334, 1069, 254, 1073, 226, 1102, 229, 1132, 269, 1135, 397, 1148, 418, 1163, 338, 1188, 340, 1199, 397, 1201, 503, 1165, 509, 1161, 590, 1073, 604, 1025, 627, 987, 598, 996, 503, 992, 458, 1041, 440, 1029, 405, 1042, 384, 1069, 438, 1118, 413, 1079, 380, 1054, 351, 1011, 335, 982, 314, 959, 331, 969, 395, 948, 408, 916, 391, 932, 304, 903, 295, 839, 286, 846, 182, 847, 142, 742, 150, 733, 113, 1354, 152, 1507, 333, 1467, 754, 1197, 950)
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="colisoees" unique_id=1958439672]
+polygon = PackedVector2Array(1149, 748, 1149, 727, 1125, 668, 1205, 647, 1220, 706, 1206, 727)
+
+[node name="CollisionPolygon2D9" type="CollisionPolygon2D" parent="colisoees" unique_id=672691382]
+polygon = PackedVector2Array(1243, 428, 1237, 473, 1264, 470)
+
+[node name="CollisionPolygon2D10" type="CollisionPolygon2D" parent="colisoees" unique_id=1434780132]
+polygon = PackedVector2Array(1305, 538, 1264, 584, 1275, 596, 1289, 603, 1330, 559, 1324, 539)
+
+[node name="CollisionPolygon2D11" type="CollisionPolygon2D" parent="colisoees" unique_id=761539287]
+polygon = PackedVector2Array(569, 330, 555, 359, 586, 365)
+
+[node name="CollisionPolygon2D12" type="CollisionPolygon2D" parent="colisoees" unique_id=827188917]
+polygon = PackedVector2Array(552, 383, 535, 426, 571, 426)
+
+[node name="CollisionPolygon2D13" type="CollisionPolygon2D" parent="colisoees" unique_id=895969158]
+polygon = PackedVector2Array(686, 419, 694, 324, 799, 319, 809, 418)
+
+[node name="CollisionPolygon2D14" type="CollisionPolygon2D" parent="colisoees" unique_id=1761107391]
+polygon = PackedVector2Array(627, 403, 617, 489, 657, 491, 651, 414)
+
+[node name="CollisionPolygon2D15" type="CollisionPolygon2D" parent="colisoees" unique_id=970388202]
+polygon = PackedVector2Array(701, 475, 691, 509, 794, 524, 806, 493, 779, 477)
+
+[node name="CollisionPolygon2D16" type="CollisionPolygon2D" parent="colisoees" unique_id=1398068776]
+polygon = PackedVector2Array(846, 477, 852, 411, 874, 413, 885, 485)
+
+[node name="CollisionPolygon2D17" type="CollisionPolygon2D" parent="colisoees" unique_id=720922824]
+polygon = PackedVector2Array(778, 207, 776, 237, 794, 239)
+
+[node name="CollisionPolygon2D18" type="CollisionPolygon2D" parent="colisoees" unique_id=2134002771]
+polygon = PackedVector2Array(199, 232, 251, 206, 270, 215, 270, 237, 251, 228, 222, 240, 222, 262, 200, 254)
+
+[node name="CollisionPolygon2D19" type="CollisionPolygon2D" parent="colisoees" unique_id=184419608]
+polygon = PackedVector2Array(330, 182, 329, 211, 339, 212, 338, 181)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(768.0, 725.0)
+npc_id = "stonehenge_lesson_1"
+speaker_name = "Guia do monumento — Skimming"
+dialogue_text = "The stones stand in a circle. People worked together to move them. O assunto geral é a construção do círculo de pedras."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_idoso1")
+
+[node name="LessonNPC2" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(768.0, 845.0)
+npc_id = "stonehenge_lesson_2"
+speaker_name = "Monitor do monumento — Scanning"
+dialogue_text = "Tour A: 10:00, north gate. Tour B: 12:00, south gate. Para achar o portão do Tour B, procure B primeiro."
+
+[node name="Sprite2D" parent="LessonNPC2" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_cidadao3")

@@ -1,0 +1,710 @@
+[gd_scene format=3 uid="uid://by5wt2urpvcvo"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/cambridge/cambridge_novo.webp" id="1_vcsgt"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/cambridge/librarian.png" id="2_chars"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/npcs/cambridge_npc.gd" id="4_npc"]
+[ext_resource type="Script" path="res://scripts/systems/cambridge_dialogue.gd" id="5_dialogue"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="6_music"]
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="7_music_loop"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="8_portal"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="9_spawn"]
+[ext_resource type="Script" path="res://scripts/npcs/bridge_numbers_npc.gd" id="12_bridge_npc"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="180_entrance_indicator"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="190_map_exit_indicator"]
+
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/cambridge/bridge_guide.png" id="bridge_guide"]
+
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/cambridge/bridge_apprentice.png" id="bridge_apprentice"]
+
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/cambridge/bridge_carpenter.png" id="bridge_carpenter"]
+
+[sub_resource type="RectangleShape2D" id="NpcShape"]
+size = Vector2(9, 15)
+
+[sub_resource type="RectangleShape2D" id="UniversityEntranceShape"]
+size = Vector2(72, 56)
+
+[sub_resource type="RectangleShape2D" id="WorldMapExitShape"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="BridgeGuideShape"]
+size = Vector2(13, 24)
+
+[sub_resource type="RectangleShape2D" id="ChapelEntranceShape"]
+size = Vector2(76, 64)
+
+[sub_resource type="StyleBoxFlat" id="DialogStyle"]
+bg_color = Color(0.055, 0.055, 0.075, 0.94)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.82, 0.68, 0.25, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="NameStyle"]
+bg_color = Color(0.18, 0.14, 0.06, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[node name="Main" type="Node2D" unique_id=282057934]
+script = ExtResource("9_spawn")
+
+[node name="Map" type="Sprite2D" parent="." unique_id=187735218]
+texture_filter = 1
+position = Vector2(768.5, 511.5)
+texture = ExtResource("1_vcsgt")
+
+[node name="Player" parent="." unique_id=824763242 instance=ExtResource("3_player")]
+position = Vector2(152, 528)
+
+[node name="NPC" type="CharacterBody2D" parent="." unique_id=583008127]
+position = Vector2(560, 590)
+script = ExtResource("4_npc")
+npc_id = "cambridge_villager_01"
+
+[node name="Sprite2D" type="Sprite2D" parent="NPC" unique_id=2121421460]
+modulate = Color(0.75, 0.95, 0.75, 1)
+texture_filter = 1
+position = Vector2(0, -7)
+scale = Vector2(0.34782609, 0.25806452)
+texture = ExtResource("2_chars")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC" unique_id=765018155]
+shape = SubResource("NpcShape")
+
+[node name="Prompt" type="Label" parent="NPC" unique_id=231443691]
+offset_left = -39.0
+offset_top = -41.0
+offset_right = 61.0
+offset_bottom = -18.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
+text = "[E] Falar"
+
+[node name="UniversityEntrance" type="Area2D" parent="." unique_id=1310359728]
+position = Vector2(462, 468)
+script = ExtResource("8_portal")
+target_scene_path = "res://scenes/locations/cambridge/biblioteca/biblioteca.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UniversityEntrance" unique_id=693725184]
+position = Vector2(23, -2)
+shape = SubResource("UniversityEntranceShape")
+
+[node name="EntranceLabel" type="Label" parent="UniversityEntrance" unique_id=1683431897]
+offset_left = -105.0
+offset_top = -48.0
+offset_right = 120.0
+offset_bottom = -24.0
+theme_override_colors/font_color = Color(1, 0.9, 0.45, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "University of Cambridge"
+
+
+[node name="EntranceArrow" parent="UniversityEntrance" instance=ExtResource("180_entrance_indicator")]
+
+[node name="ReturnToWorldMap" type="Area2D" parent="." unique_id=1453113740]
+position = Vector2(103, 510)
+script = ExtResource("8_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReturnToWorldMap" unique_id=1924217945]
+position = Vector2(3, 8)
+shape = SubResource("WorldMapExitShape")
+
+[node name="BridgeGuide" type="CharacterBody2D" parent="." unique_id=1871776737]
+position = Vector2(651, 698)
+script = ExtResource("12_bridge_npc")
+npc_id = "cambridge_bridge_guide"
+speaker_name = "Guia da ponte"
+lesson = Array[String](["Os cardinais indicam quantidade. Vamos contar de 0 a 10.\n0 zero · 1 one · 2 two · 3 three · 4 four · 5 five\n6 six · 7 seven · 8 eight · 9 nine · 10 ten", "Agora, de 11 a 20.\n11 eleven · 12 twelve · 13 thirteen · 14 fourteen · 15 fifteen\n16 sixteen · 17 seventeen · 18 eighteen · 19 nineteen · 20 twenty", "As dezenas são 30 thirty, 40 forty, 50 fifty, 60 sixty, 70 seventy, 80 eighty e 90 ninety. Use hífen para combinar dezenas e unidades. 23 é twenty-three.", "100 é one hundred e 1.000 é one thousand. No inglês britânico, 105 é one hundred and five. Juntando tudo, 999 é nine hundred and ninety-nine."])
+question = "O inventário marca 40 tábuas. Como você diz essa quantidade em inglês?"
+answers = Array[String](["Fourteen", "Forty", "Four hundred"])
+correct_answer = 1
+explanation = "Forty significa 40. Fourteen significa 14."
+
+[node name="Sprite2D" type="Sprite2D" parent="BridgeGuide" unique_id=2069489259]
+texture_filter = 1
+position = Vector2(0, -12)
+texture = ExtResource("bridge_guide")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BridgeGuide" unique_id=2060340209]
+position = Vector2(-1, -2)
+shape = SubResource("BridgeGuideShape")
+
+[node name="Prompt" type="Label" parent="BridgeGuide" unique_id=251289139]
+offset_left = -48.0
+offset_top = 8.0
+offset_right = 117.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(1, 0.9, 0.45, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 13
+text = "[E] Falar"
+
+[node name="BridgeOrdinal" type="CharacterBody2D" parent="."]
+position = Vector2(528, 693)
+script = ExtResource("12_bridge_npc")
+npc_id = "cambridge_bridge_ordinal"
+speaker_name = "Aprendiz de carpintaria"
+lesson = Array[String](["Os ordinais indicam posição. A contagem começa em first. Zeroth (0th) aparece em contextos técnicos.\n1st first · 2nd second · 3rd third · 4th fourth · 5th fifth", "6th sixth · 7th seventh · 8th eighth · 9th ninth · 10th tenth\n11th eleventh · 12th twelfth · 13th thirteenth · 14th fourteenth · 15th fifteenth", "16th sixteenth · 17th seventeenth · 18th eighteenth · 19th nineteenth · 20th twentieth\nEm 21st, só a última parte vira ordinal. Twenty-first.", "30th thirtieth · 40th fortieth · 50th fiftieth · 60th sixtieth\n70th seventieth · 80th eightieth · 90th ninetieth\n100th one hundredth · 1,000th one thousandth"])
+question = "A marca numa tábua é 21st. Como você lê essa posição em inglês?"
+answers = Array[String](["Twenty-one", "Twentieth", "Twenty-first"])
+correct_answer = 2
+explanation = "Twenty-first indica a 21ª posição. Twenty-one indica a quantidade 21."
+
+[node name="Sprite2D" type="Sprite2D" parent="BridgeOrdinal"]
+texture_filter = 1
+position = Vector2(0, -12)
+texture = ExtResource("bridge_apprentice")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BridgeOrdinal"]
+position = Vector2(-1, -2)
+shape = SubResource("BridgeGuideShape")
+
+[node name="Prompt" type="Label" parent="BridgeOrdinal"]
+offset_left = -48.0
+offset_top = 8.0
+offset_right = 117.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(1, 0.9, 0.45, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 13
+text = "[E] Falar"
+
+[node name="BridgeMultiplier" type="CharacterBody2D" parent="."]
+position = Vector2(995, 870)
+script = ExtResource("12_bridge_npc")
+npc_id = "cambridge_bridge_multiplier"
+speaker_name = "Carpinteira da ponte"
+lesson = Array[String](["Para dizer quantas vezes uma ação acontece, usamos once (uma vez), twice (duas vezes) e three times (três vezes).", "Compare three taps (três batidas), the third tap (a terceira batida) e tap three times (bata três vezes). A primeira conta, a segunda indica posição e a terceira diz quantas vezes repetir."])
+question = "Qual instrução pede para bater duas vezes?"
+answers = Array[String](["Tap twice.", "Tap once.", "Tap three times."])
+correct_answer = 0
+explanation = "Tap twice significa bata duas vezes."
+
+[node name="Sprite2D" type="Sprite2D" parent="BridgeMultiplier"]
+texture_filter = 1
+position = Vector2(0, -12)
+texture = ExtResource("bridge_carpenter")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BridgeMultiplier"]
+position = Vector2(-1, -2)
+shape = SubResource("BridgeGuideShape")
+
+[node name="Prompt" type="Label" parent="BridgeMultiplier"]
+offset_left = -48.0
+offset_top = 8.0
+offset_right = 117.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(1, 0.9, 0.45, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 13
+text = "[E] Falar"
+
+[node name="ChapelEntrance" type="Area2D" parent="." unique_id=2047835011]
+position = Vector2(1173, 487)
+script = ExtResource("8_portal")
+target_scene_path = "res://scenes/locations/cambridge/capela/capela.tscn"
+target_spawn_name = &"ChapelEntry"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChapelEntrance" unique_id=2047835012]
+position = Vector2(0, -2)
+shape = SubResource("ChapelEntranceShape")
+
+
+[node name="EntranceArrow" parent="ChapelEntrance" instance=ExtResource("180_entrance_indicator")]
+
+[node name="Dialogue" type="CanvasLayer" parent="." unique_id=1507199352]
+visible = false
+script = ExtResource("5_dialogue")
+
+[node name="Panel" type="Panel" parent="Dialogue" unique_id=820354690]
+offset_left = 240.0
+offset_top = 470.0
+offset_right = 1040.0
+offset_bottom = 700.0
+theme_override_styles/panel = SubResource("DialogStyle")
+
+[node name="Name" type="Label" parent="Dialogue/Panel" unique_id=1517279465]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 10.0
+offset_right = 180.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(1, 0.9, 0.55, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("NameStyle")
+text = "Morador"
+
+[node name="Text" type="Label" parent="Dialogue/Panel" unique_id=2135216112]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 35.0
+offset_right = 665.0
+offset_bottom = 88.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "Olá!"
+autowrap_mode = 2
+
+[node name="Help" type="Label" parent="Dialogue" unique_id=1553007536]
+offset_left = 15.0
+offset_top = 12.0
+offset_right = 600.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.85)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.8)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
+text = "WASD / SETAS: mover     E: conversar"
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=417745924]
+
+[node name="CambridgeReturn" type="Marker2D" parent="SpawnPoints" unique_id=998636140]
+position = Vector2(476, 515)
+
+[node name="ChapelReturn" type="Marker2D" parent="SpawnPoints" unique_id=2047835014]
+position = Vector2(1154, 526)
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=358801393]
+stream = ExtResource("6_music")
+autoplay = true
+script = ExtResource("7_music_loop")
+
+[node name="CambridgeMapCollisions" type="StaticBody2D" parent="." unique_id=615811936]
+collision_mask = 0
+
+[node name="UniversityWest_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1144902332]
+polygon = PackedVector2Array(172, 455, 202, 476, 161, 350)
+
+[node name="UniversityWest_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1038327922]
+polygon = PackedVector2Array(192, 509, 286, 480, 161, 350)
+
+[node name="UniversityWest_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=952190539]
+polygon = PackedVector2Array(286, 480, 370, 350, 161, 350)
+
+[node name="UniversityWest_004" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=141971496]
+polygon = PackedVector2Array(211, 512, 359, 512, 370, 350)
+
+[node name="UniversityWest_005" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=864861644]
+polygon = PackedVector2Array(356, 482, 441, 413, 370, 350)
+
+[node name="UniversityWest_006" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=581807640]
+position = Vector2(-7, 35)
+polygon = PackedVector2Array(356, 482, 431, 477, 441, 413)
+
+[node name="UniversityWest_007" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1176164885]
+polygon = PackedVector2Array(441, 413, 440, 369, 370, 350)
+
+[node name="UniversityWest_008" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1373584669]
+polygon = PackedVector2Array(440, 29, 371, 201, 441, 194)
+
+[node name="UniversityWest_009" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1153405480]
+polygon = PackedVector2Array(440, 29, 335, 22, 371, 201)
+
+[node name="UniversityWest_010" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=420738783]
+polygon = PackedVector2Array(335, 22, 198, 42, 371, 201)
+
+[node name="UniversityWest_011" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=344815792]
+polygon = PackedVector2Array(198, 42, 156, 122, 153, 230, 371, 201)
+
+[node name="UniversityWest_012" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1320472212]
+polygon = PackedVector2Array(153, 230, 370, 350, 371, 201)
+
+[node name="UniversityWest_013" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1813734305]
+polygon = PackedVector2Array(153, 230, 161, 350, 370, 350)
+
+[node name="UniversityEast_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1448142078]
+position = Vector2(-5, 20)
+polygon = PackedVector2Array(515, 484, 539, 513, 645, 513, 676, 512, 665, 494, 630, 491, 497, 455)
+
+[node name="UniversityEast_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1784562800]
+polygon = PackedVector2Array(680, 488, 614, 365, 572, 514)
+
+[node name="UniversityEast_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1223462684]
+polygon = PackedVector2Array(680, 488, 720, 360, 614, 365)
+
+[node name="UniversityEast_004" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=122037578]
+polygon = PackedVector2Array(680, 488, 735, 489, 773, 457, 796, 380, 720, 360)
+
+[node name="UniversityEast_005" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1080141012]
+polygon = PackedVector2Array(692, 35, 616, 219, 711, 83)
+
+[node name="UniversityEast_006" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1252301645]
+polygon = PackedVector2Array(692, 35, 503, 220, 616, 219)
+
+[node name="UniversityEast_007" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=372909606]
+polygon = PackedVector2Array(496, 411, 590, 480, 517, 371)
+
+[node name="UniversityEast_008" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=438843740]
+polygon = PackedVector2Array(496, 411, 497, 455, 590, 480)
+
+[node name="UniversityEast_009" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1824266209]
+polygon = PackedVector2Array(590, 480, 614, 365, 517, 371)
+
+[node name="UniversityEast_010" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=946151606]
+polygon = PackedVector2Array(614, 365, 720, 360, 616, 219)
+
+[node name="UniversityEast_011" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1064693919]
+polygon = PackedVector2Array(720, 360, 780, 372, 808, 325, 793, 286, 714, 218, 616, 219)
+
+[node name="UniversityEast_012" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1070453795]
+position = Vector2(47, 34)
+polygon = PackedVector2Array(727, -17, 616, 219, 714, 218, 709, 206, 897, 190, 895, 139, 910, 139, 973, 25)
+
+[node name="UniversityNorth_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=908959185]
+polygon = PackedVector2Array(438, 216, 498, 216, 499, 25)
+
+[node name="UniversityCourtyardTreeLeft_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=141332933]
+polygon = PackedVector2Array(300, 313, 374, 260, 279, 286)
+
+[node name="UniversityCourtyardTreeLeft_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1374507150]
+polygon = PackedVector2Array(300, 313, 363, 305, 374, 260)
+
+[node name="UniversityCourtyardTreeLeft_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1878682066]
+polygon = PackedVector2Array(374, 260, 353, 225, 279, 286)
+
+[node name="UniversityCourtyardTreeRight_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=291807243]
+polygon = PackedVector2Array(574, 311, 631, 271, 618, 218)
+
+[node name="UniversityCourtyardTreeRight_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=2103158235]
+polygon = PackedVector2Array(574, 311, 618, 315, 631, 271)
+
+[node name="UniversityFountain_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=8631995]
+polygon = PackedVector2Array(443, 307, 490, 245, 426, 280)
+
+[node name="UniversityFountain_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1981333615]
+polygon = PackedVector2Array(443, 307, 483, 309, 490, 245)
+
+[node name="UniversityFountain_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=332702523]
+polygon = PackedVector2Array(483, 309, 501, 289, 490, 245)
+
+[node name="ChapelBuilding_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1804768416]
+polygon = PackedVector2Array(984, 469, 1061, 46, 1008, 41)
+
+[node name="ChapelBuilding_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1663851849]
+polygon = PackedVector2Array(984, 469, 1128, 439, 1061, 46)
+
+[node name="ChapelBuilding_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=791192110]
+polygon = PackedVector2Array(984, 469, 1015, 490, 1128, 439)
+
+[node name="ChapelBuilding_004" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1577956279]
+polygon = PackedVector2Array(1015, 490, 1074, 492, 1128, 439)
+
+[node name="ChapelBuilding_005" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=139189081]
+polygon = PackedVector2Array(1074, 492, 1116, 467, 1128, 439)
+
+[node name="ChapelBuilding_006" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=213302909]
+polygon = PackedVector2Array(1326, 480, 1371, 427, 1254, 483)
+
+[node name="ChapelBuilding_007" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=35292330]
+polygon = PackedVector2Array(1371, 427, 1165, 448, 1254, 483)
+
+[node name="ChapelBuilding_008" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1485396723]
+polygon = PackedVector2Array(1371, 427, 1258, 58, 1165, 448)
+
+[node name="ChapelBuilding_009" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1642694629]
+polygon = PackedVector2Array(1371, 427, 1362, 72, 1258, 58)
+
+[node name="ChapelBuilding_010" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1467309991]
+polygon = PackedVector2Array(1362, 72, 1309, 44, 1258, 58)
+
+[node name="ChapelBuilding_011" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1077285697]
+polygon = PackedVector2Array(1110, 7, 1061, 46, 1167, 51)
+
+[node name="ChapelBuilding_012" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=516871340]
+polygon = PackedVector2Array(1061, 46, 1128, 439, 1167, 51)
+
+[node name="ChapelBuilding_013" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=141674714]
+polygon = PackedVector2Array(1128, 439, 1165, 448, 1167, 51)
+
+[node name="ChapelBuilding_014" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=871595050]
+polygon = PackedVector2Array(1172, 474, 1245, 522, 1343, 529, 1357, 482, 1348, 460, 1254, 483, 1165, 448)
+
+[node name="ChapelBuilding_015" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=2128862710]
+polygon = PackedVector2Array(1165, 448, 1258, 58, 1167, 51)
+
+[node name="ChapelRightTrees_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=294267419]
+polygon = PackedVector2Array(1383, 342, 1486, 202, 1426, 148)
+
+[node name="ChapelRightTrees_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1958534889]
+polygon = PackedVector2Array(1383, 342, 1413, 345, 1486, 202)
+
+[node name="ChapelRightTrees_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1557714116]
+position = Vector2(-57, -7)
+polygon = PackedVector2Array(1440, 486, 1452, 463, 1480, 453, 1483, 418, 1461, 372, 1488, 350, 1413, 345, 1409, 455)
+
+[node name="ChapelRightTrees_004" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=780103452]
+position = Vector2(15, 0)
+polygon = PackedVector2Array(1517, 349, 1486, 202, 1413, 345, 1462, 356, 1482, 383, 1490, 354)
+
+[node name="ChapelBottomGarden_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=215538100]
+position = Vector2(-145, -8)
+polygon = PackedVector2Array(1244, 660, 1435, 701, 1435, 664, 1433, 660, 1435, 642, 1421, 641, 1419, 662, 1354, 663, 1347, 642, 1330.7618, 641.3872, 1328, 657, 1241, 638)
+
+[node name="ChapelBottomGarden_004" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=382827821]
+position = Vector2(114, 61)
+polygon = PackedVector2Array(1395, 584, 1394, 344, 1362, 580)
+
+[node name="ChapelBottomGarden_008" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=2080805335]
+position = Vector2(-71, 11)
+polygon = PackedVector2Array(1310, 560, 1303, 591, 1335, 598, 1356, 594, 1357, 563)
+
+[node name="ChapelBottomGarden_009" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=384176315]
+position = Vector2(-176, -6)
+polygon = PackedVector2Array(1286, 549, 1270, 559, 1279, 600, 1294, 599, 1299, 563)
+
+[node name="RightCherryTree_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=782008280]
+position = Vector2(48, 9)
+polygon = PackedVector2Array(1425, 483, 1488, 482, 1488, 392, 1489, 314, 1463, 394, 1417, 424, 1408, 461)
+
+[node name="RightLawn_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1266853913]
+polygon = PackedVector2Array(1351, 687, 1399, 688, 1496, 686, 1507, 641, 1432, 645, 1381, 645, 1371, 655, 1366.9731, 629.92487, 1354, 633)
+
+[node name="RightLawn_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=775599988]
+position = Vector2(-16, -150)
+polygon = PackedVector2Array(1434, 752, 1471, 722, 1467, 658, 1433, 630, 1388, 705)
+
+[node name="RightLawn_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1947963044]
+position = Vector2(42, 36)
+polygon = PackedVector2Array(1489, 731, 1489, 601, 1417, 696, 1415, 745)
+
+[node name="LeftForestTop_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=567621613]
+polygon = PackedVector2Array(0, 457, 113, 166, 150, 0)
+
+[node name="LeftForestTop_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=26104453]
+position = Vector2(-2, 32)
+polygon = PackedVector2Array(0, 457, 112, 456, 128, 110)
+
+[node name="LeftForestTop_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=787387823]
+polygon = PackedVector2Array(163, 148, 132, 77, 113, 166)
+
+[node name="LeftForestMiddle_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1609768676]
+polygon = PackedVector2Array(16.67, 618.14, 28, 536, 16, 588)
+
+[node name="LeftForestMiddle_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1036203271]
+polygon = PackedVector2Array(67, 823, 66, 717, 0, 739)
+
+[node name="LeftForestMiddle_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=908495050]
+polygon = PackedVector2Array(67, 823, 143, 735, 66, 717)
+
+[node name="LeftForestMiddle_004" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=519224860]
+position = Vector2(27, 28)
+polygon = PackedVector2Array(67, 823, 229, 810, 155, 763, 108, 739)
+
+[node name="LeftForestMiddle_006" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=2047138501]
+polygon = PackedVector2Array(16.67, 618.14, 0, 739, 17, 633)
+
+[node name="LeftForestMiddle_007" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1261596177]
+polygon = PackedVector2Array(0, 739, 41, 671, 18, 474)
+
+[node name="LeftForestMiddle_008" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1639368133]
+polygon = PackedVector2Array(0, 739, 66, 717, 41, 671)
+
+[node name="LeftLawnTree_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=974342834]
+polygon = PackedVector2Array(389, 660, 419, 669, 371, 624)
+
+[node name="LeftLawnTree_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=533343909]
+polygon = PackedVector2Array(419, 669, 469, 601, 371, 624)
+
+[node name="LeftLawnTree_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=562516339]
+polygon = PackedVector2Array(419, 669, 407, 688, 439, 690, 465, 648, 486, 610, 469, 601)
+
+[node name="LeftLawnTree_004" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1729472741]
+polygon = PackedVector2Array(469, 601, 452, 557, 398, 569, 371, 624)
+
+[node name="LeftLowerTrees_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1785701518]
+polygon = PackedVector2Array(62, 637, 103, 666, 125, 521)
+
+[node name="LeftLowerTrees_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=859837403]
+polygon = PackedVector2Array(103, 666, 148, 665, 125, 521)
+
+[node name="LeftLowerTrees_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=312759763]
+polygon = PackedVector2Array(148, 665, 188, 553, 125, 521)
+
+[node name="LeftLowerTrees_004" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=2006814793]
+polygon = PackedVector2Array(148, 665, 194, 637, 188, 553)
+
+[node name="LeftSmallHouse_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1642710758]
+polygon = PackedVector2Array(61, 827, 139, 868, 137, 812, 134, 744)
+
+[node name="LowerSmallTree_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=705847593]
+position = Vector2(12, 13)
+polygon = PackedVector2Array(243, 746, 361, 675, 312, 636, 262, 683)
+
+[node name="LowerSmallTree_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1918133570]
+position = Vector2(16, 12)
+polygon = PackedVector2Array(243, 746, 350, 754, 361, 675)
+
+[node name="LowerSmallTree_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1485857446]
+position = Vector2(22, 10)
+polygon = PackedVector2Array(243, 746, 297, 790, 350, 754)
+
+[node name="BridgeCenterIsland_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=609434785]
+position = Vector2(10, 23)
+polygon = PackedVector2Array(553, 728, 593, 724, 594, 705, 583, 677, 555, 686)
+
+[node name="BridgeCenterIsland_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=354218432]
+position = Vector2(39, 64)
+polygon = PackedVector2Array(553, 728, 580, 729, 594, 705, 540, 694)
+
+[node name="RiverNorth_005" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1121361852]
+position = Vector2(1, -22)
+polygon = PackedVector2Array(862, 279, 840, 321, 849, 521, 940, 326, 998, 212, 923, 288)
+
+[node name="RiverSouth_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1248888965]
+position = Vector2(72, -188)
+polygon = PackedVector2Array(338, 942, 400, 940, 431, 895, 412, 887, 381, 911)
+
+[node name="RiverSouth_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=2098436985]
+position = Vector2(59.40451, -781.6042)
+scale = Vector2(2.2429125, 1.3657784)
+polygon = PackedVector2Array(411.33817, 941.29785, 440.7642, 961.79895, 455.4772, 952.2805, 473.31116, 947.1553, 478.66135, 914.9392, 362.74063, 917.8679, 336.43555, 942.03, 317.26404, 942.7622, 319.04745, 960.3346, 367.64496, 931.7794)
+
+[node name="RiverSouth_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1738399383]
+polygon = PackedVector2Array(1236, 889, 1248, 851, 1162, 867)
+
+[node name="RiverSouth_004" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=138008856]
+polygon = PackedVector2Array(1248, 851, 1207, 809, 1162, 867)
+
+[node name="RiverSouth_005" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1861824134]
+polygon = PackedVector2Array(1207, 809, 1087, 833, 1162, 867)
+
+[node name="RiverSouth_006" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=511325477]
+polygon = PackedVector2Array(1207, 809, 1091, 753, 1087, 833)
+
+[node name="RiverSouth_007" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=255556823]
+position = Vector2(9, 7)
+polygon = PackedVector2Array(821, 556, 766, 548, 855, 616, 1044, 612, 1026, 557, 902, 520, 879, 534, 843, 539)
+
+[node name="RiverSouth_008" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=832516056]
+polygon = PackedVector2Array(766, 548, 748, 564, 693, 751, 855, 616)
+
+[node name="RiverSouth_009" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1212013939]
+position = Vector2(2, -38)
+polygon = PackedVector2Array(369, 899, 466, 953, 474, 878, 455, 860)
+
+[node name="RiverSouth_010" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1204250600]
+polygon = PackedVector2Array(466, 953, 534, 930, 455, 860)
+
+[node name="RiverSouth_011" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=2146948635]
+polygon = PackedVector2Array(534, 930, 550, 825, 455, 860)
+
+[node name="RiverSouth_012" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=147994588]
+polygon = PackedVector2Array(534, 930, 598, 901, 550, 825)
+
+[node name="RiverSouth_013" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1381131132]
+polygon = PackedVector2Array(1087, 833, 1091, 753, 1004, 794)
+
+[node name="RiverSouth_014" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=654457997]
+polygon = PackedVector2Array(1091, 753, 1015, 715, 1004, 794)
+
+[node name="RiverSouth_015" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=302932196]
+position = Vector2(69, -74)
+polygon = PackedVector2Array(971, 672, 927, 769, 1428, 901, 1435, 835, 1372, 860, 1311, 827, 1282, 783, 1215, 762, 1015, 715)
+
+[node name="RiverSouth_016" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=251022246]
+polygon = PackedVector2Array(971, 672, 908, 656, 927, 769)
+
+[node name="RiverSouth_017" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=885122136]
+polygon = PackedVector2Array(855, 616, 861, 783, 908, 656)
+
+[node name="RiverSouth_018" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1891605970]
+position = Vector2(63, 90)
+polygon = PackedVector2Array(855, 616, 693, 751, 861, 783)
+
+[node name="RiverSouth_019" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=564320824]
+polygon = PackedVector2Array(693, 751, 788, 820, 861, 783)
+
+[node name="RiverSouth_020" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=97557775]
+polygon = PackedVector2Array(693, 751, 718, 848, 788, 820)
+
+[node name="RiverSouth_021" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=520485894]
+polygon = PackedVector2Array(693, 751, 633, 790, 718, 848)
+
+[node name="RiverSouth_022" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=725334339]
+polygon = PackedVector2Array(633, 790, 657, 873, 718, 848)
+
+[node name="RiverSouth_023" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1650880849]
+polygon = PackedVector2Array(633, 790, 598, 901, 657, 873)
+
+[node name="RiverSouth_024" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1916021397]
+polygon = PackedVector2Array(633, 790, 550, 825, 598, 901)
+
+[node name="RiverSouth_025" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=734459687]
+polygon = PackedVector2Array(1004, 794, 1015, 715, 927, 769)
+
+[node name="RiverSouth_026" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=345117956]
+polygon = PackedVector2Array(927, 769, 908, 656, 861, 783)
+
+[node name="RiverWest_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1796538913]
+polygon = PackedVector2Array(0, 951, 172, 855, 59, 853)
+
+[node name="RiverWest_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1811034084]
+polygon = PackedVector2Array(0, 951, 261, 951, 172, 855)
+
+[node name="RiverWest_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=124924592]
+polygon = PackedVector2Array(261, 951, 269, 851, 172, 855)
+
+[node name="RiverWest_004" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1323033919]
+polygon = PackedVector2Array(261, 951, 331, 929, 269, 851)
+
+[node name="RiverWest_005" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1017966039]
+polygon = PackedVector2Array(331, 929, 365, 823, 269, 851)
+
+[node name="RiverWest_006" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=580885441]
+polygon = PackedVector2Array(331, 929, 390, 899, 365, 823)
+
+[node name="RiverWest_007" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1772469578]
+polygon = PackedVector2Array(390, 899, 416, 846, 365, 823)
+
+[node name="RiverEast_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=874912882]
+polygon = PackedVector2Array(1246, 947, 1273, 926, 1225, 906)
+
+[node name="RiverEast_002" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=297767335]
+polygon = PackedVector2Array(1443, 978, 1490, 978, 1413, 930)
+
+[node name="RiverEast_003" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=791883298]
+polygon = PackedVector2Array(1490, 978, 1490, 875, 1413, 930)
+
+[node name="RiverEast_004" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=547073932]
+polygon = PackedVector2Array(1490, 875, 1445, 847, 1413, 930)
+
+[node name="RiverEast_005" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=2121626686]
+polygon = PackedVector2Array(1445, 847, 1367, 900, 1413, 930)
+
+[node name="RiverEast_006" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=964076924]
+polygon = PackedVector2Array(1445, 847, 1377, 826, 1367, 900)
+
+[node name="RiverEast_007" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=842602635]
+polygon = PackedVector2Array(1377, 826, 1311, 899, 1367, 900)
+
+[node name="RiverEast_008" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1607240896]
+polygon = PackedVector2Array(1377, 826, 1301, 826, 1311, 899)
+
+[node name="RiverEast_009" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1566830111]
+polygon = PackedVector2Array(1301, 826, 1225, 906, 1311, 899)
+
+[node name="RiverEast_010" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1937322132]
+polygon = PackedVector2Array(1225, 906, 1273, 926, 1311, 899)
+
+[node name="Statue_001" type="CollisionPolygon2D" parent="CambridgeMapCollisions" unique_id=1139285557]
+position = Vector2(42, 34)
+polygon = PackedVector2Array(1095, 585, 1170, 579, 1167, 541, 1146, 529, 1131, 494, 1118, 529, 1095, 540)
+
+[node name="MapExitIndicator" parent="ReturnToWorldMap" instance=ExtResource("190_map_exit_indicator")]

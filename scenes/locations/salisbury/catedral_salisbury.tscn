@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://cd5fkdj0qajjp"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="1_fhjwt"]
+[ext_resource type="Texture2D" path="res://assets/environments/salisbury/catedral_salisbury.webp" id="2_du3r4"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_v6bwa"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="4_inswe"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/padre3.png" id="lesson_art_padre3"]
+
+[sub_resource type="RectangleShape2D" id="ChapelExitShape"]
+size = Vector2(100, 20)
+
+[node name="Capela" type="Node2D" unique_id=329895702]
+script = ExtResource("1_fhjwt")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1896752094]
+texture_filter = 1
+position = Vector2(250.9818, 916.8592)
+scale = Vector2(0.37502366, 0.35324058)
+texture = ExtResource("2_du3r4")
+
+[node name="Player" parent="." unique_id=2090693554 instance=ExtResource("3_v6bwa")]
+position = Vector2(240, 1065)
+
+[node name="SaidaCapela" type="Area2D" parent="." unique_id=219278742]
+position = Vector2(250, 1087)
+script = ExtResource("4_inswe")
+target_scene_path = "res://scenes/locations/salisbury/salisbury.tscn"
+target_spawn_name = &"CatedralReturn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaCapela" unique_id=233117731]
+position = Vector2(-7, -2)
+shape = SubResource("ChapelExitShape")
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=901439329]
+
+[node name="ChapelEntry" type="Marker2D" parent="SpawnPoints" unique_id=804216007]
+position = Vector2(240, 1045)
+
+[node name="colisoes" type="StaticBody2D" parent="." unique_id=1383986098]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="colisoes" unique_id=1703886706]
+polygon = PackedVector2Array(190, 1094, -34, 1093, -33, 1005, -23, 999, -23, 981, -10, 980, -9, 968, -1, 966, 1, 972, 20, 972, 19, 966, 51, 967, 50, 951, 69, 951, 70, 944, 74, 946, 85, 946, 87, 941, 96, 943, 96, 967, 99, 971, 136, 971, 154, 971, 153, 968, 151, 961, 155, 949, 161, 945, 193, 945, 220, 946, 340, 944, 16, 929, -36, 986, -36, 1096, 189, 1097)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="colisoes" unique_id=1183349681]
+polygon = PackedVector2Array(293, 1091, 329, 1094, 535, 1093, 535, 1006, 520, 1001, 519, 994, 492, 994, 483, 995, 485, 998, 470, 998, 470, 993, 432, 996, 437, 1017, 456, 1017, 457, 1039, 478, 1039, 477, 1035, 485, 1037, 487, 1076, 338, 1073, 335, 1055, 323, 1060, 321, 1034, 312, 1040, 312, 1015, 304, 1020, 303, 986, 306, 992, 328, 996, 371, 992, 370, 986, 374, 970, 346, 969, 339, 960, 339, 943, 318, 944, 459, 957, 538, 997, 538, 1096, 293, 1096)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="colisoes" unique_id=1270932292]
+polygon = PackedVector2Array(-13, 1076, 139, 1077, 143, 1059, 152, 1059, 153, 1041, 161, 1035, 160, 1019, 168, 1019, 167, 990, 54, 992, 47, 999, 29, 999, 26, 1018, 12, 1015, 8, 1039, -10, 1037)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(240.0, 1005.0)
+npc_id = "catedral_salisbury_lesson_1"
+speaker_name = "Guia da catedral — Sequência em um parágrafo"
+dialogue_text = "First, enter through the west door. Then, walk along the hall. Finally, stop by the window. Cada conector organiza a etapa seguinte."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_padre3")

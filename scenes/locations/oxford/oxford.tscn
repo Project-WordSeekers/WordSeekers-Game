@@ -1,0 +1,623 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="loop"]
+
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="theme"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="CityGuideScene"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="map_exit_indicator"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="linked_portal"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="arrive"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="red_arrow"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/oxford/oxford_map.webp" id="1_mapa"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scenes/locations/oxford/scripts/hud_oxford.gd" id="4_hud"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/cidadao4.png" id="lesson_art_cidadao4"]
+
+[sub_resource type="CircleShape2D" id="PortalOxford"]
+radius = 59.0
+
+[sub_resource type="CircleShape2D" id="PortalBodleian"]
+radius = 60.0
+
+[sub_resource type="CircleShape2D" id="PortalRadcliffe"]
+radius = 57.0
+
+[sub_resource type="CircleShape2D" id="C_FonteCentral"]
+radius = 65.0
+
+[sub_resource type="CircleShape2D" id="C_ArvorePertoPortaoOeste"]
+radius = 22.0
+
+[sub_resource type="CircleShape2D" id="C_ArvorePertoPortaoLeste"]
+radius = 22.0
+
+[sub_resource type="CircleShape2D" id="C_PosteBodleianEsq"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="C_PosteBodleianDir"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="C_PosteUniversidadeEsq"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="C_PosteUniversidadeDir"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="C_PosteRadcliffeEsq"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="C_PosteRadcliffeDir"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="C_PostePortaoOeste"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="C_PostePortaoLeste"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="WorldMapExitShape"]
+radius = 17.0
+
+[node name="Oxford" type="Node2D"]
+script = ExtResource("arrive")
+
+[node name="Mapa" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_mapa")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="LimiteNoroesteMuralhaRio" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "LimiteNoroesteMuralhaRio"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/LimiteNoroesteMuralhaRio"]
+polygon = PackedVector2Array(0, 0, 210, 0, 210, 67, 96, 140, 70, 250, 0, 290)
+
+[node name="FlorestaMuralhaNorteOeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "FlorestaMuralhaNorteOeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/FlorestaMuralhaNorteOeste"]
+polygon = PackedVector2Array(200, 0, 524, 0, 524, 140, 501, 167, 471, 130, 402, 113, 340, 112, 270, 152, 203, 145, 175, 96)
+
+[node name="FlorestaMuralhaNorteCentro" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "FlorestaMuralhaNorteCentro"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/FlorestaMuralhaNorteCentro"]
+polygon = PackedVector2Array(1017, 0, 1114, 0, 1103, 180, 1069, 202, 1038, 149, 1012, 127)
+
+[node name="FlorestaMuralhaNorteLeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "FlorestaMuralhaNorteLeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/FlorestaMuralhaNorteLeste"]
+polygon = PackedVector2Array(1328, 0, 1536, 0, 1536, 317, 1463, 316, 1431, 237, 1422, 180, 1360, 138, 1321, 120)
+
+[node name="MuralhaOesteRio" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "MuralhaOesteRio"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/MuralhaOesteRio"]
+polygon = PackedVector2Array(0, 270, 80, 244, 95, 299, 66, 370, 84, 513, 101, 642, 140, 690, 147, 746, 0, 713)
+
+[node name="MuralhaLesteRio" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "MuralhaLesteRio"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/MuralhaLesteRio"]
+polygon = PackedVector2Array(1536, 294, 1451, 299, 1435, 378, 1450, 532, 1431, 633, 1395, 705, 1390, 746, 1536, 709)
+
+[node name="ForaMuralhaSulOeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "ForaMuralhaSulOeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/ForaMuralhaSulOeste"]
+polygon = PackedVector2Array(0, 702, 151, 707, 231, 727, 368, 780, 611, 795, 659, 834, 680, 905, 681, 1024, 0, 1024)
+
+[node name="ForaMuralhaSulLeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "ForaMuralhaSulLeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/ForaMuralhaSulLeste"]
+polygon = PackedVector2Array(878, 825, 926, 797, 1128, 774, 1295, 722, 1390, 713, 1536, 699, 1536, 1024, 880, 1024)
+
+[node name="MargemPonteSulEsquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "MargemPonteSulEsquerda"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/MargemPonteSulEsquerda"]
+polygon = PackedVector2Array(681, 887, 710, 887, 710, 1024, 681, 1024)
+
+[node name="MargemPonteSulDireita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "MargemPonteSulDireita"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/MargemPonteSulDireita"]
+polygon = PackedVector2Array(831, 893, 878, 893, 878, 1024, 831, 1024)
+
+[node name="FimSulPonte" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "FimSulPonte"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/FimSulPonte"]
+polygon = PackedVector2Array(709, 1013, 831, 1013, 831, 1024, 709, 1024)
+
+[node name="TorrePortaoSulOeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "TorrePortaoSulOeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/TorrePortaoSulOeste"]
+polygon = PackedVector2Array(616, 661, 663, 641, 692, 662, 704, 724, 705, 807, 674, 848, 621, 819)
+
+[node name="TorrePortaoSulLeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "TorrePortaoSulLeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/TorrePortaoSulLeste"]
+polygon = PackedVector2Array(850, 665, 876, 642, 905, 664, 913, 813, 862, 846, 837, 815, 837, 730)
+
+[node name="UniversidadeDeOxfordPredio" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "UniversidadeDeOxfordPredio"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/UniversidadeDeOxfordPredio"]
+polygon = PackedVector2Array(518, 57, 602, 45, 665, 40, 709, 18, 796, 13, 831, 49, 919, 49, 1014, 50, 1018, 262, 834, 269, 700, 269, 519, 269)
+
+[node name="BodleianLibraryPredio" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "BodleianLibraryPredio"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BodleianLibraryPredio"]
+polygon = PackedVector2Array(150, 178, 182, 139, 444, 136, 496, 176, 506, 340, 379, 352, 368, 381, 284, 381, 274, 353, 151, 349)
+
+[node name="RadcliffeCameraPredio" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "RadcliffeCameraPredio"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/RadcliffeCameraPredio"]
+polygon = PackedVector2Array(1177, 113, 1243, 119, 1300, 166, 1337, 231, 1338, 301, 1311, 351, 1269, 376, 1150, 376, 1104, 350, 1080, 302, 1081, 239, 1116, 180)
+
+[node name="BodleianJardimEsquerdo" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "BodleianJardimEsquerdo"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BodleianJardimEsquerdo"]
+polygon = PackedVector2Array(94, 376, 166, 364, 277, 382, 277, 450, 208, 449, 149, 440, 101, 422)
+
+[node name="BodleianJardimDireito" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "BodleianJardimDireito"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BodleianJardimDireito"]
+polygon = PackedVector2Array(390, 374, 475, 365, 507, 385, 506, 437, 457, 451, 392, 446)
+
+[node name="UniversidadeJardimEsquerdo" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "UniversidadeJardimEsquerdo"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/UniversidadeJardimEsquerdo"]
+polygon = PackedVector2Array(559, 295, 688, 295, 693, 356, 574, 354, 551, 332)
+
+[node name="UniversidadeJardimDireito" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "UniversidadeJardimDireito"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/UniversidadeJardimDireito"]
+polygon = PackedVector2Array(846, 295, 963, 290, 967, 333, 945, 359, 844, 357)
+
+[node name="RadcliffeJardimEsquerdo" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "RadcliffeJardimEsquerdo"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/RadcliffeJardimEsquerdo"]
+polygon = PackedVector2Array(1016, 366, 1127, 383, 1136, 440, 1024, 454, 995, 417)
+
+[node name="RadcliffeJardimDireito" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "RadcliffeJardimDireito"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/RadcliffeJardimDireito"]
+polygon = PackedVector2Array(1280, 380, 1397, 350, 1414, 407, 1386, 446, 1277, 453)
+
+[node name="RochasCavernaDecorativa" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "RochasCavernaDecorativa"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/RochasCavernaDecorativa"]
+polygon = PackedVector2Array(1397, 300, 1431, 315, 1451, 363, 1445, 417, 1414, 426, 1386, 412, 1377, 357)
+
+[node name="FonteCentral" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "FonteCentral"
+
+[node name="Area" type="CollisionShape2D" parent="Colisoes/FonteCentral"]
+position = Vector2(768, 517)
+shape = SubResource("C_FonteCentral")
+
+[node name="BancoFonteNoroeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "BancoFonteNoroeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BancoFonteNoroeste"]
+polygon = PackedVector2Array(657, 453, 712, 453, 712, 480, 657, 480)
+
+[node name="BancoFonteNordeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "BancoFonteNordeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BancoFonteNordeste"]
+polygon = PackedVector2Array(822, 453, 874, 453, 874, 483, 822, 483)
+
+[node name="BancoFonteSudoeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "BancoFonteSudoeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BancoFonteSudoeste"]
+polygon = PackedVector2Array(677, 561, 746, 561, 746, 583, 677, 583)
+
+[node name="BancoFonteSudeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "BancoFonteSudeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BancoFonteSudeste"]
+polygon = PackedVector2Array(788, 559, 861, 559, 861, 583, 788, 583)
+
+[node name="CasaOesteSuperior" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "CasaOesteSuperior"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasaOesteSuperior"]
+polygon = PackedVector2Array(93, 473, 167, 471, 211, 516, 205, 587, 116, 589, 68, 541)
+
+[node name="CasaOesteInferior" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "CasaOesteInferior"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasaOesteInferior"]
+polygon = PackedVector2Array(173, 566, 248, 555, 306, 608, 292, 694, 183, 692, 154, 625)
+
+[node name="CasaOesteCentral" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "CasaOesteCentral"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasaOesteCentral"]
+polygon = PackedVector2Array(288, 522, 376, 513, 414, 563, 422, 647, 357, 682, 291, 643)
+
+[node name="CasaOesteInferiorLeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "CasaOesteInferiorLeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasaOesteInferiorLeste"]
+polygon = PackedVector2Array(398, 571, 477, 557, 523, 606, 526, 712, 434, 714, 398, 658)
+
+[node name="BarracaOeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "BarracaOeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BarracaOeste"]
+polygon = PackedVector2Array(480, 658, 564, 658, 564, 736, 480, 736)
+
+[node name="CasaLesteSuperior" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "CasaLesteSuperior"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasaLesteSuperior"]
+polygon = PackedVector2Array(1363, 480, 1410, 467, 1455, 490, 1463, 573, 1362, 593, 1338, 546)
+
+[node name="CasaLesteCentral" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "CasaLesteCentral"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasaLesteCentral"]
+polygon = PackedVector2Array(1203, 525, 1275, 513, 1349, 550, 1352, 633, 1270, 653, 1221, 619)
+
+[node name="CasaLesteInferior" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "CasaLesteInferior"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasaLesteInferior"]
+polygon = PackedVector2Array(1075, 539, 1150, 521, 1212, 554, 1228, 677, 1162, 714, 1073, 667)
+
+[node name="BarracaLeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "BarracaLeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BarracaLeste"]
+polygon = PackedVector2Array(1005, 628, 1087, 628, 1087, 692, 1005, 692)
+
+
+
+
+
+[node name="ArvorePertoPortaoOeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "ArvorePertoPortaoOeste"
+
+[node name="Area" type="CollisionShape2D" parent="Colisoes/ArvorePertoPortaoOeste"]
+position = Vector2(588, 695)
+shape = SubResource("C_ArvorePertoPortaoOeste")
+
+[node name="ArvorePertoPortaoLeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "ArvorePertoPortaoLeste"
+
+[node name="Area" type="CollisionShape2D" parent="Colisoes/ArvorePertoPortaoLeste"]
+position = Vector2(967, 696)
+shape = SubResource("C_ArvorePertoPortaoLeste")
+
+[node name="PosteBodleianEsq" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "PosteBodleianEsq"
+
+[node name="Area" type="CollisionShape2D" parent="Colisoes/PosteBodleianEsq"]
+position = Vector2(262, 381)
+shape = SubResource("C_PosteBodleianEsq")
+
+[node name="PosteBodleianDir" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "PosteBodleianDir"
+
+[node name="Area" type="CollisionShape2D" parent="Colisoes/PosteBodleianDir"]
+position = Vector2(395, 383)
+shape = SubResource("C_PosteBodleianDir")
+
+[node name="PosteUniversidadeEsq" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "PosteUniversidadeEsq"
+
+[node name="Area" type="CollisionShape2D" parent="Colisoes/PosteUniversidadeEsq"]
+position = Vector2(705, 257)
+shape = SubResource("C_PosteUniversidadeEsq")
+
+[node name="PosteUniversidadeDir" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "PosteUniversidadeDir"
+
+[node name="Area" type="CollisionShape2D" parent="Colisoes/PosteUniversidadeDir"]
+position = Vector2(835, 258)
+shape = SubResource("C_PosteUniversidadeDir")
+
+[node name="PosteRadcliffeEsq" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "PosteRadcliffeEsq"
+
+[node name="Area" type="CollisionShape2D" parent="Colisoes/PosteRadcliffeEsq"]
+position = Vector2(1142, 386)
+shape = SubResource("C_PosteRadcliffeEsq")
+
+[node name="PosteRadcliffeDir" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "PosteRadcliffeDir"
+
+[node name="Area" type="CollisionShape2D" parent="Colisoes/PosteRadcliffeDir"]
+position = Vector2(1267, 383)
+shape = SubResource("C_PosteRadcliffeDir")
+
+
+
+
+
+[node name="PostePortaoOeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "PostePortaoOeste"
+
+[node name="Area" type="CollisionShape2D" parent="Colisoes/PostePortaoOeste"]
+position = Vector2(682, 850)
+shape = SubResource("C_PostePortaoOeste")
+
+[node name="PostePortaoLeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+metadata/descricao = "PostePortaoLeste"
+
+[node name="Area" type="CollisionShape2D" parent="Colisoes/PostePortaoLeste"]
+position = Vector2(854, 849)
+shape = SubResource("C_PostePortaoLeste")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(766, 896)
+
+[node name="EntradaUniversidadeOxford" type="Area2D" parent="."]
+position = Vector2(766, 307)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/oxford/universidadeoxfordinterior.tscn"
+target_spawn_name = &"FromOxford"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="EntradaUniversidadeOxford"]
+shape = SubResource("PortalOxford")
+
+[node name="EntradaBodleianLibrary" type="Area2D" parent="."]
+position = Vector2(327, 404)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/oxford/bodleianlibraryinterior.tscn"
+target_spawn_name = &"FromOxford"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="EntradaBodleianLibrary"]
+shape = SubResource("PortalBodleian")
+
+[node name="EntradaRadcliffeCamera" type="Area2D" parent="."]
+position = Vector2(1207, 420)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/oxford/radcliffecamerainterior.tscn"
+target_spawn_name = &"FromOxford"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="EntradaRadcliffeCamera"]
+shape = SubResource("PortalRadcliffe")
+
+[node name="Interface" type="CanvasLayer" parent="."]
+script = ExtResource("4_hud")
+
+[node name="Instrucoes" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 10.0
+offset_right = 955.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(1, 0.95, 0.76, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "Oxford  |  WASD / Setas: mover  |  E: interagir"
+
+[node name="Estado" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 43.0
+offset_right = 955.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(0.92, 0.88, 0.72, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "Radcliffe: a descobrir  |  Manuscrito: pendente"
+
+[node name="Dica" type="Label" parent="Interface"]
+visible = false
+offset_left = 115.0
+offset_top = 480.0
+offset_right = 850.0
+offset_bottom = 533.0
+theme_override_colors/font_color = Color(1, 0.95, 0.65, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+text = "E — Interagir"
+
+[node name="Info" type="Panel" parent="Interface"]
+visible = false
+offset_left = 147.0
+offset_top = 161.0
+offset_right = 813.0
+offset_bottom = 365.0
+
+[node name="Mensagem" type="Label" parent="Interface/Info"]
+offset_left = 23.0
+offset_top = 21.0
+offset_right = 641.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 3
+text = "Informacoes"
+
+[node name="Fechar" type="Label" parent="Interface/Info"]
+offset_left = 23.0
+offset_top = 167.0
+offset_right = 641.0
+offset_bottom = 194.0
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Pressione E ou Esc para fechar."
+
+
+[node name="EntranceArrow" parent="EntradaUniversidadeOxford" instance=ExtResource("red_arrow")]
+
+[node name="EntranceArrow" parent="EntradaBodleianLibrary" instance=ExtResource("red_arrow")]
+
+[node name="EntranceArrow" parent="EntradaRadcliffeCamera" instance=ExtResource("red_arrow")]
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromBodleianLibraryInterior" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(327, 466)
+
+[node name="FromRadcliffeCameraInterior" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1208, 474)
+
+[node name="FromUniversidadeOxfordInterior" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(767, 357)
+
+[node name="WorldMapExit" type="Area2D" parent="."]
+position = Vector2(766, 961)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
+shape = SubResource("WorldMapExitShape")
+
+[node name="Indicator" parent="WorldMapExit" instance=ExtResource("map_exit_indicator")]
+
+[node name="CityGuide" parent="." instance=ExtResource("CityGuideScene")]
+position = Vector2(821, 896)
+speaker_name = "Oxford Guide"
+npc_id = "oxford_town_guide"
+dialogue_text = "Welcome to Oxford! Visit the Bodleian Library and look for the key inside the Radcliffe Camera."
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("theme")
+autoplay = true
+script = ExtResource("loop")
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(766.0, 836.0)
+npc_id = "oxford_lesson_1"
+speaker_name = "Guia de Oxford — Bilhetes e inferência"
+dialogue_text = "Books must stay in this room. Pode consultar o livro na sala. A instrução indica que ele deve permanecer ali."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_cidadao4")

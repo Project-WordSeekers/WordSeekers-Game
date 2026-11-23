@@ -1,0 +1,677 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="arrive"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="red_arrow"]
+
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="Texture2D" path="res://assets/environments/oxford/radcliffe_camera_interior_map.webp" id="2_img"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scenes/locations/oxford/scripts/interacao_oxford.gd" id="4_info"]
+[ext_resource type="Script" path="res://scenes/locations/oxford/scripts/hud_oxford.gd" id="5_hud"]
+[ext_resource type="Script" path="res://scripts/locations/entrada_secreta_oxford.gd" id="6_segredo"]
+[ext_resource type="Script" path="res://scenes/locations/oxford/scripts/key03_oxford.gd" id="7_key03"]
+[ext_resource type="Texture2D" path="res://assets/environments/oxford/estante_secreta_fechada_map.webp" id="8_porta_fechada"]
+[ext_resource type="Texture2D" path="res://assets/environments/oxford/estante_secreta_aberta_map.webp" id="9_porta_aberta"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/gentle1.png" id="lesson_art_gentle1"]
+
+[sub_resource type="RectangleShape2D" id="bl0"]
+size = Vector2(200, 145)
+
+[sub_resource type="RectangleShape2D" id="bl1"]
+size = Vector2(200, 145)
+
+[sub_resource type="RectangleShape2D" id="bl2"]
+size = Vector2(200, 146)
+
+[sub_resource type="RectangleShape2D" id="bl3"]
+size = Vector2(200, 146)
+
+[sub_resource type="RectangleShape2D" id="bl4"]
+size = Vector2(45, 99)
+
+[sub_resource type="RectangleShape2D" id="bl5"]
+size = Vector2(45, 97)
+
+[sub_resource type="RectangleShape2D" id="bl6"]
+size = Vector2(45, 96)
+
+[sub_resource type="RectangleShape2D" id="bl7"]
+size = Vector2(45, 96)
+
+[sub_resource type="RectangleShape2D" id="bl8"]
+size = Vector2(167, 88)
+
+[sub_resource type="RectangleShape2D" id="bl9"]
+size = Vector2(149, 81)
+
+[sub_resource type="RectangleShape2D" id="bl10"]
+size = Vector2(98, 186)
+
+[sub_resource type="RectangleShape2D" id="bl11"]
+size = Vector2(98, 186)
+
+[sub_resource type="RectangleShape2D" id="bl12"]
+size = Vector2(57, 125)
+
+[sub_resource type="RectangleShape2D" id="bl13"]
+size = Vector2(54, 125)
+
+[sub_resource type="CircleShape2D" id="round0"]
+radius = 26.0
+
+[sub_resource type="CircleShape2D" id="round1"]
+radius = 25.0
+
+[sub_resource type="CircleShape2D" id="round2"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="round3"]
+radius = 23.0
+
+[sub_resource type="CircleShape2D" id="round4"]
+radius = 23.0
+
+[sub_resource type="RectangleShape2D" id="wall0"]
+size = Vector2(113.71, 34)
+
+[sub_resource type="RectangleShape2D" id="wall1"]
+size = Vector2(140.46, 34)
+
+[sub_resource type="RectangleShape2D" id="wall2"]
+size = Vector2(147.68, 34)
+
+[sub_resource type="RectangleShape2D" id="wall3"]
+size = Vector2(139.96, 34)
+
+[sub_resource type="RectangleShape2D" id="wall4"]
+size = Vector2(131.87, 34)
+
+[sub_resource type="RectangleShape2D" id="wall5"]
+size = Vector2(110.48, 34)
+
+[sub_resource type="RectangleShape2D" id="wall6"]
+size = Vector2(117.13, 34)
+
+[sub_resource type="RectangleShape2D" id="wall7"]
+size = Vector2(138.03, 34)
+
+[sub_resource type="RectangleShape2D" id="wall8"]
+size = Vector2(122.73, 34)
+
+[sub_resource type="RectangleShape2D" id="wall9"]
+size = Vector2(124.15, 34)
+
+[sub_resource type="RectangleShape2D" id="wall10"]
+size = Vector2(111.08, 34)
+
+[sub_resource type="RectangleShape2D" id="wall11"]
+size = Vector2(118.02, 34)
+
+[sub_resource type="RectangleShape2D" id="wall12"]
+size = Vector2(125.21, 34)
+
+[sub_resource type="RectangleShape2D" id="wall13"]
+size = Vector2(127.76, 34)
+
+[sub_resource type="RectangleShape2D" id="wall14"]
+size = Vector2(135.38, 34)
+
+[sub_resource type="RectangleShape2D" id="wall15"]
+size = Vector2(144.22, 34)
+
+[sub_resource type="RectangleShape2D" id="wall16"]
+size = Vector2(126.20, 34)
+
+[sub_resource type="RectangleShape2D" id="wall17"]
+size = Vector2(147.32, 34)
+
+[sub_resource type="RectangleShape2D" id="wall18"]
+size = Vector2(162.63, 34)
+
+[sub_resource type="RectangleShape2D" id="wall19"]
+size = Vector2(155.37, 34)
+
+[sub_resource type="RectangleShape2D" id="wall20"]
+size = Vector2(120.02, 34)
+
+[sub_resource type="CircleShape2D" id="AreaSaida"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="AreaInformacao"]
+radius = 72.0
+
+[sub_resource type="CircleShape2D" id="AreaSegredo"]
+radius = 78.0
+
+[sub_resource type="CircleShape2D" id="AreaKey03"]
+radius = 64.0
+
+[node name="RadcliffeCameraInterior" type="Node2D"]
+script = ExtResource("arrive")
+
+[node name="ImagemInterior" type="Sprite2D" parent="."]
+texture_filter = 1
+centered = false
+texture = ExtResource("2_img")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(724, 725)
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="MesaEstudoSuperiorOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(394, 521)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaEstudoSuperiorOeste"]
+shape = SubResource("bl0")
+
+[node name="MesaEstudoSuperiorLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1041, 521)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaEstudoSuperiorLeste"]
+shape = SubResource("bl1")
+
+[node name="MesaEstudoInferiorOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(394, 722)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaEstudoInferiorOeste"]
+shape = SubResource("bl2")
+
+[node name="MesaEstudoInferiorLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1039, 722)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaEstudoInferiorLeste"]
+shape = SubResource("bl3")
+
+[node name="ColunaCentroOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(555, 441)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaCentroOeste"]
+shape = SubResource("bl4")
+
+[node name="ColunaCentroLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(855, 443)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaCentroLeste"]
+shape = SubResource("bl5")
+
+[node name="ColunaFrenteOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(555, 743)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaFrenteOeste"]
+shape = SubResource("bl6")
+
+[node name="ColunaFrenteLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(852, 742)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaFrenteLeste"]
+shape = SubResource("bl7")
+
+[node name="EstanteCurvaOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(320, 360)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstanteCurvaOeste"]
+shape = SubResource("bl8")
+
+[node name="EstanteCurvaLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1116, 362)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstanteCurvaLeste"]
+shape = SubResource("bl9")
+
+[node name="EscadaOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(176, 518)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EscadaOeste"]
+shape = SubResource("bl10")
+
+[node name="EscadaLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1260, 518)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EscadaLeste"]
+shape = SubResource("bl11")
+
+[node name="MolduraPortaOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(607, 886)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MolduraPortaOeste"]
+shape = SubResource("bl12")
+
+[node name="MolduraPortaLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(834, 886)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MolduraPortaLeste"]
+shape = SubResource("bl13")
+
+[node name="BustoCentral" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(702, 261)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BustoCentral"]
+shape = SubResource("round0")
+
+[node name="GloboOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(294, 248)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/GloboOeste"]
+shape = SubResource("round1")
+
+[node name="GloboLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1120, 245)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/GloboLeste"]
+shape = SubResource("round2")
+
+[node name="VasoOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(639, 274)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/VasoOeste"]
+shape = SubResource("round3")
+
+[node name="VasoLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(775, 273)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/VasoLeste"]
+shape = SubResource("round4")
+
+[node name="MuroCurvo01" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(564.5, 913.0)
+collision_layer = 1
+collision_mask = 0
+rotation = -2.916881485
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo01"]
+shape = SubResource("wall0")
+
+[node name="MuroCurvo02" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(450.0, 875.0)
+collision_layer = 1
+collision_mask = 0
+rotation = -2.744513208
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo02"]
+shape = SubResource("wall1")
+
+[node name="MuroCurvo03" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(335.0, 802.0)
+collision_layer = 1
+collision_mask = 0
+rotation = -2.416122645
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo03"]
+shape = SubResource("wall2")
+
+[node name="MuroCurvo04" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(244.5, 699.5)
+collision_layer = 1
+collision_mask = 0
+rotation = -2.165010031
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo04"]
+shape = SubResource("wall3")
+
+[node name="MuroCurvo05" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(188.0, 584.0)
+collision_layer = 1
+collision_mask = 0
+rotation = -1.877472646
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo05"]
+shape = SubResource("wall4")
+
+[node name="MuroCurvo06" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(174.0, 472.0)
+collision_layer = 1
+collision_mask = 0
+rotation = -1.474937180
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo06"]
+shape = SubResource("wall5")
+
+[node name="MuroCurvo07" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(216.5, 379.0)
+collision_layer = 1
+collision_mask = 0
+rotation = -0.829954642
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo07"]
+shape = SubResource("wall6")
+
+[node name="MuroCurvo08" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(315.5, 314.0)
+collision_layer = 1
+collision_mask = 0
+rotation = -0.372067759
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo08"]
+shape = SubResource("wall7")
+
+[node name="MuroCurvo09" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(434.5, 280.0)
+collision_layer = 1
+collision_mask = 0
+rotation = -0.172190815
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo09"]
+shape = SubResource("wall8")
+
+[node name="MuroCurvo10" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(551.0, 267.0)
+collision_layer = 1
+collision_mask = 0
+rotation = -0.050803704
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo10"]
+shape = SubResource("wall9")
+
+[node name="MuroCurvo11" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(662.5, 266.0)
+collision_layer = 1
+collision_mask = 0
+rotation = 0.038076826
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo11"]
+shape = SubResource("wall10")
+
+[node name="MuroCurvo12" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(771.0, 267.0)
+collision_layer = 1
+collision_mask = 0
+rotation = -0.017855245
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo12"]
+shape = SubResource("wall11")
+
+[node name="MuroCurvo13" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(886.5, 269.5)
+collision_layer = 1
+collision_mask = 0
+rotation = 0.058755823
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo13"]
+shape = SubResource("wall12")
+
+[node name="MuroCurvo14" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1004.0, 291.5)
+collision_layer = 1
+collision_mask = 0
+rotation = 0.308764271
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo14"]
+shape = SubResource("wall13")
+
+[node name="MuroCurvo15" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1118.5, 341.5)
+collision_layer = 1
+collision_mask = 0
+rotation = 0.508600005
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo15"]
+shape = SubResource("wall14")
+
+[node name="MuroCurvo16" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1215.5, 429.0)
+collision_layer = 1
+collision_mask = 0
+rotation = 0.944659609
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo16"]
+shape = SubResource("wall15")
+
+[node name="MuroCurvo17" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1259.5, 545.0)
+collision_layer = 1
+collision_mask = 0
+rotation = 1.512529024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo17"]
+shape = SubResource("wall16")
+
+[node name="MuroCurvo18" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1226.5, 665.5)
+collision_layer = 1
+collision_mask = 0
+rotation = 2.113643007
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo18"]
+shape = SubResource("wall17")
+
+[node name="MuroCurvo19" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1131.0, 777.5)
+collision_layer = 1
+collision_mask = 0
+rotation = 2.423963855
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo19"]
+shape = SubResource("wall18")
+
+[node name="MuroCurvo20" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1005.0, 862.0)
+collision_layer = 1
+collision_mask = 0
+rotation = 2.683932997
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo20"]
+shape = SubResource("wall19")
+
+[node name="MuroCurvo21" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(883.0, 910.0)
+collision_layer = 1
+collision_mask = 0
+rotation = 2.875340604
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroCurvo21"]
+shape = SubResource("wall20")
+
+[node name="Saida" type="Area2D" parent="."]
+position = Vector2(724, 838)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/oxford/oxford.tscn"
+target_spawn_name = &"FromRadcliffeCameraInterior"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="Saida"]
+shape = SubResource("AreaSaida")
+
+[node name="ConhecerRotunda" type="Area2D" parent="."]
+position = Vector2(725, 583)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E — Conhecer a rotunda"
+texto = "RADCLIFFE CAMERA\\nUma sala de leitura circular. Uma fechadura discreta numa estante do lado direito revela uma passagem secreta."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="ConhecerRotunda"]
+shape = SubResource("AreaInformacao")
+
+[node name="LivrosAntigos" type="Area2D" parent="."]
+position = Vector2(515, 640)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E — Consultar livros raros"
+texto = "RADCLIFFE CAMERA\\nLivros antigos mencionam uma estante movel que pode ser aberta com a KEY 03."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="LivrosAntigos"]
+shape = SubResource("AreaInformacao")
+
+[node name="PortaSecretaKey03" type="Area2D" parent="."]
+position = Vector2(1100, 421)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("6_segredo")
+target_scene_path = "res://scenes/locations/oxford/areasecretaradcliffe.tscn"
+target_spawn_name = &"FromRadcliffeCameraInterior"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="PortaSecretaKey03"]
+shape = SubResource("AreaSegredo")
+[node name="PortaSecretaVisual" type="Node2D" parent="."]
+position = Vector2(1122, 377)
+z_index = 1
+
+[node name="PortaFechada" type="Sprite2D" parent="PortaSecretaVisual"]
+texture_filter = 1
+texture = ExtResource("8_porta_fechada")
+
+[node name="PortaAberta" type="Sprite2D" parent="PortaSecretaVisual"]
+visible = false
+texture_filter = 1
+texture = ExtResource("9_porta_aberta")
+
+[node name="Key03" type="Area2D" parent="."]
+position = Vector2(870, 635)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("7_key03")
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="Key03"]
+shape = SubResource("AreaKey03")
+
+[node name="Visual" type="Node2D" parent="Key03"]
+
+[node name="HasteDourada" type="Polygon2D" parent="Key03/Visual"]
+color = Color(1, 0.73, 0.2, 1)
+polygon = PackedVector2Array(-5, -20, 7, -20, 7, 20, 17, 20, 17, 32, 7, 32, 7, 39, -5, 39)
+
+[node name="CabecaDaChave" type="Polygon2D" parent="Key03/Visual"]
+color = Color(1, 0.83, 0.34, 1)
+polygon = PackedVector2Array(-18, -39, -11, -48, 11, -48, 19, -39, 19, -25, 11, -17, -11, -17, -19, -25)
+
+[node name="CentroDaChave" type="Polygon2D" parent="Key03/Visual"]
+color = Color(0.28, 0.19, 0.31, 1)
+polygon = PackedVector2Array(-8, -36, -3, -41, 5, -41, 9, -35, 9, -28, 4, -24, -4, -24, -9, -28)
+
+[node name="TextoKey03" type="Label" parent="Key03/Visual"]
+offset_left = -50.0
+offset_top = -79.0
+offset_right = 55.0
+offset_bottom = -50.0
+theme_override_colors/font_color = Color(1, 0.9, 0.38, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+text = "KEY 03"
+
+[node name="Interface" type="CanvasLayer" parent="."]
+script = ExtResource("5_hud")
+
+[node name="Instrucoes" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 10.0
+offset_right = 950.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(1, 0.95, 0.76, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "Radcliffe Camera  |  WASD / Setas: mover  |  E: interagir"
+
+[node name="Estado" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 43.0
+offset_right = 950.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(0.92, 0.88, 0.72, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Radcliffe: a descobrir  |  Manuscrito: pendente"
+
+[node name="Dica" type="Label" parent="Interface"]
+visible = false
+offset_left = 115.0
+offset_top = 480.0
+offset_right = 850.0
+offset_bottom = 533.0
+theme_override_colors/font_color = Color(1, 0.95, 0.65, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+text = "E — Interagir"
+
+[node name="Info" type="Panel" parent="Interface"]
+visible = false
+offset_left = 147.0
+offset_top = 161.0
+offset_right = 813.0
+offset_bottom = 365.0
+
+[node name="Mensagem" type="Label" parent="Interface/Info"]
+offset_left = 23.0
+offset_top = 21.0
+offset_right = 641.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 3
+text = "Informacoes"
+
+[node name="Fechar" type="Label" parent="Interface/Info"]
+offset_left = 23.0
+offset_top = 167.0
+offset_right = 641.0
+offset_bottom = 194.0
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Pressione E ou Esc para fechar."
+
+
+[node name="EntranceArrow" parent="PortaSecretaKey03" instance=ExtResource("red_arrow")]
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromOxford" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(724, 725)
+
+[node name="FromAreaSecretaRadcliffe" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(991, 417)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(664.0, 725.0)
+npc_id = "radcliffecamerainterior_lesson_1"
+speaker_name = "Estudioso — Polissemia de book"
+dialogue_text = "Read a book usa book como substantivo, livro. Book a ticket usa book como verbo, reservar. A posição e as palavras vizinhas ajudam."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_gentle1")

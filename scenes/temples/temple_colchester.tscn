@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="2_npc"]
+
+[ext_resource type="Script" path="res://scripts/npcs/irma_agnes.gd" id="3_agnes"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/temples/freira_preto_branco_24x32.png" id="4_agnes_tex"]
+
+[node name="TempleColchester" instance=ExtResource("1_base")]
+temple_zoom = 1.0
+
+[node name="IrmaAgnes" parent="NPCs" index="0" instance=ExtResource("2_npc")]
+position = Vector2(155, 30)
+script = ExtResource("3_agnes")
+
+[node name="Sprite2D" parent="NPCs/IrmaAgnes"]
+position = Vector2(0, -16)
+scale = Vector2(2, 2)
+texture = ExtResource("4_agnes_tex")
+

@@ -1,0 +1,317 @@
+[gd_scene load_steps=27 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="arrive"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/nottingham/wollaton_hall_interior_map.webp" id="1_bg"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+
+
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/idosa1.png" id="lesson_art_idosa1"]
+
+[sub_resource type="RectangleShape2D" id="R0"]
+size = Vector2(1510, 28)
+
+[sub_resource type="RectangleShape2D" id="R1"]
+size = Vector2(24, 1024)
+
+[sub_resource type="RectangleShape2D" id="R2"]
+size = Vector2(24, 1024)
+
+[sub_resource type="RectangleShape2D" id="R3"]
+size = Vector2(630, 42)
+
+[sub_resource type="RectangleShape2D" id="R4"]
+size = Vector2(630, 42)
+
+[sub_resource type="RectangleShape2D" id="R5"]
+size = Vector2(160, 278)
+
+[sub_resource type="RectangleShape2D" id="R6"]
+size = Vector2(165, 278)
+
+[sub_resource type="RectangleShape2D" id="R7"]
+size = Vector2(245, 135)
+
+[sub_resource type="RectangleShape2D" id="R8"]
+size = Vector2(405, 160)
+
+[sub_resource type="RectangleShape2D" id="R9"]
+size = Vector2(405, 160)
+
+[sub_resource type="RectangleShape2D" id="R10"]
+size = Vector2(95, 178)
+
+[sub_resource type="RectangleShape2D" id="R11"]
+size = Vector2(90, 105)
+
+[sub_resource type="RectangleShape2D" id="R12"]
+size = Vector2(66, 80)
+
+[sub_resource type="RectangleShape2D" id="R13"]
+size = Vector2(66, 80)
+
+[sub_resource type="RectangleShape2D" id="R14"]
+size = Vector2(90, 140)
+
+[sub_resource type="RectangleShape2D" id="R15"]
+size = Vector2(90, 140)
+
+[sub_resource type="RectangleShape2D" id="R16"]
+size = Vector2(160, 95)
+
+[sub_resource type="RectangleShape2D" id="R17"]
+size = Vector2(160, 95)
+
+[sub_resource type="RectangleShape2D" id="R18"]
+size = Vector2(230, 120)
+
+[sub_resource type="RectangleShape2D" id="R19"]
+size = Vector2(230, 120)
+
+[sub_resource type="RectangleShape2D" id="R20"]
+size = Vector2(35, 230)
+
+[sub_resource type="RectangleShape2D" id="R21"]
+size = Vector2(35, 230)
+
+[sub_resource type="CircleShape2D" id="ExitCircle"]
+radius = 68.0
+
+[node name="WollatonHallInterior" type="Node2D"]
+script = ExtResource("arrive")
+
+[node name="Mapa" type="Sprite2D" parent="."]
+texture_filter = 1
+centered = false
+texture = ExtResource("1_bg")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(768, 850)
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="LimiteSuperior" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(768, 14)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/LimiteSuperior"]
+shape = SubResource("R0")
+
+[node name="LimiteEsquerdo" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(12, 512)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/LimiteEsquerdo"]
+shape = SubResource("R1")
+
+[node name="LimiteDireito" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1524, 512)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/LimiteDireito"]
+shape = SubResource("R2")
+
+[node name="LimiteInferiorEsquerdo" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(315, 1003)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/LimiteInferiorEsquerdo"]
+shape = SubResource("R3")
+
+[node name="LimiteInferiorDireito" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1221, 1003)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/LimiteInferiorDireito"]
+shape = SubResource("R4")
+
+[node name="EstanteEsquerda" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(120, 441)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstanteEsquerda"]
+shape = SubResource("R5")
+
+[node name="EstanteDireita" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1417, 441)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstanteDireita"]
+shape = SubResource("R6")
+
+[node name="Lareira" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(356, 492)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/Lareira"]
+shape = SubResource("R7")
+
+[node name="MesaEsquerda" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(398, 667)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaEsquerda"]
+shape = SubResource("R8")
+
+[node name="MesaDireita" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1138, 667)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaDireita"]
+shape = SubResource("R9")
+
+[node name="Armadura" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1059, 421)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/Armadura"]
+shape = SubResource("R10")
+
+[node name="Globo" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1292, 465)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/Globo"]
+shape = SubResource("R11")
+
+[node name="VasoEsquerdo" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(544, 515)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/VasoEsquerdo"]
+shape = SubResource("R12")
+
+[node name="VasoDireito" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(962, 515)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/VasoDireito"]
+shape = SubResource("R13")
+
+[node name="BustoEsquerdo" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(237, 862)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BustoEsquerdo"]
+shape = SubResource("R14")
+
+[node name="BustoDireito" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1298, 862)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BustoDireito"]
+shape = SubResource("R15")
+
+[node name="JardineiraEsquerda" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(444, 867)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/JardineiraEsquerda"]
+shape = SubResource("R16")
+
+[node name="JardineiraDireita" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1092, 867)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/JardineiraDireita"]
+shape = SubResource("R17")
+
+[node name="BalcaoEsquerdo" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(185, 858)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BalcaoEsquerdo"]
+shape = SubResource("R18")
+
+[node name="BalcaoDireito" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1351, 858)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BalcaoDireito"]
+shape = SubResource("R19")
+
+[node name="PortaTopoEsquerda" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(640, 333)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/PortaTopoEsquerda"]
+shape = SubResource("R20")
+
+[node name="PortaTopoDireita" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(893, 333)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/PortaTopoDireita"]
+shape = SubResource("R21")
+
+[node name="Saida" type="Area2D" parent="."]
+position = Vector2(768, 975)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/nottingham/nottingham.tscn"
+target_spawn_name = &"FromWollatonHallInterior"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="Saida"]
+shape = SubResource("ExitCircle")
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="Instrucoes" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 15.0
+offset_right = 850.0
+offset_bottom = 60.0
+text = "Wollaton Hall • WASD / Setas: mover • E: interagir"
+theme_override_colors/font_color = Color(1, 0.95, 0.8, 1)
+
+[node name="Dica" type="Label" parent="Interface"]
+visible = false
+offset_left = 170.0
+offset_top = 470.0
+offset_right = 860.0
+offset_bottom = 520.0
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromNottingham" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(768, 850)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(708.0, 850.0)
+npc_id = "wollatonhallinterior_lesson_1"
+speaker_name = "Moradora — Plural"
+dialogue_text = "Book vira books e box vira boxes. Person tem o plural irregular people. Observe a mudança em one person e two people."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_idosa1")

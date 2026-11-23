@@ -1,0 +1,374 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="loop"]
+
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="theme"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="CityGuideScene"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="map_exit_indicator"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="linked_portal"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="arrive"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="red_arrow"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/nottingham/nottingham_map.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/cidadao3.png" id="lesson_art_cidadao3"]
+
+[sub_resource type="CircleShape2D" id="CircleCaves"]
+radius = 44.0
+
+[sub_resource type="CircleShape2D" id="CircleCastle"]
+radius = 46.0
+
+[sub_resource type="CircleShape2D" id="CircleHall"]
+radius = 42.0
+
+[sub_resource type="CircleShape2D" id="CircleMarket"]
+radius = 55.0
+
+[sub_resource type="CircleShape2D" id="WorldMapExitShape"]
+radius = 17.0
+
+[node name="Nottingham" type="Node2D" unique_id=2025785328]
+script = ExtResource("arrive")
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=1793756266]
+texture_filter = 1
+position = Vector2(-6, 1)
+texture = ExtResource("1_map")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=1469975793]
+
+[node name="Obstaculo_00" type="StaticBody2D" parent="Colisoes" unique_id=370360546]
+collision_mask = 0
+metadata/descricao = "Castelo - alas e jardim esquerdo"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_00" unique_id=1236089503]
+polygon = PackedVector2Array(0, 0, 331, 0, 401, 8, 331, 175, 318, 193, 318, 244, 325, 271, 325, 304, 118, 303, 119, 279, 98, 271, 0, 272)
+
+[node name="Obstaculo_01" type="StaticBody2D" parent="Colisoes" unique_id=2060813214]
+collision_mask = 0
+metadata/descricao = "Castelo - alas e jardim direito"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_01" unique_id=643749450]
+polygon = PackedVector2Array(389, 0, 593, 0, 593, 99, 576, 120, 615, 192, 596, 285, 546, 309, 396, 309, 390, 275, 389, 208, 364, 100)
+
+[node name="Obstaculo_02" type="StaticBody2D" parent="Colisoes" unique_id=832399057]
+collision_mask = 0
+metadata/descricao = "Castelo - porta fechada"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_02" unique_id=801880933]
+position = Vector2(0, -50)
+polygon = PackedVector2Array(329, 169, 395, 169, 395, 197, 329, 197)
+
+[node name="Obstaculo_03" type="StaticBody2D" parent="Colisoes" unique_id=1964055600]
+collision_mask = 0
+metadata/descricao = "Muralha ao norte do castelo"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_03" unique_id=214635200]
+polygon = PackedVector2Array(518, 92, 650, 92, 651, 162, 634, 180, 583, 188, 550, 195, 520, 195)
+
+[node name="Obstaculo_04" type="StaticBody2D" parent="Colisoes" unique_id=954885634]
+collision_mask = 0
+metadata/descricao = "Portao norte e torres"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_04" unique_id=1222587076]
+polygon = PackedVector2Array(635, 0, 784, 0, 784, 166, 766, 179, 781, 50, 579, 4, 646, 179, 631, 167)
+
+[node name="Obstaculo_05" type="StaticBody2D" parent="Colisoes" unique_id=297312368]
+collision_mask = 0
+metadata/descricao = "Muralha norte direita"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_05" unique_id=302563319]
+polygon = PackedVector2Array(763, 100, 874, 100, 874, 191, 804, 189, 764, 179)
+
+[node name="Obstaculo_06" type="StaticBody2D" parent="Colisoes" unique_id=2062549759]
+collision_mask = 0
+metadata/descricao = "Wollaton - estrutura superior"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_06" unique_id=24171964]
+polygon = PackedVector2Array(877, 0, 1120, 0, 1120, 212, 1045, 216, 1045, 222, 1030, 228, 1030, 212, 948, 212, 948, 227, 936, 219, 877, 223)
+
+[node name="Obstaculo_07" type="StaticBody2D" parent="Colisoes" unique_id=457957581]
+collision_mask = 0
+metadata/descricao = "Wollaton - jardim esquerdo"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_07" unique_id=1742043917]
+polygon = PackedVector2Array(831, 180, 946, 176, 948, 248, 961, 274, 963, 301, 966, 333, 969, 356, 970, 381, 952, 393, 909, 378, 873, 355, 834, 321)
+
+[node name="Obstaculo_08" type="StaticBody2D" parent="Colisoes" unique_id=1865124925]
+collision_mask = 0
+metadata/descricao = "Wollaton - jardim direito"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_08" unique_id=2124770074]
+polygon = PackedVector2Array(1056, 179, 1134, 183, 1177, 311, 1114, 344, 1082, 379, 1049, 392, 1046, 364, 1048, 334, 1051, 306, 1056, 267)
+
+[node name="Obstaculo_10" type="StaticBody2D" parent="Colisoes" unique_id=351917053]
+collision_mask = 0
+metadata/descricao = "Floresta e limite superior direito"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_10" unique_id=641364411]
+polygon = PackedVector2Array(1115, 0, 1447, 0, 1447, 482, 1406, 473, 1390, 429, 1352, 415, 1338, 377, 1318, 336, 1296, 302, 1269, 278, 1215, 281, 1193, 244, 1159, 223, 1118, 215)
+
+[node name="Obstaculo_11" type="StaticBody2D" parent="Colisoes" unique_id=36572093]
+collision_mask = 0
+metadata/descricao = "Torres e limite esquerdo"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_11" unique_id=647398412]
+polygon = PackedVector2Array(0, 268, 120, 268, 121, 339, 105, 376, 88, 412, 88, 482, 102, 524, 43, 546, 0, 534)
+
+[node name="Obstaculo_12" type="StaticBody2D" parent="Colisoes" unique_id=1930573220]
+collision_mask = 0
+metadata/descricao = "Banca de comercio"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_12" unique_id=866531728]
+position = Vector2(3, 14)
+polygon = PackedVector2Array(126, 389, 149, 340, 203, 319, 256, 326, 282, 347, 290, 413, 275, 449, 248, 460, 176, 453, 120, 431)
+
+[node name="Obstaculo_13" type="StaticBody2D" parent="Colisoes" unique_id=1162081513]
+collision_mask = 0
+metadata/descricao = "Loja com toldo vermelho"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_13" unique_id=1355719993]
+position = Vector2(3, 21)
+polygon = PackedVector2Array(289, 439, 309, 400, 350, 381, 380, 389, 416, 420, 442, 463, 438, 511, 414, 527, 295, 531, 281, 505)
+
+[node name="Obstaculo_14" type="StaticBody2D" parent="Colisoes" unique_id=1413564642]
+collision_mask = 0
+metadata/descricao = "Coreto central - cobertura e cerca"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_14" unique_id=564510284]
+position = Vector2(15, 20)
+polygon = PackedVector2Array(680, 372, 713, 352, 727, 374, 757, 417, 785, 427, 801, 457, 796, 493, 776, 519, 753, 531, 704, 403, 644, 534, 611, 501, 610, 453, 634, 428, 665, 416)
+
+[node name="Obstaculo_15" type="StaticBody2D" parent="Colisoes" unique_id=652947971]
+collision_mask = 0
+metadata/descricao = "Edificio de telhado azul a direita"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_15" unique_id=625507217]
+position = Vector2(33, 24)
+polygon = PackedVector2Array(1004, 434, 1042, 416, 1063, 392, 1132, 389, 1174, 422, 1203, 420, 1187, 512, 1161, 534, 1126, 534, 1122, 515, 1120, 496, 1081, 496, 1078, 530, 1016, 536, 984, 525, 986, 459)
+
+[node name="Obstaculo_16" type="StaticBody2D" parent="Colisoes" unique_id=66533975]
+collision_mask = 0
+metadata/descricao = "City of Caves - arvoredo esquerdo"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_16" unique_id=454355277]
+polygon = PackedVector2Array(1036, 621, 1077, 590, 1114, 559, 1148, 568, 1140, 609, 1138, 685, 1138, 736, 1116, 747, 1067, 743, 1030, 723, 1017, 684, 1001, 637)
+
+[node name="Obstaculo_17" type="StaticBody2D" parent="Colisoes" unique_id=793571349]
+collision_mask = 0
+metadata/descricao = "City of Caves - predio e porta"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_17" unique_id=1305519396]
+polygon = PackedVector2Array(1125, 575, 1324, 509, 1334, 511, 1342, 614, 1320, 650, 1265, 650, 1250, 620, 1210, 625, 1170, 680, 1128, 684, 1120, 624)
+
+[node name="Obstaculo_18" type="StaticBody2D" parent="Colisoes" unique_id=1463074445]
+collision_mask = 0
+metadata/descricao = "City of Caves - cerca direita"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_18" unique_id=1521472810]
+position = Vector2(-1339.0001, -123.000015)
+scale = Vector2(2.1426291, 0.94485295)
+polygon = PackedVector2Array(1250, 581, 1300, 595, 1313, 640, 1309, 707, 1308.2059, 974.75494, 1255.467, 981.10516, 1235, 751, 1235, 701, 1231.6646, 663.5954)
+
+[node name="Obstaculo_19" type="StaticBody2D" parent="Colisoes" unique_id=611915847]
+collision_mask = 0
+metadata/descricao = "Muralha inferior e rio esquerdo"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_19" unique_id=1343169595]
+position = Vector2(-7, 5)
+polygon = PackedVector2Array(0, 509, 111, 489, 132, 509, 128, 584, 172, 606, 354, 601, 436, 641, 536, 672, 669, 699, 674, 835, 593, 777, 626, 781, 628, 1087, 0, 1087)
+
+[node name="Obstaculo_20" type="StaticBody2D" parent="Colisoes" unique_id=1683362878]
+collision_mask = 0
+metadata/descricao = "Muralha inferior e rio direito"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_20" unique_id=1664517587]
+polygon = PackedVector2Array(764, 716, 809, 691, 887, 665, 856, 746, 896, 636, 962, 689, 1017, 789, 963, 777, 1016, 794, 1076, 814, 1143, 833, 1206, 848, 1254, 855, 1299, 822, 1336, 780, 1366, 748, 1447, 726, 1447, 1087, 768, 1087)
+
+[node name="Obstaculo_21" type="StaticBody2D" parent="Colisoes" unique_id=130362218]
+collision_mask = 0
+metadata/descricao = "Torre esquerda do portao principal"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_21" unique_id=1649940956]
+polygon = PackedVector2Array(519, 661, 532, 631, 559, 627, 579, 668, 580, 771, 522, 756)
+
+[node name="Obstaculo_22" type="StaticBody2D" parent="Colisoes" unique_id=1973423659]
+collision_mask = 0
+metadata/descricao = "Torre central esquerda"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_22" unique_id=87708998]
+polygon = PackedVector2Array(624, 683, 642, 652, 658, 626, 677, 644, 679, 813, 632, 813)
+
+[node name="Obstaculo_23" type="StaticBody2D" parent="Colisoes" unique_id=1147541903]
+collision_mask = 0
+metadata/descricao = "Torre central direita"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_23" unique_id=1549028609]
+polygon = PackedVector2Array(720, 649, 741, 624, 766, 647, 777, 692, 777, 814, 726, 815)
+
+[node name="Obstaculo_24" type="StaticBody2D" parent="Colisoes" unique_id=2135982865]
+collision_mask = 0
+metadata/descricao = "Lateral esquerda da ponte"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_24" unique_id=848348996]
+polygon = PackedVector2Array(627, 812, 663, 812, 663, 1087, 628, 1087)
+
+[node name="Obstaculo_25" type="StaticBody2D" parent="Colisoes" unique_id=204457775]
+collision_mask = 0
+metadata/descricao = "Lateral direita da ponte"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_25" unique_id=1611461860]
+polygon = PackedVector2Array(739, 812, 769, 812, 769, 1087, 739, 1087)
+
+[node name="Obstaculo_26" type="StaticBody2D" parent="Colisoes" unique_id=1553550098]
+collision_mask = 0
+metadata/descricao = "Limite sul da ponte"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/Obstaculo_26" unique_id=369297883]
+polygon = PackedVector2Array(663, 1078, 739, 1078, 739, 1087, 663, 1087)
+
+[node name="Player" parent="." unique_id=1647526076 instance=ExtResource("2_player")]
+position = Vector2(735, 576)
+
+[node name="EntradaCityOfCaves" type="Area2D" parent="." unique_id=1195745073]
+position = Vector2(1184, 746)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/nottingham/cityofcaves.tscn"
+target_spawn_name = &"FromNottingham"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="EntradaCityOfCaves" unique_id=722463208]
+position = Vector2(30, -65)
+shape = SubResource("CircleCaves")
+
+[node name="EntradaNottinghamCastle" type="Area2D" parent="." unique_id=1033249722]
+position = Vector2(390, 225)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/nottingham/nottinghamcastleinterior.tscn"
+target_spawn_name = &"FromNottingham"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="EntradaNottinghamCastle" unique_id=1961541364]
+position = Vector2(-31, -44)
+shape = SubResource("CircleCastle")
+
+[node name="EntradaWollatonHall" type="Area2D" parent="." unique_id=1888214666]
+position = Vector2(1065, 287)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/nottingham/wollatonhallinterior.tscn"
+target_spawn_name = &"FromNottingham"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="EntradaWollatonHall" unique_id=1635786904]
+position = Vector2(-60, -40)
+shape = SubResource("CircleHall")
+
+[node name="EntradaOldMarketSquare" type="Area2D" parent="." unique_id=1124792807]
+position = Vector2(705, 568)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/nottingham/oldmarketsquare.tscn"
+target_spawn_name = &"FromNottingham"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="EntradaOldMarketSquare" unique_id=14617195]
+position = Vector2(14, -54)
+shape = SubResource("CircleMarket")
+
+[node name="Interface" type="CanvasLayer" parent="." unique_id=236600403]
+
+[node name="Instrucoes" type="Label" parent="Interface" unique_id=735764294]
+offset_left = 344.0
+offset_top = 14.0
+offset_right = 480.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(1, 0.98, 0.83, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.95)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "Nottingham  •  WASD / Setas: mover  •  E: interagir"
+
+[node name="Dica" type="Label" parent="Interface" unique_id=1105191061]
+visible = false
+offset_left = 250.0
+offset_top = 481.0
+offset_right = 760.0
+offset_bottom = 525.0
+theme_override_colors/font_color = Color(1, 0.95, 0.66, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "E — Entrar na City of Caves"
+horizontal_alignment = 1
+
+[node name="EntranceArrow" parent="EntradaCityOfCaves" instance=ExtResource("red_arrow")]
+position = Vector2(30, -130)
+
+[node name="EntranceArrow" parent="EntradaNottinghamCastle" instance=ExtResource("red_arrow")]
+position = Vector2(-31, -109)
+
+[node name="EntranceArrow" parent="EntradaWollatonHall" instance=ExtResource("red_arrow")]
+position = Vector2(-60, -105)
+
+[node name="EntranceArrow" parent="EntradaOldMarketSquare" instance=ExtResource("red_arrow")]
+position = Vector2(14, -119)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromCityOfCaves" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1185, 757)
+
+[node name="FromNottinghamCastleInterior" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(390, 266)
+
+[node name="FromOldMarketSquare" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(705, 580)
+
+[node name="FromWollatonHallInterior" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1005, 320)
+
+[node name="WorldMapExit" type="Area2D" parent="."]
+position = Vector2(700, 1020)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
+shape = SubResource("WorldMapExitShape")
+
+[node name="Indicator" parent="WorldMapExit" instance=ExtResource("map_exit_indicator")]
+
+[node name="CityGuide" parent="." instance=ExtResource("CityGuideScene")]
+position = Vector2(790, 576)
+speaker_name = "Nottingham Guide"
+npc_id = "nottingham_town_guide"
+dialogue_text = "Welcome to Nottingham! Explore our historic castle and the City of Caves. Every place has a story."
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("theme")
+autoplay = true
+script = ExtResource("loop")
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(627.0, 576.0)
+npc_id = "nottingham_lesson_1"
+speaker_name = "Comerciante — Much e many"
+dialogue_text = "Use many com coisas contáveis, como many apples. Use much com substâncias, como much water. A lot of funciona em a lot of apples e a lot of water."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_cidadao3")

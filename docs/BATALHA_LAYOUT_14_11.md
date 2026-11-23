@@ -1,0 +1,1 @@
+Batalha: player e monstro usam a mesma altura-alvo em pixels (30% da altura do viewport, máximo 220), com limite de largura para evitar cortes. Quiz posicionado a 12px do topo e centralizado na região disponível; Dicionário à esquerda. Resposta correta usa fonte 22, explicação na mesma caixa e ícone de visto verde. ZIP testado; execução Godot não disponível.

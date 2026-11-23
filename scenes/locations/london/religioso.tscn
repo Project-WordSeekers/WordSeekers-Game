@@ -1,0 +1,197 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="loop"]
+
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="theme"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="entrance_arrow"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="linked_portal"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/london/religioso.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="3_district"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/guarda_londres.png" id="lesson_art_guarda_londres"]
+
+[sub_resource type="RectangleShape2D" id="portal_Cima"]
+size = Vector2(212, 36.75)
+
+[sub_resource type="RectangleShape2D" id="portal_Direita"]
+size = Vector2(43, 159)
+
+[sub_resource type="CircleShape2D" id="TempleEntranceShape"]
+radius = 17.0
+
+[sub_resource type="CircleShape2D" id="EntradaCatedralShape"]
+radius = 17.0
+
+[node name="Religioso" type="Node2D" unique_id=704206163]
+script = ExtResource("3_district")
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=1140496146]
+texture_filter = 1
+position = Vector2(-4, -7)
+texture = ExtResource("1_map")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=915247130]
+
+[node name="Catedral" type="StaticBody2D" parent="Colisoes" unique_id=607237116]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Catedral" unique_id=228319177]
+polygon = PackedVector2Array(-65, 392, 419, 408, 422, 459, 502, 429, 539, 452, 564, 486, 575, 521, 568, 571, 502, 603, 506, 665, 498, 762, 359, 773, 351, 709, 263, 705, 266, 776, 13, 778)
+
+[node name="TorreDeLondres" type="StaticBody2D" parent="Colisoes" unique_id=129144571]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/TorreDeLondres" unique_id=576591856]
+position = Vector2(-87, 59)
+polygon = PackedVector2Array(716, 290, 772, 266, 778, 140, 806, 91, 835, 23, 787, 9, 775, -69, 1339, -30, 1315, 299, 1334, 475, 1208, 479, 1206, 519, 1161, 519, 1156, 473, 1190, 436, 1188, 405, 1081, 397, 1072, 357, 1026, 357, 1018, 406, 961, 414, 964, 471, 723, 467)
+
+[node name="Templo" type="StaticBody2D" parent="Colisoes" unique_id=199284871]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Templo" unique_id=912414134]
+polygon = PackedVector2Array(649, 901, 680, 870, 731, 836, 759, 870, 856, 846, 979, 842, 1024, 855, 1068, 848, 1086, 887, 1084, 944, 1033, 958, 1032, 1088, 900, 1090, 890, 1033, 830, 1035, 830, 1095, 636, 1095)
+
+[node name="Cemiterio" type="StaticBody2D" parent="Colisoes" unique_id=1943092394]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Cemiterio" unique_id=105362438]
+position = Vector2(749, -316)
+polygon = PackedVector2Array(127, 981, 347, 966, 357, 978, 362, 1029, 501, 1026, 498, 1107, 367, 1098, 138, 1095, 132.9325, 996.81714, 99, 1015, 92, 1058, 64, 1063, 54, 1017, 75, 984)
+
+[node name="Estatua" type="StaticBody2D" parent="Colisoes" unique_id=1537875819]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Estatua" unique_id=1474254869]
+position = Vector2(9, -12)
+polygon = PackedVector2Array(606, 619, 624, 591, 642, 617, 658, 737, 639, 752, 605, 751, 589, 737)
+
+[node name="CasasSuperiorEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=398835769]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/CasasSuperiorEsquerda" unique_id=912674720]
+polygon = PackedVector2Array(15, 5, 522, 2, 500, 100, 563, 200, 560, 364, 387, 349, 396, 201, 336, 222, 337, 314, 261, 333, 261, 362, 174, 358, 168, 401, 5, 403)
+
+[node name="BordaSuperior" type="StaticBody2D" parent="Colisoes" unique_id=1962763222]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaSuperior" unique_id=267080679]
+polygon = PackedVector2Array(0, -20, 1254, -20, 1254, 10, 0, 10)
+
+[node name="BordaInferior" type="StaticBody2D" parent="Colisoes" unique_id=1109561131]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaInferior" unique_id=1331810085]
+position = Vector2(-10, -99)
+polygon = PackedVector2Array(0, 1238, 18, 862, 210, 875, 295, 931, 470, 938, 566, 991, 557, 1239, 1136, 1227, 1205, 1137, 1161, 960, 1137, 960, 1124, 939, 1113, 879, 1192, 829, 1254, 1238, 1254, 1268, 621, 1273, 0, 1268)
+
+[node name="BordaEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=401771921]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaEsquerda" unique_id=1517679968]
+polygon = PackedVector2Array(-20, 0, 10, 0, 10, 1254, -20, 1254)
+
+[node name="BordaDireita" type="StaticBody2D" parent="Colisoes" unique_id=444630047]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaDireita" unique_id=838317838]
+polygon = PackedVector2Array(1244, 0, 1274, 0, 1274, 1254, 1244, 1254)
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=242519847]
+
+[node name="Entrada" type="Marker2D" parent="SpawnPoints" unique_id=1771421895]
+position = Vector2(620, 640)
+
+[node name="Cima" type="Marker2D" parent="SpawnPoints" unique_id=568223693]
+position = Vector2(618, 114)
+
+[node name="Direita" type="Marker2D" parent="SpawnPoints" unique_id=1191632463]
+position = Vector2(1162, 635)
+
+[node name="Portais" type="Node2D" parent="." unique_id=51021015]
+
+[node name="Cima" type="Area2D" parent="Portais" unique_id=1294328720]
+position = Vector2(620, 95)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/london/academia.tscn"
+target_spawn_name = &"Baixo"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portais/Cima" unique_id=1396226203]
+position = Vector2(-12, -53.625)
+shape = SubResource("portal_Cima")
+
+[node name="Direita" type="Area2D" parent="Portais" unique_id=1842276747]
+position = Vector2(1150, 615)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/london/comercial.tscn"
+target_spawn_name = &"Esquerda"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portais/Direita" unique_id=747004729]
+position = Vector2(68.5, 16)
+shape = SubResource("portal_Direita")
+
+[node name="Player" parent="." unique_id=1505669291 instance=ExtResource("2_player")]
+position = Vector2(691, 721)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1317623098]
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer" unique_id=1229401858]
+offset_left = 344.0
+offset_top = 8.0
+offset_right = 680.0
+offset_bottom = 43.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel" unique_id=560126246]
+layout_mode = 2
+text = "Londres · Distrito Religioso"
+
+[node name="TempleEntrance" type="Area2D" parent="."]
+position = Vector2(860, 1063)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/temples/temple_london.tscn"
+temple_entrance = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempleEntrance"]
+shape = SubResource("TempleEntranceShape")
+
+[node name="Indicator" parent="TempleEntrance" instance=ExtResource("entrance_arrow")]
+
+[node name="FromTemple" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(860, 1120)
+
+[node name="EntradaCatedral" type="Area2D" parent="."]
+position = Vector2(307, 730)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/london/catedral.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntradaCatedral"]
+shape = SubResource("EntradaCatedralShape")
+
+[node name="Indicator" parent="EntradaCatedral" instance=ExtResource("entrance_arrow")]
+
+[node name="FromCatedral" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(307, 782)
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("theme")
+autoplay = true
+script = ExtResource("loop")
+
+[node name="Camera2D" parent="Player"]
+min_zoom = 1.2
+max_zoom = 1.2
+zoom = Vector2(1.2, 1.2)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(751.0, 721.0)
+npc_id = "religioso_lesson_1"
+speaker_name = "Guarda de Londres — Leitura de mapas"
+dialogue_text = "Leia a legenda primeiro. A cruz indica a catedral. A linha tracejada indica o caminho a pé. Next to significa ao lado de."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_guarda_londres")

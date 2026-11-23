@@ -1,0 +1,119 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/temples/roman_bath.gd" id="1_bath"]
+[ext_resource type="Texture2D" path="res://assets/environments/bath/roman_bath_interior.webp" id="2_bg"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="4_npc"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="5_portal"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/temple_choir.ogg" id="6_music"]
+
+[sub_resource type="RectangleShape2D" id="PoolWater"]
+size = Vector2(190, 412)
+
+[sub_resource type="RectangleShape2D" id="ExitShape"]
+size = Vector2(138, 28)
+
+; Banhos romanos de Bath. Substitui o interior de templo compartilhado nesta cidade.
+; Room tem a imagem (1452x1083) com canto superior esquerdo na origem e escala
+; 2048/1452, para ocupar a mesma área do templo padrão. Por isso os polígonos e
+; áreas dentro de Room usam diretamente coordenadas em pixels da imagem.
+[node name="TempleBath" type="Node2D"]
+script = ExtResource("1_bath")
+temple_zoom = 1.0
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+scale = Vector2(0.75, 0.75)
+
+[node name="Room" type="Node2D" parent="TileMapLayer"]
+position = Vector2(-1024, -763.76)
+scale = Vector2(1.41047, 1.41047)
+
+[node name="Background" type="Sprite2D" parent="TileMapLayer/Room"]
+texture_filter = 2
+texture = ExtResource("2_bg")
+centered = false
+
+[node name="Obstacles" type="StaticBody2D" parent="TileMapLayer/Room"]
+collision_layer = 1
+collision_mask = 0
+
+; Parede norte: estátuas, estandartes, braseiros e fonte de Sulis Minerva.
+[node name="NorthWall" type="CollisionPolygon2D" parent="TileMapLayer/Room/Obstacles"]
+polygon = PackedVector2Array(-50, -50, 1502, -50, 1502, 298, -50, 298)
+
+; Colunata oeste, bancos/ânforas do degrau inferior e pedestal do braseiro esquerdo.
+[node name="WestSide" type="CollisionPolygon2D" parent="TileMapLayer/Room/Obstacles"]
+polygon = PackedVector2Array(-50, 298, 275, 298, 195, 770, 117, 780, 117, 852, 584, 852, 592, 1048, 592, 1133, -50, 1133)
+
+; Colunata leste, bancos/ânforas do degrau inferior e pedestal do braseiro direito.
+[node name="EastSide" type="CollisionPolygon2D" parent="TileMapLayer/Room/Obstacles"]
+polygon = PackedVector2Array(1177, 298, 1502, 298, 1502, 1133, 858, 1133, 858, 1048, 866, 852, 1335, 852, 1335, 780, 1257, 770)
+
+; Abaixo da escadaria de saída.
+[node name="SouthEdge" type="CollisionPolygon2D" parent="TileMapLayer/Room/Obstacles"]
+polygon = PackedVector2Array(592, 1048, 858, 1048, 858, 1133, 592, 1133)
+
+; Água das piscinas: ao entrar, a vida é restaurada (ver roman_bath.gd).
+[node name="LeftPool" type="Area2D" parent="TileMapLayer/Room"]
+position = Vector2(396, 582)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/Room/LeftPool"]
+shape = SubResource("PoolWater")
+
+[node name="RightPool" type="Area2D" parent="TileMapLayer/Room"]
+position = Vector2(1056, 582)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/Room/RightPool"]
+shape = SubResource("PoolWater")
+
+[node name="Player" parent="TileMapLayer" instance=ExtResource("3_player")]
+position = Vector2(0, 650)
+scale = Vector2(2, 2)
+z_index = 2
+
+[node name="NPCs" type="Node2D" parent="."]
+scale = Vector2(0.75, 0.75)
+
+[node name="Guardian" parent="NPCs" instance=ExtResource("4_npc")]
+position = Vector2(217, -284)
+speaker_name = "Roman Baths Attendant"
+dialogue_text = "Salve, traveler! Welcome to the Roman Baths. The hot spring water comes from deep underground, and the Romans believed the goddess Sulis Minerva gave it healing powers. Step into the warm pools to restore your strength."
+
+[node name="TempleExit" type="Area2D" parent="."]
+position = Vector2(0, 526)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_portal")
+temple_exit = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempleExit"]
+shape = SubResource("ExitShape")
+
+[node name="HealMessage" type="CanvasLayer" parent="."]
+layer = 95
+
+[node name="Label" type="Label" parent="HealMessage"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 140.0
+offset_bottom = 230.0
+grow_horizontal = 2
+mouse_filter = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_colors/font_color = Color(1, 0.94, 0.72, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.03, 0.02, 1)
+theme_override_colors/font_shadow_color = Color(0.05, 0.03, 0.02, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 28
+
+[node name="TempleChoir" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_music")
+autoplay = true
+volume_db = -5.0

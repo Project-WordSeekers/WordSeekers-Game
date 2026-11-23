@@ -1,0 +1,176 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="loop"]
+
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="theme"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="entrance_arrow"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="linked_portal"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/london/academia.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="3_district"]
+
+[sub_resource type="RectangleShape2D" id="portal_Direita"]
+size = Vector2(30, 90)
+
+[sub_resource type="RectangleShape2D" id="portal_Baixo"]
+size = Vector2(144, 40)
+
+[sub_resource type="CircleShape2D" id="EntradaAcademia_InteriorShape"]
+radius = 17.0
+
+[node name="Academia" type="Node2D" unique_id=1687583111]
+script = ExtResource("3_district")
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=1091790271]
+texture_filter = 1
+texture = ExtResource("1_map")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=625093582]
+
+[node name="Academia" type="StaticBody2D" parent="Colisoes" unique_id=969774833]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Academia" unique_id=21010015]
+position = Vector2(-30, -10)
+polygon = PackedVector2Array(355, 105, 930, 105, 938, 345, 960, 340, 964, 422, 930, 430, 896, 464, 706, 459, 702, 415, 682, 411, 684, 396, 642, 396, 644, 411, 623, 416, 621, 461, 436, 460, 418, 430, 367, 424, 368, 352, 385, 326, 395, 229)
+
+[node name="Biblioteca" type="StaticBody2D" parent="Colisoes" unique_id=1932285063]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Biblioteca" unique_id=500119010]
+polygon = PackedVector2Array(173, 586, 247, 530, 421, 535, 495, 598, 561, 708, 563, 767, 487, 789, 386.30914, 789.3033, 383, 746, 283, 744, 281, 795, 155, 790)
+
+[node name="Escola" type="StaticBody2D" parent="Colisoes" unique_id=989304922]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Escola" unique_id=509037916]
+polygon = PackedVector2Array(733, 595, 793, 576, 823, 561, 868, 533, 1065, 550, 1095, 749, 1086, 792, 964, 792, 944, 755, 907, 754, 891, 789, 820, 788, 675, 771, 673, 706)
+
+[node name="Observatorio" type="StaticBody2D" parent="Colisoes" unique_id=1935786538]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Observatorio" unique_id=86394632]
+position = Vector2(-1, -18)
+polygon = PackedVector2Array(15, 181, 6, 36, 353, 95, 353, 225, 127, 216, 124, 247, 151, 284, 208, 220, 224, 254, 294, 281, 304, 328, 300, 393, 271, 392, 272, 369, 203, 372, 196, 452, 51, 450, 23, 391)
+
+[node name="CasasEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=362482574]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/CasasEsquerda" unique_id=1105436694]
+position = Vector2(268.79535, -367)
+scale = Vector2(0.9979839, 1)
+polygon = PackedVector2Array(689, 623, 814, 614, 836.89197, 660, 844, 699, 690, 704)
+
+[node name="CasasDireita" type="StaticBody2D" parent="Colisoes" unique_id=1437657699]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/CasasDireita" unique_id=1383170710]
+position = Vector2(-5, -31)
+polygon = PackedVector2Array(658, 906, 666, 856, 755, 857, 827, 891, 825, 963, 661, 962)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Colisoes/CasasDireita" unique_id=1663327479]
+position = Vector2(-176, -20)
+polygon = PackedVector2Array(660, 913, 694, 901, 681, 872, 709, 839, 741, 859, 744, 909, 744, 951, 709, 957, 651, 952)
+
+[node name="Barraca" type="StaticBody2D" parent="Colisoes" unique_id=1097637905]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Barraca" unique_id=86733481]
+position = Vector2(-35, 20)
+polygon = PackedVector2Array(886, 926, 927, 878, 1017, 862, 1116, 871, 1129, 895, 1125, 921, 1143, 943, 1142, 975, 1039, 976, 1042, 1029, 936, 1028, 948, 987, 883, 983)
+
+[node name="BordaSuperior" type="StaticBody2D" parent="Colisoes" unique_id=1183109780]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaSuperior" unique_id=822171719]
+polygon = PackedVector2Array(-14, 24, 1240, 24, 1213, 162, 1117, 163, 1111, 191, 909, 203, -14, 54)
+
+[node name="BordaInferior" type="StaticBody2D" parent="Colisoes" unique_id=292317967]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaInferior" unique_id=1974311936]
+position = Vector2(-2, -15)
+polygon = PackedVector2Array(1, 1061, 523, 1057, 530, 995, 567, 1000, 568, 1047, 573, 1101, 534, 1177, 691, 1168, 663, 1102, 660, 1040, 661, 996, 696, 998, 698, 1044, 837, 1048, 1201, 1048, 1255, 1061, 1255, 1091, 706.2917, 1091, 769, 1245, 607, 1223, 524, 1213, 1, 1091)
+
+[node name="BordaEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=1126303057]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaEsquerda" unique_id=1661793436]
+polygon = PackedVector2Array(-20, 0, 10, 0, 58, 560, 169, 565, 179, 824, 206, 915, 102, 917, 110, 985, 120, 1063, 10, 1254, -20, 1254)
+
+[node name="BordaDireita" type="StaticBody2D" parent="Colisoes" unique_id=1982748103]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaDireita" unique_id=534405839]
+position = Vector2(-16, -1)
+polygon = PackedVector2Array(1213, 2, 1243, 2, 1243, 1256, 1213, 1256, 1219, 515)
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=28484944]
+
+[node name="Entrada" type="Marker2D" parent="SpawnPoints" unique_id=977655530]
+position = Vector2(620, 720)
+
+[node name="Direita" type="Marker2D" parent="SpawnPoints" unique_id=1874552539]
+position = Vector2(1135, 606)
+
+[node name="Baixo" type="Marker2D" parent="SpawnPoints" unique_id=1472351336]
+position = Vector2(608, 1103)
+
+[node name="Portais" type="Node2D" parent="." unique_id=704023134]
+
+[node name="Direita" type="Area2D" parent="Portais" unique_id=1854723272]
+position = Vector2(1150, 615)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/london/cultural.tscn"
+target_spawn_name = &"Esquerda"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portais/Direita" unique_id=1568558409]
+position = Vector2(28, -7)
+shape = SubResource("portal_Direita")
+
+[node name="Baixo" type="Area2D" parent="Portais" unique_id=1905448715]
+position = Vector2(620, 1020)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/london/religioso.tscn"
+target_spawn_name = &"Cima"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portais/Baixo" unique_id=1079589058]
+position = Vector2(-13, 104)
+shape = SubResource("portal_Baixo")
+
+[node name="Player" parent="." unique_id=1933685598 instance=ExtResource("2_player")]
+position = Vector2(603, 900)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1961399077]
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer" unique_id=957534851]
+offset_left = 344.0
+offset_top = 8.0
+offset_right = 680.0
+offset_bottom = 43.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel" unique_id=2081247893]
+layout_mode = 2
+text = "Londres · Distrito Academia"
+
+[node name="EntradaAcademia_Interior" type="Area2D" parent="."]
+position = Vector2(628, 418)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/london/academia_interior.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntradaAcademia_Interior"]
+shape = SubResource("EntradaAcademia_InteriorShape")
+
+[node name="Indicator" parent="EntradaAcademia_Interior" instance=ExtResource("entrance_arrow")]
+
+[node name="FromAcademia_Interior" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(628, 470)
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("theme")
+autoplay = true
+script = ExtResource("loop")
+
+[node name="Camera2D" parent="Player"]
+min_zoom = 1.2
+max_zoom = 1.2
+zoom = Vector2(1.2, 1.2)

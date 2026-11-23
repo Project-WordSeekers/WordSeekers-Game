@@ -1,0 +1,352 @@
+[gd_scene format=3 uid="uid://t1glofkbooxb"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/cambridge/biblioteca/library.webp" id="1_5hne4"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_blutl"]
+[ext_resource type="Script" path="res://scripts/npcs/professor.gd" id="2_qd40r"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/cambridge/librarian.png" id="3_dh2li"]
+[ext_resource type="AudioStream" path="res://assets/audio/ambience/cambridge/library.ogg" id="5_mf01h"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="6_portal"]
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="7_music_loop"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/scholar1.png" id="lesson_art_scholar1"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/menina2.png" id="lesson_art_menina2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ly40g"]
+radius = 13.0
+height = 68.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_50kor"]
+radius = 39.0
+height = 92.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jxuie"]
+size = Vector2(101, 29)
+
+[node name="Biblioteca" type="Node2D" unique_id=205530898]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1337453125]
+position = Vector2(642, 409.4375)
+scale = Vector2(1.2524413, 0.9423411)
+texture = ExtResource("1_5hne4")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D" unique_id=998239617]
+polygon = PackedVector2Array(-286.6402, 3.780487, -284.24487, 66.3905, -309.79498, 68.51288, -312.1903, 136.42886, -324.1669, 0.5969238)
+
+[node name="Professor" type="CharacterBody2D" parent="." unique_id=1870855469]
+script = ExtResource("2_qd40r")
+npc_id = "cambridge_professor_john"
+
+[node name="Sprite2D" type="Sprite2D" parent="Professor" unique_id=715429714]
+position = Vector2(641, 142)
+scale = Vector2(0.7717386, 0.6774193)
+texture = ExtResource("3_dh2li")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Professor" unique_id=801846990]
+position = Vector2(643, 138)
+shape = SubResource("CapsuleShape2D_ly40g")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1794397753]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1146787772]
+position = Vector2(642, 140)
+shape = SubResource("CapsuleShape2D_50kor")
+
+[node name="Player" parent="." unique_id=218410659 instance=ExtResource("2_blutl")]
+position = Vector2(642, 764)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=582027516]
+
+[node name="InteractionLabel" type="Panel" parent="UI" unique_id=56443884]
+visible = false
+offset_left = 511.0
+offset_top = 53.0
+offset_right = 784.0
+offset_bottom = 93.0
+
+[node name="Label" type="Label" parent="UI/InteractionLabel" unique_id=1914128708]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 5.0
+offset_right = 268.0
+offset_bottom = 28.0
+text = "[E] Falar"
+
+[node name="DialoguePanel" type="Panel" parent="UI" unique_id=1356358428]
+visible = false
+anchors_preset = -1
+anchor_left = 0.523
+anchor_top = 0.057000004
+anchor_right = 0.65800005
+anchor_bottom = 0.24900001
+offset_left = -0.44000244
+offset_top = 33.96
+offset_right = 61.75995
+offset_bottom = -1.280014
+
+[node name="DialogueLabel" type="Label" parent="UI/DialoguePanel" unique_id=1044207341]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 6.0
+offset_right = -5.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuizPanel" type="Panel" parent="UI" unique_id=196774945]
+visible = false
+offset_left = 669.0
+offset_top = 75.0
+offset_right = 1012.0
+offset_bottom = 213.0
+
+[node name="QuestionLabel" type="Label" parent="UI/QuizPanel" unique_id=1032442646]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 336.0
+offset_bottom = 25.0
+text = "What is the correct translation of \"library\"?"
+
+[node name="AnswerButton1" type="Button" parent="UI/QuizPanel" unique_id=843787988]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 28.0
+offset_right = 45.0
+offset_bottom = 51.0
+text = "A) Escola"
+
+[node name="AnswerButton2" type="Button" parent="UI/QuizPanel" unique_id=511574440]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 54.0
+offset_right = 45.0
+offset_bottom = 77.0
+text = "B) Biblioteca"
+
+[node name="AnswerButton3" type="Button" parent="UI/QuizPanel" unique_id=1595692968]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 80.0
+offset_right = 45.0
+offset_bottom = 103.0
+text = "C) Professor"
+
+[node name="AnswerButton4" type="Button" parent="UI/QuizPanel" unique_id=1386644008]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 106.0
+offset_right = 45.0
+offset_bottom = 129.0
+text = "D) Livro"
+
+[node name="victoryLabel" type="Label" parent="UI/QuizPanel" unique_id=1159733684]
+visible = false
+layout_mode = 0
+offset_left = 115.0
+offset_top = 30.0
+offset_right = 155.0
+offset_bottom = 53.0
+text = "You won! 🎉
+Great job!
+You answered correctly!"
+
+[node name="Paredes" type="StaticBody2D" parent="." unique_id=600319386]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Paredes" unique_id=1172012254]
+position = Vector2(630.5, 71)
+polygon = PackedVector2Array(-620.5, -81, 620.5, -81, 620.5, 81, -620.5, 81)
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="Paredes" unique_id=637293141]
+position = Vector2(30, 436.25)
+polygon = PackedVector2Array(-15, -362.75, 15, -362.75, 13, -148.25, 52, -151.25, 56, 95.75, 384, 105.75, 393, 219.75, 219, 223.75, 214, 196.75, 104, 195.75, 98, 228.75, 63, 227.75, 45, 349.75, 15, 362.75, -15, 362.75)
+
+[node name="CollisionShape2D3" type="CollisionPolygon2D" parent="Paredes" unique_id=2039157345]
+position = Vector2(1277, 399.75)
+polygon = PackedVector2Array(-30.5, -410.25, 30.5, -410.25, 30.5, 410.25, -30.5, 410.25)
+
+[node name="CollisionShape2D4" type="CollisionPolygon2D" parent="Paredes" unique_id=530800484]
+position = Vector2(392.5, 324.5)
+polygon = PackedVector2Array(-58.5, -175.5, 58.5, -175.5, 106.5, 40.5, 99.5, 146.5, 68.5, 155.5, 58.5, 175.5, -58.5, 175.5, -61.5, 87.5, -266.5, 86.5, -266.5, -32.5, -60.5, -39.5)
+
+[node name="CollisionShape2D5" type="CollisionPolygon2D" parent="Paredes" unique_id=317233342]
+position = Vector2(528, 264)
+polygon = PackedVector2Array(-76.5, -69.125, 76.5, -69.125, 81, 145, 72, 83, -76.5, 69.125)
+
+[node name="CollisionShape2D6" type="CollisionPolygon2D" parent="Paredes" unique_id=1137094037]
+position = Vector2(320, 808)
+polygon = PackedVector2Array(-300, -21.25, 300, -21.25, 300, 21.25, -300, 21.25)
+
+[node name="CollisionShape2D7" type="CollisionPolygon2D" parent="Paredes" unique_id=1499731889]
+position = Vector2(968.5, 799)
+polygon = PackedVector2Array(-302.5, -13, 302.5, -13, 302.5, 13, -302.5, 13)
+
+[node name="CollisionShape2D8" type="CollisionPolygon2D" parent="Paredes" unique_id=1080722870]
+position = Vector2(750, 262)
+polygon = PackedVector2Array(-69, -67, 69, -67, 99, -41, 69, 67, -59, 89, -71, 144)
+
+[node name="CollisionShape2D9" type="CollisionPolygon2D" parent="Paredes" unique_id=854170331]
+position = Vector2(997, 327)
+polygon = PackedVector2Array(-163, -174, 163, -174, 264, 81, 232, 120, 166, 85, 163, 174, -163, 174, -170, 145, -201, 143, -208, 125, -208, 24)
+
+[node name="CollisionShape2D10" type="CollisionPolygon2D" parent="Paredes" unique_id=2091504297]
+position = Vector2(643.25, 547)
+polygon = PackedVector2Array(-105.75, -74, 105.75, -74, 105.75, 74, -105.75, 74)
+
+[node name="CollisionShape2D11" type="CollisionPolygon2D" parent="Paredes" unique_id=210387659]
+position = Vector2(642, 816.5)
+polygon = PackedVector2Array(-75.5, -3.5, 75.5, -3.5, 75.5, 3.5, -75.5, 3.5)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Paredes" unique_id=428799965]
+polygon = PackedVector2Array(1240, 499, 1208, 506, 1208, 530, 873, 538, 877, 658, 999, 663, 1000, 750, 912, 749, 912, 783, 872, 785, 866, 738, 756, 740, 753, 755, 670, 756, 668, 788, 1242, 785)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Paredes" unique_id=772114082]
+polygon = PackedVector2Array(133, 674, 245, 663, 281, 675, 284, 752, 137, 753, 132, 790)
+
+[node name="Mesas" type="StaticBody2D" parent="." unique_id=200018567]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Mesas" unique_id=1047773225]
+position = Vector2(205, 471.75)
+polygon = PackedVector2Array(-41.5, -38.125, 41.5, -38.125, 41.5, 38.125, -41.5, 38.125)
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="Mesas" unique_id=1032028206]
+position = Vector2(210, 222)
+polygon = PackedVector2Array(-41.5, -38.125, 41.5, -38.125, 41.5, 38.125, -41.5, 38.125)
+
+[node name="CollisionShape2D3" type="CollisionPolygon2D" parent="Mesas" unique_id=930942518]
+position = Vector2(208, 705)
+polygon = PackedVector2Array(-41.5, -38.125, 41.5, -38.125, 41.5, 38.125, -41.5, 38.125)
+
+[node name="CollisionShape2D4" type="CollisionPolygon2D" parent="Mesas" unique_id=188521514]
+position = Vector2(1081, 706)
+polygon = PackedVector2Array(-41.5, -38.125, 41.5, -38.125, 41.5, 38.125, -41.5, 38.125)
+
+[node name="CollisionShape2D5" type="CollisionPolygon2D" parent="Mesas" unique_id=1410783658]
+position = Vector2(1076, 181)
+polygon = PackedVector2Array(-41.5, -38.125, 41.5, -38.125, 41.5, 38.125, -41.5, 38.125)
+
+[node name="CollisionShape2D6" type="CollisionPolygon2D" parent="Mesas" unique_id=1043138883]
+position = Vector2(808.25, 763.625)
+polygon = PackedVector2Array(-19.75, -23.375, 19.75, -23.375, 19.75, 23.375, -19.75, 23.375)
+
+[node name="Central" type="StaticBody2D" parent="." unique_id=1266338331]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Central" unique_id=634538238]
+position = Vector2(600, 772)
+polygon = PackedVector2Array(-20.0625, -13.8125, 20.0625, -13.8125, 20.0625, 13.8125, -20.0625, 13.8125)
+
+[node name="CollisionShape2D3" type="CollisionPolygon2D" parent="Central" unique_id=1162364239]
+position = Vector2(560, 772)
+polygon = PackedVector2Array(-20.0625, -13.8125, 20.0625, -13.8125, 20.0625, 13.8125, -20.0625, 13.8125)
+
+[node name="CollisionShape2D4" type="CollisionPolygon2D" parent="Central" unique_id=1569336469]
+position = Vector2(476, 756)
+polygon = PackedVector2Array(-20.0625, -13.8125, 20.0625, -13.8125, 20.0625, 13.8125, -20.0625, 13.8125)
+
+[node name="CollisionShape2D5" type="CollisionPolygon2D" parent="Central" unique_id=39241394]
+position = Vector2(475, 774)
+polygon = PackedVector2Array(-20.0625, -13.8125, 20.0625, -13.8125, 20.0625, 13.8125, -20.0625, 13.8125)
+
+[node name="CollisionShape2D6" type="CollisionPolygon2D" parent="Central" unique_id=1556559064]
+position = Vector2(521, 761)
+polygon = PackedVector2Array(-20.0625, -13.8125, 20.0625, -13.8125, 20.0625, 13.8125, -20.0625, 13.8125)
+
+[node name="CollisionShape2D7" type="CollisionPolygon2D" parent="Central" unique_id=692273614]
+position = Vector2(726, 772)
+polygon = PackedVector2Array(-20.0625, -13.8125, 20.0625, -13.8125, 20.0625, 13.8125, -20.0625, 13.8125)
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="Central" unique_id=655701202]
+position = Vector2(685, 771.1875)
+polygon = PackedVector2Array(-20.0625, -13.8125, 20.0625, -13.8125, 20.0625, 13.8125, -20.0625, 13.8125)
+
+[node name="Estantes" type="StaticBody2D" parent="." unique_id=753060010]
+visible = false
+position = Vector2(647, 547)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Estantes" unique_id=1507511982]
+position = Vector2(-397.5625, -192.5)
+polygon = PackedVector2Array(-122.8125, -62.75, 122.8125, -62.75, 122.8125, 62.75, -122.8125, 62.75)
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="Estantes" unique_id=1179488202]
+position = Vector2(-420.75, 36.375)
+polygon = PackedVector2Array(-181.75, -44.625, 181.75, -44.625, 181.75, 44.625, -181.75, 44.625)
+
+[node name="CollisionShape2D3" type="CollisionPolygon2D" parent="Estantes" unique_id=1166274768]
+position = Vector2(-319.5, 93)
+polygon = PackedVector2Array(-79.5, -17, 79.5, -17, 79.5, 17, -79.5, 17)
+
+[node name="CollisionShape2D4" type="CollisionPolygon2D" parent="Estantes" unique_id=1676979496]
+position = Vector2(-584, 157.5)
+polygon = PackedVector2Array(-16, -75.5, 16, -75.5, 16, 75.5, -16, 75.5)
+
+[node name="CollisionShape2D5" type="CollisionPolygon2D" parent="Estantes" unique_id=2003511757]
+position = Vector2(-172.5, -138)
+polygon = PackedVector2Array(-20.5, -63, 20.5, -63, 20.5, 63, -20.5, 63)
+
+[node name="CollisionShape2D6" type="CollisionPolygon2D" parent="Estantes" unique_id=909800659]
+position = Vector2(-591, -124)
+polygon = PackedVector2Array(-24, -134, 24, -134, 24, 134, -24, 134)
+
+[node name="CollisionShape2D7" type="CollisionPolygon2D" parent="Estantes" unique_id=1743549734]
+position = Vector2(-547.5, 98)
+polygon = PackedVector2Array(-22.5, -16, 22.5, -16, 22.5, 16, -22.5, 16)
+
+[node name="CollisionShape2D8" type="CollisionPolygon2D" parent="Estantes" unique_id=162610556]
+position = Vector2(412.5, 53)
+polygon = PackedVector2Array(-183.5, -64, 183.5, -64, 183.5, 64, -183.5, 64)
+
+[node name="CollisionShape2D9" type="CollisionPolygon2D" parent="Estantes" unique_id=1870266390]
+position = Vector2(556, -197)
+polygon = PackedVector2Array(-47, -58, 47, -58, 47, 58, -47, 58)
+
+[node name="CollisionShape2D10" type="CollisionPolygon2D" parent="Estantes" unique_id=646111140]
+position = Vector2(171, -138.5)
+polygon = PackedVector2Array(-28, -64.5, 28, -64.5, 28, 64.5, -28, 64.5)
+
+[node name="SaidaBiblioteca" type="Area2D" parent="." unique_id=499901015]
+script = ExtResource("6_portal")
+target_scene_path = "res://scenes/locations/cambridge/cambridge.tscn"
+target_spawn_name = &"CambridgeReturn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaBiblioteca" unique_id=432506594]
+position = Vector2(642, 805)
+shape = SubResource("RectangleShape2D_jxuie")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1938738185]
+stream = ExtResource("5_mf01h")
+autoplay = true
+script = ExtResource("7_music_loop")
+
+[connection signal="body_entered" from="InteractionArea" to="Professor" method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="Professor" method="_on_interaction_area_body_exited"]
+[connection signal="pressed" from="UI/QuizPanel/AnswerButton1" to="Professor" method="_on_answer_button_1_pressed"]
+[connection signal="pressed" from="UI/QuizPanel/AnswerButton2" to="Professor" method="_on_answer_button_2_pressed"]
+[connection signal="pressed" from="UI/QuizPanel/AnswerButton3" to="Professor" method="_on_answer_button_3_pressed"]
+[connection signal="pressed" from="UI/QuizPanel/AnswerButton4" to="Professor" method="_on_answer_button_4_pressed"]
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(642.0, 704.0)
+npc_id = "biblioteca_lesson_1"
+speaker_name = "Bibliotecária — Objetos escolares"
+dialogue_text = "Book é livro, notebook é caderno e ruler é régua. Can I borrow a ruler? significa Posso pegar uma régua emprestada?"
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_scholar1")
+
+[node name="LessonNPC2" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(714.0, 740.0)
+npc_id = "biblioteca_lesson_2"
+speaker_name = "Estudante — Artigos e cores"
+dialogue_text = "Diga a blue pencil ou an orange pencil. A escolha entre a e an depende do som seguinte. The blue pencil aponta para um lápis específico."
+
+[node name="Sprite2D" parent="LessonNPC2" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_menina2")

@@ -1,0 +1,330 @@
+[gd_scene format=3 uid="uid://dkdfhhr6famxq"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="entrance_arrow"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="linked_portal"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="arrive"]
+
+[ext_resource type="Texture2D" uid="uid://d2rfegoaw586p" path="res://assets/environments/liverpool/royal_albert_dock.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="AudioStream" uid="uid://gtdwiun34427" path="res://assets/audio/music/cities_theme.ogg" id="90_city_theme"]
+[ext_resource type="Script" uid="uid://pa24vstghc64" path="res://scripts/systems/looping_music.gd" id="91_city_music_loop"]
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="190_map_exit_indicator"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/pescador.png" id="lesson_art_pescador"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/pescador2.png" id="lesson_art_pescador2"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/pescador3.png" id="lesson_art_pescador3"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/pescador4.png" id="lesson_art_pescador4"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/pescador5.png" id="lesson_art_pescador5"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/guarda2.png" id="lesson_art_guarda2"]
+
+[sub_resource type="RectangleShape2D" id="OfficeDoorShape"]
+size = Vector2(52, 20)
+
+[sub_resource type="RectangleShape2D" id="WorldExitShape"]
+size = Vector2(110, 30)
+
+[sub_resource type="CircleShape2D" id="TempleEntranceShape"]
+radius = 17.0
+
+[node name="RoyalAlbertDock" type="Node2D" unique_id=880547288]
+script = ExtResource("arrive")
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=1479038634]
+texture = ExtResource("1_map")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=1287261099]
+
+[node name="Armazem_Principal" type="StaticBody2D" parent="Colisoes" unique_id=1893000552]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Armazem_Principal" unique_id=1893310999]
+polygon = PackedVector2Array(525, 44, 1011, 50, 1010, 230, 804, 230, 801, 216, 766, 214, 727, 214, 727, 231, 522, 225)
+
+[node name="Armazem_Oeste" type="StaticBody2D" parent="Colisoes" unique_id=1618729432]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Armazem_Oeste" unique_id=1879174677]
+polygon = PackedVector2Array(322, 23, 478, 23, 478, 484, 322, 484)
+
+[node name="Armazem_Leste" type="StaticBody2D" parent="Colisoes" unique_id=2104036051]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Armazem_Leste" unique_id=1150926956]
+polygon = PackedVector2Array(1050, 71, 1195, 22, 1195, 483, 1068, 482)
+
+[node name="Muralha_Superior_Oeste" type="StaticBody2D" parent="Colisoes" unique_id=602595065]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Muralha_Superior_Oeste" unique_id=960853289]
+polygon = PackedVector2Array(0, 0, 638, 0, 638, 72, 0, 72)
+
+[node name="Muralha_Superior_Leste" type="StaticBody2D" parent="Colisoes" unique_id=1263393795]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Muralha_Superior_Leste" unique_id=599869734]
+polygon = PackedVector2Array(840, 0, 1392, 0, 1392, 70, 840, 70)
+
+[node name="Muralha_Canto_Esquerdo" type="StaticBody2D" parent="Colisoes" unique_id=1798745777]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Muralha_Canto_Esquerdo" unique_id=769943877]
+polygon = PackedVector2Array(0, 0, 75, 0, 128, 70, 140, 117, 92, 110, 91, 161, 43, 158, 37, 205, 7, 165)
+
+[node name="Muralha_Escada_Fundo" type="StaticBody2D" parent="Colisoes" unique_id=594997639]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Muralha_Escada_Fundo" unique_id=1636440694]
+polygon = PackedVector2Array(640, 0, 840, 0, 840, 14, 640, 14)
+
+[node name="Tanque_NO" type="StaticBody2D" parent="Colisoes" unique_id=495299097]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Tanque_NO" unique_id=1185486604]
+position = Vector2(1, -4)
+polygon = PackedVector2Array(230, 125, 307, 130, 310, 199, 226, 199)
+
+[node name="Tanque_Oeste_Medio" type="StaticBody2D" parent="Colisoes" unique_id=1414196443]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Tanque_Oeste_Medio" unique_id=1726863855]
+polygon = PackedVector2Array(211, 258, 282, 250, 282, 343, 197, 343)
+
+[node name="Tanque_Oeste_Baixo" type="StaticBody2D" parent="Colisoes" unique_id=1287513446]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Tanque_Oeste_Baixo" unique_id=113115370]
+position = Vector2(-3.0517578e-05, -11.10519)
+scale = Vector2(1.0000002, 1.0306604)
+polygon = PackedVector2Array(184, 394, 269, 396, 258, 498, 198.99998, 505.60324, 166, 500)
+
+[node name="Tanque_Nordeste" type="StaticBody2D" parent="Colisoes" unique_id=768118616]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Tanque_Nordeste" unique_id=980469660]
+position = Vector2(20, 0)
+polygon = PackedVector2Array(1217, 120, 1300, 124, 1301, 191, 1223, 187)
+
+[node name="Tanque_Leste_Medio" type="StaticBody2D" parent="Colisoes" unique_id=469577252]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Tanque_Leste_Medio" unique_id=1286750952]
+polygon = PackedVector2Array(1252, 251, 1342, 251, 1342, 491, 1252, 491)
+
+[node name="Tanque_Leste_Estreito" type="StaticBody2D" parent="Colisoes" unique_id=2143947144]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Tanque_Leste_Estreito" unique_id=1470965040]
+position = Vector2(23, 1)
+polygon = PackedVector2Array(1401, 385, 1425, 385, 1435, 483, 1406, 481)
+
+[node name="Bacia_Central_Esquerda" type="StaticBody2D" parent="Colisoes" unique_id=1559056112]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Bacia_Central_Esquerda" unique_id=1697849566]
+polygon = PackedVector2Array(547, 314, 695, 312, 691, 384, 734, 384, 736, 491, 825, 492, 789, 600, 537, 596, 543, 316)
+
+[node name="Bacia_Central_Direita" type="StaticBody2D" parent="Colisoes" unique_id=1155316837]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Bacia_Central_Direita" unique_id=1524229458]
+polygon = PackedVector2Array(841, 318, 982, 316, 994, 636, 920, 628, 920, 536, 807, 536, 807, 506, 823, 506, 818, 382, 835.29626, 377.57306)
+
+[node name="Mar_Exterior_Oeste" type="StaticBody2D" parent="Colisoes" unique_id=757829020]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Mar_Exterior_Oeste" unique_id=807683734]
+polygon = PackedVector2Array(17, 475, 71, 510, 177, 564, 204, 502, 258, 499, 243, 571, 230, 613, 299, 669, 412, 701, 539, 723, 663, 684, 661, 588, 696, 740, 711, 799, 653, 860, 0, 941)
+
+[node name="Mar_Exterior_Leste" type="StaticBody2D" parent="Colisoes" unique_id=597978611]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Mar_Exterior_Leste" unique_id=766187755]
+position = Vector2(-37, -42)
+polygon = PackedVector2Array(1672, 190, 1672, 941, 1027, 941, 917, 856, 919, 779, 963, 727, 1075, 755, 1235, 788, 1413, 755, 1458, 750, 1528, 703, 1570, 647, 1667, 610)
+
+[node name="Canal_Central" type="StaticBody2D" parent="Colisoes" unique_id=1448179384]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Canal_Central" unique_id=1988275173]
+position = Vector2(736, -596)
+scale = Vector2(0.99903107, 0.9999999)
+polygon = PackedVector2Array(656, 597, 783.19824, 596, 913, 597, 927.89905, 1098.0001, 796.772, 1070.0001, 783.7594, 980.0001, 886.85925, 980.0001, 880.8535, 850.0001, 800.7759, 848.0001, 783.7594, 809.0001, 685.6643, 806.0001, 681.6605, 730.00006)
+
+[node name="Muralha_Quay_Oeste" type="StaticBody2D" parent="Colisoes" unique_id=621193972]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Muralha_Quay_Oeste" unique_id=700391797]
+polygon = PackedVector2Array(241, 515, 258, 517, 258, 558, 366, 635, 494, 678, 652, 684, 666, 720, 666, 746, 502, 742, 352, 699, 242, 626)
+
+[node name="Muralha_Quay_Leste" type="StaticBody2D" parent="Colisoes" unique_id=827526411]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Muralha_Quay_Leste" unique_id=644943182]
+polygon = PackedVector2Array(918, 630, 933, 596, 938, 702, 1034, 767, 1229, 764, 1453, 764, 1571, 757, 1626, 715, 1676, 695, 1629, 768, 1458, 796, 1227, 802, 1034, 775, 919, 733)
+
+[node name="Farol" type="StaticBody2D" parent="Colisoes" unique_id=379788530]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Farol" unique_id=827671132]
+position = Vector2(-437, -26)
+polygon = PackedVector2Array(1505, 647, 1695, 643, 1699, 574, 1796, 576, 1804, 658, 1881, 664, 1883, 577, 1936, 577, 1939, 552, 1968, 554, 1969, 480, 2093, 523, 2096, 565, 2102, 604, 2097, 730, 2080, 709, 2035, 720, 2001, 696, 2015, 632, 1958, 646, 1922, 698, 1630, 697, 1505, 696)
+
+[node name="Caixas_NO" type="StaticBody2D" parent="Colisoes" unique_id=2037516595]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Caixas_NO" unique_id=2141456657]
+position = Vector2(-24, 136)
+polygon = PackedVector2Array(30, 74, 47, 57, 158, 67, 145, 147, 129, 234, 77, 241, 30, 387, 22, 326, 26, 269)
+
+[node name="Caixas_Oeste" type="StaticBody2D" parent="Colisoes" unique_id=1267873729]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Caixas_Oeste" unique_id=1146243024]
+position = Vector2(15, 7)
+polygon = PackedVector2Array(59, 422, 82, 421, 91, 453, 46, 451)
+
+[node name="Barris_Oeste" type="StaticBody2D" parent="Colisoes" unique_id=1950341755]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Barris_Oeste" unique_id=1957452895]
+polygon = PackedVector2Array(406, 533, 429, 526, 457, 533, 461, 564, 425, 572, 384, 570)
+
+[node name="Barris_Leste" type="StaticBody2D" parent="Colisoes" unique_id=1220344961]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Barris_Leste" unique_id=1601953536]
+polygon = PackedVector2Array(1074, 526, 1126, 539, 1153, 572, 1063, 572)
+
+[node name="Barris_SE" type="StaticBody2D" parent="Colisoes" unique_id=968252630]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Barris_SE" unique_id=1884867405]
+polygon = PackedVector2Array(1446, 700, 1482, 705, 1494, 729, 1433, 727)
+
+[node name="Guindaste" type="StaticBody2D" parent="Colisoes" unique_id=195156370]
+collision_mask = 0
+
+[node name="Poligono" type="CollisionPolygon2D" parent="Colisoes/Guindaste" unique_id=1830516806]
+position = Vector2(20, -9)
+polygon = PackedVector2Array(1413, 267, 1502, 218, 1473, 291, 1533, 299, 1539, 334, 1424, 331)
+
+[node name="Player" parent="." unique_id=1817650752 instance=ExtResource("2_player")]
+position = Vector2(769, 274)
+
+[node name="OfficeEntrance" type="Area2D" parent="." unique_id=36783123]
+position = Vector2(769, 242)
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/liverpool/royal_albert_office.tscn"
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OfficeEntrance" unique_id=1633737203]
+shape = SubResource("OfficeDoorShape")
+
+[node name="EntranceArrow" parent="OfficeEntrance" unique_id=162767480 instance=ExtResource("entrance_arrow")]
+
+[node name="WorldMapExit" type="Area2D" parent="." unique_id=990100312]
+position = Vector2(770, 920)
+collision_layer = 0
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit" unique_id=1705352719]
+shape = SubResource("WorldExitShape")
+
+[node name="MapExitIndicator" parent="WorldMapExit" unique_id=1437522204 instance=ExtResource("190_map_exit_indicator")]
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="." unique_id=1413922476]
+stream = ExtResource("90_city_theme")
+autoplay = true
+script = ExtResource("91_city_music_loop")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromOffice" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(769, 286)
+
+[node name="TempleEntrance" type="Area2D" parent="."]
+position = Vector2(835, 300)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/temples/temple_liverpool.tscn"
+temple_entrance = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempleEntrance"]
+shape = SubResource("TempleEntranceShape")
+
+[node name="Indicator" parent="TempleEntrance" instance=ExtResource("entrance_arrow")]
+
+[node name="FromTemple" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(835, 340)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(697.0, 274.0)
+npc_id = "royal_albert_dock_lesson_1"
+speaker_name = "Pescador — Vocabulário do cais"
+dialogue_text = "Boat é barco, rope é corda e net é rede. Net também aparece em safety net, rede de segurança."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_pescador")
+
+[node name="LessonNPC2" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(757.0, 334.0)
+npc_id = "royal_albert_dock_lesson_2"
+speaker_name = "Pescador — Presente contínuo no cais"
+dialogue_text = "We are unloading the boat indica uma ação agora. We unload the boat every morning indica a rotina."
+
+[node name="Sprite2D" parent="LessonNPC2" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_pescador2")
+
+[node name="LessonNPC3" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(913.0, 274.0)
+npc_id = "royal_albert_dock_lesson_3"
+speaker_name = "Pescador — Habilidade"
+dialogue_text = "I can tie a knot significa que sei dar um nó. I could swim when I was six indica habilidade no passado."
+
+[node name="Sprite2D" parent="LessonNPC3" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_pescador3")
+
+[node name="LessonNPC4" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(769.0, 418.0)
+npc_id = "royal_albert_dock_lesson_4"
+speaker_name = "Pescador — Permissão"
+dialogue_text = "Can I cross the dock? pede permissão. Could I go aboard? também pede, com mais cortesia."
+
+[node name="Sprite2D" parent="LessonNPC4" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_pescador4")
+
+[node name="LessonNPC5" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(613.0, 274.0)
+npc_id = "royal_albert_dock_lesson_5"
+speaker_name = "Pescador — Demonstrativos no cais"
+dialogue_text = "This rope é esta corda aqui. That boat é aquele barco ali. These nets são estas redes, e those boats são aqueles barcos."
+
+[node name="Sprite2D" parent="LessonNPC5" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_pescador5")
+
+[node name="LessonNPC6" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(997.0, 274.0)
+npc_id = "royal_albert_dock_lesson_6"
+speaker_name = "Guarda do cais — Mapa e rota"
+dialogue_text = "Dock é cais e entrance é entrada. Follow the path, then turn right quer dizer siga pelo caminho e depois vire à direita."
+
+[node name="Sprite2D" parent="LessonNPC6" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_guarda2")

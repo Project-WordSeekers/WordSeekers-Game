@@ -1,0 +1,318 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="arrive"]
+
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="Texture2D" path="res://assets/environments/oxford/bodleian_library_interior_map.webp" id="2_imagem"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scenes/locations/oxford/scripts/interacao_oxford.gd" id="4_info"]
+[ext_resource type="Script" path="res://scenes/locations/oxford/scripts/hud_oxford.gd" id="5_hud"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/scholar2.png" id="lesson_art_scholar2"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/scholar1.png" id="lesson_art_scholar1"]
+
+[ext_resource type="Script" path="res://scripts/minigames/roman_walls_challenge.gd" id="word_search"]
+
+[sub_resource type="CircleShape2D" id="WordSearchInteraction"]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id="AreaSaida"]
+radius = 65.0
+
+[sub_resource type="CircleShape2D" id="AreaInformacao"]
+radius = 78.0
+
+[node name="BodleianLibraryInterior" type="Node2D"]
+script = ExtResource("arrive")
+
+[node name="ImagemBodleian" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_imagem")
+centered = false
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(768, 840)
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="ParedeNorte" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/ParedeNorte"]
+polygon = PackedVector2Array(0, 0, 1536, 0, 1536, 393, 0, 393)
+
+[node name="ParedeLateralOeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/ParedeLateralOeste"]
+polygon = PackedVector2Array(0, 393, 102, 393, 102, 1024, 0, 1024)
+
+[node name="ParedeLateralLeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/ParedeLateralLeste"]
+polygon = PackedVector2Array(1440, 393, 1536, 393, 1536, 1024, 1440, 1024)
+
+[node name="EstanteNorteOeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/EstanteNorteOeste"]
+polygon = PackedVector2Array(104, 389, 525, 389, 525, 475, 104, 475)
+
+[node name="EstanteNorteLeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/EstanteNorteLeste"]
+polygon = PackedVector2Array(1011, 389, 1438, 389, 1438, 475, 1011, 475)
+
+[node name="EstantesLateraisOeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/EstantesLateraisOeste"]
+polygon = PackedVector2Array(104, 475, 193, 475, 193, 797, 104, 797)
+
+[node name="EstantesLateraisLeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/EstantesLateraisLeste"]
+polygon = PackedVector2Array(1343, 475, 1439, 475, 1439, 797, 1343, 797)
+
+[node name="MuroSulOeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/MuroSulOeste"]
+polygon = PackedVector2Array(0, 860, 687, 860, 687, 1024, 0, 1024)
+
+[node name="MuroSulLeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/MuroSulLeste"]
+polygon = PackedVector2Array(847, 860, 1536, 860, 1536, 1024, 847, 1024)
+
+[node name="BaseDaPortaSul" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BaseDaPortaSul"]
+polygon = PackedVector2Array(687, 1000, 847, 1000, 847, 1024, 687, 1024)
+
+[node name="MesaSuperiorEsquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/MesaSuperiorEsquerda"]
+polygon = PackedVector2Array(350, 493, 631, 493, 631, 637, 350, 637)
+
+[node name="MesaInferiorEsquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/MesaInferiorEsquerda"]
+polygon = PackedVector2Array(344, 672, 636, 672, 636, 817, 344, 817)
+
+[node name="MesaSuperiorDireita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/MesaSuperiorDireita"]
+polygon = PackedVector2Array(940, 493, 1218, 493, 1218, 635, 940, 635)
+
+[node name="MesaInferiorDireita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/MesaInferiorDireita"]
+polygon = PackedVector2Array(939, 673, 1227, 673, 1227, 813, 939, 813)
+
+[node name="VitrineInferiorEsquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/VitrineInferiorEsquerda"]
+polygon = PackedVector2Array(143, 771, 275, 771, 275, 871, 143, 871)
+
+[node name="VitrineInferiorDireita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/VitrineInferiorDireita"]
+polygon = PackedVector2Array(1255, 771, 1380, 771, 1380, 875, 1255, 875)
+
+[node name="GloboOeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/GloboOeste"]
+polygon = PackedVector2Array(185, 421, 299, 421, 299, 501, 185, 501)
+
+[node name="GloboLeste" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/GloboLeste"]
+polygon = PackedVector2Array(1254, 408, 1351, 408, 1351, 488, 1254, 488)
+
+[node name="Saida" type="Area2D" parent="."]
+position = Vector2(768, 931)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/oxford/oxford.tscn"
+target_spawn_name = &"FromBodleianLibraryInterior"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="Saida"]
+shape = SubResource("AreaSaida")
+
+[node name="ConsultarLivros" type="Area2D" parent="."]
+position = Vector2(673, 557)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E — Consultar livros da Bodleian"
+texto = "BODLEIAN LIBRARY\nBiblioteca historica de Oxford, com um grande acervo de livros e mesas para leitura."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="ConsultarLivros"]
+shape = SubResource("AreaInformacao")
+
+[node name="MesaPesquisa" type="Area2D" parent="."]
+position = Vector2(877, 740)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E — Pesquisar na biblioteca"
+texto = "BODLEIAN LIBRARY\nExplore as estantes e conheca o patrimonio academico de Oxford."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="MesaPesquisa"]
+shape = SubResource("AreaInformacao")
+
+[node name="Interface" type="CanvasLayer" parent="."]
+script = ExtResource("5_hud")
+
+[node name="Instrucoes" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 10.0
+offset_right = 950.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(1, 0.95, 0.76, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "Bodleian Library  |  WASD / Setas: mover  |  E: interagir"
+
+[node name="Estado" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 43.0
+offset_right = 950.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(0.92, 0.88, 0.72, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Radcliffe: a descobrir  |  Manuscrito: pendente"
+
+[node name="Dica" type="Label" parent="Interface"]
+visible = false
+offset_left = 115.0
+offset_top = 480.0
+offset_right = 850.0
+offset_bottom = 533.0
+theme_override_colors/font_color = Color(1, 0.95, 0.65, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+text = "E — Interagir"
+
+[node name="Info" type="Panel" parent="Interface"]
+visible = false
+offset_left = 147.0
+offset_top = 161.0
+offset_right = 813.0
+offset_bottom = 365.0
+
+[node name="Mensagem" type="Label" parent="Interface/Info"]
+offset_left = 23.0
+offset_top = 21.0
+offset_right = 641.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 3
+text = "Informacoes"
+
+[node name="Fechar" type="Label" parent="Interface/Info"]
+offset_left = 23.0
+offset_top = 167.0
+offset_right = 641.0
+offset_bottom = 194.0
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Pressione E ou Esc para fechar."
+
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromOxford" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(768, 840)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(708.0, 840.0)
+npc_id = "bodleianlibraryinterior_lesson_1"
+speaker_name = "Bibliotecária — Cognatos"
+dialogue_text = "Information, important e different lembram palavras do português e têm sentidos próximos. Use a frase para confirmar a hipótese."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_scholar2")
+
+[node name="LessonNPC2" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(828.0, 840.0)
+npc_id = "bodleianlibraryinterior_lesson_2"
+speaker_name = "Pesquisador — Falsos cognatos"
+dialogue_text = "Library é biblioteca e bookshop é livraria. Actually significa na verdade, enquanto currently costuma significar atualmente."
+
+[node name="Sprite2D" parent="LessonNPC2" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_scholar1")
+
+[node name="WordSearchChallenge" type="Area2D" parent="."]
+position = Vector2(768.0, 780.0)
+collision_layer = 0
+script = ExtResource("word_search")
+challenge_id = "oxford_library"
+challenge_title = "Oxford · Biblioteca"
+difficulty = "Fácil"
+board_size = 8
+vocabulary = Array[String](["BOOK", "SHELF", "PAGE", "READ"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WordSearchChallenge"]
+shape = SubResource("WordSearchInteraction")
+
+[node name="Marker" type="Label" parent="WordSearchChallenge"]
+offset_left = -75.0
+offset_top = -22.0
+offset_right = 75.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 13
+text = "Caça-palavras"
+horizontal_alignment = 1
+
+[node name="Prompt" type="Label" parent="WordSearchChallenge"]
+offset_left = -88.0
+offset_top = -45.0
+offset_right = 88.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 14
+text = "[E] Abrir diário"
+horizontal_alignment = 1

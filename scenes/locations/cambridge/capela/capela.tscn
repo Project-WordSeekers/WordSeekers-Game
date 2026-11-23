@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bd83a5ejopiqa"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/cambridge/capela/chapel_interior.webp" id="1_bg"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="4_spawn"]
+
+[sub_resource type="RectangleShape2D" id="ChapelExitShape"]
+size = Vector2(100, 52)
+
+[node name="Capela" type="Node2D" unique_id=329895702]
+script = ExtResource("4_spawn")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1896752094]
+texture_filter = 1
+position = Vector2(387.5, 844)
+scale = Vector2(0.55278176, 0.4955437)
+texture = ExtResource("1_bg")
+
+[node name="Player" parent="." unique_id=2090693554 instance=ExtResource("2_player")]
+position = Vector2(387, 1001)
+
+[node name="SaidaCapela" type="Area2D" parent="." unique_id=219278742]
+position = Vector2(390, 1092)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/cambridge/cambridge.tscn"
+target_spawn_name = &"ChapelReturn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaCapela" unique_id=233117731]
+position = Vector2(-5, -42)
+shape = SubResource("ChapelExitShape")
+
+[node name="ExitLabel" type="Label" parent="SaidaCapela" unique_id=660168564]
+offset_left = -90.0
+offset_top = -45.0
+offset_right = 100.0
+offset_bottom = -20.0
+theme_override_colors/font_color = Color(1, 0.9, 0.45, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Exit to Cambridge"
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=901439329]
+
+[node name="ChapelEntry" type="Marker2D" parent="SpawnPoints" unique_id=804216007]
+position = Vector2(701, 900)
+
+[node name="colisoes" type="StaticBody2D" parent="." unique_id=1383986098]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="colisoes" unique_id=980554061]
+polygon = PackedVector2Array(352, 782, 342, 993, 354, 1023, 340, 1028, 313, 1008, 354, 996, 321, 996, 261, 790, 311, 700, 318, 819, 331, 825)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="colisoes" unique_id=1716816519]
+polygon = PackedVector2Array(313, 713, 340, 711, 341, 743, 435, 742, 434, 713, 460, 714, 463, 785, 458, 796, 457, 817, 442, 818, 440, 807, 429, 805, 427, 778, 421, 817, 430, 821, 433, 992, 420, 997, 421, 1019, 540, 1008, 518, 810, 497, 675, 312, 691)

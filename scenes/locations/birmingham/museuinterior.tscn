@@ -1,0 +1,437 @@
+[gd_scene load_steps=33 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="arrive"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/birmingham/museu_birmingham_interior_map.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scenes/locations/birmingham/scripts/interacao_birmingham.gd" id="4_info"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/gentle1.png" id="lesson_art_gentle1"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/nobre5.png" id="lesson_art_nobre5"]
+
+[sub_resource type="RectangleShape2D" id="Bloco00"]
+size = Vector2(1448, 365)
+
+[sub_resource type="RectangleShape2D" id="Bloco01"]
+size = Vector2(170, 460)
+
+[sub_resource type="RectangleShape2D" id="Bloco02"]
+size = Vector2(178, 460)
+
+[sub_resource type="RectangleShape2D" id="Bloco03"]
+size = Vector2(610, 261)
+
+[sub_resource type="RectangleShape2D" id="Bloco04"]
+size = Vector2(610, 261)
+
+[sub_resource type="RectangleShape2D" id="Bloco05"]
+size = Vector2(232, 39)
+
+[sub_resource type="RectangleShape2D" id="Bloco06"]
+size = Vector2(23, 216)
+
+[sub_resource type="RectangleShape2D" id="Bloco07"]
+size = Vector2(25, 216)
+
+[sub_resource type="RectangleShape2D" id="Bloco08"]
+size = Vector2(134, 214)
+
+[sub_resource type="RectangleShape2D" id="Bloco09"]
+size = Vector2(130, 214)
+
+[sub_resource type="RectangleShape2D" id="Bloco10"]
+size = Vector2(161, 109)
+
+[sub_resource type="RectangleShape2D" id="Bloco11"]
+size = Vector2(181, 114)
+
+[sub_resource type="RectangleShape2D" id="Bloco12"]
+size = Vector2(182, 140)
+
+[sub_resource type="RectangleShape2D" id="Bloco13"]
+size = Vector2(160, 141)
+
+[sub_resource type="RectangleShape2D" id="Bloco14"]
+size = Vector2(233, 125)
+
+[sub_resource type="RectangleShape2D" id="Bloco15"]
+size = Vector2(303, 116)
+
+[sub_resource type="RectangleShape2D" id="Bloco16"]
+size = Vector2(265, 119)
+
+[sub_resource type="RectangleShape2D" id="Bloco17"]
+size = Vector2(77, 187)
+
+[sub_resource type="RectangleShape2D" id="Bloco18"]
+size = Vector2(59, 185)
+
+[sub_resource type="RectangleShape2D" id="Bloco19"]
+size = Vector2(41, 73)
+
+[sub_resource type="RectangleShape2D" id="Bloco20"]
+size = Vector2(46, 75)
+
+[sub_resource type="CircleShape2D" id="SaidaArea"]
+radius = 58.0
+
+[sub_resource type="CircleShape2D" id="Interacao00"]
+radius = 67.0
+
+[sub_resource type="CircleShape2D" id="Interacao01"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="Interacao02"]
+radius = 56.0
+
+[sub_resource type="CircleShape2D" id="Interacao03"]
+radius = 59.0
+
+[sub_resource type="CircleShape2D" id="Interacao04"]
+radius = 57.0
+
+[sub_resource type="CircleShape2D" id="Interacao05"]
+radius = 53.0
+
+[node name="MuseuInterior" type="Node2D"]
+script = ExtResource("arrive")
+
+[node name="MapaMuseu" type="Sprite2D" parent="."]
+centered = false
+texture_filter = 1
+texture = ExtResource("1_map")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(723, 930)
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="EstruturaSuperiorETeto" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(724, 182.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstruturaSuperiorETeto"]
+shape = SubResource("Bloco00")
+
+[node name="ParedeOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(85, 595)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeOeste"]
+shape = SubResource("Bloco01")
+
+[node name="ParedeLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1359, 595)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeLeste"]
+shape = SubResource("Bloco02")
+
+[node name="FachadaSulOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(305, 955.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/FachadaSulOeste"]
+shape = SubResource("Bloco03")
+
+[node name="FachadaSulLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1143, 955.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/FachadaSulLeste"]
+shape = SubResource("Bloco04")
+
+[node name="LimitePortaEntrada" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(724, 1066.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/LimitePortaEntrada"]
+shape = SubResource("Bloco05")
+
+[node name="LateralEntradaEsquerda" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(616.5, 940)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/LateralEntradaEsquerda"]
+shape = SubResource("Bloco06")
+
+[node name="LateralEntradaDireita" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(827.5, 940)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/LateralEntradaDireita"]
+shape = SubResource("Bloco07")
+
+[node name="EscadariaEsquerda" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(301, 499)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EscadariaEsquerda"]
+shape = SubResource("Bloco08")
+
+[node name="EscadariaDireita" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1137, 499)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EscadariaDireita"]
+shape = SubResource("Bloco09")
+
+[node name="VitrineArmadura" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(467.5, 440.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/VitrineArmadura"]
+shape = SubResource("Bloco10")
+
+[node name="VitrineNavio" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(919.5, 436)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/VitrineNavio"]
+shape = SubResource("Bloco11")
+
+[node name="VitrineCeramicas" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(434, 589)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/VitrineCeramicas"]
+shape = SubResource("Bloco12")
+
+[node name="VitrineFosseis" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(994, 591.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/VitrineFosseis"]
+shape = SubResource("Bloco13")
+
+[node name="ExposicaoDinosssauro" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(724.5, 575.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ExposicaoDinosssauro"]
+shape = SubResource("Bloco14")
+
+[node name="ConjuntoSofas" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(327.5, 754)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ConjuntoSofas"]
+shape = SubResource("Bloco15")
+
+[node name="BalcaoInformacoes" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1116.5, 759.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BalcaoInformacoes"]
+shape = SubResource("Bloco16")
+
+[node name="VitrineLateralOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(197.5, 648.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/VitrineLateralOeste"]
+shape = SubResource("Bloco17")
+
+[node name="VitrineLateralLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1260.5, 650.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/VitrineLateralLeste"]
+shape = SubResource("Bloco18")
+
+[node name="ColunaOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(249.5, 601.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaOeste"]
+shape = SubResource("Bloco19")
+
+[node name="ColunaLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1194, 600.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaLeste"]
+shape = SubResource("Bloco20")
+
+[node name="SaidaParaBirmingham" type="Area2D" parent="."]
+position = Vector2(723, 963)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/birmingham/birmingham.tscn"
+target_spawn_name = &"FromMuseuInterior"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="SaidaParaBirmingham"]
+shape = SubResource("SaidaArea")
+
+[node name="Recepcao" type="Area2D" parent="."]
+position = Vector2(933, 758)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E — Consultar informações"
+texto = "MUSEU DE BIRMINGHAM\nBem-vindo ao salão principal. Explore os objetos históricos, obras de arte e fósseis. A saída fica na porta principal, ao sul."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="Recepcao"]
+shape = SubResource("Interacao00")
+
+[node name="ExposicaoHistoria" type="Area2D" parent="."]
+position = Vector2(568, 489)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E — Ver a exposição de história"
+texto = "EXPOSIÇÃO DE HISTÓRIA\nObserve as armaduras e peças históricas desta exposição ilustrativa inspirada no Birmingham Museum and Art Gallery."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="ExposicaoHistoria"]
+shape = SubResource("Interacao01")
+
+[node name="ExposicaoArte" type="Area2D" parent="."]
+position = Vector2(1042, 505)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E — Ver a exposição de arte"
+texto = "GALERIA DE ARTE\nConheça as pinturas, esculturas e objetos artísticos expostos nas vitrines e nas paredes do museu."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="ExposicaoArte"]
+shape = SubResource("Interacao02")
+
+[node name="ExposicaoFosseis" type="Area2D" parent="."]
+position = Vector2(879, 674)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E — Observar os fósseis"
+texto = "FÓSSEIS E CIÊNCIAS NATURAIS\nAs vitrines apresentam uma coleção ilustrativa de fósseis, minerais e cristais."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="ExposicaoFosseis"]
+shape = SubResource("Interacao03")
+
+[node name="ExposicaoCeramica" type="Area2D" parent="."]
+position = Vector2(555, 670)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E — Examinar as cerâmicas"
+texto = "CERÂMICAS E HISTÓRIA\nObserve peças de cerâmica e artefatos históricos expostos nas vitrines."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="ExposicaoCeramica"]
+shape = SubResource("Interacao04")
+
+[node name="EsqueletoCentral" type="Area2D" parent="."]
+position = Vector2(722, 676)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E — Conhecer o fóssil central"
+texto = "EXPOSIÇÃO CENTRAL\nObserve o esqueleto pré-histórico no centro do salão. A peça é ilustrativa e faz parte da ambientação do jogo."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="EsqueletoCentral"]
+shape = SubResource("Interacao05")
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="Instrucoes" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 12.0
+offset_right = 955.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 0.96, 0.78, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "Museu de Birmingham  •  WASD / Setas: mover  •  E: interagir"
+
+[node name="Dica" type="Label" parent="Interface"]
+visible = false
+offset_left = 130.0
+offset_top = 480.0
+offset_right = 830.0
+offset_bottom = 531.0
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1, 0.95, 0.70, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "E — Interagir"
+
+[node name="Info" type="Panel" parent="Interface"]
+visible = false
+offset_left = 148.0
+offset_top = 165.0
+offset_right = 812.0
+offset_bottom = 340.0
+
+[node name="Mensagem" type="Label" parent="Interface/Info"]
+offset_left = 22.0
+offset_top = 20.0
+offset_right = 642.0
+offset_bottom = 125.0
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 19
+text = "Informações"
+
+[node name="Fechar" type="Label" parent="Interface/Info"]
+offset_left = 22.0
+offset_top = 135.0
+offset_right = 640.0
+offset_bottom = 167.0
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Pressione E ou Esc para fechar."
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromBirmingham" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(723, 930)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(723.0, 870.0)
+npc_id = "museuinterior_lesson_1"
+speaker_name = "Monitor — Ação em andamento"
+dialogue_text = "I am cleaning this display descreve o que faço agora. Use am, is ou are seguido do verbo com -ing."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_gentle1")
+
+[node name="LessonNPC2" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(651.0, 906.0)
+npc_id = "museuinterior_lesson_2"
+speaker_name = "Visitante — Bilhetes"
+dialogue_text = "Leia Return the book on Tuesday. Return indica a ação, the book indica o objeto e Tuesday indica quando."
+
+[node name="Sprite2D" parent="LessonNPC2" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_nobre5")

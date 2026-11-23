@@ -1,0 +1,338 @@
+[gd_scene load_steps=28 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="arrive"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/nottingham/old_market_square_map.webp" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3"]
+[ext_resource type="Script" path="res://scenes/locations/nottingham/scripts/key_reward.gd" id="4"]
+
+
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/camponesa.png" id="lesson_art_camponesa"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/padeiro.png" id="lesson_art_padeiro"]
+
+[sub_resource type="CircleShape2D" id="ExitCircle"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="KeyCircle"]
+radius = 85.0
+
+[sub_resource type="RectangleShape2D" id="ParedeSuperiorShape"]
+size = Vector2(1536, 36)
+
+[sub_resource type="RectangleShape2D" id="ParedeEsquerdaShape"]
+size = Vector2(32, 1010)
+
+[sub_resource type="RectangleShape2D" id="ParedeDireitaShape"]
+size = Vector2(32, 1010)
+
+[sub_resource type="RectangleShape2D" id="ParedeInferiorEsquerdaShape"]
+size = Vector2(610, 68)
+
+[sub_resource type="RectangleShape2D" id="ParedeInferiorDireitaShape"]
+size = Vector2(610, 68)
+
+[sub_resource type="RectangleShape2D" id="BarracaFrutasShape"]
+size = Vector2(322, 239)
+
+[sub_resource type="RectangleShape2D" id="BarracaPaoShape"]
+size = Vector2(320, 245)
+
+[sub_resource type="RectangleShape2D" id="BancaLivrosShape"]
+size = Vector2(352, 188)
+
+[sub_resource type="RectangleShape2D" id="BancaPocoesShape"]
+size = Vector2(300, 194)
+
+[sub_resource type="RectangleShape2D" id="MesaEsquerdaShape"]
+size = Vector2(333, 145)
+
+[sub_resource type="RectangleShape2D" id="MesaDireitaShape"]
+size = Vector2(330, 146)
+
+[sub_resource type="RectangleShape2D" id="VasoEsquerdoShape"]
+size = Vector2(160, 128)
+
+[sub_resource type="RectangleShape2D" id="VasoDireitoShape"]
+size = Vector2(160, 128)
+
+[sub_resource type="RectangleShape2D" id="ColunaEsquerdaShape"]
+size = Vector2(95, 735)
+
+[sub_resource type="RectangleShape2D" id="ColunaDireitaShape"]
+size = Vector2(95, 735)
+
+[sub_resource type="RectangleShape2D" id="ParedePortalEsquerdaShape"]
+size = Vector2(62, 272)
+
+[sub_resource type="RectangleShape2D" id="ParedePortalDireitaShape"]
+size = Vector2(62, 272)
+
+[sub_resource type="RectangleShape2D" id="BarrisEsquerdaShape"]
+size = Vector2(96, 100)
+
+[sub_resource type="RectangleShape2D" id="BarrisDireitaShape"]
+size = Vector2(95, 100)
+
+[sub_resource type="RectangleShape2D" id="BarrisCantoDireitoShape"]
+size = Vector2(94, 120)
+
+[sub_resource type="RectangleShape2D" id="TapeteSuperiorParedeShape"]
+size = Vector2(240, 24)
+
+[node name="OldMarketSquare" type="Node2D"]
+script = ExtResource("arrive")
+
+[node name="Mapa" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="ParedeSuperior" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeSuperior"]
+position = Vector2(768, 18)
+shape = SubResource("ParedeSuperiorShape")
+
+[node name="ParedeEsquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeEsquerda"]
+position = Vector2(16, 505)
+shape = SubResource("ParedeEsquerdaShape")
+
+[node name="ParedeDireita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeDireita"]
+position = Vector2(1520, 505)
+shape = SubResource("ParedeDireitaShape")
+
+[node name="ParedeInferiorEsquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeInferiorEsquerda"]
+position = Vector2(305, 990)
+shape = SubResource("ParedeInferiorEsquerdaShape")
+
+[node name="ParedeInferiorDireita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeInferiorDireita"]
+position = Vector2(1230, 990)
+shape = SubResource("ParedeInferiorDireitaShape")
+
+[node name="BarracaFrutas" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BarracaFrutas"]
+position = Vector2(345, 359)
+shape = SubResource("BarracaFrutasShape")
+
+[node name="BarracaPao" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BarracaPao"]
+position = Vector2(1183, 356)
+shape = SubResource("BarracaPaoShape")
+
+[node name="BancaLivros" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BancaLivros"]
+position = Vector2(189, 829)
+shape = SubResource("BancaLivrosShape")
+
+[node name="BancaPocoes" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BancaPocoes"]
+position = Vector2(1363, 826)
+shape = SubResource("BancaPocoesShape")
+
+[node name="MesaEsquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaEsquerda"]
+position = Vector2(459, 594)
+shape = SubResource("MesaEsquerdaShape")
+
+[node name="MesaDireita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaDireita"]
+position = Vector2(1080, 593)
+shape = SubResource("MesaDireitaShape")
+
+[node name="VasoEsquerdo" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/VasoEsquerdo"]
+position = Vector2(444, 839)
+shape = SubResource("VasoEsquerdoShape")
+
+[node name="VasoDireito" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/VasoDireito"]
+position = Vector2(1085, 837)
+shape = SubResource("VasoDireitoShape")
+
+[node name="ColunaEsquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaEsquerda"]
+position = Vector2(110, 485)
+shape = SubResource("ColunaEsquerdaShape")
+
+[node name="ColunaDireita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaDireita"]
+position = Vector2(1435, 485)
+shape = SubResource("ColunaDireitaShape")
+
+[node name="ParedePortalEsquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedePortalEsquerda"]
+position = Vector2(603, 290)
+shape = SubResource("ParedePortalEsquerdaShape")
+
+[node name="ParedePortalDireita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedePortalDireita"]
+position = Vector2(927, 290)
+shape = SubResource("ParedePortalDireitaShape")
+
+[node name="BarrisEsquerda" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BarrisEsquerda"]
+position = Vector2(526, 422)
+shape = SubResource("BarrisEsquerdaShape")
+
+[node name="BarrisDireita" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BarrisDireita"]
+position = Vector2(993, 422)
+shape = SubResource("BarrisDireitaShape")
+
+[node name="BarrisCantoDireito" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BarrisCantoDireito"]
+position = Vector2(1374, 596)
+shape = SubResource("BarrisCantoDireitoShape")
+
+[node name="TapeteSuperiorParede" type="StaticBody2D" parent="Colisoes"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/TapeteSuperiorParede"]
+position = Vector2(766, 160)
+shape = SubResource("TapeteSuperiorParedeShape")
+
+[node name="Player" parent="." instance=ExtResource("2")]
+position = Vector2(768, 850)
+
+[node name="Saida" type="Area2D" parent="."]
+position = Vector2(768, 975)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3")
+target_scene_path = "res://scenes/locations/nottingham/nottingham.tscn"
+target_spawn_name = &"FromOldMarketSquare"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="Saida"]
+shape = SubResource("ExitCircle")
+
+[node name="Key01Mercado" type="Area2D" parent="."]
+position = Vector2(768, 432)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4")
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="Key01Mercado"]
+shape = SubResource("KeyCircle")
+
+[node name="Visual" type="Node2D" parent="Key01Mercado"]
+
+[node name="Chave" type="Polygon2D" parent="Key01Mercado/Visual"]
+polygon = PackedVector2Array(-9, -9, 0, -9, 0, -18, 13, -18, 13, -7, 8, -7, 8, 9, 2, 9, 2, 17, -9, 17)
+color = Color(1, 0.81, 0.28, 1)
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="Instrucoes" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 12.0
+offset_right = 750.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(1, 0.96, 0.8, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Old Market Square • WASD / Setas: mover • E: interagir"
+
+[node name="Dica" type="Label" parent="Interface"]
+visible = false
+offset_left = 170.0
+offset_top = 470.0
+offset_right = 860.0
+offset_bottom = 520.0
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromNottingham" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(768, 850)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(708.0, 850.0)
+npc_id = "oldmarketsquare_lesson_1"
+speaker_name = "Feirante — Quantidades e cores"
+dialogue_text = "Two red apples são duas maçãs vermelhas. Em inglês, a cor costuma vir antes do nome. Red não ganha s."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_camponesa")
+
+[node name="LessonNPC2" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(828.0, 850.0)
+npc_id = "oldmarketsquare_lesson_2"
+speaker_name = "Padeiro — Some e any"
+dialogue_text = "I have some bread oferece uma quantidade. Do you have any bread? pergunta se há pão. I don't have any bread diz que não há."
+
+[node name="Sprite2D" parent="LessonNPC2" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_padeiro")

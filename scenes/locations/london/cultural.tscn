@@ -1,0 +1,230 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="loop"]
+
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="theme"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="entrance_arrow"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="CityGuideScene"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="map_exit_indicator"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="linked_portal"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/london/cultural.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="3_district"]
+
+[sub_resource type="RectangleShape2D" id="portal_Esquerda"]
+size = Vector2(28, 156)
+
+[sub_resource type="RectangleShape2D" id="portal_Baixo"]
+size = Vector2(242, 78)
+
+[sub_resource type="CircleShape2D" id="WorldMapExitShape"]
+radius = 17.0
+
+[sub_resource type="CircleShape2D" id="EntradaGaleriaShape"]
+radius = 17.0
+
+[sub_resource type="CircleShape2D" id="EntradaMuseuShape"]
+radius = 17.0
+
+[node name="Cultural" type="Node2D" unique_id=1358652408]
+script = ExtResource("3_district")
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=58859037]
+texture_filter = 1
+position = Vector2(-1, 0)
+texture = ExtResource("1_map")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=1284968419]
+
+[node name="Museu" type="StaticBody2D" parent="Colisoes" unique_id=899423465]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Museu" unique_id=1333877338]
+polygon = PackedVector2Array(440, 120, 860, 120, 929, 283, 925, 371, 864, 380, 868, 421, 714, 420, 704, 343, 612, 341, 610, 428, 451, 423)
+
+[node name="Teatro" type="StaticBody2D" parent="Colisoes" unique_id=1742652657]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Teatro" unique_id=174650716]
+position = Vector2(1, 0)
+polygon = PackedVector2Array(296, 497, 359, 420, 408, 437, 406, 472, 511, 466, 581, 503, 577, 722, 476, 736, 479, 682, 406, 676, 400.3905, 742, 286, 728, 264, 697, 285, 647, 263, 624, 266, 593)
+
+[node name="Galeria" type="StaticBody2D" parent="Colisoes" unique_id=1798707509]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Galeria" unique_id=672452269]
+polygon = PackedVector2Array(834, 499, 873, 465, 938, 417, 992.72034, 415.94086, 966, 380, 995, 357, 1057, 353, 1100, 357, 1098, 295, 1248, 411, 1188, 690, 1139, 730, 1034, 749, 1017, 695, 960, 691, 949.6546, 748, 830, 720, 809, 625, 757, 595, 774, 541)
+
+[node name="Estatua" type="StaticBody2D" parent="Colisoes" unique_id=1317700118]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Estatua" unique_id=1112287127]
+position = Vector2(4, 7)
+polygon = PackedVector2Array(588, 826, 614, 798, 646, 793, 662, 770, 671, 692, 682, 678, 693, 697, 700, 764, 722, 792, 752, 801, 770, 832, 758, 886, 710, 886, 701, 844, 658, 841, 648, 888, 604, 880, 582, 853)
+
+[node name="CasasSuperiorEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=1275215586]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/CasasSuperiorEsquerda" unique_id=454701840]
+position = Vector2(91, 1)
+polygon = PackedVector2Array(55, 45, 440, 45, 440, 375, 314, 385, 285, 369, 282, 312, 189, 313, 195, 355, 188, 376, 55, 375)
+
+[node name="CasasSuperiorDireita" type="StaticBody2D" parent="Colisoes" unique_id=1740717789]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/CasasSuperiorDireita" unique_id=1290218165]
+position = Vector2(-38, -85)
+polygon = PackedVector2Array(955, 45, 1240, 45, 1240, 390, 955, 390)
+
+[node name="CasasInferiorEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=150718447]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/CasasInferiorEsquerda" unique_id=883621170]
+position = Vector2(26, -23)
+polygon = PackedVector2Array(157, 964, 280, 960, 320, 942, 380.2611, 1033.6829, 450, 1022, 544, 1021, 547, 1148, -24, 1163, -25, 1100, -17, 741, 24, 736, 25, 889, 50, 979, 36, 1067, 70, 1082, 66, 1138, 103, 1141, 103, 904, 123, 752, 183, 755, 184, 828)
+
+[node name="CasasInferiorDireita" type="StaticBody2D" parent="Colisoes" unique_id=1762353492]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/CasasInferiorDireita" unique_id=1609927740]
+polygon = PackedVector2Array(744, 952, 777, 987, 769, 1069, 804, 1052, 830, 999, 849, 989, 897, 1028, 943, 996, 1210.689, 745.80707, 1175, 678, 1249, 710, 1248, 1147, 730, 1119, 728, 984)
+
+[node name="JardimEsquerdo" type="StaticBody2D" parent="Colisoes" unique_id=1834174476]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/JardimEsquerdo" unique_id=1042369260]
+polygon = PackedVector2Array(315, 811, 354, 774, 395, 812, 393, 879, 321, 877)
+
+[node name="JardimDireito" type="StaticBody2D" parent="Colisoes" unique_id=1841033854]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/JardimDireito" unique_id=1063632311]
+position = Vector2(19, -4)
+polygon = PackedVector2Array(986, 818, 1023, 788, 1056, 820, 1048, 878, 983, 878, 988, 847)
+
+[node name="BordaSuperior" type="StaticBody2D" parent="Colisoes" unique_id=1655547311]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaSuperior" unique_id=874343937]
+polygon = PackedVector2Array(0, -20, 1254, -20, 1254, 10, 0, 10)
+
+[node name="BordaInferior" type="StaticBody2D" parent="Colisoes" unique_id=283480574]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaInferior" unique_id=1810051822]
+polygon = PackedVector2Array(0, 1244, 1254, 1244, 1254, 1274, 0, 1274)
+
+[node name="BordaEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=422453038]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaEsquerda" unique_id=3693767]
+position = Vector2(11, 5)
+polygon = PackedVector2Array(-20, 0, 10, 0, 155, 162, 83, 227, 54, 280, 51, 352, 26.204224, 358.9533, 23.04161, 533.64154, -5, 540, -2, 677, 10, 1254, -20, 1254)
+
+[node name="BordaDireita" type="StaticBody2D" parent="Colisoes" unique_id=1725250423]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaDireita" unique_id=312542152]
+polygon = PackedVector2Array(1244, 0, 1274, 0, 1274, 1254, 1244, 1254)
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=542480837]
+
+[node name="Entrada" type="Marker2D" parent="SpawnPoints" unique_id=174568890]
+position = Vector2(670, 926)
+
+[node name="Esquerda" type="Marker2D" parent="SpawnPoints" unique_id=506644232]
+position = Vector2(105, 637)
+
+[node name="Baixo" type="Marker2D" parent="SpawnPoints" unique_id=1586423624]
+position = Vector2(655, 1150)
+
+[node name="Portais" type="Node2D" parent="." unique_id=1422857720]
+
+[node name="Esquerda" type="Area2D" parent="Portais" unique_id=365350375]
+position = Vector2(90, 615)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/london/academia.tscn"
+target_spawn_name = &"Direita"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portais/Esquerda" unique_id=1897396083]
+position = Vector2(-56, 13)
+shape = SubResource("portal_Esquerda")
+
+[node name="Baixo" type="Area2D" parent="Portais" unique_id=560985646]
+position = Vector2(620, 1198)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/london/comercial.tscn"
+target_spawn_name = &"Cima"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portais/Baixo" unique_id=1592192887]
+position = Vector2(29, 27)
+shape = SubResource("portal_Baixo")
+
+[node name="Player" parent="." unique_id=1846496501 instance=ExtResource("2_player")]
+position = Vector2(666, 932)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1687278202]
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer" unique_id=686518350]
+offset_left = 344.0
+offset_top = 8.0
+offset_right = 680.0
+offset_bottom = 43.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel" unique_id=1535020816]
+layout_mode = 2
+text = "Londres · Distrito Cultural"
+
+[node name="WorldMapExit" type="Area2D" parent="."]
+position = Vector2(771, 963)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
+shape = SubResource("WorldMapExitShape")
+
+[node name="Indicator" parent="WorldMapExit" instance=ExtResource("map_exit_indicator")]
+
+[node name="ProgressGuide" parent="." instance=ExtResource("CityGuideScene")]
+position = Vector2(605, 923)
+speaker_name = "London Guide"
+npc_id = "london_town_guide"
+dialogue_text = "Welcome to London! The museum and gallery are in the Cultural District. Cross into the Religious District to visit the cathedral and the healing temple."
+
+[node name="EntradaGaleria" type="Area2D" parent="."]
+position = Vector2(986, 720)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/london/galeria.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntradaGaleria"]
+shape = SubResource("EntradaGaleriaShape")
+
+[node name="Indicator" parent="EntradaGaleria" instance=ExtResource("entrance_arrow")]
+
+[node name="FromGaleria" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(986, 772)
+
+[node name="EntradaMuseu" type="Area2D" parent="."]
+position = Vector2(657, 375)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/london/museu.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntradaMuseu"]
+shape = SubResource("EntradaMuseuShape")
+
+[node name="Indicator" parent="EntradaMuseu" instance=ExtResource("entrance_arrow")]
+
+[node name="FromMuseu" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(657, 427)
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("theme")
+autoplay = true
+script = ExtResource("loop")
+
+[node name="Camera2D" parent="Player"]
+min_zoom = 1.2
+max_zoom = 1.2
+zoom = Vector2(1.2, 1.2)

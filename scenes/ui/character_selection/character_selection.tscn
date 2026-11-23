@@ -1,0 +1,209 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/character_selection.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/characters/player/overworld/player_walk.png" id="tex0"]
+[ext_resource type="Texture2D" path="res://assets/characters/player/female/player_female.png" id="tex1"]
+[ext_resource type="Texture2D" path="res://assets/characters/player/extra/garota_azul.png" id="tex2"]
+[ext_resource type="Texture2D" path="res://assets/characters/player/extra/garoto_ruivo.png" id="tex3"]
+
+[sub_resource type="AtlasTexture" id="Atlas0"]
+atlas = ExtResource("tex0")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="Atlas1"]
+atlas = ExtResource("tex1")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="Atlas2"]
+atlas = ExtResource("tex2")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="Atlas3"]
+atlas = ExtResource("tex3")
+region = Rect2(128, 0, 128, 128)
+
+[node name="CharacterSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.055, 0.067, 0.09, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Center"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Title" type="Label" parent="Center/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "WordSeekers — escolha seu personagem"
+horizontal_alignment = 1
+
+[node name="Options" type="HBoxContainer" parent="Center/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Option0" type="Panel" parent="Center/VBox/Options"]
+custom_minimum_size = Vector2(205, 270)
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="Center/VBox/Options/Option0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Portrait" type="TextureRect" parent="Center/VBox/Options/Option0/Content"]
+custom_minimum_size = Vector2(170, 185)
+layout_mode = 2
+texture_filter = 1
+texture = SubResource("Atlas0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Center/VBox/Options/Option0/Content"]
+layout_mode = 2
+text = "Aparência 1"
+horizontal_alignment = 1
+
+[node name="Marker" type="Label" parent="Center/VBox/Options/Option0/Content"]
+layout_mode = 2
+text = "SELECIONADO"
+horizontal_alignment = 1
+
+[node name="Option1" type="Panel" parent="Center/VBox/Options"]
+custom_minimum_size = Vector2(205, 270)
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="Center/VBox/Options/Option1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Portrait" type="TextureRect" parent="Center/VBox/Options/Option1/Content"]
+custom_minimum_size = Vector2(170, 185)
+layout_mode = 2
+texture_filter = 1
+texture = SubResource("Atlas1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Center/VBox/Options/Option1/Content"]
+layout_mode = 2
+text = "Aparência 2"
+horizontal_alignment = 1
+
+[node name="Marker" type="Label" parent="Center/VBox/Options/Option1/Content"]
+layout_mode = 2
+text = "SELECIONADO"
+horizontal_alignment = 1
+
+[node name="Option2" type="Panel" parent="Center/VBox/Options"]
+custom_minimum_size = Vector2(205, 270)
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="Center/VBox/Options/Option2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Portrait" type="TextureRect" parent="Center/VBox/Options/Option2/Content"]
+custom_minimum_size = Vector2(170, 185)
+layout_mode = 2
+texture_filter = 1
+texture = SubResource("Atlas2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Center/VBox/Options/Option2/Content"]
+layout_mode = 2
+text = "Aparência 3"
+horizontal_alignment = 1
+
+[node name="Marker" type="Label" parent="Center/VBox/Options/Option2/Content"]
+layout_mode = 2
+text = "SELECIONADO"
+horizontal_alignment = 1
+
+[node name="Option3" type="Panel" parent="Center/VBox/Options"]
+custom_minimum_size = Vector2(205, 270)
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="Center/VBox/Options/Option3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Portrait" type="TextureRect" parent="Center/VBox/Options/Option3/Content"]
+custom_minimum_size = Vector2(170, 185)
+layout_mode = 2
+texture_filter = 1
+texture = SubResource("Atlas3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Center/VBox/Options/Option3/Content"]
+layout_mode = 2
+text = "Aparência 4"
+horizontal_alignment = 1
+
+[node name="Marker" type="Label" parent="Center/VBox/Options/Option3/Content"]
+layout_mode = 2
+text = "SELECIONADO"
+horizontal_alignment = 1
+
+[node name="Instruction" type="Label" parent="Center/VBox"]
+layout_mode = 2
+text = "Use as setas esquerda/direita para escolher e E para confirmar."
+horizontal_alignment = 1

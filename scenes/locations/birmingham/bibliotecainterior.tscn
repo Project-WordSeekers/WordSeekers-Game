@@ -1,0 +1,508 @@
+[gd_scene load_steps=39 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="arrive"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/birmingham/library_of_birmingham_interior_map.webp" id="1_img"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scenes/locations/birmingham/scripts/interacao_birmingham.gd" id="4_info"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/scholar2.png" id="lesson_art_scholar2"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/menina1.png" id="lesson_art_menina1"]
+
+[sub_resource type="RectangleShape2D" id="Col00"]
+size = Vector2(1448, 395)
+
+[sub_resource type="RectangleShape2D" id="Col01"]
+size = Vector2(125, 691)
+
+[sub_resource type="RectangleShape2D" id="Col02"]
+size = Vector2(123, 691)
+
+[sub_resource type="RectangleShape2D" id="Col03"]
+size = Vector2(1448, 11)
+
+[sub_resource type="RectangleShape2D" id="Col04"]
+size = Vector2(201, 90)
+
+[sub_resource type="RectangleShape2D" id="Col05"]
+size = Vector2(152, 73)
+
+[sub_resource type="RectangleShape2D" id="Col06"]
+size = Vector2(144, 149)
+
+[sub_resource type="RectangleShape2D" id="Col07"]
+size = Vector2(47, 144)
+
+[sub_resource type="RectangleShape2D" id="Col08"]
+size = Vector2(365, 100)
+
+[sub_resource type="RectangleShape2D" id="Col09"]
+size = Vector2(43, 144)
+
+[sub_resource type="RectangleShape2D" id="Col10"]
+size = Vector2(124, 149)
+
+[sub_resource type="RectangleShape2D" id="Col11"]
+size = Vector2(105, 125)
+
+[sub_resource type="RectangleShape2D" id="Col12"]
+size = Vector2(54, 210)
+
+[sub_resource type="RectangleShape2D" id="Col13"]
+size = Vector2(98, 212)
+
+[sub_resource type="RectangleShape2D" id="Col14"]
+size = Vector2(340, 104)
+
+[sub_resource type="RectangleShape2D" id="Col15"]
+size = Vector2(310, 135)
+
+[sub_resource type="RectangleShape2D" id="Col16"]
+size = Vector2(319, 137)
+
+[sub_resource type="RectangleShape2D" id="Col17"]
+size = Vector2(47, 195)
+
+[sub_resource type="RectangleShape2D" id="Col18"]
+size = Vector2(43, 196)
+
+[sub_resource type="RectangleShape2D" id="Col19"]
+size = Vector2(86, 165)
+
+[sub_resource type="RectangleShape2D" id="Col20"]
+size = Vector2(86, 164)
+
+[sub_resource type="RectangleShape2D" id="Col21"]
+size = Vector2(170, 112)
+
+[sub_resource type="RectangleShape2D" id="Col22"]
+size = Vector2(62, 69)
+
+[sub_resource type="RectangleShape2D" id="Col23"]
+size = Vector2(310, 169)
+
+[sub_resource type="RectangleShape2D" id="Col24"]
+size = Vector2(45, 305)
+
+[sub_resource type="RectangleShape2D" id="Col25"]
+size = Vector2(43, 303)
+
+[sub_resource type="CircleShape2D" id="Inter00"]
+radius = 45.0
+
+[sub_resource type="CircleShape2D" id="Inter01"]
+radius = 65.0
+
+[sub_resource type="CircleShape2D" id="Inter02"]
+radius = 62.0
+
+[sub_resource type="CircleShape2D" id="Inter03"]
+radius = 63.0
+
+[sub_resource type="CircleShape2D" id="Inter04"]
+radius = 69.0
+
+[sub_resource type="CircleShape2D" id="Inter05"]
+radius = 69.0
+
+[sub_resource type="CircleShape2D" id="Inter06"]
+radius = 72.0
+
+[sub_resource type="CircleShape2D" id="Inter07"]
+radius = 68.0
+
+[node name="BibliotecaInterior" type="Node2D"]
+script = ExtResource("arrive")
+
+[node name="Arte" type="Sprite2D" parent="."]
+texture = ExtResource("1_img")
+centered = false
+texture_filter = 1
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(724, 981)
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="ParedeSuperior" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(724.0, 197.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeSuperior"]
+shape = SubResource("Col00")
+
+[node name="ParedeLateralOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(62.5, 740.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeLateralOeste"]
+shape = SubResource("Col01")
+
+[node name="ParedeLateralLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1386.5, 740.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeLateralLeste"]
+shape = SubResource("Col02")
+
+[node name="FechamentoInferior" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(724.0, 1080.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/FechamentoInferior"]
+shape = SubResource("Col03")
+
+[node name="EscadaOesteSuperior" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(219.5, 440.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EscadaOesteSuperior"]
+shape = SubResource("Col04")
+
+[node name="EscadaOesteInferior" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(254.0, 521.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EscadaOesteInferior"]
+shape = SubResource("Col05")
+
+[node name="EstanteOesteDoFundo" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(409.0, 469.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstanteOesteDoFundo"]
+shape = SubResource("Col06")
+
+[node name="ArmaduraOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(501.5, 478.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ArmaduraOeste"]
+shape = SubResource("Col07")
+
+[node name="MuralhaAoFundoDaRecepcao" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(722.5, 445.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuralhaAoFundoDaRecepcao"]
+shape = SubResource("Col08")
+
+[node name="ArmaduraLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(924.5, 478.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ArmaduraLeste"]
+shape = SubResource("Col09")
+
+[node name="EstanteLesteDoFundo" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1010.0, 469.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstanteLesteDoFundo"]
+shape = SubResource("Col10")
+
+[node name="ArcoLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1135.5, 457.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ArcoLeste"]
+shape = SubResource("Col11")
+
+[node name="EstanteLateralOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(150.0, 500.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstanteLateralOeste"]
+shape = SubResource("Col12")
+
+[node name="EstanteLateralLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1277.0, 501.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstanteLateralLeste"]
+shape = SubResource("Col13")
+
+[node name="BalcaoDaBiblioteca" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(712.0, 542.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BalcaoDaBiblioteca"]
+shape = SubResource("Col14")
+
+[node name="MesaDeEstudosOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(362.0, 640.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaDeEstudosOeste"]
+shape = SubResource("Col15")
+
+[node name="MesaDeEstudosLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1064.5, 640.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaDeEstudosLeste"]
+shape = SubResource("Col16")
+
+[node name="ExpositorLivrosOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(147.5, 674.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ExpositorLivrosOeste"]
+shape = SubResource("Col17")
+
+[node name="ExpositorLivrosLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1306.5, 674.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ExpositorLivrosLeste"]
+shape = SubResource("Col18")
+
+[node name="PoltronaOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(180.0, 831.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/PoltronaOeste"]
+shape = SubResource("Col19")
+
+[node name="PoltronaLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(447.0, 833.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/PoltronaLeste"]
+shape = SubResource("Col20")
+
+[node name="MesaDeDescanso" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(314.0, 873.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaDeDescanso"]
+shape = SubResource("Col21")
+
+[node name="GlobodeLeitura" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(290.0, 784.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/GlobodeLeitura"]
+shape = SubResource("Col22")
+
+[node name="MesaDeMapasHistoricos" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1174.0, 869.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaDeMapasHistoricos"]
+shape = SubResource("Col23")
+
+[node name="EstruturaLateralEsquerda" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(22.5, 921.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstruturaLateralEsquerda"]
+shape = SubResource("Col24")
+
+[node name="EstruturaLateralDireita" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1426.5, 922.5)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstruturaLateralDireita"]
+shape = SubResource("Col25")
+
+[node name="SaidaParaBirmingham" type="Area2D" parent="."]
+position = Vector2(724, 1044)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/birmingham/birmingham.tscn"
+target_spawn_name = &"FromBibliotecaInterior"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="SaidaParaBirmingham"]
+shape = SubResource("Inter00")
+
+[node name="ConsultarAcervoOeste" type="Area2D" parent="."]
+position = Vector2(190, 695)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E - Consultar livros"
+texto = "ACERVO MEDIEVAL\\nConsulte livros e manuscritos nas estantes da Library of Birmingham. Explore a colecao e descubra novos conhecimentos."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="ConsultarAcervoOeste"]
+shape = SubResource("Inter01")
+
+[node name="ConsultarAcervoLeste" type="Area2D" parent="."]
+position = Vector2(1250, 706)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E - Pesquisar acervo"
+texto = "ACERVO DE LIVROS\\nEstantes de historia, ciencias e literatura. Os manuscritos desta biblioteca ajudam os visitantes a estudar."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="ConsultarAcervoLeste"]
+shape = SubResource("Inter02")
+
+[node name="PesquisarCatalogo" type="Area2D" parent="."]
+position = Vector2(724, 624)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E - Pedir informacoes"
+texto = "BALCAO DE INFORMACOES\\nPergunte sobre o catalogo, a escola e as atividades de estudo na Library of Birmingham."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="PesquisarCatalogo"]
+shape = SubResource("Inter03")
+
+[node name="EstudarMesaOeste" type="Area2D" parent="."]
+position = Vector2(525, 727)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E - Iniciar atividade de estudo"
+texto = "BIBLIOTECA / ESCOLA"
+acao = "estudar"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="EstudarMesaOeste"]
+shape = SubResource("Inter04")
+
+[node name="EstudarMesaLeste" type="Area2D" parent="."]
+position = Vector2(902, 728)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E - Estudar na mesa"
+texto = "BIBLIOTECA / ESCOLA"
+acao = "estudar"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="EstudarMesaLeste"]
+shape = SubResource("Inter05")
+
+[node name="SalaDeLeitura" type="Area2D" parent="."]
+position = Vector2(541, 917)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E - Conhecer a sala de leitura"
+texto = "SALA DE LEITURA\\nPoltronas medievais, livros e iluminacao de velas criam um espaco para ler e descansar."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="SalaDeLeitura"]
+shape = SubResource("Inter06")
+
+[node name="MesaDeCartografia" type="Area2D" parent="."]
+position = Vector2(1107, 987)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E - Consultar mapas antigos"
+texto = "CARTOGRAFIA HISTORICA\\nNesta mesa voce encontra mapas antigos, pergaminhos e um globo terrestre para explorar as rotas do passado."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="MesaDeCartografia"]
+shape = SubResource("Inter07")
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="Instrucoes" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 10.0
+offset_right = 940.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(1, 0.95, 0.78, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "Library of Birmingham  |  WASD / Setas: mover  |  E: interagir"
+
+[node name="Dica" type="Label" parent="Interface"]
+visible = false
+offset_left = 160.0
+offset_top = 487.0
+offset_right = 800.0
+offset_bottom = 531.0
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 0.94, 0.65, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "E - Interagir"
+
+[node name="Info" type="Panel" parent="Interface"]
+visible = false
+offset_left = 152.0
+offset_top = 160.0
+offset_right = 808.0
+offset_bottom = 352.0
+
+[node name="Mensagem" type="Label" parent="Interface/Info"]
+offset_left = 24.0
+offset_top = 19.0
+offset_right = 632.0
+offset_bottom = 147.0
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 18
+text = "Informacoes"
+
+[node name="Fechar" type="Label" parent="Interface/Info"]
+offset_left = 24.0
+offset_top = 153.0
+offset_right = 632.0
+offset_bottom = 179.0
+theme_override_colors/font_color = Color(0.75, 0.75, 0.75, 1)
+text = "Pressione E ou Esc para fechar."
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromBirmingham" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(640, 665)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(664.0, 981.0)
+npc_id = "bibliotecainterior_lesson_1"
+speaker_name = "Bibliotecário — Dias da semana"
+dialogue_text = "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday e Sunday. Use on para indicar um dia. On Friday significa na sexta-feira."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_scholar2")
+
+[node name="LessonNPC2" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(784.0, 981.0)
+npc_id = "bibliotecainterior_lesson_2"
+speaker_name = "Estudante — Meses do ano"
+dialogue_text = "January, February, March, April, May, June, July, August, September, October, November e December. In July significa em julho."
+
+[node name="Sprite2D" parent="LessonNPC2" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_menina1")

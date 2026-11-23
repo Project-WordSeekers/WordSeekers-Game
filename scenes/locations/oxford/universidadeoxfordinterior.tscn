@@ -1,0 +1,419 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="arrive"]
+
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="Texture2D" path="res://assets/environments/oxford/universidade_oxford_interior_map.webp" id="2_img"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scenes/locations/oxford/scripts/interacao_oxford.gd" id="4_info"]
+[ext_resource type="Script" path="res://scenes/locations/oxford/scripts/hud_oxford.gd" id="5_hud"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/monge.png" id="lesson_art_monge"]
+
+[sub_resource type="RectangleShape2D" id="bl0"]
+size = Vector2(1448, 200)
+
+[sub_resource type="RectangleShape2D" id="bl1"]
+size = Vector2(50, 1088)
+
+[sub_resource type="RectangleShape2D" id="bl2"]
+size = Vector2(52, 1088)
+
+[sub_resource type="RectangleShape2D" id="bl3"]
+size = Vector2(614, 278)
+
+[sub_resource type="RectangleShape2D" id="bl4"]
+size = Vector2(622, 278)
+
+[sub_resource type="RectangleShape2D" id="bl5"]
+size = Vector2(165, 378)
+
+[sub_resource type="RectangleShape2D" id="bl6"]
+size = Vector2(174, 378)
+
+[sub_resource type="RectangleShape2D" id="bl7"]
+size = Vector2(304, 36)
+
+[sub_resource type="RectangleShape2D" id="bl8"]
+size = Vector2(260, 106)
+
+[sub_resource type="RectangleShape2D" id="bl9"]
+size = Vector2(68, 62)
+
+[sub_resource type="RectangleShape2D" id="bl10"]
+size = Vector2(215, 132)
+
+[sub_resource type="RectangleShape2D" id="bl11"]
+size = Vector2(254, 95)
+
+[sub_resource type="RectangleShape2D" id="bl12"]
+size = Vector2(224, 175)
+
+[sub_resource type="RectangleShape2D" id="bl13"]
+size = Vector2(223, 177)
+
+[sub_resource type="RectangleShape2D" id="bl14"]
+size = Vector2(130, 99)
+
+[sub_resource type="RectangleShape2D" id="bl15"]
+size = Vector2(136, 99)
+
+[sub_resource type="RectangleShape2D" id="bl16"]
+size = Vector2(137, 100)
+
+[sub_resource type="RectangleShape2D" id="bl17"]
+size = Vector2(143, 100)
+
+[sub_resource type="RectangleShape2D" id="bl18"]
+size = Vector2(60, 76)
+
+[sub_resource type="RectangleShape2D" id="bl19"]
+size = Vector2(59, 76)
+
+[sub_resource type="RectangleShape2D" id="bl20"]
+size = Vector2(61, 76)
+
+[sub_resource type="RectangleShape2D" id="bl21"]
+size = Vector2(51, 121)
+
+[sub_resource type="RectangleShape2D" id="bl22"]
+size = Vector2(51, 121)
+
+[sub_resource type="RectangleShape2D" id="bl23"]
+size = Vector2(52, 149)
+
+[sub_resource type="RectangleShape2D" id="bl24"]
+size = Vector2(52, 149)
+
+[sub_resource type="CircleShape2D" id="AreaSaida"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="AreaInformacao"]
+radius = 72.0
+
+[sub_resource type="CircleShape2D" id="AreaSegredo"]
+radius = 96.0
+
+[node name="UniversidadeOxfordInterior" type="Node2D"]
+script = ExtResource("arrive")
+
+[node name="ImagemInterior" type="Sprite2D" parent="."]
+texture_filter = 1
+centered = false
+texture = ExtResource("2_img")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(724, 725)
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="MuroNorte" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(724, 100)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroNorte"]
+shape = SubResource("bl0")
+
+[node name="MuroLateralOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(25, 544)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroLateralOeste"]
+shape = SubResource("bl1")
+
+[node name="MuroLateralLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1422, 544)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuroLateralLeste"]
+shape = SubResource("bl2")
+
+[node name="FachadaSulOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(307, 947)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/FachadaSulOeste"]
+shape = SubResource("bl3")
+
+[node name="FachadaSulLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1137, 947)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/FachadaSulLeste"]
+shape = SubResource("bl4")
+
+[node name="EstantesOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(111, 523)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstantesOeste"]
+shape = SubResource("bl5")
+
+[node name="EstantesLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1334, 523)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstantesLeste"]
+shape = SubResource("bl6")
+
+[node name="PlataformaProfessor" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(297, 298)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/PlataformaProfessor"]
+shape = SubResource("bl7")
+
+[node name="MesaProfessor" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(291, 234)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaProfessor"]
+shape = SubResource("bl8")
+
+[node name="CadeiraProfessor" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(295, 163)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/CadeiraProfessor"]
+shape = SubResource("bl9")
+
+[node name="Lareira" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1159, 168)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/Lareira"]
+shape = SubResource("bl10")
+
+[node name="Poltronas" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1167, 244)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/Poltronas"]
+shape = SubResource("bl11")
+
+[node name="MesaEstudoOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(369, 520)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaEstudoOeste"]
+shape = SubResource("bl12")
+
+[node name="MesaEstudoLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1047, 519)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaEstudoLeste"]
+shape = SubResource("bl13")
+
+[node name="EscrivaninhaOeste1" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(147, 770)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EscrivaninhaOeste1"]
+shape = SubResource("bl14")
+
+[node name="EscrivaninhaOeste2" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(298, 770)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EscrivaninhaOeste2"]
+shape = SubResource("bl15")
+
+[node name="EscrivaninhaLeste1" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1100, 770)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EscrivaninhaLeste1"]
+shape = SubResource("bl16")
+
+[node name="EscrivaninhaLeste2" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1262, 770)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EscrivaninhaLeste2"]
+shape = SubResource("bl17")
+
+[node name="PedestalBusto" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(711, 213)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/PedestalBusto"]
+shape = SubResource("bl18")
+
+[node name="JardineiraOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(506, 220)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/JardineiraOeste"]
+shape = SubResource("bl19")
+
+[node name="JardineiraLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(916, 218)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/JardineiraLeste"]
+shape = SubResource("bl20")
+
+[node name="ColunaOesteFundo" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(537, 385)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaOesteFundo"]
+shape = SubResource("bl21")
+
+[node name="ColunaLesteFundo" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(888, 387)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaLesteFundo"]
+shape = SubResource("bl22")
+
+[node name="ColunaOesteFrente" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(538, 659)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaOesteFrente"]
+shape = SubResource("bl23")
+
+[node name="ColunaLesteFrente" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(885, 660)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaLesteFrente"]
+shape = SubResource("bl24")
+
+[node name="Saida" type="Area2D" parent="."]
+position = Vector2(724, 806)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/oxford/oxford.tscn"
+target_spawn_name = &"FromUniversidadeOxfordInterior"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="Saida"]
+shape = SubResource("AreaSaida")
+
+[node name="AulaOxford" type="Area2D" parent="."]
+position = Vector2(721, 550)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E — Participar de aula"
+texto = "UNIVERSIDADE DE OXFORD\\nUm espaco de pesquisa, ensino e debates."
+acao = "estudar"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="AulaOxford"]
+shape = SubResource("AreaInformacao")
+
+[node name="ArquivoHistorico" type="Area2D" parent="."]
+position = Vector2(471, 341)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E — Consultar o arquivo"
+texto = "UNIVERSIDADE DE OXFORD\\nConsulte os registros e manuscritos academicos."
+acao = "informacao"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="ArquivoHistorico"]
+shape = SubResource("AreaInformacao")
+[node name="Interface" type="CanvasLayer" parent="."]
+script = ExtResource("5_hud")
+
+[node name="Instrucoes" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 10.0
+offset_right = 950.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(1, 0.95, 0.76, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "Universidade de Oxford  |  WASD / Setas: mover  |  E: interagir"
+
+[node name="Estado" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 43.0
+offset_right = 950.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(0.92, 0.88, 0.72, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Radcliffe: a descobrir  |  Manuscrito: pendente"
+
+[node name="Dica" type="Label" parent="Interface"]
+visible = false
+offset_left = 115.0
+offset_top = 480.0
+offset_right = 850.0
+offset_bottom = 533.0
+theme_override_colors/font_color = Color(1, 0.95, 0.65, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+text = "E — Interagir"
+
+[node name="Info" type="Panel" parent="Interface"]
+visible = false
+offset_left = 147.0
+offset_top = 161.0
+offset_right = 813.0
+offset_bottom = 365.0
+
+[node name="Mensagem" type="Label" parent="Interface/Info"]
+offset_left = 23.0
+offset_top = 21.0
+offset_right = 641.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 3
+text = "Informacoes"
+
+[node name="Fechar" type="Label" parent="Interface/Info"]
+offset_left = 23.0
+offset_top = 167.0
+offset_right = 641.0
+offset_bottom = 194.0
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Pressione E ou Esc para fechar."
+
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromOxford" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(724, 725)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(664.0, 725.0)
+npc_id = "universidadeoxfordinterior_lesson_1"
+speaker_name = "Leitor — Ideia principal e detalhe"
+dialogue_text = "Leia primeiro o título e a primeira frase para achar o assunto. Para achar uma data, passe os olhos pelo texto procurando números."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_monge")

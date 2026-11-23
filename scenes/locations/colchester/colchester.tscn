@@ -1,0 +1,220 @@
+[gd_scene format=3 uid="uid://0o0lx7yg3nh1"]
+
+[ext_resource type="Texture2D" uid="uid://cr2a62cvssjcv" path="res://assets/environments/colchester/colchester.webp" id="1_map"]
+[ext_resource type="PackedScene" uid="uid://2mcfjb48ord5" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" uid="uid://cfq0c381aaqqy" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Texture2D" uid="uid://bgdgb7hi25mnf" path="res://assets/characters/npcs/colchester/baron_abbot.png" id="4_baron_texture"]
+[ext_resource type="Script" uid="uid://cqfxsvgiurr8j" path="res://scripts/npcs/baron_abbot.gd" id="5_baron_script"]
+[ext_resource type="Script" uid="uid://b8jjmgtsykfdu" path="res://scripts/systems/scene_spawn.gd" id="6_spawn"]
+[ext_resource type="Script" uid="uid://dfokg42c6fplo" path="res://scripts/minigames/roman_walls_challenge.gd" id="7_word_search"]
+[ext_resource type="AudioStream" uid="uid://gtdwiun34427" path="res://assets/audio/music/cities_theme.ogg" id="90_city_theme"]
+[ext_resource type="Script" uid="uid://pa24vstghc64" path="res://scripts/systems/looping_music.gd" id="91_city_music_loop"]
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="180_entrance_indicator"]
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="190_map_exit_indicator"]
+[ext_resource type="Texture2D" uid="uid://7it50hd56jgo" path="res://assets/characters/npcs/colchester/guide_help_inventory.webp" id="200_help_guide_texture"]
+[ext_resource type="Script" uid="uid://cg4kft3ckfykh" path="res://scripts/npcs/simple_dialogue_npc.gd" id="201_help_guide_script"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="roman_historian"]
+
+[sub_resource type="RectangleShape2D" id="ExitShape"]
+size = Vector2(95, 30)
+
+[sub_resource type="CircleShape2D" id="BaronInteraction"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="GuideInteraction"]
+radius = 40.0
+
+[sub_resource type="RectangleShape2D" id="TempleEntranceShape"]
+size = Vector2(90, 25)
+
+[sub_resource type="CircleShape2D" id="RomanWordsInteraction"]
+radius = 48.0
+
+[node name="Colchester" type="Node2D" unique_id=218663003]
+script = ExtResource("6_spawn")
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=608651589]
+texture_filter = 1
+position = Vector2(768, 512)
+texture = ExtResource("1_map")
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=787006476]
+
+[node name="Priory" type="StaticBody2D" parent="Colisoes" unique_id=1231403385]
+position = Vector2(355, 202)
+
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/Priory" unique_id=1415936675]
+polygon = PackedVector2Array(-165, -102.5, 165, -102.5, 165, 102.5, -165, 102.5)
+
+[node name="Castle" type="StaticBody2D" parent="Colisoes" unique_id=564248862]
+position = Vector2(1164, 220)
+
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/Castle" unique_id=1429329204]
+polygon = PackedVector2Array(-242.5, -120, 242.5, -120, 242.5, 120, -242.5, 120)
+
+[node name="RomanRuins" type="StaticBody2D" parent="Colisoes" unique_id=1312979414]
+position = Vector2(1220, 580)
+
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/RomanRuins" unique_id=1980367853]
+polygon = PackedVector2Array(-190, -145, -42, -115, 190, -145, 190, 145, -190, 145)
+
+[node name="Fountain" type="StaticBody2D" parent="Colisoes" unique_id=1757253428]
+position = Vector2(800, 562)
+
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/Fountain" unique_id=585327172]
+polygon = PackedVector2Array(-13, -55, 20, -54, 68, 81, 35, 85, 2, 45, -28, 81, -65, 84)
+
+[node name="LeftWall" type="StaticBody2D" parent="Colisoes" unique_id=1009929676]
+position = Vector2(60, 406)
+
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/LeftWall" unique_id=1381735406]
+polygon = PackedVector2Array(-32.5, -360, 32.5, -360, 32.5, 360, -32.5, 360)
+
+[node name="RightWall" type="StaticBody2D" parent="Colisoes" unique_id=322264627]
+position = Vector2(1477, 405)
+
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/RightWall" unique_id=1146620294]
+polygon = PackedVector2Array(-35, -360, 35, -360, 35, 360, -35, 360)
+
+[node name="TopWall" type="StaticBody2D" parent="Colisoes" unique_id=1756405520]
+position = Vector2(770, 52)
+
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/TopWall" unique_id=319423705]
+polygon = PackedVector2Array(-695, -27.5, 695, -27.5, 695, 27.5, -695, 27.5)
+
+[node name="BottomLeftWall" type="StaticBody2D" parent="Colisoes" unique_id=1158142486]
+position = Vector2(340, 785)
+
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/BottomLeftWall" unique_id=1933087532]
+polygon = PackedVector2Array(-337.5, -32.5, 337.5, -32.5, 337.5, 32.5, -337.5, 32.5)
+
+[node name="BottomRightWall" type="StaticBody2D" parent="Colisoes" unique_id=1088318942]
+position = Vector2(1190, 785)
+
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/BottomRightWall" unique_id=1665027214]
+polygon = PackedVector2Array(-300, -32.5, 300, -32.5, 300, 32.5, -300, 32.5)
+
+[node name="WaterLeft" type="StaticBody2D" parent="Colisoes" unique_id=415081959]
+position = Vector2(330, 903)
+
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/WaterLeft" unique_id=12633456]
+polygon = PackedVector2Array(-330, -95, 330, -95, 330, 95, -330, 95)
+
+[node name="WaterRight" type="StaticBody2D" parent="Colisoes" unique_id=284719350]
+position = Vector2(1195, 902)
+
+[node name="Shape" type="CollisionPolygon2D" parent="Colisoes/WaterRight" unique_id=1342614087]
+polygon = PackedVector2Array(-325, -95, 325, -95, 325, 95, -325, 95)
+
+[node name="Player" parent="." unique_id=1296527574 instance=ExtResource("2_player")]
+position = Vector2(768, 730)
+
+[node name="WorldMapExit" type="Area2D" parent="." unique_id=839482352]
+position = Vector2(768, 948)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit" unique_id=459346120]
+shape = SubResource("ExitShape")
+
+[node name="MapExitIndicator" parent="WorldMapExit" unique_id=1540535813 instance=ExtResource("190_map_exit_indicator")]
+
+[node name="NPCs" type="Node2D" parent="." unique_id=349224008]
+
+[node name="BaronAbbot" type="Area2D" parent="NPCs" unique_id=1833333768]
+position = Vector2(800, 690)
+script = ExtResource("5_baron_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="NPCs/BaronAbbot" unique_id=231575790]
+texture_filter = 1
+position = Vector2(0, -16)
+scale = Vector2(0.22857143, 0.17391305)
+texture = ExtResource("4_baron_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/BaronAbbot" unique_id=1356597337]
+shape = SubResource("BaronInteraction")
+
+[node name="Prompt" type="Label" parent="NPCs/BaronAbbot" unique_id=1757330984]
+offset_left = -45.0
+offset_top = -60.0
+offset_right = 45.0
+offset_bottom = -38.0
+theme_override_font_sizes/font_size = 12
+text = "[E] Falar"
+horizontal_alignment = 1
+
+[node name="HelpInventoryGuide" type="Area2D" parent="NPCs" unique_id=1788294594]
+position = Vector2(1210, 391)
+script = ExtResource("201_help_guide_script")
+speaker_name = "Guia de Colchester"
+dialogue_text = "Olá, WordSeeker! Quer uma dica para sua jornada?
+
+Pressione H para abrir a Ajuda. Lá você pode consultar os comandos e as orientações do jogo. Pressione H novamente para fechar.
+
+Pressione I para abrir sua Mochila. Nela você encontra os itens que recebeu, como O Dicionário, e pode conferir quantos usos ainda restam. Pressione I novamente para fechar.
+
+Desde que os monstros apareceram, ficou muito difícil manter contato com as outras cidades. As estradas já não são seguras, e estamos perdendo a oportunidade de compartilhar o que sabemos sobre o idioma inglês.
+
+Você pode consultar a Ajuda e a Mochila durante sua exploração. Boa viagem!"
+npc_id = "colchester_guia_ajuda_mochila"
+
+[node name="Sprite2D" type="Sprite2D" parent="NPCs/HelpInventoryGuide" unique_id=2064884108]
+texture_filter = 1
+position = Vector2(0, -24)
+texture = ExtResource("200_help_guide_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/HelpInventoryGuide" unique_id=451533619]
+shape = SubResource("GuideInteraction")
+
+[node name="Prompt" type="Label" parent="NPCs/HelpInventoryGuide" unique_id=2133135745]
+offset_left = -66.0
+offset_top = -56.0
+offset_right = 66.0
+offset_bottom = -35.0
+theme_override_font_sizes/font_size = 12
+text = "[E] Falar"
+horizontal_alignment = 1
+
+[node name="TempleEntrance" type="Area2D" parent="." unique_id=1912176502]
+position = Vector2(355, 331)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/temples/temple_colchester.tscn"
+temple_entrance = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TempleEntrance" unique_id=162464788]
+shape = SubResource("TempleEntranceShape")
+
+[node name="EntranceArrow" parent="TempleEntrance" unique_id=67546597 instance=ExtResource("180_entrance_indicator")]
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=1082087657]
+
+[node name="FromTemple" type="Marker2D" parent="SpawnPoints" unique_id=770467062]
+position = Vector2(355, 395)
+
+[node name="RomanWallsWordSearch" type="Area2D" parent="." unique_id=959785843]
+position = Vector2(990, 575)
+script = ExtResource("7_word_search")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RomanWallsWordSearch" unique_id=311409241]
+shape = SubResource("RomanWordsInteraction")
+
+[node name="Prompt" type="Label" parent="RomanWallsWordSearch" unique_id=1185179801]
+offset_left = -95.0
+offset_top = -66.0
+offset_right = 95.0
+offset_bottom = -43.0
+theme_override_font_sizes/font_size = 15
+text = "[E] Diário: Roman Walls"
+horizontal_alignment = 1
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="." unique_id=445414392]
+stream = ExtResource("90_city_theme")
+autoplay = true
+script = ExtResource("91_city_music_loop")
+
+[node name="CronistaRomano" parent="NPCs" instance=ExtResource("roman_historian")]
+position = Vector2(960, 660)
+speaker_name = "Cronista de Colchester"
+npc_id = "colchester_cronista_romano"
+dialogue_text = "Na época dos romanos, Colchester era conhecida como Camulodunum. Os romanos adotaram esse nome de origem celta, que significa fortaleza de Camulos. Em 49 d.C., fundaram aqui a Colonia Claudia, que se tornou a primeira capital da Britânia romana.\n\nQuando sair de Colchester, siga para Cambridge pelo mapa-múndi. Há boatos de que ainda vivem lá pessoas que se lembram do inglês. Procure os moradores perto da ponte matemática. Talvez eles possam ensinar o que ainda sabem."

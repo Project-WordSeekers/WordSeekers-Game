@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://6skt0pp2t554"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/salisbury/salisbury.webp" id="1_bg"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="4_spawn"]
+
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="90_city_theme"]
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="91_city_music_loop"]
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="99_progress_npc"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="180_entrance_indicator"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="190_map_exit_indicator"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Script" path="res://scripts/npcs/reading_lesson_npc.gd" id="reading_lesson"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/cidadao6.png" id="lesson_art_cidadao6"]
+
+[sub_resource type="RectangleShape2D" id="exit_shape"]
+size = Vector2(170, 48)
+
+[sub_resource type="RectangleShape2D" id="EntradaCatedralShape"]
+size = Vector2(76, 30)
+
+[sub_resource type="RectangleShape2D" id="EntradaStonehengeShape"]
+size = Vector2(88, 38)
+
+[node name="Salisbury" type="Node2D" unique_id=939046124]
+script = ExtResource("4_spawn")
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=116045992]
+texture_filter = 1
+position = Vector2(512, 410)
+texture = ExtResource("1_bg")
+
+[node name="Player" parent="." unique_id=665656456 instance=ExtResource("2_player")]
+position = Vector2(470, 725)
+
+[node name="Limites" type="StaticBody2D" parent="." unique_id=409585956]
+
+[node name="Topo" type="CollisionPolygon2D" parent="Limites" unique_id=1714268211]
+position = Vector2(512, 0)
+polygon = PackedVector2Array(-512, -15, 512, -15, 512, 15, -512, 15)
+
+[node name="Esquerda" type="CollisionPolygon2D" parent="Limites" unique_id=118918099]
+position = Vector2(0, 410)
+polygon = PackedVector2Array(-15, -410, 15, -410, 15, 410, -15, 410)
+
+[node name="Direita" type="CollisionPolygon2D" parent="Limites" unique_id=2027403458]
+position = Vector2(1024, 410)
+polygon = PackedVector2Array(-15, -410, 15, -410, 15, 410, -15, 410)
+
+[node name="SaidaMapa" type="Area2D" parent="." unique_id=1723652617]
+position = Vector2(471, 779)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SaidaMapa" unique_id=1330627786]
+position = Vector2(2, -11)
+shape = SubResource("exit_shape")
+
+[node name="EntradaCatedral" type="Area2D" parent="." unique_id=126419726]
+position = Vector2(453, 285)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/salisbury/catedral_salisbury.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntradaCatedral" unique_id=187279111]
+shape = SubResource("EntradaCatedralShape")
+
+
+[node name="EntranceArrow" parent="EntradaCatedral" instance=ExtResource("180_entrance_indicator")]
+
+[node name="EntradaStonehenge" type="Area2D" parent="." unique_id=1202761400]
+position = Vector2(902, 171)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/salisbury/stonehenge.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntradaStonehenge" unique_id=759262096]
+position = Vector2(21, -23)
+shape = SubResource("EntradaStonehengeShape")
+
+
+[node name="EntranceArrow" parent="EntradaStonehenge" instance=ExtResource("180_entrance_indicator")]
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=757415567]
+
+[node name="SalisburyEntry" type="Marker2D" parent="SpawnPoints" unique_id=502329838]
+position = Vector2(472, 725)
+
+[node name="CatedralReturn" type="Marker2D" parent="SpawnPoints" unique_id=923734102]
+position = Vector2(453, 345)
+
+[node name="StonehengeReturn" type="Marker2D" parent="SpawnPoints" unique_id=1772682517]
+position = Vector2(830, 174)
+
+[node name="colisoes" type="StaticBody2D" parent="." unique_id=179737190]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="colisoes" unique_id=2013322814]
+polygon = PackedVector2Array(441, 738, 444, 667, 416, 662, 417, 677, 324, 676, 309, 659, 291, 648, 297, 612, 285, 598, 279, 587, 103, 581, 97, 546, 97, 514, 106, 515, 135, 557, 157, 559, 162, 549, 206, 548, 213, 560, 289, 554, 290, 472, 275, 456, 239, 452, 231, 442, 222, 445, 144, 446, 134, 441, 124, 465, 97, 498, 88, 474, 92, 424, 95, 416, 159, 422, 159, 406, 200, 405, 203, 418, 268, 415, 268, 357, 243, 331, 232, 304, 228, 284, 241, 264, 237, 170, 248, 170, 250, 127, 215, 122, 213, 56, 219, 46, 253, 47, 254, 108, 278, 112, 280, 172, 290, 174, 293, 314, 307, 333, 373, 334, 379, 349, 415, 346, 429, 324, 431, 299, 453, 261, 474, 302, 478, 337, 497, 333, 513, 349, 625, 347, 630, 330, 721, 337, 732, 331, 740, 342, 861, 338, 859, 273, 866, 274, 866, 214, 835, 190, 797, 178, 778, 150, 764, 151, 732, 117, 702, 100, 705, 86, 730, 86, 742, 60, 778, 60, 773, 35, 332, 74, 268, 24, 63, 63, 69, 530, 161, 738)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="colisoes" unique_id=1220920804]
+polygon = PackedVector2Array(499, 733, 495, 667, 507, 660, 523, 676, 691, 676, 692, 661, 735, 651, 740, 610, 783, 609, 791, 607, 794, 658, 784, 659, 777, 673, 786, 682, 827, 707, 826, 686, 829, 657, 827, 604, 838, 601, 838, 582, 860, 560, 907, 569, 943, 525, 941, 482, 935, 437, 1004, 434, 1007, 410, 936, 407, 938, 371, 909, 340, 902, 196, 930, 176, 939, 164, 956, 153, 982, 148, 958, 114, 873, 125, 878, 158, 833, 149, 772, 104, 765, 80, 779, 55, 1003, 106, 1020, 451, 909, 745)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="colisoes" unique_id=537248237]
+polygon = PackedVector2Array(490, 403, 479, 429, 455, 447, 462, 470, 484, 481, 504, 480, 521, 470, 527, 453, 518, 440, 504, 430)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="colisoes" unique_id=1316887069]
+polygon = PackedVector2Array(371, 536, 352, 584, 350, 611, 430, 609, 432, 555, 381, 552)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="colisoes" unique_id=1737670178]
+polygon = PackedVector2Array(537, 636, 686, 628, 686, 571, 662, 574, 649, 552, 505, 555, 506, 569, 527, 572, 525, 586, 541, 592)
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="colisoes" unique_id=78138394]
+polygon = PackedVector2Array(748, 564, 836, 563, 834, 543, 845, 536, 844, 524, 872, 526, 881, 541, 910, 508, 909, 475, 897, 467, 896, 392, 876, 383, 875, 367, 827, 373, 702, 372, 705, 421, 674, 419, 665, 409, 649, 434, 649, 499, 666, 528, 693, 528, 698, 514, 731, 517)
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("90_city_theme")
+autoplay = true
+script = ExtResource("91_city_music_loop")
+
+[node name="ProgressGuide" parent="." instance=ExtResource("99_progress_npc")]
+position = Vector2(567, 665)
+speaker_name = "Town Guide"
+dialogue_text = "Welcome, traveler! Explore our city and keep practicing your English."
+
+[node name="MapExitIndicator" parent="SaidaMapa" instance=ExtResource("190_map_exit_indicator")]
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(470.0, 665.0)
+npc_id = "salisbury_lesson_1"
+speaker_name = "Anfitriã — Leitura de visita guiada"
+dialogue_text = "Leia e descubra o assunto principal da visita.\n\nToday we will see the stone circle and learn how people moved the stones. The tour starts at noon."
+script = ExtResource("reading_lesson")
+review_text = "A visita trata do círculo e de como as pedras foram movidas."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_cidadao6")

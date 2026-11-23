@@ -1,0 +1,277 @@
+[gd_scene format=3 uid="uid://c66d14nbg18jg"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="BathEntranceArrow"]
+
+[ext_resource type="Texture2D" uid="uid://c3eug607grpk6" path="res://assets/environments/bath/bath.webp" id="1_map"]
+[ext_resource type="PackedScene" uid="uid://2mcfjb48ord5" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" uid="uid://cfq0c381aaqqy" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" uid="uid://b8jjmgtsykfdu" path="res://scripts/systems/scene_spawn.gd" id="4_city"]
+[ext_resource type="AudioStream" uid="uid://gtdwiun34427" path="res://assets/audio/music/cities_theme.ogg" id="90_city_theme"]
+[ext_resource type="Script" uid="uid://pa24vstghc64" path="res://scripts/systems/looping_music.gd" id="91_city_music_loop"]
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="99_npc"]
+[ext_resource type="Script" uid="uid://cv55qv4bh2owm" path="res://scripts/npcs/bath_storyteller_npc.gd" id="100_storyteller"]
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="190_map_exit_indicator"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Script" path="res://scripts/npcs/reading_lesson_npc.gd" id="reading_lesson"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/cidadao6.png" id="lesson_art_cidadao6"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/idosa1.png" id="lesson_art_idosa1"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/adolescente.png" id="lesson_art_adolescente"]
+
+[ext_resource type="Script" path="res://scripts/minigames/roman_walls_challenge.gd" id="word_search"]
+
+[sub_resource type="CircleShape2D" id="WordSearchInteraction"]
+radius = 30.0
+
+[sub_resource type="RectangleShape2D" id="ExitShape"]
+size = Vector2(50, 30)
+
+
+[sub_resource type="RectangleShape2D" id="BathEntranceShape"]
+size = Vector2(50, 24)
+
+[node name="Bath" type="Node2D" unique_id=1124066728]
+script = ExtResource("4_city")
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=876196426]
+texture_filter = 1
+position = Vector2(701, 561)
+texture = ExtResource("1_map")
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=601138722]
+
+[node name="Topo" type="StaticBody2D" parent="Colisoes" unique_id=118987925]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Topo" unique_id=1939561807]
+polygon = PackedVector2Array(0, 0, 1402, 0, 1402, 22, 0, 22)
+
+[node name="CrescentEOeste" type="StaticBody2D" parent="Colisoes" unique_id=683022490]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/CrescentEOeste" unique_id=1270569912]
+polygon = PackedVector2Array(0, 0, 560, 0, 560, 105, 400, 110, 267, 120, 167, 140, 110, 180, 95, 210, 95, 855, 147, 855, 147, 982, 0, 982)
+
+[node name="CercaGramado" type="StaticBody2D" parent="Colisoes" unique_id=2002881540]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/CercaGramado" unique_id=1610165132]
+polygon = PackedVector2Array(527, 118, 538, 118, 538, 262, 127, 262, 127, 250, 527, 250)
+
+[node name="Circus" type="StaticBody2D" parent="Colisoes" unique_id=425433737]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Circus" unique_id=891637943]
+polygon = PackedVector2Array(578, 140, 600, 70, 660, 35, 730, 25, 800, 35, 860, 70, 880, 140, 860, 215, 800, 232, 660, 232, 600, 215)
+
+[node name="Biblioteca" type="StaticBody2D" parent="Colisoes" unique_id=454845370]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Biblioteca" unique_id=241379069]
+polygon = PackedVector2Array(880, 0, 1115, 0, 1115, 232, 925, 232, 925, 65, 880, 65)
+
+[node name="RioEPonte" type="StaticBody2D" parent="Colisoes" unique_id=355527553]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/RioEPonte" unique_id=1910125002]
+polygon = PackedVector2Array(1115, 0, 1402, 0, 1402, 975, 1355, 978, 1112, 575, 1085, 530, 1082, 473, 1045, 473, 1045, 373, 1140, 373, 1192, 255, 1197, 95, 1115, 95)
+
+[node name="Abadia" type="StaticBody2D" parent="Colisoes" unique_id=652254088]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Abadia" unique_id=1166532377]
+polygon = PackedVector2Array(693, 272, 1022, 272, 1022, 460, 955, 460, 955, 668, 632, 668, 632, 380, 693, 380)
+
+[node name="Termas" type="StaticBody2D" parent="Colisoes" unique_id=821871921]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Termas" unique_id=105057105]
+polygon = PackedVector2Array(230, 535, 533, 535, 533, 505, 640, 505, 667, 560, 638, 831, 480, 840, 480, 822, 380, 822, 380, 840, 241, 829, 226, 798, 207, 600)
+
+[node name="QuarteiraoSudeste" type="StaticBody2D" parent="Colisoes" unique_id=350677422]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/QuarteiraoSudeste" unique_id=2051744773]
+polygon = PackedVector2Array(1000, 460, 1057, 460, 1057, 540, 1109, 540, 1109, 709, 1142, 722, 1142, 838, 869, 838, 869, 722, 995, 709, 995, 540)
+
+[node name="CasasSudeste" type="StaticBody2D" parent="Colisoes" unique_id=1563076522]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/CasasSudeste" unique_id=1637985055]
+polygon = PackedVector2Array(942, 870, 1220, 870, 1220, 982, 942, 982)
+
+[node name="CasasSudoeste" type="StaticBody2D" parent="Colisoes" unique_id=804249509]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/CasasSudoeste" unique_id=446251295]
+polygon = PackedVector2Array(233, 868, 682, 868, 682, 982, 233, 982)
+
+[node name="MuroOeste" type="StaticBody2D" parent="Colisoes" unique_id=1379977196]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/MuroOeste" unique_id=878799036]
+polygon = PackedVector2Array(0, 975, 752, 975, 752, 1122, 0, 1122)
+
+[node name="MuroLeste" type="StaticBody2D" parent="Colisoes" unique_id=817634749]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/MuroLeste" unique_id=1757598035]
+polygon = PackedVector2Array(797, 975, 1402, 975, 1402, 1122, 797, 1122)
+
+[node name="PredioPraca" type="StaticBody2D" parent="Colisoes" unique_id=831441934]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/PredioPraca" unique_id=240181823]
+polygon = PackedVector2Array(183, 267, 287, 267, 295, 393, 282, 450, 228, 450, 222, 400, 195, 372)
+
+[node name="Fonte" type="StaticBody2D" parent="Colisoes" unique_id=955681056]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Colisoes/Fonte" unique_id=872443136]
+polygon = PackedVector2Array(420, 423, 440, 400, 470, 393, 500, 400, 522, 423, 500, 448, 470, 453, 440, 448)
+
+[node name="Obstaculos" type="StaticBody2D" parent="Colisoes" unique_id=351278052]
+
+[node name="ArvorePraca1" type="CollisionPolygon2D" parent="Colisoes/Obstaculos" unique_id=1359567917]
+polygon = PackedVector2Array(333, 327, 407, 327, 407, 373, 333, 373)
+
+[node name="ArvorePraca2" type="CollisionPolygon2D" parent="Colisoes/Obstaculos" unique_id=766630540]
+polygon = PackedVector2Array(533, 327, 603, 327, 603, 373, 533, 373)
+
+[node name="BarracasNorte" type="CollisionPolygon2D" parent="Colisoes/Obstaculos" unique_id=1171542060]
+polygon = PackedVector2Array(579, 370, 623, 370, 623, 453, 579, 453)
+
+[node name="BarracaSul1" type="CollisionPolygon2D" parent="Colisoes/Obstaculos" unique_id=1114439218]
+polygon = PackedVector2Array(640, 806, 687, 806, 687, 836, 640, 836)
+
+[node name="BarracaSul2" type="CollisionPolygon2D" parent="Colisoes/Obstaculos" unique_id=1865854560]
+polygon = PackedVector2Array(702, 799, 749, 799, 749, 849, 702, 849)
+
+[node name="BarracaSul3" type="CollisionPolygon2D" parent="Colisoes/Obstaculos" unique_id=112336782]
+polygon = PackedVector2Array(792, 799, 839, 799, 839, 849, 792, 849)
+
+[node name="Canteiro1" type="CollisionPolygon2D" parent="Colisoes/Obstaculos" unique_id=822308717]
+polygon = PackedVector2Array(107, 397, 140, 397, 140, 437, 107, 437)
+
+[node name="Canteiro2" type="CollisionPolygon2D" parent="Colisoes/Obstaculos" unique_id=1638937581]
+polygon = PackedVector2Array(107, 520, 140, 520, 140, 553, 107, 553)
+
+[node name="Canteiro3" type="CollisionPolygon2D" parent="Colisoes/Obstaculos" unique_id=1634197221]
+polygon = PackedVector2Array(107, 685, 140, 685, 140, 722, 107, 722)
+
+[node name="Canteiro4" type="CollisionPolygon2D" parent="Colisoes/Obstaculos" unique_id=1455678110]
+polygon = PackedVector2Array(107, 825, 140, 825, 140, 855, 107, 855)
+
+[node name="Canteiro5" type="CollisionPolygon2D" parent="Colisoes/Obstaculos" unique_id=1210621347]
+polygon = PackedVector2Array(163, 842, 207, 842, 207, 915, 163, 915)
+
+[node name="Canteiro6" type="CollisionPolygon2D" parent="Colisoes/Obstaculos" unique_id=1195255033]
+polygon = PackedVector2Array(223, 470, 257, 470, 257, 510, 223, 510)
+
+[node name="Player" parent="." unique_id=669813333 instance=ExtResource("2_player")]
+position = Vector2(775, 930)
+
+[node name="WorldMapExit" type="Area2D" parent="." unique_id=991542962]
+position = Vector2(775, 1010)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit" unique_id=1588707640]
+shape = SubResource("ExitShape")
+
+[node name="MapExitIndicator" parent="WorldMapExit" unique_id=230105215 instance=ExtResource("190_map_exit_indicator")]
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=213172806]
+
+[node name="NPCs" type="Node2D" parent="." unique_id=1340091840]
+
+[node name="CrescentGuide" parent="NPCs" unique_id=1452298480 instance=ExtResource("99_npc")]
+position = Vector2(330, 205)
+speaker_name = "Royal Crescent Guide"
+dialogue_text = "Welcome to Bath! These elegant houses form the Royal Crescent, built in the 1770s. Bath is famous for its golden stone, its Roman Baths and the writer Jane Austen, who lived here. Explore the Abbey, the Baths and Pulteney Bridge!"
+npc_id = "bath_crescent_guide"
+
+[node name="BathsAttendant" parent="NPCs" unique_id=1219789549 instance=ExtResource("99_npc")]
+position = Vector2(170, 640)
+speaker_name = "Roman Baths Attendant"
+dialogue_text = "Salve, traveler! The Romans built these baths almost two thousand years ago. The hot spring water comes from deep underground, and they dedicated the temple here to the goddess Sulis Minerva."
+npc_id = "bath_baths_attendant"
+
+[node name="Storyteller" parent="NPCs" unique_id=1108075196 instance=ExtResource("99_npc")]
+position = Vector2(830, 720)
+script = ExtResource("100_storyteller")
+speaker_name = "Sister Abigail"
+npc_id = "bath_storyteller"
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="." unique_id=1500090680]
+stream = ExtResource("90_city_theme")
+autoplay = true
+script = ExtResource("91_city_music_loop")
+
+
+[node name="RomanBathsEntrance" type="Area2D" parent="."]
+position = Vector2(757, 680)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/bath/roman_baths.tscn"
+temple_entrance = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RomanBathsEntrance"]
+shape = SubResource("BathEntranceShape")
+
+[node name="EntranceArrow" parent="RomanBathsEntrance" instance=ExtResource("BathEntranceArrow")]
+
+[node name="FromTemple" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(757, 730)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(715.0, 930.0)
+npc_id = "bath_lesson_1"
+speaker_name = "Auxiliar das termas — Partes do corpo"
+dialogue_text = "Head é cabeça, shoulders são ombros, knees são joelhos e feet são pés. Foot é um pé; feet é o plural."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_cidadao6")
+
+[node name="LessonNPC2" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(835.0, 930.0)
+npc_id = "bath_lesson_2"
+speaker_name = "Visitante das termas — Saúde e bem-estar"
+dialogue_text = "My head hurts significa que minha cabeça dói. I feel tired significa que estou cansado. Rest e drink water são instruções de cuidado."
+
+[node name="Sprite2D" parent="LessonNPC2" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_idosa1")
+
+[node name="LessonNPC3" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(775.0, 870.0)
+npc_id = "bath_lesson_3"
+speaker_name = "Visitante — Leitura sobre bem-estar"
+dialogue_text = "Leia a fala da visitante. Que parte do corpo ela menciona e o que pretende fazer?\n\nMy feet hurt after the walk. I need to sit down and rest."
+script = ExtResource("reading_lesson")
+review_text = "Ela menciona os pés e quer sentar para descansar."
+
+[node name="Sprite2D" parent="LessonNPC3" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_adolescente")
+
+[node name="WordSearchChallenge" type="Area2D" parent="."]
+position = Vector2(919.0, 930.0)
+collision_layer = 0
+script = ExtResource("word_search")
+challenge_id = "bath_thermae"
+challenge_title = "Bath · Termas"
+difficulty = "Médio"
+board_size = 12
+vocabulary = Array[String](["TOWEL", "MIRROR", "WATER", "SOAP", "SHOULDER", "BATHROOM"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WordSearchChallenge"]
+shape = SubResource("WordSearchInteraction")
+
+[node name="Marker" type="Label" parent="WordSearchChallenge"]
+offset_left = -75.0
+offset_top = -22.0
+offset_right = 75.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 13
+text = "Caça-palavras"
+horizontal_alignment = 1
+
+[node name="Prompt" type="Label" parent="WordSearchChallenge"]
+offset_left = -88.0
+offset_top = -45.0
+offset_right = 88.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 14
+text = "[E] Abrir diário"
+horizontal_alignment = 1

@@ -1,0 +1,187 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/london/catedral.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_exit"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Script" path="res://scripts/npcs/reading_lesson_npc.gd" id="reading_lesson"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/padre2.png" id="lesson_art_padre2"]
+
+[node name="CatedralDeLondres" type="Node2D"]
+
+[node name="Mapa" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_map")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="ParedeSuperior" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ParedeSuperior"]
+polygon = PackedVector2Array(0, 0, 1536, 0, 1536, 105, 0, 105)
+
+[node name="ParedeEsquerda" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ParedeEsquerda"]
+polygon = PackedVector2Array(0, 105, 70, 105, 70, 880, 0, 880)
+
+[node name="ParedeDireita" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ParedeDireita"]
+polygon = PackedVector2Array(1465, 105, 1536, 105, 1536, 880, 1465, 880)
+
+[node name="ParedeInferiorEsquerda" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ParedeInferiorEsquerda"]
+polygon = PackedVector2Array(0, 880, 650, 880, 650, 1024, 0, 1024)
+
+[node name="ParedeInferiorDireita" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ParedeInferiorDireita"]
+polygon = PackedVector2Array(885, 880, 1536, 880, 1536, 1024, 885, 1024)
+
+[node name="Altar" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Altar"]
+polygon = PackedVector2Array(660, 85, 880, 85, 880, 340, 660, 340)
+
+[node name="DegrausAltarEsquerda" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/DegrausAltarEsquerda"]
+polygon = PackedVector2Array(545, 335, 655, 335, 655, 411, 545, 385)
+
+[node name="DegrausAltarDireita" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/DegrausAltarDireita"]
+polygon = PackedVector2Array(885, 335, 985, 335, 985, 385, 885, 411)
+
+[node name="Pulpito" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Pulpito"]
+polygon = PackedVector2Array(1150, 375, 1275, 375, 1275, 570, 1150, 570)
+
+[node name="ArmarioEsquerdo" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ArmarioEsquerdo"]
+polygon = PackedVector2Array(290, 290, 385, 290, 385, 398, 290, 398)
+
+[node name="ArmarioDireito" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ArmarioDireito"]
+polygon = PackedVector2Array(1140, 290, 1235, 290, 1235, 375, 1140, 375)
+
+[node name="BancoEsquerdo1" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/BancoEsquerdo1"]
+polygon = PackedVector2Array(405, 498, 615, 498, 615, 552, 405, 552)
+
+[node name="BancoEsquerdo2" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/BancoEsquerdo2"]
+polygon = PackedVector2Array(405, 555, 615, 555, 615, 610, 405, 610)
+
+[node name="BancoEsquerdo3" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/BancoEsquerdo3"]
+polygon = PackedVector2Array(405, 615, 615, 615, 615, 670, 405, 670)
+
+[node name="BancoEsquerdo4" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/BancoEsquerdo4"]
+polygon = PackedVector2Array(405, 675, 615, 675, 615, 730, 405, 730)
+
+[node name="BancoEsquerdo5" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/BancoEsquerdo5"]
+polygon = PackedVector2Array(405, 735, 615, 735, 615, 790, 405, 790)
+
+[node name="BancoEsquerdo6" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/BancoEsquerdo6"]
+polygon = PackedVector2Array(405, 795, 615, 795, 615, 850, 405, 850)
+
+[node name="BancoDireito1" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/BancoDireito1"]
+polygon = PackedVector2Array(932, 498, 1135, 498, 1135, 552, 932, 552)
+
+[node name="BancoDireito2" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/BancoDireito2"]
+polygon = PackedVector2Array(932, 555, 1135, 555, 1135, 610, 932, 610)
+
+[node name="BancoDireito3" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/BancoDireito3"]
+polygon = PackedVector2Array(932, 615, 1135, 615, 1135, 670, 932, 670)
+
+[node name="BancoDireito4" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/BancoDireito4"]
+polygon = PackedVector2Array(932, 675, 1135, 675, 1135, 730, 932, 730)
+
+[node name="BancoDireito5" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/BancoDireito5"]
+polygon = PackedVector2Array(932, 735, 1135, 735, 1135, 790, 932, 790)
+
+[node name="BancoDireito6" type="StaticBody2D" parent="Colisoes"]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/BancoDireito6"]
+polygon = PackedVector2Array(932, 795, 1135, 795, 1135, 850, 932, 850)
+
+[node name="Saida" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3_exit")
+target_scene_path = "res://scenes/locations/london/religioso.tscn"
+target_spawn_name = &"FromCatedral"
+
+[node name="Forma" type="CollisionPolygon2D" parent="Saida"]
+polygon = PackedVector2Array(680, 970, 855, 970, 855, 1024, 680, 1024)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(768, 865)
+
+[node name="Camera2D" parent="Player"]
+min_zoom = 1.0
+max_zoom = 1.0
+zoom = Vector2(1, 1)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(708.0, 865.0)
+npc_id = "catedral_lesson_1"
+speaker_name = "Guia da catedral — Leitura e ideia principal"
+dialogue_text = "Leia o aviso e descubra o que os visitantes precisam fazer.\n\nThe guided tour is starting. Please meet by the main door and keep the stairs clear."
+script = ExtResource("reading_lesson")
+review_text = "O grupo deve se reunir junto à porta principal e deixar a escada livre."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_padre2")

@@ -1,0 +1,270 @@
+[gd_scene load_steps=21 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="arrive"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/nottingham/nottingham_castle_interior_map.webp" id="1_bg"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/guarda2.png" id="lesson_art_guarda2"]
+
+[sub_resource type="RectangleShape2D" id="R0"]
+size = Vector2(1448, 30)
+
+[sub_resource type="RectangleShape2D" id="R1"]
+size = Vector2(36, 1040)
+
+[sub_resource type="RectangleShape2D" id="R2"]
+size = Vector2(36, 1040)
+
+[sub_resource type="RectangleShape2D" id="R3"]
+size = Vector2(600, 50)
+
+[sub_resource type="RectangleShape2D" id="R4"]
+size = Vector2(600, 50)
+
+[sub_resource type="RectangleShape2D" id="R5"]
+size = Vector2(185, 140)
+
+[sub_resource type="RectangleShape2D" id="R6"]
+size = Vector2(60, 115)
+
+[sub_resource type="RectangleShape2D" id="R7"]
+size = Vector2(60, 115)
+
+[sub_resource type="RectangleShape2D" id="R8"]
+size = Vector2(310, 145)
+
+[sub_resource type="RectangleShape2D" id="R9"]
+size = Vector2(310, 145)
+
+[sub_resource type="RectangleShape2D" id="R10"]
+size = Vector2(175, 147)
+
+[sub_resource type="RectangleShape2D" id="R11"]
+size = Vector2(175, 147)
+
+[sub_resource type="RectangleShape2D" id="R12"]
+size = Vector2(240, 146)
+
+[sub_resource type="RectangleShape2D" id="R13"]
+size = Vector2(235, 150)
+
+[sub_resource type="RectangleShape2D" id="R14"]
+size = Vector2(70, 135)
+
+[sub_resource type="RectangleShape2D" id="R15"]
+size = Vector2(70, 135)
+
+[sub_resource type="RectangleShape2D" id="R16"]
+size = Vector2(590, 40)
+
+[sub_resource type="RectangleShape2D" id="R17"]
+size = Vector2(585, 40)
+
+[sub_resource type="CircleShape2D" id="ExitCircle"]
+radius = 48.0
+
+[node name="NottinghamCastleInterior" type="Node2D"]
+script = ExtResource("arrive")
+
+[node name="Mapa" type="Sprite2D" parent="."]
+texture_filter = 1
+centered = false
+texture = ExtResource("1_bg")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(724, 986)
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="ParedeTopo" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(724, 15)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeTopo"]
+shape = SubResource("R0")
+
+[node name="ParedeEsquerda" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(18, 520)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeEsquerda"]
+shape = SubResource("R1")
+
+[node name="ParedeDireita" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1430, 520)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeDireita"]
+shape = SubResource("R2")
+
+[node name="ParedeInferiorEsq" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(300, 1060)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeInferiorEsq"]
+shape = SubResource("R3")
+
+[node name="ParedeInferiorDir" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1148, 1060)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParedeInferiorDir"]
+shape = SubResource("R4")
+
+[node name="Trono" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(724, 210)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/Trono"]
+shape = SubResource("R5")
+
+[node name="GuardaEsq" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(500, 195)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/GuardaEsq"]
+shape = SubResource("R6")
+
+[node name="GuardaDir" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(914, 195)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/GuardaDir"]
+shape = SubResource("R7")
+
+[node name="MesaBanqueteEsq" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(320, 429)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaBanqueteEsq"]
+shape = SubResource("R8")
+
+[node name="MesaBanqueteDir" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1120, 429)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MesaBanqueteDir"]
+shape = SubResource("R9")
+
+[node name="EstanteTopoEsq" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(115, 241)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstanteTopoEsq"]
+shape = SubResource("R10")
+
+[node name="EstanteTopoDir" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1332, 241)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/EstanteTopoDir"]
+shape = SubResource("R11")
+
+[node name="Lareira" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(263, 688)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/Lareira"]
+shape = SubResource("R12")
+
+[node name="SalaDireita" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1160, 710)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/SalaDireita"]
+shape = SubResource("R13")
+
+[node name="ColunaEsq" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(48, 450)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaEsq"]
+shape = SubResource("R14")
+
+[node name="ColunaDir" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1400, 450)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ColunaDir"]
+shape = SubResource("R15")
+
+[node name="MuretaEsq" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(295, 905)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuretaEsq"]
+shape = SubResource("R16")
+
+[node name="MuretaDir" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1155, 905)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MuretaDir"]
+shape = SubResource("R17")
+
+[node name="Saida" type="Area2D" parent="."]
+position = Vector2(724, 986)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/locations/nottingham/nottingham.tscn"
+target_spawn_name = &"FromNottinghamCastleInterior"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="Saida"]
+shape = SubResource("ExitCircle")
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="Instrucoes" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 15.0
+offset_right = 840.0
+offset_bottom = 60.0
+text = "Nottingham Castle • WASD: mover • E: sair"
+theme_override_colors/font_color = Color(1, 0.95, 0.8, 1)
+
+[node name="Dica" type="Label" parent="Interface"]
+visible = false
+offset_left = 260.0
+offset_top = 480.0
+offset_right = 760.0
+offset_bottom = 530.0
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1, 0.95, 0.65, 1)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromNottingham" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(640, 590)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(640.0, 986.0)
+npc_id = "nottinghamcastleinterior_lesson_1"
+speaker_name = "Guarda do castelo — Demonstrativos"
+dialogue_text = "Para um objeto perto, use this. Para um longe, that. No plural, use these para perto e those para longe."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_guarda2")

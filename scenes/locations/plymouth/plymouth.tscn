@@ -1,0 +1,218 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/plymouth/plymouth.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_portal"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="4_city"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="90_city_theme"]
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="91_city_music_loop"]
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="190_map_exit_indicator"]
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="99_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/point02/knight01.png" id="103_drake_tex"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Script" path="res://scripts/npcs/reading_lesson_npc.gd" id="reading_lesson"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/pescador.png" id="lesson_art_pescador"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/cidadao5.png" id="lesson_art_cidadao5"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/guarda2.png" id="lesson_art_guarda2"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/nobre1.png" id="lesson_art_nobre1"]
+
+[sub_resource type="RectangleShape2D" id="ExitShape"]
+size = Vector2(50, 30)
+
+; Plymouth. A imagem (1402x1122) tem o canto superior esquerdo na origem,
+; então os polígonos usam diretamente coordenadas em pixels da imagem.
+[node name="Plymouth" type="Node2D"]
+script = ExtResource("4_city")
+
+[node name="Mapa" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(701, 561)
+texture = ExtResource("1_map")
+
+[node name="Colisoes" type="StaticBody2D" parent="."]
+
+; Mar, mureta do calçadão e penhasco com escada no alto.
+[node name="MarNorte" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(150, -40, 1442, -40, 1442, 140, 1012, 140, 945, 100, 150, 100)
+
+; Rochas, bosque à beira-mar, casa Tudor, galpão e arco dos Mayflower Steps.
+[node name="RochasCasaTudor" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(1012, 140, 1442, 140, 1442, 470, 1245, 470, 1245, 428, 888, 440, 892, 328, 1012, 270)
+
+; Água do porto (Barbican), píer diagonal e escadaria dos Mayflower Steps.
+[node name="Porto" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(922, 458, 1340, 458, 1340, 645, 1080, 656, 930, 508)
+
+[node name="MarLeste" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(1335, 455, 1442, 455, 1442, 1160, 1335, 1160)
+
+[node name="MuroCais" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(1303, 640, 1340, 640, 1340, 910, 1303, 910)
+
+; Bosque a oeste, casa do canto superior esquerdo e muro oeste.
+[node name="Oeste" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(-40, -40, 150, -40, 150, 100, 195, 100, 200, 320, 252, 352, 252, 548, 95, 548, 95, 905, -40, 905)
+
+; Muralha sul, torres do portão e bosque de fora.
+[node name="MuralhaOeste" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(-40, 900, 553, 900, 553, 880, 612, 880, 612, 1160, -40, 1160)
+
+[node name="MuralhaLeste" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(688, 880, 745, 880, 745, 900, 1442, 900, 1442, 1160, 688, 1160)
+
+[node name="Portao" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(612, 1005, 688, 1005, 688, 1160, 612, 1160)
+
+; Plymouth Hoe: farol de Smeaton (só a base; o calçadão passa por trás) e gramados.
+[node name="Farol" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(600, 145, 655, 145, 655, 205, 600, 205)
+
+[node name="GramadoOeste" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(232, 138, 545, 138, 560, 222, 593, 238, 593, 328, 300, 328, 232, 262)
+
+[node name="GramadoEstatua" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(705, 132, 955, 132, 984, 162, 984, 215, 855, 330, 658, 330, 658, 205)
+
+; Edifícios e jardins.
+[node name="Mansao" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(303, 345, 623, 345, 623, 533, 303, 533)
+
+[node name="JardimCentral" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(678, 362, 838, 362, 838, 532, 678, 532)
+
+[node name="CasaBranca" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(741, 565, 945, 565, 945, 640, 988, 660, 988, 808, 741, 808)
+
+[node name="JardimSul" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(744, 850, 988, 850, 988, 905, 744, 905)
+
+[node name="ArvoresSul" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(415, 830, 552, 830, 552, 905, 415, 905)
+
+[node name="CasaSudoeste" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(97, 705, 297, 705, 297, 895, 97, 895)
+
+[node name="CasaSudeste" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(1064, 748, 1300, 748, 1300, 895, 1064, 895)
+
+; Praça do mercado: fonte, barracas e árvores.
+[node name="Fonte" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(427, 672, 443, 633, 482, 617, 521, 633, 537, 672, 521, 711, 482, 727, 443, 711)
+
+[node name="Barraca1" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(358, 575, 423, 575, 423, 622, 358, 622)
+
+[node name="Barraca2" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(537, 575, 603, 575, 603, 622, 537, 622)
+
+[node name="Barraca3" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(312, 668, 383, 668, 383, 720, 312, 720)
+
+[node name="Barraca4" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(582, 668, 653, 668, 653, 720, 582, 720)
+
+[node name="Barraca5" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(367, 750, 438, 750, 438, 805, 367, 805)
+
+[node name="Barraca6" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(532, 750, 598, 750, 598, 805, 532, 805)
+
+[node name="Arvore1" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(285, 595, 330, 595, 330, 637, 285, 637)
+
+[node name="Arvore2" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(630, 598, 675, 598, 675, 640, 630, 640)
+
+[node name="Arvore3" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(165, 652, 212, 652, 212, 700, 165, 700)
+
+[node name="Arvore4" type="CollisionPolygon2D" parent="Colisoes"]
+polygon = PackedVector2Array(667, 755, 712, 755, 712, 800, 667, 800)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(650, 870)
+
+[node name="WorldMapExit" type="Area2D" parent="."]
+position = Vector2(650, 985)
+script = ExtResource("3_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
+shape = SubResource("ExitShape")
+
+[node name="MapExitIndicator" parent="WorldMapExit" instance=ExtResource("190_map_exit_indicator")]
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="NPCs" type="Node2D" parent="."]
+
+; Sprites provisórios (reaproveitados de outras cidades) até haver arte própria.
+; Plymouth Hoe: Sir Francis Drake, no calçadão ao lado da estátua.
+[node name="Drake" parent="NPCs" instance=ExtResource("99_npc")]
+position = Vector2(800, 122)
+dialogue_text = "Ahoy, WordSeeker! I am Sir Francis Drake. That is my statue on Plymouth Hoe. In 1577, I set sail and travelled around the world aboard the Golden Hind. I returned in 1580. People here tell a story about me playing bowls before facing the Spanish Armada. Can you see the red and white lighthouse? That is Smeaton’s Tower."
+speaker_name = "Sir Francis Drake"
+npc_id = "plymouth_drake"
+
+[node name="Sprite2D" parent="NPCs/Drake" index="0"]
+scale = Vector2(0.151, 0.151)
+texture = ExtResource("103_drake_tex")
+
+; Mayflower Steps: capitão do Mayflower, em frente ao arco.
+[node name="Captain" parent="NPCs" instance=ExtResource("99_npc")]
+position = Vector2(1222, 446)
+dialogue_text = "Good day, WordSeeker! I am Captain Christopher Jones. In September 1620, the Mayflower left Plymouth with 102 passengers. We crossed the Atlantic in 66 days. The passengers are known as the Pilgrims. They founded a settlement called Plymouth, just like this city."
+speaker_name = "Captain Christopher Jones"
+npc_id = "plymouth_captain"
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("90_city_theme")
+autoplay = true
+script = ExtResource("91_city_music_loop")
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(650.0, 810.0)
+npc_id = "plymouth_lesson_1"
+speaker_name = "Trabalhador do porto — Bilhete de embarque"
+dialogue_text = "Board at the east pier before noon. East pier identifica o cais leste e before noon indica antes do meio-dia."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_pescador")
+
+[node name="LessonNPC2" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(578.0, 858.0)
+npc_id = "plymouth_lesson_2"
+speaker_name = "Atendente do cais — Tabela de partidas"
+dialogue_text = "North pier: 10:00. East pier: 11:30. West pier: 13:00. Para embarcar no cais leste antes do meio-dia, use a partida das 11:30."
+
+[node name="Sprite2D" parent="LessonNPC2" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_cidadao5")
+
+[node name="LessonNPC3" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(722.0, 858.0)
+npc_id = "plymouth_lesson_3"
+speaker_name = "Vigia do porto — Leitura e mudança de rota"
+dialogue_text = "Leia o anúncio e descubra para qual cais vai o passageiro.\n\nThe east pier is closed. Passengers for the eleven thirty boat should go to the north pier."
+script = ExtResource("reading_lesson")
+review_text = "O passageiro deve ir ao cais norte."
+
+[node name="Sprite2D" parent="LessonNPC3" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_guarda2")
+
+[node name="LessonNPC4" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(614.0, 738.0)
+npc_id = "plymouth_lesson_4"
+speaker_name = "Viajante — Inglês e diversidade"
+dialogue_text = "Nesta viagem, uma pessoa fala português e outra fala japonês. Elas podem usar inglês para confirmar o cais e o horário sem compartilhar a mesma língua materna."
+
+[node name="Sprite2D" parent="LessonNPC4" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_nobre1")

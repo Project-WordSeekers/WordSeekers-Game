@@ -1,0 +1,271 @@
+[gd_scene format=3]
+
+
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="linked_portal"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/london/museu.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/scholar1.png" id="lesson_art_scholar1"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/nobre5.png" id="lesson_art_nobre5"]
+
+[ext_resource type="Script" path="res://scripts/minigames/roman_walls_challenge.gd" id="word_search"]
+
+[sub_resource type="CircleShape2D" id="WordSearchInteraction"]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id="SaidaShape"]
+radius = 17.0
+
+[node name="Museu" type="Node2D" unique_id=357816815]
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=682201015]
+texture_filter = 1
+texture = ExtResource("1_map")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=433936283]
+
+[node name="Parede_superior" type="StaticBody2D" parent="Colisoes" unique_id=1040978604]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Parede_superior" unique_id=1672512110]
+position = Vector2(2, -29)
+polygon = PackedVector2Array(0, 0, 1254, 0, 1254, 95, 0, 95)
+
+[node name="Parede_esquerda" type="StaticBody2D" parent="Colisoes" unique_id=1329851580]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Parede_esquerda" unique_id=419468983]
+position = Vector2(-42, -2)
+polygon = PackedVector2Array(0, 0, 146, 148, 173, 310, 128, 318, 130, 452, 106, 451, 122, 1040, 159, 1087, 0, 1050)
+
+[node name="Parede_direita" type="StaticBody2D" parent="Colisoes" unique_id=2100882803]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Parede_direita" unique_id=1849568776]
+position = Vector2(18, 26)
+polygon = PackedVector2Array(1150, 0, 1254, 0, 1254, 1060, 1150, 1060)
+
+[node name="Parede_inferior_esquerda" type="StaticBody2D" parent="Colisoes" unique_id=1598875647]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Parede_inferior_esquerda" unique_id=805061100]
+position = Vector2(6, 23)
+polygon = PackedVector2Array(0, 1045, 555, 1045, 555, 1254, 0, 1254)
+
+[node name="Parede_inferior_direita" type="StaticBody2D" parent="Colisoes" unique_id=1981379748]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Parede_inferior_direita" unique_id=1839814321]
+position = Vector2(5, 35)
+polygon = PackedVector2Array(700, 1045, 1254, 1045, 1254, 1254, 700, 1254)
+
+[node name="Armadura" type="StaticBody2D" parent="Colisoes" unique_id=1794497895]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Armadura" unique_id=575529787]
+position = Vector2(-19, -40)
+polygon = PackedVector2Array(143, 105, 350, 105, 368, 353, 327, 355, 336, 302, 94, 297)
+
+[node name="Vasos_antigos" type="StaticBody2D" parent="Colisoes" unique_id=1040819593]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Vasos_antigos" unique_id=1781857793]
+position = Vector2(60, -41)
+polygon = PackedVector2Array(890, 105, 1100, 105, 1111, 376, 1057, 353, 1064, 305, 878, 302)
+
+[node name="Coluna_superior_esquerda" type="StaticBody2D" parent="Colisoes" unique_id=1546861542]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Coluna_superior_esquerda" unique_id=1447450934]
+position = Vector2(-32, 10)
+polygon = PackedVector2Array(375, 90, 545, 94, 494, 313, 414, 308, 410, 355, 375, 355, 387, 287)
+
+[node name="Coluna_superior_centro_esquerda" type="StaticBody2D" parent="Colisoes" unique_id=1266024614]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Coluna_superior_centro_esquerda" unique_id=1293633211]
+position = Vector2(11, -8)
+polygon = PackedVector2Array(455, 95, 495, 95, 767, 101, 741, 333, 495, 330, 495, 355, 455, 355)
+
+[node name="Coluna_superior_centro_direita" type="StaticBody2D" parent="Colisoes" unique_id=198465125]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Coluna_superior_centro_direita" unique_id=1951082734]
+polygon = PackedVector2Array(755, 95, 795, 95, 795, 355, 755, 355)
+
+[node name="Coluna_superior_direita" type="StaticBody2D" parent="Colisoes" unique_id=1718864502]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Coluna_superior_direita" unique_id=848084572]
+polygon = PackedVector2Array(759, 86, 935, 107, 948, 315, 919, 313, 920, 355, 875, 355, 875, 321, 791, 326)
+
+[node name="Dinossauro" type="StaticBody2D" parent="Colisoes" unique_id=84871700]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Dinossauro" unique_id=330036933]
+polygon = PackedVector2Array(539, 383, 800, 476, 779, 608, 468, 611, 460, 407)
+
+[node name="Vitrine_egipcia" type="StaticBody2D" parent="Colisoes" unique_id=1049669986]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Vitrine_egipcia" unique_id=1645660398]
+polygon = PackedVector2Array(154, 345, 276, 347, 286, 532, 149, 524)
+
+[node name="Vitrine_geodo" type="StaticBody2D" parent="Colisoes" unique_id=1083251370]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Vitrine_geodo" unique_id=1752379191]
+polygon = PackedVector2Array(970, 344, 1102, 341, 1106, 515, 970, 515)
+
+[node name="Vitrine_navio" type="StaticBody2D" parent="Colisoes" unique_id=1180071670]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Vitrine_navio" unique_id=996613815]
+polygon = PackedVector2Array(143, 568, 281, 568, 279, 716, 141, 714)
+
+[node name="Vitrine_esfera" type="StaticBody2D" parent="Colisoes" unique_id=145852905]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Vitrine_esfera" unique_id=1670958168]
+polygon = PackedVector2Array(969, 571, 1111, 569, 1114, 721, 966, 721)
+
+[node name="Estatua_esquerda" type="StaticBody2D" parent="Colisoes" unique_id=1944280609]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Estatua_esquerda" unique_id=164040098]
+position = Vector2(3, 3)
+polygon = PackedVector2Array(339, 491, 362, 457, 394, 500, 390, 655, 335, 655)
+
+[node name="Estatua_direita" type="StaticBody2D" parent="Colisoes" unique_id=181931313]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Estatua_direita" unique_id=1437727100]
+polygon = PackedVector2Array(867, 498, 886.6446, 455, 908, 500, 914, 655, 860, 655)
+
+[node name="Banco_esquerdo" type="StaticBody2D" parent="Colisoes" unique_id=2141303711]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Banco_esquerdo" unique_id=1295530646]
+polygon = PackedVector2Array(410, 737, 524, 737, 524, 792, 410, 792)
+
+[node name="Banco_direito" type="StaticBody2D" parent="Colisoes" unique_id=547493133]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Banco_direito" unique_id=291940364]
+polygon = PackedVector2Array(728, 736, 845, 736, 845, 792, 728, 792)
+
+[node name="Recepcao" type="StaticBody2D" parent="Colisoes" unique_id=974156318]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Recepcao" unique_id=72466993]
+position = Vector2(-4, -3)
+polygon = PackedVector2Array(135, 813, 353, 810, 362, 996, 141, 996)
+
+[node name="Mesa_exposicao" type="StaticBody2D" parent="Colisoes" unique_id=769091219]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Mesa_exposicao" unique_id=1429725000]
+polygon = PackedVector2Array(906, 843, 1015, 844, 1013, 809, 1043, 795, 1071, 816, 1076, 839, 1124, 840, 1123, 962, 909, 965)
+
+[node name="Poste_esquerdo" type="StaticBody2D" parent="Colisoes" unique_id=1906002949]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Poste_esquerdo" unique_id=878545923]
+polygon = PackedVector2Array(389, 878, 397, 857, 413, 882, 410, 945, 393, 944)
+
+[node name="Poste_direito" type="StaticBody2D" parent="Colisoes" unique_id=452440535]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Poste_direito" unique_id=1924299812]
+position = Vector2(5, 6)
+polygon = PackedVector2Array(845, 875, 851, 848, 861, 875, 857, 941, 840, 943)
+
+[node name="Pilar_entrada_esquerdo" type="StaticBody2D" parent="Colisoes" unique_id=1315417566]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Pilar_entrada_esquerdo" unique_id=764455855]
+position = Vector2(2, -3)
+polygon = PackedVector2Array(457, 1078, 501.73267, 990, 563, 1083, 551, 1210, 462, 1210)
+
+[node name="Pilar_entrada_direito" type="StaticBody2D" parent="Colisoes" unique_id=1733245533]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Pilar_entrada_direito" unique_id=804225203]
+polygon = PackedVector2Array(718, 1041, 755, 1006, 795, 1049, 793, 1210, 700, 1210, 693, 1070)
+
+[node name="Player" parent="." unique_id=127551452 instance=ExtResource("2_player")]
+position = Vector2(626, 1005)
+
+[node name="Saida" type="Area2D" parent="."]
+position = Vector2(626, 1100)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/london/cultural.tscn"
+target_spawn_name = &"FromMuseu"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Saida"]
+shape = SubResource("SaidaShape")
+
+
+[node name="Camera2D" parent="Player"]
+min_zoom = 1.65
+max_zoom = 1.65
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(566.0, 1005.0)
+npc_id = "museu_lesson_1"
+speaker_name = "Guia do museu — Skimming"
+dialogue_text = "Leia depressa: The first room has coins. The next room has tools. Both show everyday life in Roman Britain. O assunto geral é o cotidiano romano."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_scholar1")
+
+[node name="LessonNPC2" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(686.0, 1005.0)
+npc_id = "museu_lesson_2"
+speaker_name = "Visitante do museu — Scanning"
+dialogue_text = "Procure só o dado pedido. Room 2 opens at ten. Room 3 opens at eleven. Para achar eleven, seus olhos podem ir direto aos horários."
+
+[node name="Sprite2D" parent="LessonNPC2" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_nobre5")
+
+[node name="WordSearchChallenge" type="Area2D" parent="."]
+position = Vector2(626.0, 945.0)
+collision_layer = 0
+script = ExtResource("word_search")
+challenge_id = "london_museum"
+challenge_title = "Londres · Museu"
+difficulty = "Médio"
+board_size = 12
+vocabulary = Array[String](["COINS", "TOOLS", "POTTERY", "STATUE", "HISTORY", "DISPLAY"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WordSearchChallenge"]
+shape = SubResource("WordSearchInteraction")
+
+[node name="Marker" type="Label" parent="WordSearchChallenge"]
+offset_left = -75.0
+offset_top = -22.0
+offset_right = 75.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 13
+text = "Caça-palavras"
+horizontal_alignment = 1
+
+[node name="Prompt" type="Label" parent="WordSearchChallenge"]
+offset_left = -88.0
+offset_top = -45.0
+offset_right = 88.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 14
+text = "[E] Abrir diário"
+horizontal_alignment = 1

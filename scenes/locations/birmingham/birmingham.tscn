@@ -1,0 +1,437 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="loop"]
+
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="theme"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="CityGuideScene"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/map_exit_indicator.tscn" id="map_exit_indicator"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="linked_portal"]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="arrive"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="red_arrow"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/birmingham/birmingham_map.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scenes/locations/birmingham/scripts/interacao_birmingham.gd" id="4_info"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/padeiro.png" id="lesson_art_padeiro"]
+
+[sub_resource type="CircleShape2D" id="CircleLibrary"]
+radius = 49.0
+
+[sub_resource type="CircleShape2D" id="CircleMuseum"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleSquare"]
+radius = 46.0
+
+[sub_resource type="CircleShape2D" id="WorldMapExitShape"]
+radius = 17.0
+
+[node name="Birmingham" type="Node2D" unique_id=199550078]
+script = ExtResource("arrive")
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=2017533268]
+texture_filter = 1
+texture = ExtResource("1_map")
+centered = false
+
+[node name="Area" type="CollisionPolygon2D" parent="Mapa" unique_id=1744224219]
+polygon = PackedVector2Array(572, 378, 603, 364, 647, 361, 682, 390, 698, 412, 684, 448, 601, 469, 530, 429, 542, 394)
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=135331440]
+
+[node name="BordaNorteOeste" type="StaticBody2D" parent="Colisoes" unique_id=688718413]
+collision_mask = 0
+metadata/descricao = "floresta e muralha norte, lado oeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BordaNorteOeste" unique_id=157534777]
+position = Vector2(0, -5)
+polygon = PackedVector2Array(0, 0, 706, 0, 708, 102, 717, 212, 651, 154, 629, 178, 610, 154, 548, 89, 280, 140, 248, 164, 192, 205, 170, 260, 140, 320, 0, 309)
+
+[node name="BordaNorteLeste" type="StaticBody2D" parent="Colisoes" unique_id=1098637317]
+collision_mask = 0
+metadata/descricao = "floresta e muralha norte, lado leste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BordaNorteLeste" unique_id=1799878058]
+polygon = PackedVector2Array(824, 0, 1536, 0, 1536, 301, 1436, 279, 1402, 242, 1347, 173, 1223, 94, 910, 83, 851, 106, 828, 163)
+
+[node name="LadoOesteRio" type="StaticBody2D" parent="Colisoes" unique_id=1166242857]
+collision_mask = 0
+metadata/descricao = "muralha oeste e rio"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/LadoOesteRio" unique_id=871665413]
+polygon = PackedVector2Array(0, 300, 96, 277, 123, 330, 178, 400, 115, 471, 110, 562, 173, 594, 167, 698, 112, 676, 0, 630)
+
+[node name="LadoLesteRio" type="StaticBody2D" parent="Colisoes" unique_id=1451490904]
+collision_mask = 0
+metadata/descricao = "muralha leste e rio"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/LadoLesteRio" unique_id=894787214]
+polygon = PackedVector2Array(1536, 281, 1442, 284, 1414, 324, 1424, 475, 1443, 567, 1378, 638, 1439, 672, 1536, 635)
+
+[node name="ForaDaMuralhaSulOeste" type="StaticBody2D" parent="Colisoes" unique_id=1373396003]
+collision_mask = 0
+metadata/descricao = "floresta e agua abaixo da muralha sudoeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/ForaDaMuralhaSulOeste" unique_id=1493504453]
+polygon = PackedVector2Array(0, 611, 95, 621, 187, 608, 208, 648, 262, 625, 297, 710, 445, 780, 657, 826, 694, 823, 711, 1024, 0, 1024)
+
+[node name="ForaDaMuralhaSulLeste" type="StaticBody2D" parent="Colisoes" unique_id=447797000]
+collision_mask = 0
+metadata/descricao = "floresta e agua abaixo da muralha sudeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/ForaDaMuralhaSulLeste" unique_id=1961737548]
+polygon = PackedVector2Array(838, 821, 897, 818, 1100, 789, 1262, 707, 1407, 644, 1536, 608, 1536, 1024, 827, 1024)
+
+[node name="BordaPonteOeste" type="StaticBody2D" parent="Colisoes" unique_id=1333813679]
+collision_mask = 0
+metadata/descricao = "limite ocidental da ponte sul"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BordaPonteOeste" unique_id=1062909699]
+polygon = PackedVector2Array(691, 812, 842, 808, 849, 999, 726, 1024, 688, 1024)
+
+[node name="BordaPonteLeste" type="StaticBody2D" parent="Colisoes" unique_id=195826985]
+collision_mask = 0
+metadata/descricao = "limite oriental da ponte sul"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BordaPonteLeste" unique_id=670229143]
+polygon = PackedVector2Array(784, 811, 842, 811, 848, 1024, 801, 1024)
+
+[node name="FechamentoSul" type="StaticBody2D" parent="Colisoes" unique_id=809421677]
+collision_mask = 0
+metadata/descricao = "fim do mapa na saida sul"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/FechamentoSul" unique_id=1085462491]
+polygon = PackedVector2Array(724, 1007, 805, 1007, 805, 1024, 724, 1024)
+
+[node name="PortaoNorte" type="StaticBody2D" parent="Colisoes" unique_id=564011469]
+collision_mask = 0
+metadata/descricao = "porta norte fechada"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/PortaoNorte" unique_id=753029733]
+position = Vector2(-30, -107)
+polygon = PackedVector2Array(731, 105, 810, 105, 863, 102, 874, 187, 837, 259, 742, 270, 737, 226, 731, 158)
+
+[node name="BibliotecaPredio" type="StaticBody2D" parent="Colisoes" unique_id=1713163683]
+collision_mask = 0
+metadata/descricao = "Library of Birmingham - edificio"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BibliotecaPredio" unique_id=168555726]
+polygon = PackedVector2Array(247, 59, 315, 48, 604, 48, 560, 115, 719, 210, 668, 262, 603, 263, 580, 281, 515, 289, 455, 218, 322, 276, 304, 241, 309, 132)
+
+[node name="BibliotecaJardimOeste" type="StaticBody2D" parent="Colisoes" unique_id=2063057874]
+collision_mask = 0
+metadata/descricao = "Library - jardim e cerca oeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BibliotecaJardimOeste" unique_id=1176744325]
+polygon = PackedVector2Array(277, 184, 313, 159, 323, 273, 419, 294, 418, 323, 357, 317, 275, 285)
+
+[node name="BibliotecaJardimLeste" type="StaticBody2D" parent="Colisoes" unique_id=1985943633]
+collision_mask = 0
+metadata/descricao = "Library - jardim e cerca leste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/BibliotecaJardimLeste" unique_id=537834834]
+polygon = PackedVector2Array(516, 291, 594, 271, 619, 229, 657, 267, 630, 308, 516, 340, 500, 378, 454, 333)
+
+[node name="MuseuPredio" type="StaticBody2D" parent="Colisoes" unique_id=1937945360]
+collision_mask = 0
+metadata/descricao = "Museu - fachada e estrutura"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/MuseuPredio" unique_id=1843611300]
+position = Vector2(23, 4)
+polygon = PackedVector2Array(881, 130, 831, 81, 1010, 66, 1170, 55, 1344, 184, 1220, 273, 1105, 284, 1019, 215, 884, 267, 799, 173, 826, 74)
+
+[node name="MuseuJardimOeste" type="StaticBody2D" parent="Colisoes" unique_id=1530360103]
+collision_mask = 0
+metadata/descricao = "Museu - canteiro com arvores oeste (sem cerca)"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/MuseuJardimOeste" unique_id=2115510021]
+polygon = PackedVector2Array(822, 219, 850, 194, 899, 211, 935, 259, 937, 292, 958, 323, 945, 349, 909, 328, 879, 301, 833, 288)
+
+[node name="MuseuJardimLeste" type="StaticBody2D" parent="Colisoes" unique_id=834534854]
+collision_mask = 0
+metadata/descricao = "Museu - canteiro com arvores leste (sem cerca)"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/MuseuJardimLeste" unique_id=1308722033]
+polygon = PackedVector2Array(1122, 240, 1163, 219, 1219, 231, 1255, 275, 1240, 316, 1196, 351, 1168, 377, 1089, 391, 1076, 364, 1099, 319)
+
+[node name="VictoriaSquareMonumento" type="StaticBody2D" parent="Colisoes" unique_id=613820574]
+collision_mask = 0
+metadata/descricao = "Victoria Square - monumento e pedestal"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/VictoriaSquareMonumento" unique_id=17404388]
+polygon = PackedVector2Array(725, 386, 798, 386, 819, 419, 846, 437, 866, 470, 881, 515, 874, 552, 851, 580, 820, 596, 762, 466, 695, 596, 667, 573, 651, 539, 653, 487, 681, 448, 708, 422)
+
+[node name="CasaNoroeste" type="StaticBody2D" parent="Colisoes" unique_id=1904646389]
+collision_mask = 0
+metadata/descricao = "casa proxima da muralha oeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasaNoroeste" unique_id=1253061969]
+polygon = PackedVector2Array(134, 289, 163, 260, 210, 267, 257, 311, 258, 350, 148, 366, 119, 340)
+
+[node name="IgrejaOeste" type="StaticBody2D" parent="Colisoes" unique_id=885842938]
+collision_mask = 0
+metadata/descricao = "igreja da parte oeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/IgrejaOeste" unique_id=816391968]
+polygon = PackedVector2Array(181, 379, 199, 411, 215, 436, 249, 448, 290, 506, 271, 552, 190, 583, 105, 555, 101, 463, 137, 422)
+
+[node name="CasasEsquinaOeste" type="StaticBody2D" parent="Colisoes" unique_id=1543456091]
+collision_mask = 0
+metadata/descricao = "predios a oeste de Victoria Square"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasasEsquinaOeste" unique_id=686755459]
+position = Vector2(414, -74)
+polygon = PackedVector2Array(564, 399, 598, 381, 602, 386, 610, 390, 614, 410, 599, 418, 566, 414)
+
+[node name="CasasEsquinaLeste" type="StaticBody2D" parent="Colisoes" unique_id=951298613]
+collision_mask = 0
+metadata/descricao = "predios a leste de Victoria Square"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasasEsquinaLeste" unique_id=591865263]
+polygon = PackedVector2Array(856, 381, 886, 361, 920, 350, 949, 385, 970, 423, 937, 465, 841, 444)
+
+[node name="CasaNordeste" type="StaticBody2D" parent="Colisoes" unique_id=2092439700]
+collision_mask = 0
+metadata/descricao = "casas proximas da muralha leste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasaNordeste" unique_id=849729844]
+polygon = PackedVector2Array(1265, 269, 1302, 239, 1380, 178, 1451, 315, 1430, 404, 1389, 373, 1314, 373, 1255, 335)
+
+[node name="CasaCentroLeste" type="StaticBody2D" parent="Colisoes" unique_id=300385194]
+collision_mask = 0
+metadata/descricao = "construcao proxima ao museu"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasaCentroLeste" unique_id=2095642403]
+polygon = PackedVector2Array(1108, 479, 1158, 467, 1242, 492, 1216, 547, 1142, 627, 1071, 553, 1069, 521)
+
+[node name="CasasSudeste" type="StaticBody2D" parent="Colisoes" unique_id=1414092593]
+collision_mask = 0
+metadata/descricao = "casas da parte inferior leste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasasSudeste" unique_id=244316227]
+position = Vector2(-58, 52)
+polygon = PackedVector2Array(912, 615, 971, 580, 1027, 593, 1053, 543, 1119, 552, 1214, 588, 1317, 672, 1284, 711, 1006, 764, 896, 792, 904, 734, 875, 680)
+
+[node name="CasasSudesteMenores" type="StaticBody2D" parent="Colisoes" unique_id=1932591608]
+collision_mask = 0
+metadata/descricao = "predios pequenos perto da torre"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasasSudesteMenores" unique_id=1027952814]
+polygon = PackedVector2Array(1173, 554, 1228, 528, 1299, 545, 1308, 611, 1242, 652, 1162, 623)
+
+[node name="TorreRelogio" type="StaticBody2D" parent="Colisoes" unique_id=1838622869]
+collision_mask = 0
+metadata/descricao = "torre do relogio e conjunto leste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/TorreRelogio" unique_id=1998603859]
+polygon = PackedVector2Array(1363, 427, 1382, 414, 1438, 397, 1468, 469, 1459, 608, 1383, 659, 1300, 700, 1250, 656, 1304, 562, 1265, 522, 1298, 469)
+
+[node name="CasasSudoeste" type="StaticBody2D" parent="Colisoes" unique_id=268460181]
+collision_mask = 0
+metadata/descricao = "casas inferiores a oeste"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasasSudoeste" unique_id=997296095]
+polygon = PackedVector2Array(420, 604, 474, 581, 530, 584, 570, 618, 554, 666, 633, 889, 290, 716, 321, 656, 387, 671)
+
+[node name="CasasSudoesteMenores" type="StaticBody2D" parent="Colisoes" unique_id=2020727800]
+collision_mask = 0
+metadata/descricao = "predios proximos a entrada sul"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/CasasSudoesteMenores" unique_id=1808425239]
+polygon = PackedVector2Array(552, 661, 600, 622, 676, 673, 679, 709, 694, 880, 559, 788, 525, 737)
+
+[node name="PortaoSulTorreOeste" type="StaticBody2D" parent="Colisoes" unique_id=939556579]
+collision_mask = 0
+metadata/descricao = "torre esquerda do portao sul"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/PortaoSulTorreOeste" unique_id=1043834204]
+polygon = PackedVector2Array(674, 691, 697, 643, 720, 649, 744, 696, 744, 824, 672, 825)
+
+[node name="PortaoSulTorreLeste" type="StaticBody2D" parent="Colisoes" unique_id=691170539]
+collision_mask = 0
+metadata/descricao = "torre direita do portao sul"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/PortaoSulTorreLeste" unique_id=272856072]
+polygon = PackedVector2Array(781, 695, 798, 643, 820, 647, 846, 693, 846, 825, 781, 824)
+
+[node name="PortaoSulFechado" type="StaticBody2D" parent="Colisoes" unique_id=1389358282]
+collision_mask = 0
+metadata/descricao = "porta de madeira fechada da entrada sul"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/PortaoSulFechado" unique_id=2089212898]
+polygon = PackedVector2Array(741, 729, 783, 729, 783, 811, 741, 811)
+
+[node name="LampiaoOeste" type="StaticBody2D" parent="Colisoes" unique_id=1683299557]
+collision_mask = 0
+metadata/descricao = "poste a oeste da praca"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/LampiaoOeste" unique_id=2123791027]
+polygon = PackedVector2Array(287, 471, 305, 471, 305, 518, 287, 518)
+
+[node name="LampiaoCentroOeste" type="StaticBody2D" parent="Colisoes" unique_id=363478656]
+collision_mask = 0
+metadata/descricao = "poste sudoeste da praca"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/LampiaoCentroOeste" unique_id=212854999]
+polygon = PackedVector2Array(620, 526, 641, 526, 641, 580, 620, 580)
+
+[node name="LampiaoCentroLeste" type="StaticBody2D" parent="Colisoes" unique_id=56580600]
+collision_mask = 0
+metadata/descricao = "poste sudeste da praca"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/LampiaoCentroLeste" unique_id=1402256480]
+polygon = PackedVector2Array(882, 537, 900, 537, 900, 577, 882, 577)
+
+[node name="LampiaoLeste" type="StaticBody2D" parent="Colisoes" unique_id=1218308105]
+collision_mask = 0
+metadata/descricao = "poste proximo a torre"
+
+[node name="Area" type="CollisionPolygon2D" parent="Colisoes/LampiaoLeste" unique_id=1570065115]
+polygon = PackedVector2Array(1308, 434, 1326, 434, 1326, 477, 1308, 477)
+
+[node name="Player" parent="." unique_id=1906825096 instance=ExtResource("2_player")]
+position = Vector2(762, 642)
+
+[node name="EntradaLibraryOfBirmingham" type="Area2D" parent="." unique_id=1043205884]
+position = Vector2(468, 330)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/birmingham/bibliotecainterior.tscn"
+target_spawn_name = &"FromBirmingham"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="EntradaLibraryOfBirmingham" unique_id=1211010923]
+position = Vector2(-27, -53)
+shape = SubResource("CircleLibrary")
+
+[node name="EntradaMuseu" type="Area2D" parent="." unique_id=1560195482]
+position = Vector2(1058, 348)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/locations/birmingham/museuinterior.tscn"
+target_spawn_name = &"FromBirmingham"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="EntradaMuseu" unique_id=2092709406]
+position = Vector2(-26, -32)
+shape = SubResource("CircleMuseum")
+
+[node name="MarcoVictoriaSquare" type="Area2D" parent="." unique_id=101094596]
+position = Vector2(764, 611)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_info")
+prompt = "E — Conhecer Victoria Square"
+texto = "VICTORIA SQUARE
+Praça central de Birmingham. Um marco público para exploração e encontro. O monumento e os jardins têm colisões; as ruas à sua volta continuam livres."
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="MarcoVictoriaSquare" unique_id=1417888698]
+position = Vector2(-3, -57)
+shape = SubResource("CircleSquare")
+
+[node name="Interface" type="CanvasLayer" parent="." unique_id=1913615438]
+
+[node name="Instrucoes" type="Label" parent="Interface" unique_id=1804295820]
+offset_left = 344.0
+offset_top = 12.0
+offset_right = 950.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 0.96, 0.78, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "Birmingham  •  WASD / Setas: mover  •  E: interagir"
+
+[node name="Dica" type="Label" parent="Interface" unique_id=923413095]
+visible = false
+offset_left = 130.0
+offset_top = 480.0
+offset_right = 830.0
+offset_bottom = 531.0
+theme_override_colors/font_color = Color(1, 0.95, 0.7, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "E — Interagir"
+horizontal_alignment = 1
+
+[node name="Info" type="Panel" parent="Interface" unique_id=684668951]
+visible = false
+offset_left = 148.0
+offset_top = 165.0
+offset_right = 812.0
+offset_bottom = 340.0
+
+[node name="Mensagem" type="Label" parent="Interface/Info" unique_id=642618399]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 20.0
+offset_right = 642.0
+offset_bottom = 125.0
+theme_override_font_sizes/font_size = 19
+text = "Informacoes"
+autowrap_mode = 3
+
+[node name="Fechar" type="Label" parent="Interface/Info" unique_id=1595038896]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 135.0
+offset_right = 640.0
+offset_bottom = 167.0
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Pressione E ou Esc para fechar."
+
+[node name="EntranceArrow" parent="EntradaLibraryOfBirmingham" instance=ExtResource("red_arrow")]
+position = Vector2(-27, -118)
+
+[node name="EntranceArrow" parent="EntradaMuseu" instance=ExtResource("red_arrow")]
+position = Vector2(-26, -97)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromBibliotecaInterior" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(465, 360)
+
+[node name="FromMuseuInterior" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1056, 450)
+
+[node name="WorldMapExit" type="Area2D" parent="."]
+position = Vector2(762, 714)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("linked_portal")
+target_scene_path = "res://scenes/world/world_map.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldMapExit"]
+shape = SubResource("WorldMapExitShape")
+
+[node name="Indicator" parent="WorldMapExit" instance=ExtResource("map_exit_indicator")]
+
+[node name="CityGuide" parent="." instance=ExtResource("CityGuideScene")]
+position = Vector2(817, 642)
+speaker_name = "Birmingham Guide"
+npc_id = "birmingham_town_guide"
+dialogue_text = "Welcome to Birmingham! You can study at the library and explore the museum."
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("theme")
+autoplay = true
+script = ExtResource("loop")
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(762.0, 582.0)
+npc_id = "birmingham_lesson_1"
+speaker_name = "Padeiro — Rotina"
+dialogue_text = "I bake bread every morning descreve uma rotina. Every morning e usually ajudam a reconhecer o Simple Present."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_padeiro")

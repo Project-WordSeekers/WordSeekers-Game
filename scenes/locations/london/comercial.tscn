@@ -1,0 +1,183 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/looping_music.gd" id="loop"]
+
+[ext_resource type="AudioStream" path="res://assets/audio/music/cities_theme.ogg" id="theme"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/london/comercial.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="3_district"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="4_portal"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/padeiro.png" id="lesson_art_padeiro"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/cidadao7.png" id="lesson_art_cidadao7"]
+
+[sub_resource type="RectangleShape2D" id="portal_Esquerda"]
+size = Vector2(25, 123)
+
+[sub_resource type="RectangleShape2D" id="portal_Cima"]
+size = Vector2(160, 40)
+
+[node name="Comercial" type="Node2D" unique_id=1425693994]
+script = ExtResource("3_district")
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=1295568432]
+texture_filter = 1
+position = Vector2(-5, -3)
+texture = ExtResource("1_map")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=1014750644]
+
+[node name="PalacioBuckingham" type="StaticBody2D" parent="Colisoes" unique_id=1500358294]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/PalacioBuckingham" unique_id=1453324686]
+position = Vector2(5, -25)
+polygon = PackedVector2Array(70, 85, 517, 27, 564, 181, 580, 405, 0, 406)
+
+[node name="BigBen" type="StaticBody2D" parent="Colisoes" unique_id=2036241520]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BigBen" unique_id=250668229]
+position = Vector2(-5, -35)
+polygon = PackedVector2Array(799, 749, 867, 749, 863, 584, 903, 485, 949, 588, 945, 724, 995, 678, 1020, 729, 1223, 721, 1251, 999, 1092, 993, 1087, 1024, 1019, 1018, 1012, 976, 957, 974, 958, 1019, 886, 1025, 896.6914, 995.3955, 741, 990, 742, 859)
+
+[node name="Loja" type="StaticBody2D" parent="Colisoes" unique_id=1018996178]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Loja" unique_id=907028135]
+position = Vector2(-13, -17)
+polygon = PackedVector2Array(318, 480, 356, 496, 429, 496, 456, 484, 475, 494, 511, 570, 493, 621, 493, 661, 479, 684, 422, 689, 420, 674, 401, 674, 402, 661, 366, 661, 363, 675, 340, 679, 339, 693, 265, 685, 265.00006, 609.28656, 168, 607, 152, 654, 12, 646, 12, 489, 104, 488, 148, 451, 186.02817, 483.88153)
+
+[node name="Pousada" type="StaticBody2D" parent="Colisoes" unique_id=942205457]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Pousada" unique_id=1076117815]
+position = Vector2(0, -10)
+polygon = PackedVector2Array(571, 487, 645, 484, 671, 489, 731, 491, 778, 489, 805, 538, 829, 595, 820, 662, 799, 682, 728, 681, 712, 640, 655, 641, 641, 685, 565, 685, 559, 585)
+
+[node name="Fonte" type="StaticBody2D" parent="Colisoes" unique_id=1215126524]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/Fonte" unique_id=1091342679]
+position = Vector2(-2, -12)
+polygon = PackedVector2Array(441, 842, 516, 796, 593, 838, 594, 912, 561, 938, 469, 940, 441, 900)
+
+[node name="CasasSuperiorDireita" type="StaticBody2D" parent="Colisoes" unique_id=1997857393]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/CasasSuperiorDireita" unique_id=1380738625]
+position = Vector2(-101, -15)
+polygon = PackedVector2Array(792, 24, 1220, 40, 1351, 427, 1322, 642, 1129, 630, 1108, 587, 1096, 531, 1086, 402, 794, 414, 792, 322, 917, 320, 971, 293, 1041, 295, 1108, 343, 1240, 340, 1242, 285, 1123, 293, 1100, 266, 1014, 248, 794, 266)
+
+[node name="CasasInferiorEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=1751403821]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/CasasInferiorEsquerda" unique_id=1891932333]
+position = Vector2(-66, 59)
+polygon = PackedVector2Array(67, 726, 198, 726, 289, 694, 320, 671, 351, 707, 378, 846, 260, 859, 306, 897, 336, 1001, 367, 967, 367, 918, 382, 886, 453, 957, 565, 951, 622, 1067, 622, 1189, 75, 1184)
+
+[node name="CasasInferiorDireita" type="StaticBody2D" parent="Colisoes" unique_id=2119607438]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/CasasInferiorDireita" unique_id=934791450]
+position = Vector2(-95, 36)
+polygon = PackedVector2Array(738, 1032, 713, 1001, 743, 973, 793, 1001, 924.0399, 1005.7776, 1177, 1015, 1340, 999, 1333, 1202, 735, 1205)
+
+[node name="BordaSuperior" type="StaticBody2D" parent="Colisoes" unique_id=2083495313]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaSuperior" unique_id=376228051]
+polygon = PackedVector2Array(0, -20, 1254, -20, 1254, 10, 0, 10)
+
+[node name="BordaInferior" type="StaticBody2D" parent="Colisoes" unique_id=1416092006]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaInferior" unique_id=411956416]
+polygon = PackedVector2Array(0, 1244, 1254, 1244, 1254, 1274, 0, 1274)
+
+[node name="BordaEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=1330533003]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaEsquerda" unique_id=923242411]
+polygon = PackedVector2Array(-20, 0, 10, 0, 65, 365, 64, 475, 10, 467.92426, 10, 1254, -20, 1254)
+
+[node name="BordaDireita" type="StaticBody2D" parent="Colisoes" unique_id=595732364]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Colisoes/BordaDireita" unique_id=2142548031]
+polygon = PackedVector2Array(1244, 0, 1274, 0, 1274, 1254, 1244, 1254)
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=1274739898]
+
+[node name="Entrada" type="Marker2D" parent="SpawnPoints" unique_id=727980377]
+position = Vector2(26, 709)
+
+[node name="Esquerda" type="Marker2D" parent="SpawnPoints" unique_id=2144627607]
+position = Vector2(99, 712)
+
+[node name="Cima" type="Marker2D" parent="SpawnPoints" unique_id=338324725]
+position = Vector2(618, 93)
+
+[node name="Portais" type="Node2D" parent="." unique_id=375732458]
+
+[node name="Esquerda" type="Area2D" parent="Portais" unique_id=1674105736]
+position = Vector2(90, 615)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_portal")
+target_scene_path = "res://scenes/locations/london/religioso.tscn"
+target_spawn_name = &"Direita"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portais/Esquerda" unique_id=1524312173]
+position = Vector2(-49, 98)
+shape = SubResource("portal_Esquerda")
+
+[node name="Cima" type="Area2D" parent="Portais" unique_id=195769773]
+position = Vector2(621, 104)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_portal")
+target_scene_path = "res://scenes/locations/london/cultural.tscn"
+target_spawn_name = &"Baixo"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portais/Cima" unique_id=1832610850]
+position = Vector2(-13, -67)
+shape = SubResource("portal_Cima")
+
+[node name="Player" parent="." unique_id=794820243 instance=ExtResource("2_player")]
+position = Vector2(530, 751)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1250243995]
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer" unique_id=329703778]
+offset_left = 344.0
+offset_top = 8.0
+offset_right = 680.0
+offset_bottom = 43.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel" unique_id=1927491196]
+layout_mode = 2
+text = "Londres · Distrito Comercial"
+
+[node name="CityMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("theme")
+autoplay = true
+script = ExtResource("loop")
+
+[node name="Camera2D" parent="Player"]
+min_zoom = 1.2
+max_zoom = 1.2
+zoom = Vector2(1.2, 1.2)
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(470.0, 751.0)
+npc_id = "comercial_lesson_1"
+speaker_name = "Vendedor — Alimentos e bebidas"
+dialogue_text = "Bread é pão, cheese é queijo e juice é suco. Some bread e some juice servem para pedir uma quantidade sem especificá-la."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_padeiro")
+
+[node name="LessonNPC2" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(590.0, 751.0)
+npc_id = "comercial_lesson_2"
+speaker_name = "Compradora — Much, many e a lot of"
+dialogue_text = "How many cups? pergunta quantas xícaras. How much juice? pergunta quanto suco. A lot of pode acompanhar cups ou juice."
+
+[node name="Sprite2D" parent="LessonNPC2" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_cidadao7")

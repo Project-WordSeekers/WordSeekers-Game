@@ -1,0 +1,214 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/london/academia_interior.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_exit"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/scholar2.png" id="lesson_art_scholar2"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/menina1.png" id="lesson_art_menina1"]
+
+[ext_resource type="Script" path="res://scripts/minigames/roman_walls_challenge.gd" id="word_search"]
+
+[sub_resource type="CircleShape2D" id="WordSearchInteraction"]
+radius = 30.0
+
+[node name="AcademiaDeLondres" type="Node2D" unique_id=1633554639]
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=2011242658]
+texture_filter = 1
+position = Vector2(1, -6)
+texture = ExtResource("1_map")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=670487653]
+
+[node name="ParedeSuperior" type="StaticBody2D" parent="Colisoes" unique_id=691044045]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ParedeSuperior" unique_id=77104855]
+polygon = PackedVector2Array(0, 0, 1536, 0, 1536, 70, 0, 70)
+
+[node name="ParedeEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=287302009]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ParedeEsquerda" unique_id=1660527243]
+polygon = PackedVector2Array(0, 70, 66, 70, 66, 868, 0, 868)
+
+[node name="ParedeDireita" type="StaticBody2D" parent="Colisoes" unique_id=2034526586]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ParedeDireita" unique_id=883450581]
+polygon = PackedVector2Array(1470, 70, 1536, 70, 1536, 868, 1470, 868)
+
+[node name="GuardaCorpoInferiorEsquerdo" type="StaticBody2D" parent="Colisoes" unique_id=694603848]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/GuardaCorpoInferiorEsquerdo" unique_id=1985086636]
+position = Vector2(-1, -4)
+polygon = PackedVector2Array(0, 866, 103, 868, 111, 891, 255, 891, 260.00046, 866.83875, 314, 864, 317, 891, 573, 893, 577, 866, 638, 866, 638, 1024, 0, 1024)
+
+[node name="GuardaCorpoInferiorDireito" type="StaticBody2D" parent="Colisoes" unique_id=1899366257]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/GuardaCorpoInferiorDireito" unique_id=1829228907]
+position = Vector2(-3, -3)
+polygon = PackedVector2Array(902, 866, 963, 870, 969, 889, 1215, 889, 1226, 866, 1281.2421, 866, 1289, 892, 1536, 866, 1536, 1024, 902, 1024)
+
+[node name="MesaProfessor" type="StaticBody2D" parent="Colisoes" unique_id=896605710]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/MesaProfessor" unique_id=2076055985]
+position = Vector2(18, -6)
+polygon = PackedVector2Array(655, 231, 843, 225, 842, 278, 652, 281)
+
+[node name="ParedeFundoEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=50287917]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ParedeFundoEsquerda" unique_id=2050007158]
+position = Vector2(180, 9)
+polygon = PackedVector2Array(15, 86, 246, 70, 366, 221, 379, 256, 341, 263, 317, 267, 298, 255, 47, 385)
+
+[node name="ParedeFundoDireita" type="StaticBody2D" parent="Colisoes" unique_id=1161026192]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ParedeFundoDireita" unique_id=236505442]
+position = Vector2(3, 78)
+polygon = PackedVector2Array(1292, 70, 1469, 70, 1473, 439, 1359, 365, 1382, 223, 1351, 206, 1330, 336, 1253, 284)
+
+[node name="EstanteEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=1250018836]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/EstanteEsquerda" unique_id=1969880079]
+position = Vector2(-4, -26)
+polygon = PackedVector2Array(83, 304, 231, 304, 242, 414, 212, 447, 191, 331, 156, 340, 183, 477, 127, 502, 67, 498)
+
+[node name="EstanteDireita" type="StaticBody2D" parent="Colisoes" unique_id=902647869]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/EstanteDireita" unique_id=1897289401]
+position = Vector2(-168, -190)
+polygon = PackedVector2Array(1303, 304, 1455, 304, 1444, 564, 1341, 509, 1305, 529, 1267, 510, 1263, 476, 1227, 459, 1212, 463, 1165, 466, 1140, 456, 1147, 395)
+
+[node name="MesaSuperiorEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=1354126264]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/MesaSuperiorEsquerda" unique_id=1973135521]
+polygon = PackedVector2Array(341, 443, 542, 442, 541, 507, 500, 509, 494, 527, 470, 525, 462, 510, 414, 508, 409, 524, 378, 523, 376, 504, 344, 495)
+
+[node name="MesaSuperiorDireita" type="StaticBody2D" parent="Colisoes" unique_id=870321238]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/MesaSuperiorDireita" unique_id=271230046]
+position = Vector2(2, 1)
+polygon = PackedVector2Array(988, 438, 1123, 435, 1129.2865, 423.53088, 1154, 421, 1160, 436, 1191, 444, 1199, 502, 1160, 503, 1153, 521, 1130, 518, 1125, 500, 1072, 503, 1070, 521, 1038, 521, 1039.957, 505.22665, 996, 501)
+
+[node name="MesaInferiorEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=1427868741]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/MesaInferiorEsquerda" unique_id=433326559]
+position = Vector2(-4, -12)
+polygon = PackedVector2Array(329, 683, 357, 681, 363, 668, 391, 669, 398, 681, 431.77112, 682.289, 431, 665, 447, 656, 463, 662, 464, 671, 456, 684, 529, 686, 523, 761, 484.93787, 761.3865, 485, 772, 452.7779, 770.17615, 451, 759, 399, 756, 399, 772, 368, 774, 326, 763)
+
+[node name="MesaInferiorDireita" type="StaticBody2D" parent="Colisoes" unique_id=1332961431]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/MesaInferiorDireita" unique_id=148639234]
+position = Vector2(18, -10)
+polygon = PackedVector2Array(998, 678, 1191, 682, 1193, 754, 1157.8064, 755.6243, 1152, 769, 1124.9858, 767.9475, 1118, 753, 1074, 749, 1073, 763, 1039.9528, 763, 998, 763)
+
+[node name="ArmarioLateralEsquerdo" type="StaticBody2D" parent="Colisoes" unique_id=1853778447]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ArmarioLateralEsquerdo" unique_id=1378334879]
+position = Vector2(-58, 6)
+polygon = PackedVector2Array(85, 468, 181, 465, 184, 653, 179, 744, 198, 760, 197, 804, 195, 836, 215, 863, 180, 886, 67, 850)
+
+[node name="ArmarioLateralDireito" type="StaticBody2D" parent="Colisoes" unique_id=704863889]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/ArmarioLateralDireito" unique_id=191752294]
+position = Vector2(33, 44)
+polygon = PackedVector2Array(1377, 413, 1462, 416, 1468, 850, 1362, 853)
+
+[node name="EscadinhaSuperiorEsquerda" type="StaticBody2D" parent="Colisoes" unique_id=1546914495]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/EscadinhaSuperiorEsquerda" unique_id=289601494]
+position = Vector2(-61, -120)
+polygon = PackedVector2Array(533, 182, 1203, 204, 1136, 328, 1039, 353, 998, 348, 981.9201, 334.53342, 853, 340, 854, 295, 804, 299, 803, 337, 594, 350)
+
+[node name="PontoEntrada" type="Marker2D" parent="." unique_id=469221657]
+position = Vector2(768, 835)
+
+[node name="Saida" type="Area2D" parent="." unique_id=1315797623]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3_exit")
+target_scene_path = "res://scenes/locations/london/academia.tscn"
+target_spawn_name = &"FromAcademia_Interior"
+
+[node name="Forma" type="CollisionPolygon2D" parent="Saida" unique_id=1041704306]
+polygon = PackedVector2Array(685, 977, 856, 977, 856, 1024, 685, 1024)
+
+[node name="Player" parent="." unique_id=1871260543 instance=ExtResource("2_player")]
+position = Vector2(768, 835)
+
+[node name="Camera2D" parent="Player"]
+min_zoom = 1.0
+max_zoom = 1.0
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(708.0, 835.0)
+npc_id = "academia_interior_lesson_1"
+speaker_name = "Professor — Comandos em sala"
+dialogue_text = "Listen, repeat e write significam ouça, repita e escreva. Please antes do comando torna o pedido mais cortês."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_scholar2")
+
+[node name="LessonNPC2" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(828.0, 835.0)
+npc_id = "academia_interior_lesson_2"
+speaker_name = "Aluna — Artigos e possessivos"
+dialogue_text = "This is a notebook apresenta um caderno. The notebook is mine identifica o caderno. Em my notebook, my vem antes do objeto."
+
+[node name="Sprite2D" parent="LessonNPC2" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_menina1")
+
+[node name="WordSearchChallenge" type="Area2D" parent="."]
+position = Vector2(768.0, 775.0)
+collision_layer = 0
+script = ExtResource("word_search")
+challenge_id = "london_academy"
+challenge_title = "Londres · Academia"
+difficulty = "Difícil"
+board_size = 16
+vocabulary = Array[String](["ACTUALLY", "CURRENTLY", "LIBRARY", "BOOKSHOP", "PRONOUN", "QUESTION", "SENTENCE", "VOCABULARY"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WordSearchChallenge"]
+shape = SubResource("WordSearchInteraction")
+
+[node name="Marker" type="Label" parent="WordSearchChallenge"]
+offset_left = -75.0
+offset_top = -22.0
+offset_right = 75.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 13
+text = "Caça-palavras"
+horizontal_alignment = 1
+
+[node name="Prompt" type="Label" parent="WordSearchChallenge"]
+offset_left = -88.0
+offset_top = -45.0
+offset_right = 88.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 14
+text = "[E] Abrir diário"
+horizontal_alignment = 1

@@ -1,0 +1,387 @@
+[gd_scene load_steps=35 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="arrive"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/entrance_arrow.tscn" id="red_arrow"]
+
+[ext_resource type="Texture2D" path="res://assets/environments/nottingham/city_of_caves_nova_map.webp" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/locations/portal_secreto.gd" id="4"]
+[ext_resource type="Script" path="res://scenes/locations/nottingham/scripts/key02_reward.gd" id="5"]
+
+[sub_resource type="CircleShape2D" id="exit"]
+radius = 58.0
+
+[sub_resource type="CircleShape2D" id="key_cave"]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id="secret"]
+radius = 54.0
+
+[sub_resource type="RectangleShape2D" id="ref_0"]
+size = Vector2(1536, 36)
+
+[sub_resource type="RectangleShape2D" id="ref_1"]
+size = Vector2(30, 1024)
+
+[sub_resource type="RectangleShape2D" id="ref_2"]
+size = Vector2(30, 1024)
+
+[sub_resource type="RectangleShape2D" id="ref_3"]
+size = Vector2(650, 60)
+
+[sub_resource type="RectangleShape2D" id="ref_4"]
+size = Vector2(650, 60)
+
+[sub_resource type="RectangleShape2D" id="ref_5"]
+size = Vector2(220, 135)
+
+[sub_resource type="RectangleShape2D" id="ref_6"]
+size = Vector2(160, 105)
+
+[sub_resource type="RectangleShape2D" id="ref_7"]
+size = Vector2(275, 100)
+
+[sub_resource type="RectangleShape2D" id="ref_8"]
+size = Vector2(225, 90)
+
+[sub_resource type="RectangleShape2D" id="ref_9"]
+size = Vector2(120, 175)
+
+[sub_resource type="RectangleShape2D" id="ref_10"]
+size = Vector2(115, 75)
+
+[sub_resource type="RectangleShape2D" id="ref_11"]
+size = Vector2(120, 80)
+
+[sub_resource type="RectangleShape2D" id="ref_12"]
+size = Vector2(330, 130)
+
+[sub_resource type="RectangleShape2D" id="ref_13"]
+size = Vector2(70, 85)
+
+[sub_resource type="RectangleShape2D" id="ref_14"]
+size = Vector2(60, 110)
+
+[sub_resource type="RectangleShape2D" id="ref_15"]
+size = Vector2(165, 105)
+
+[sub_resource type="RectangleShape2D" id="ref_16"]
+size = Vector2(165, 90)
+
+[sub_resource type="RectangleShape2D" id="ref_17"]
+size = Vector2(100, 65)
+
+[sub_resource type="RectangleShape2D" id="ref_18"]
+size = Vector2(105, 65)
+
+[sub_resource type="RectangleShape2D" id="ref_19"]
+size = Vector2(120, 95)
+
+[sub_resource type="RectangleShape2D" id="ref_20"]
+size = Vector2(100, 170)
+
+[sub_resource type="RectangleShape2D" id="ref_21"]
+size = Vector2(95, 115)
+
+[sub_resource type="RectangleShape2D" id="ref_22"]
+size = Vector2(45, 45)
+
+[sub_resource type="RectangleShape2D" id="ref_23"]
+size = Vector2(300, 12)
+
+[sub_resource type="RectangleShape2D" id="ref_24"]
+size = Vector2(90, 10)
+
+[sub_resource type="RectangleShape2D" id="ref_25"]
+size = Vector2(70, 10)
+
+[node name="CityOfCaves" type="Node2D"]
+script = ExtResource("arrive")
+
+[node name="Mapa" type="Sprite2D" parent="."]
+texture = ExtResource("1")
+centered = false
+texture_filter = 1
+
+[node name="Colisoes" type="Node2D" parent="."]
+
+[node name="BordaNorte" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(768, 18)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BordaNorte"]
+shape = SubResource("ref_0")
+
+[node name="BordaOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(15, 512)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BordaOeste"]
+shape = SubResource("ref_1")
+
+[node name="BordaLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1521, 512)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BordaLeste"]
+shape = SubResource("ref_2")
+
+[node name="BordaSulOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(325, 994)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BordaSulOeste"]
+shape = SubResource("ref_3")
+
+[node name="BordaSulLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1211, 994)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/BordaSulLeste"]
+shape = SubResource("ref_4")
+
+[node name="RochaTopoOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(120, 105)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/RochaTopoOeste"]
+shape = SubResource("ref_5")
+
+[node name="PrediosOesteSuperior" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(360, 125)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/PrediosOesteSuperior"]
+shape = SubResource("ref_6")
+
+[node name="RochaTopoCentral" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(755, 92)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/RochaTopoCentral"]
+shape = SubResource("ref_7")
+
+[node name="RochaTopoLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1200, 80)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/RochaTopoLeste"]
+shape = SubResource("ref_8")
+
+[node name="RochedoOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(78, 410)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/RochedoOeste"]
+shape = SubResource("ref_9")
+
+[node name="CasaOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(325, 363)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/CasaOeste"]
+shape = SubResource("ref_10")
+
+[node name="CasaOesteBaixa" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(398, 473)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/CasaOesteBaixa"]
+shape = SubResource("ref_11")
+
+[node name="LagoCentral" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(795, 550)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/LagoCentral"]
+shape = SubResource("ref_12")
+
+[node name="LagoOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(622, 530)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/LagoOeste"]
+shape = SubResource("ref_13")
+
+[node name="LagoLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(990, 555)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/LagoLeste"]
+shape = SubResource("ref_14")
+
+[node name="RochasSulOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(110, 790)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/RochasSulOeste"]
+shape = SubResource("ref_15")
+
+[node name="MercadoOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(270, 725)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MercadoOeste"]
+shape = SubResource("ref_16")
+
+[node name="PedrasSulOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(520, 827)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/PedrasSulOeste"]
+shape = SubResource("ref_17")
+
+[node name="PedrasSulLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1080, 824)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/PedrasSulLeste"]
+shape = SubResource("ref_18")
+
+[node name="PrediosLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1120, 295)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/PrediosLeste"]
+shape = SubResource("ref_19")
+
+[node name="RochasLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1450, 565)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/RochasLeste"]
+shape = SubResource("ref_20")
+
+[node name="MinaLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1390, 740)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/MinaLeste"]
+shape = SubResource("ref_21")
+
+[node name="CristaisLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1260, 520)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/CristaisLeste"]
+shape = SubResource("ref_22")
+
+[node name="ParapeitoPonte" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(785, 351)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParapeitoPonte"]
+shape = SubResource("ref_23")
+
+[node name="ParapeitoPonteOeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(560, 365)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParapeitoPonteOeste"]
+shape = SubResource("ref_24")
+
+[node name="ParapeitoPonteLeste" type="StaticBody2D" parent="Colisoes"]
+position = Vector2(1005, 366)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colisoes/ParapeitoPonteLeste"]
+shape = SubResource("ref_25")
+
+[node name="Player" parent="." instance=ExtResource("2")]
+position = Vector2(765, 770)
+
+[node name="Saida" type="Area2D" parent="."]
+position = Vector2(765, 930)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3")
+target_scene_path = "res://scenes/locations/nottingham/nottingham.tscn"
+target_spawn_name = &"FromCityOfCaves"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="Saida"]
+shape = SubResource("exit")
+
+[node name="PassagemSecreta" type="Area2D" parent="."]
+position = Vector2(1325, 410)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4")
+target_scene_path = "res://scenes/locations/nottingham/camarasecreta.tscn"
+target_spawn_name = &"FromCityOfCaves"
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="PassagemSecreta"]
+shape = SubResource("secret")
+
+[node name="Key02Caverna" type="Area2D" parent="."]
+position = Vector2(445, 510)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5")
+
+[node name="AreaDeInteracao" type="CollisionShape2D" parent="Key02Caverna"]
+shape = SubResource("key_cave")
+
+[node name="Visual" type="Node2D" parent="Key02Caverna"]
+
+[node name="Chave" type="Polygon2D" parent="Key02Caverna/Visual"]
+polygon = PackedVector2Array(-10, -9, 0, -9, 0, -19, 13, -19, 13, -7, 8, -7, 8, 8, 2, 8, 2, 17, -10, 17)
+color = Color(1, 0.8, 0.24, 1)
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="Instrucoes" type="Label" parent="Interface"]
+offset_left = 344.0
+offset_top = 14.0
+offset_right = 850.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(1, 0.96, 0.82, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "City of Caves • WASD / Setas: mover • E: interagir"
+
+[node name="Dica" type="Label" parent="Interface"]
+visible = false
+offset_left = 170.0
+offset_top = 470.0
+offset_right = 860.0
+offset_bottom = 520.0
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+
+[node name="EntranceArrow" parent="PassagemSecreta" instance=ExtResource("red_arrow")]
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="FromNottingham" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(765, 770)
+
+[node name="FromCamaraSecreta" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1300, 440)

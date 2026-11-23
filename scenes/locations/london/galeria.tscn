@@ -1,0 +1,177 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/london/galeria.webp" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/systems/scene_portal.gd" id="3_exit"]
+
+[ext_resource type="PackedScene" path="res://scenes/temples/temple_npc.tscn" id="lesson_npc"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/nobre3.png" id="lesson_art_nobre3"]
+[ext_resource type="Texture2D" path="res://assets/characters/npcs/lessons/ministrel4.png" id="lesson_art_ministrel4"]
+
+[node name="GaleriaDeLondres" type="Node2D" unique_id=16733172]
+
+[node name="Mapa" type="Sprite2D" parent="." unique_id=528722753]
+texture_filter = 1
+texture = ExtResource("1_map")
+centered = false
+
+[node name="Colisoes" type="Node2D" parent="." unique_id=1019609031]
+
+[node name="Parede_superior" type="StaticBody2D" parent="Colisoes" unique_id=1440050181]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Parede_superior" unique_id=1052025196]
+polygon = PackedVector2Array(0, 0, 1536, 0, 1536, 155, 0, 155)
+
+[node name="Parede_esquerda_superior" type="StaticBody2D" parent="Colisoes" unique_id=368724063]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Parede_esquerda_superior" unique_id=1452490540]
+position = Vector2(-42, 29)
+polygon = PackedVector2Array(0, 0, 110, 0, 110, 657.6963, 110, 865, 0, 865)
+
+[node name="Parede_direita_superior" type="StaticBody2D" parent="Colisoes" unique_id=1852503204]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Parede_direita_superior" unique_id=1941970361]
+position = Vector2(27, 31)
+polygon = PackedVector2Array(1435, 0, 1536, 0, 1536, 865, 1435, 865)
+
+[node name="Parede_inferior_esquerda" type="StaticBody2D" parent="Colisoes" unique_id=1305850325]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Parede_inferior_esquerda" unique_id=1487361987]
+position = Vector2(7, 9)
+polygon = PackedVector2Array(0, 865, 97, 865, 132, 832, 170, 865, 647, 865, 647, 1024, 0, 1024)
+
+[node name="Parede_inferior_direita" type="StaticBody2D" parent="Colisoes" unique_id=995194399]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Parede_inferior_direita" unique_id=753433369]
+polygon = PackedVector2Array(888, 865, 1536, 865, 1536, 1024, 888, 1024)
+
+[node name="Porta_superior" type="StaticBody2D" parent="Colisoes" unique_id=933802386]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Porta_superior" unique_id=692382847]
+position = Vector2(-162, 19)
+polygon = PackedVector2Array(697, 160, 1167, 135, 1167, 363, 1003, 361, 1003, 311, 848.0991, 305.61707, 850, 351, 697, 350)
+
+[node name="Pintura_superior_esquerda" type="StaticBody2D" parent="Colisoes" unique_id=693662731]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Pintura_superior_esquerda" unique_id=1322141465]
+position = Vector2(-2, -18)
+polygon = PackedVector2Array(25, 155, 555, 151, 555, 338, 58, 347)
+
+[node name="Pintura_superior_direita" type="StaticBody2D" parent="Colisoes" unique_id=992840376]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Pintura_superior_direita" unique_id=1187415229]
+position = Vector2(-26, -13)
+polygon = PackedVector2Array(1028, 155, 1492, 154, 1495, 331, 1028, 337)
+
+[node name="Pintura_esquerda" type="StaticBody2D" parent="Colisoes" unique_id=1943096168]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Pintura_esquerda" unique_id=192358623]
+position = Vector2(-2, -26)
+polygon = PackedVector2Array(64, 395, 357, 401, 355, 607, 109, 605, 105, 626, 70, 621)
+
+[node name="Pintura_direita" type="StaticBody2D" parent="Colisoes" unique_id=1305074618]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Pintura_direita" unique_id=1247491458]
+position = Vector2(16, -28)
+polygon = PackedVector2Array(1160, 403, 1443, 403, 1451, 623, 1412, 620, 1414.6149, 602.54333, 1232, 605, 1230, 623, 1194, 622, 1168, 607)
+
+[node name="Pintura_inferior_esquerda" type="StaticBody2D" parent="Colisoes" unique_id=1861927618]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Pintura_inferior_esquerda" unique_id=852541608]
+position = Vector2(7, -26)
+polygon = PackedVector2Array(61, 656, 314, 659, 320, 843, 271, 843, 105, 843, 97, 862, 64, 862)
+
+[node name="Pintura_inferior_direita" type="StaticBody2D" parent="Colisoes" unique_id=730177190]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Pintura_inferior_direita" unique_id=1346223235]
+position = Vector2(1, -26)
+polygon = PackedVector2Array(1182, 655, 1480, 659, 1474, 855, 1432, 858, 1425, 837, 1240, 837, 1239, 853, 1215, 852, 1182, 848)
+
+[node name="Coluna_esquerda" type="StaticBody2D" parent="Colisoes" unique_id=361054014]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Coluna_esquerda" unique_id=1344471800]
+position = Vector2(-5, -9)
+polygon = PackedVector2Array(321, 632, 364, 634, 362, 840, 310, 840)
+
+[node name="Vitrine_coroa" type="StaticBody2D" parent="Colisoes" unique_id=663818813]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Vitrine_coroa" unique_id=2130866309]
+polygon = PackedVector2Array(426, 509, 521, 510, 536, 656, 416, 652)
+
+[node name="Vitrine_orbe" type="StaticBody2D" parent="Colisoes" unique_id=139844390]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Vitrine_orbe" unique_id=384962022]
+position = Vector2(2, 0)
+polygon = PackedVector2Array(1003, 508, 1103, 508, 1119, 653, 996, 657)
+
+[node name="Estatua_leao" type="StaticBody2D" parent="Colisoes" unique_id=515477935]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Estatua_leao" unique_id=1621279845]
+polygon = PackedVector2Array(628, 583, 664, 556, 666, 530, 684, 510, 703, 483, 729, 475, 761, 475, 796, 424, 833, 441, 870, 559, 903, 587, 903, 644, 862, 678, 669, 675, 629, 645)
+
+[node name="Pilar_entrada_esquerdo" type="StaticBody2D" parent="Colisoes" unique_id=1539991956]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Pilar_entrada_esquerdo" unique_id=1808431421]
+polygon = PackedVector2Array(647, 872, 672, 848, 700, 877, 702, 1024, 641, 1024)
+
+[node name="Pilar_entrada_direito" type="StaticBody2D" parent="Colisoes" unique_id=1896815237]
+collision_mask = 0
+
+[node name="Forma" type="CollisionPolygon2D" parent="Colisoes/Pilar_entrada_direito" unique_id=407576152]
+polygon = PackedVector2Array(841, 876, 864.8301, 844, 893, 869, 895, 1024, 834, 1024)
+
+[node name="Saida" type="Area2D" parent="." unique_id=1543162937]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3_exit")
+target_scene_path = "res://scenes/locations/london/cultural.tscn"
+target_spawn_name = &"FromGaleria"
+
+[node name="Forma" type="CollisionPolygon2D" parent="Saida" unique_id=451557144]
+polygon = PackedVector2Array(704, 977, 831, 977, 831, 1024, 704, 1024)
+
+[node name="Player" parent="." unique_id=1673182543 instance=ExtResource("2_player")]
+position = Vector2(766, 832)
+
+[node name="Camera2D" parent="Player"]
+min_zoom = 1.0
+max_zoom = 1.0
+
+[node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(706.0, 832.0)
+npc_id = "galeria_lesson_1"
+speaker_name = "Curadora — Polissemia de light"
+dialogue_text = "Turn on the light fala de luz. A light bag fala de algo leve. Observe o verbo ou o substantivo ao redor da palavra."
+
+[node name="Sprite2D" parent="LessonNPC1" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_nobre3")
+
+[node name="LessonNPC2" parent="." instance=ExtResource("lesson_npc")]
+position = Vector2(826.0, 832.0)
+npc_id = "galeria_lesson_2"
+speaker_name = "Artista — Presente contínuo"
+dialogue_text = "She is painting a portrait descreve o que está acontecendo agora. She paints on Mondays descreve uma atividade habitual."
+
+[node name="Sprite2D" parent="LessonNPC2" index="0"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("lesson_art_ministrel4")

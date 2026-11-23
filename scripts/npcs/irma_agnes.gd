@@ -1,0 +1,56 @@
+extends Area2D
+
+@onready var prompt: Label = $Prompt
+var player_nearby: bool = false
+
+@export var npc_id: String = ""
+const NPC_INDICATOR_SCRIPT: Script = preload("res://scripts/npcs/npc_dialogue_indicator.gd")
+var npc_indicator
+
+func _setup_npc_indicator() -> void:
+    npc_indicator = NPC_INDICATOR_SCRIPT.new()
+    add_child(npc_indicator)
+    npc_indicator.setup(self, npc_id)
+
+
+var dialogue_lines: Array[String] = [
+    "Seja bem-vindo ao templo, WordSeeker! Sou a Irmã Agnes. Aqui você pode recuperar suas forças antes de continuar a jornada.",
+    "Sua vida é medida em HP, ou Health Points. Você possui até 10 pontos, mostrados no canto superior esquerdo da tela.",
+    "Nas batalhas, cada resposta errada faz você perder 1 HP. Se seus pontos chegarem a zero, você será levado de volta a Colchester.",
+    "Os templos são lugares seguros para se recuperar. Você encontrará templos em Colchester, York, Newcastle, Liverpool, Stratford e Londres.",
+    "Em cada templo há um cálice sagrado. Aproxime-se dele e pressione E quando aparecer o aviso para recuperar todos os seus pontos de vida.",
+    "Você pode usar o cálice quantas vezes precisar. Depois, basta atravessar a saída do templo para voltar à cidade.",
+    "Este lugar também guarda nossa história: o Priorado de St Botolph foi fundado no século XII, e suas ruínas ainda contam parte do passado de Colchester."
+]
+
+func _ready() -> void:
+    prompt.text = "[E] Falar"
+    prompt.hide()
+    _setup_npc_indicator()
+    body_entered.connect(_on_body_entered)
+    body_exited.connect(_on_body_exited)
+
+func _unhandled_input(event: InputEvent) -> void:
+    if not player_nearby or not event.is_action_pressed("interact"):
+        return
+    if DialogueUI.is_open():
+        return
+    prompt.hide()
+    DialogueUI.show_sequence("Irmã Agnes", dialogue_lines, Callable(self, "_on_dialogue_closed"))
+    get_viewport().set_input_as_handled()
+
+func _on_dialogue_closed() -> void:
+    npc_indicator.mark_talked(String(GameState.world_map_point_name))
+    if player_nearby:
+        prompt.show()
+
+func _on_body_entered(body: Node2D) -> void:
+    if body.is_in_group("player"):
+        player_nearby = true
+        if not DialogueUI.is_open():
+            prompt.show()
+
+func _on_body_exited(body: Node2D) -> void:
+    if body.is_in_group("player"):
+        player_nearby = false
+        prompt.hide()
