@@ -186,9 +186,9 @@ script = ExtResource("91_city_music_loop")
 
 [node name="CityGuide" parent="." instance=ExtResource("CityGuideScene")]
 position = Vector2(730, 950)
-speaker_name = "Manchester Guide"
+speaker_name = "Guia de Manchester"
 npc_id = "manchester_town_guide"
-dialogue_text = "Welcome to Manchester! Look around the city. What buildings can you name in English?"
+dialogue_text = "Boas-vindas a Manchester! Observe os prédios da cidade. Quais deles você consegue nomear em inglês?"
 
 [node name="LessonNPC1" parent="." instance=ExtResource("lesson_npc")]
 position = Vector2(680.0, 1010.0)

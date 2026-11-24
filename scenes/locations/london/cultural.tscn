@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="Script" path="res://scripts/systems/scene_spawn.gd" id="3_district"]
 
+[ext_resource type="Script" path="res://scripts/npcs/knowledge_scroll_npc.gd" id="scroll_npc"]
+
 [sub_resource type="RectangleShape2D" id="portal_Esquerda"]
 size = Vector2(28, 156)
 
@@ -185,9 +187,10 @@ shape = SubResource("WorldMapExitShape")
 
 [node name="ProgressGuide" parent="." instance=ExtResource("CityGuideScene")]
 position = Vector2(605, 923)
-speaker_name = "London Guide"
 npc_id = "london_town_guide"
-dialogue_text = "Welcome to London! The museum and gallery are in the Cultural District. Cross into the Religious District to visit the cathedral and the healing temple."
+script = ExtResource("scroll_npc")
+speaker_name = "Guardião do Conhecimento"
+dialogue_text = "Receba o Pergaminho do Conhecimento (Scroll of Knowledge). Na mochila, ele mostra a porcentagem dos habitantes com quem você já conversou e quantos monstros já encontrou. Para recuperar todos os fragmentos da língua inglesa, converse com todos os habitantes e encontre os 100 monstros do mapa. Mesmo se perder uma batalha, o encontro conta. Ao completar os dois objetivos, volte ao mapa-múndi para o confronto final."
 
 [node name="EntradaGaleria" type="Area2D" parent="."]
 position = Vector2(986, 720)

@@ -121,8 +121,8 @@ script = ExtResource("91_city_music_loop")
 
 [node name="ProgressGuide" parent="." instance=ExtResource("99_progress_npc")]
 position = Vector2(567, 665)
-speaker_name = "Town Guide"
-dialogue_text = "Welcome, traveler! Explore our city and keep practicing your English."
+speaker_name = "Guia da cidade"
+dialogue_text = "Boas-vindas, viajante! Explore a cidade e aproveite para praticar seu inglês."
 
 [node name="MapExitIndicator" parent="SaidaMapa" instance=ExtResource("190_map_exit_indicator")]
 

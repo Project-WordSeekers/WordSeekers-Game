@@ -3,7 +3,7 @@ extends Area2D
 # e aplica um quiz que junta o vocabulário novo com o que o jogo já ensinou
 # (saudações, números, artigos a/an, plural e verbo to be).
 
-@export var speaker_name: String = "Sister Abigail"
+@export var speaker_name: String = "Irmã Abigail"
 @export var prompt_text: String = "[E] Falar"
 @export var npc_id: String = "bath_storyteller"
 

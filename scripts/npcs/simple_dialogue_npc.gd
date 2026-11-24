@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speaker_name: String = "NPC"
-@export_multiline var dialogue_text: String = "Hello!"
+@export_multiline var dialogue_text: String = "Olá!"
 @export var prompt_text: String = "[E] Falar"
 
 @export var npc_id: String = ""

@@ -1,0 +1,7 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/minigames/battle.tscn" id="battle"]
+[ext_resource type="Script" path="res://scripts/systems/vocabullary_eater.gd" id="boss"]
+
+[node name="VocabullaryEater" instance=ExtResource("battle")]
+script = ExtResource("boss")

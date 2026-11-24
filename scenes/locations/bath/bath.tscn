@@ -172,20 +172,20 @@ shape = SubResource("ExitShape")
 
 [node name="CrescentGuide" parent="NPCs" unique_id=1452298480 instance=ExtResource("99_npc")]
 position = Vector2(330, 205)
-speaker_name = "Royal Crescent Guide"
-dialogue_text = "Welcome to Bath! These elegant houses form the Royal Crescent, built in the 1770s. Bath is famous for its golden stone, its Roman Baths and the writer Jane Austen, who lived here. Explore the Abbey, the Baths and Pulteney Bridge!"
+speaker_name = "Guia do Royal Crescent"
+dialogue_text = "Boas-vindas a Bath! Estas casas formam o Royal Crescent, construído na década de 1770. Bath é conhecida pela pedra dourada, pelas Termas Romanas e pela escritora Jane Austen, que morou aqui. Visite a abadia, as termas e a ponte Pulteney!"
 npc_id = "bath_crescent_guide"
 
 [node name="BathsAttendant" parent="NPCs" unique_id=1219789549 instance=ExtResource("99_npc")]
 position = Vector2(170, 640)
-speaker_name = "Roman Baths Attendant"
-dialogue_text = "Salve, traveler! The Romans built these baths almost two thousand years ago. The hot spring water comes from deep underground, and they dedicated the temple here to the goddess Sulis Minerva."
+speaker_name = "Atendente das Termas Romanas"
+dialogue_text = "Olá, viajante! Os romanos construíram estas termas há quase dois mil anos. A água quente vem das profundezas do solo. O templo que havia aqui era dedicado à deusa Sulis Minerva."
 npc_id = "bath_baths_attendant"
 
 [node name="Storyteller" parent="NPCs" unique_id=1108075196 instance=ExtResource("99_npc")]
 position = Vector2(830, 720)
 script = ExtResource("100_storyteller")
-speaker_name = "Sister Abigail"
+speaker_name = "Irmã Abigail"
 npc_id = "bath_storyteller"
 
 [node name="CityMusic" type="AudioStreamPlayer" parent="." unique_id=1500090680]

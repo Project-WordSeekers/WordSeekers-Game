@@ -20,7 +20,7 @@ var random_encounter_active: bool = false
 var consecutive_travels_without_battle: int = 0
 
 func get_next_battle_chance() -> float:
-	return minf(0.05 * float(consecutive_travels_without_battle + 1), 1.0)
+	return minf(0.05 * float(consecutive_travels_without_battle + 1), 0.20)
 
 func register_travel_battle_roll(battle_started: bool) -> void:
 	if battle_started:
@@ -130,6 +130,7 @@ func reset_inventory() -> void:
 	dictionary_changed.emit(dictionary_owned, dictionary_uses, DICTIONARY_MAX_USES)
 
 func return_to_city01_after_defeat() -> void:
+	random_encounter_active = false
 	world_map_point_name = &"Colchester"
 	pending_spawn_name = &""
 	restore_full_health()
@@ -144,8 +145,22 @@ const CITY_LEVELS: Dictionary = {
 const PROGRESS_PATH: String = "user://wordseekers_progress.json"
 var npc_cities_completed: Dictionary = {}
 var talked_npcs: Dictionary = {}
-var used_quiz_ids: Dictionary = {}
+var encountered_monster_ids: Dictionary = {}
 var quiz_pool: Array = []
+const KNOWLEDGE_NPCS = preload("res://assets/knowledge_npcs.json")
+const MONSTER_GOAL := 100
+var knowledge_scroll_owned := false
+var boss_defeated := false
+
+func knowledge_dialogues_completed() -> int:
+	var count := 0
+	for npc_id in KNOWLEDGE_NPCS.data:
+		if talked_npcs.has(npc_id):
+			count += 1
+	return count
+
+func endgame_ready() -> bool:
+	return not boss_defeated and knowledge_scroll_owned and encountered_monster_ids.size() >= MONSTER_GOAL and knowledge_dialogues_completed() == KNOWLEDGE_NPCS.data.size()
 
 func load_progress() -> void:
 	if not FileAccess.file_exists(PROGRESS_PATH):
@@ -156,21 +171,25 @@ func load_progress() -> void:
 	var parsed: Variant = JSON.parse_string(f.get_as_text())
 	if not parsed is Dictionary:
 		return
+	knowledge_scroll_owned = bool(parsed.get("knowledge_scroll_owned", false))
+	boss_defeated = bool(parsed.get("boss_defeated", false))
 	magnifier_uses = clampi(int(parsed.get("magnifier_uses", -1)), -1, MAGNIFIER_MAX_USES)
 	for city in parsed.get("npc_cities_completed", []):
 		if CITY_LEVELS.has(String(city)):
 			npc_cities_completed[String(city)] = true
 	for npc_id in parsed.get("talked_npcs", []):
 		talked_npcs[String(npc_id)] = true
-	for quiz_id in parsed.get("used_quiz_ids", []):
-		used_quiz_ids[String(quiz_id)] = true
+	# Os formatos anteriores registravam encontros ou vitórias por ID de quiz.
+	for key in ["encountered_monster_ids", "used_quiz_ids", "defeated_monster_ids"]:
+		for quiz_id in parsed.get(key, []):
+			encountered_monster_ids[String(quiz_id)] = true
 
 func save_progress() -> void:
 	var f := FileAccess.open(PROGRESS_PATH, FileAccess.WRITE)
 	if f == null:
 		push_warning("Unable to save progress")
 		return
-	f.store_string(JSON.stringify({"magnifier_uses": magnifier_uses, "npc_cities_completed": npc_cities_completed.keys(), "talked_npcs": talked_npcs.keys(), "used_quiz_ids": used_quiz_ids.keys()}))
+	f.store_string(JSON.stringify({"knowledge_scroll_owned": knowledge_scroll_owned, "boss_defeated": boss_defeated, "magnifier_uses": magnifier_uses, "npc_cities_completed": npc_cities_completed.keys(), "talked_npcs": talked_npcs.keys(), "encountered_monster_ids": encountered_monster_ids.keys()}))
 
 
 func has_talked_to_npc(npc_id: String) -> bool:
@@ -215,21 +234,25 @@ func load_quiz_pool() -> void:
 		quiz_pool = parsed.get("conjuntos", [])
 
 func has_unused_quizzes() -> bool:
+	if boss_defeated:
+		return false
 	load_quiz_pool()
 	for quiz in quiz_pool:
-		if quiz is Dictionary and not used_quiz_ids.has(String(quiz.get("id", ""))):
+		if quiz is Dictionary and not encountered_monster_ids.has(String(quiz.get("id", ""))):
 			return true
 	return false
 
 func reserve_random_quiz() -> Dictionary:
+	if boss_defeated:
+		return {}
 	load_quiz_pool()
 	var available: Array = []
 	for quiz in quiz_pool:
-		if quiz is Dictionary and not used_quiz_ids.has(String(quiz.get("id", ""))):
+		if quiz is Dictionary and not encountered_monster_ids.has(String(quiz.get("id", ""))):
 			available.append(quiz)
 	if available.is_empty():
 		return {}
 	var selected: Dictionary = available.pick_random()
-	used_quiz_ids[String(selected.get("id", ""))] = true
+	encountered_monster_ids[String(selected["id"])] = true
 	save_progress()
 	return selected

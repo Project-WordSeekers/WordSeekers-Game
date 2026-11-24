@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+const ToolIconButton = preload("res://scripts/ui/tool_icon_button.gd")
 const Generator = preload("res://scripts/minigames/word_search_generator.gd")
 const WORDS: Array[String] = ["CASTLE","CITY","WALLS","LEARN"]
 # Versão 3: nova grade com direções obrigatórias, sem importar o tabuleiro anterior.
@@ -23,8 +24,10 @@ var buttons: Dictionary = {}
 var overlay: ColorRect
 var status: Label
 var word_label: Label
-var hint_button: Button
+var hint_button: ToolIconButton
 var opened: bool = false
+var completion_callback: Callable
+var close_button: Button
 
 func _ready() -> void:
 	layer = 80
@@ -88,13 +91,14 @@ func _ready() -> void:
 	var actions := HBoxContainer.new()
 	actions.alignment = BoxContainer.ALIGNMENT_CENTER
 	content.add_child(actions)
-	hint_button = Button.new()
+	hint_button = ToolIconButton.new(load("res://assets/ui/magnifier.svg") as Texture2D)
 	hint_button.pressed.connect(_use_magnifier)
 	actions.add_child(hint_button)
-	var close := Button.new()
-	close.text = "Fechar diário (Esc)"
-	close.pressed.connect(close_book)
-	actions.add_child(close)
+	close_button = Button.new()
+	close_button.text = "Fechar diário (Esc)"
+	close_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	close_button.pressed.connect(close_book)
+	actions.add_child(close_button)
 	overlay.hide()
 
 func _build_grid() -> void:
@@ -128,17 +132,25 @@ func _build_grid() -> void:
 			grid.add_child(cell)
 			buttons[pos] = cell
 
-func open_book(id: String = CHALLENGE, title: String = "Colchester · Roman Walls", difficulty: String = "Fácil", size: int = 8, vocabulary: Array[String] = WORDS) -> void:
+func open_book(id: String = CHALLENGE, title: String = "Colchester · Roman Walls", difficulty: String = "Fácil", size: int = 8, vocabulary: Array[String] = WORDS, on_completed: Callable = Callable()) -> void:
 	if opened:
 		return
 	if DialogueUI.is_open() or GameHUD.is_modal_open():
 		return
+	completion_callback = on_completed
+	close_button.visible = not on_completed.is_valid()
 	challenge_id = id
 	words = vocabulary
 	board_size = size
 	subtitle.text = "%s  |  %s · %d×%d" % [title, difficulty, size, size]
 	status.text = ""
 	_load_progress()
+	if completion_callback.is_valid():
+		board = []
+		placements = {}
+		found.clear()
+		hinted_word = ""
+		hint_cell = Vector2i(-1, -1)
 	if board.is_empty():
 		var generated: Dictionary = Generator.generate(words, int(Time.get_unix_time_from_system()), size, id == CHALLENGE, size == 16)
 		if generated.is_empty():
@@ -158,7 +170,7 @@ func close_book() -> void:
 	overlay.hide()
 
 func _input(event: InputEvent) -> void:
-	if opened and event.is_action_pressed("ui_cancel"):
+	if opened and not completion_callback.is_valid() and event.is_action_pressed("ui_cancel"):
 		close_book()
 		get_viewport().set_input_as_handled()
 	if opened and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed and selecting:
@@ -204,6 +216,12 @@ func _commit_selection() -> void:
 			status.text = "Encontrou: " + word + "!"
 			if found.size() == words.size():
 				status.text = "Parabéns! Caça-palavras concluído."
+				if completion_callback.is_valid():
+					var finished := completion_callback
+					completion_callback = Callable()
+					close_book()
+					finished.call_deferred()
+					return
 			_refresh()
 			return
 	status.text = "Tente outra sequência."
@@ -245,7 +263,7 @@ func _use_magnifier() -> void:
 
 func _refresh() -> void:
 	var uses := GameState.magnifier_uses
-	hint_button.text = "Usar Lupa (%d/%d)" % [maxi(uses, 0), GameState.MAGNIFIER_MAX_USES]
+	hint_button.caption.text = "Usar Lupa (%d/%d)" % [maxi(uses, 0), GameState.MAGNIFIER_MAX_USES]
 	hint_button.disabled = uses <= 0 or not hinted_word.is_empty() or found.size() == words.size()
 	hint_button.tooltip_text = "Fale com o Guardião de York para receber a Lupa." if uses < 0 else "Destaca a primeira letra de uma palavra ainda não encontrada."
 	var selected: Array = _line_cells(start_cell,last_cell) if selecting else []
@@ -267,6 +285,8 @@ func _refresh() -> void:
 		status.text = "%d / %d palavras" % [found.size(),words.size()]
 
 func _save_progress() -> void:
+	if completion_callback.is_valid():
+		return
 	var cfg := ConfigFile.new()
 	cfg.load(SAVE_PATH)
 	cfg.set_value(challenge_id,"hinted_word",hinted_word)

@@ -80,8 +80,8 @@ scale = Vector2(0.75, 0.75)
 
 [node name="Guardian" parent="NPCs" instance=ExtResource("4_npc")]
 position = Vector2(217, -284)
-speaker_name = "Roman Baths Attendant"
-dialogue_text = "Salve, traveler! Welcome to the Roman Baths. The hot spring water comes from deep underground, and the Romans believed the goddess Sulis Minerva gave it healing powers. Step into the warm pools to restore your strength."
+speaker_name = "Atendente das Termas Romanas"
+dialogue_text = "Boas-vindas às Termas Romanas! A água quente vem das profundezas do solo. Os romanos acreditavam que a deusa Sulis Minerva lhe dava poderes de cura. Entre em uma das piscinas para recuperar suas forças."
 
 [node name="TempleExit" type="Area2D" parent="."]
 position = Vector2(0, 526)

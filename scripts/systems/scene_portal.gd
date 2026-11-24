@@ -15,6 +15,8 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 	for frame in 3:
 		await get_tree().physics_frame
+		if not is_inside_tree():
+			return
 	for body in get_overlapping_bodies():
 		_ignored_on_arrival.append(body)
 	_armed = true

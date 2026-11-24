@@ -151,7 +151,7 @@ shape = SubResource("ExitShape")
 ; Plymouth Hoe: Sir Francis Drake, no calçadão ao lado da estátua.
 [node name="Drake" parent="NPCs" instance=ExtResource("99_npc")]
 position = Vector2(800, 122)
-dialogue_text = "Ahoy, WordSeeker! I am Sir Francis Drake. That is my statue on Plymouth Hoe. In 1577, I set sail and travelled around the world aboard the Golden Hind. I returned in 1580. People here tell a story about me playing bowls before facing the Spanish Armada. Can you see the red and white lighthouse? That is Smeaton’s Tower."
+dialogue_text = "Olá, WordSeeker! Sou Sir Francis Drake. Aquela é minha estátua em Plymouth Hoe. Em 1577, parti a bordo do Golden Hind e dei a volta ao mundo. Voltei em 1580. Dizem que eu jogava boliche de gramado antes de enfrentar a Armada Espanhola. Veja o farol vermelho e branco. É a Torre de Smeaton."
 speaker_name = "Sir Francis Drake"
 npc_id = "plymouth_drake"
 
@@ -162,7 +162,7 @@ texture = ExtResource("103_drake_tex")
 ; Mayflower Steps: capitão do Mayflower, em frente ao arco.
 [node name="Captain" parent="NPCs" instance=ExtResource("99_npc")]
 position = Vector2(1222, 446)
-dialogue_text = "Good day, WordSeeker! I am Captain Christopher Jones. In September 1620, the Mayflower left Plymouth with 102 passengers. We crossed the Atlantic in 66 days. The passengers are known as the Pilgrims. They founded a settlement called Plymouth, just like this city."
+dialogue_text = "Bom dia, WordSeeker! Sou o capitão Christopher Jones. Em setembro de 1620, o Mayflower saiu de Plymouth com 102 passageiros. Cruzamos o Atlântico em 66 dias. Esses passageiros ficaram conhecidos como Peregrinos. Fundaram um povoado chamado Plymouth, como esta cidade."
 speaker_name = "Captain Christopher Jones"
 npc_id = "plymouth_captain"
 

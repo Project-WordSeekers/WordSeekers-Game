@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+const ToolIconButton = preload("res://scripts/ui/tool_icon_button.gd")
 enum Mode {
 	NONE,
 	DIALOGUE,
@@ -31,7 +32,7 @@ var quiz_pending_advance: bool = false
 var quiz_explanation: String = ""
 var choice_5: Label
 var dictionary_widget: VBoxContainer
-var dictionary_button: Button
+var dictionary_button: ToolIconButton
 var dictionary_shortcut: Label
 var quiz_wrong_indices: Array[int] = []
 var quiz_correct_index: int = -1
@@ -265,7 +266,7 @@ func _confirm_quiz_answer() -> void:
 		if not selected_index in quiz_wrong_indices:
 			quiz_wrong_indices.append(selected_index)
 		_render_choices()
-		status_label.text = String(question.get("wrong_feedback", "Not quite! Try again.")) + "\n" + String(question.get("explanation", ""))
+		status_label.text = String(question.get("wrong_feedback", "Ainda não. Tente novamente.")) + "\n" + String(question.get("explanation", ""))
 		_fit_battle_quiz_panel.call_deferred()
 		return
 	quiz_pending_advance = true
@@ -442,14 +443,8 @@ func _create_dictionary_button() -> void:
 	dictionary_widget.name = "DictionaryWidget"
 	dictionary_widget.add_theme_constant_override("separation", 5)
 	add_child(dictionary_widget)
-	dictionary_button = Button.new()
-	dictionary_button.name = "UseDictionary"
-	dictionary_button.text = "Usar Dicionário"
-	dictionary_button.icon = load("res://assets/ui/open_book.svg") as Texture2D
-	dictionary_button.expand_icon = true
-	dictionary_button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	dictionary_button.custom_minimum_size = Vector2(148, 58)
-	dictionary_button.add_theme_font_size_override("font_size", 14)
+	dictionary_button = ToolIconButton.new(load("res://assets/ui/open_book.svg") as Texture2D)
+	dictionary_button.caption.text = "Usar Dicionário"
 	dictionary_button.pressed.connect(_on_dictionary_button_pressed)
 	dictionary_widget.add_child(dictionary_button)
 	dictionary_shortcut = Label.new()
@@ -470,7 +465,7 @@ func _process(_delta: float) -> void:
 	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	# O HUD do jogador ocupa o canto superior esquerdo (x=16..316, y=16..188).
 	# Deixe o Dicionario abaixo dessa regiao, sem encostar no quiz.
-	var button_size: Vector2 = Vector2(148.0, 94.0)
+	var button_size: Vector2 = dictionary_widget.get_combined_minimum_size()
 	var left_x: float = panel.position.x - button_size.x - 12.0
 	var bottom_space: float = screen_size.y - panel.position.y - panel.size.y
 	if left_x >= 8.0 and screen_size.y >= 340.0:

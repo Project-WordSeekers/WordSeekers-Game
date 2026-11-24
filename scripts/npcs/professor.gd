@@ -18,40 +18,31 @@ func _setup_npc_indicator() -> void:
 	npc_indicator.setup(self, npc_id)
 
 
-var dialogue_lines: Array[String] = [
-	"Hello!\nWelcome to our library!",
-	"My name is Mr. John.\nI am the English teacher.",
-	"I have some questions\nfor you today.",
-	"Don't worry!\nThey are not too difficult.",
-	"You can use what you know\nabout English to answer them.",
-	"If you make a mistake, that's okay.\nYou can learn from it!",
-	"Are you ready\nto test your English?",
-	"Great!\nLet's start the challenge!"
-]
+var dialogue_lines: Array[String] = ["Olá! Boas-vindas à nossa biblioteca.", "Sou o professor John e ensino inglês. Em inglês, biblioteca é library, professor é teacher e livro é book.", "Hoje tenho algumas perguntas para você. Se errar, aproveite para aprender com a resposta.", "Vamos começar o desafio!"]
 
 var questions: Array[Dictionary] = [
 	{
-		"prompt": "What is the correct translation of \"library\"?",
+		"prompt": "Qual é a tradução de \"library\"?",
 		"answers": ["A) Escola", "B) Biblioteca", "C) Professor", "D) Livro"],
 		"correct": 1
 	},
 	{
-		"prompt": "What is the correct translation of \"teacher\"?",
+		"prompt": "Qual é a tradução de \"teacher\"?",
 		"answers": ["A) Aluno", "B) Professor", "C) Livro", "D) Amigo"],
 		"correct": 1
 	},
 	{
-		"prompt": "What is the correct translation of \"book\"?",
+		"prompt": "Qual é a tradução de \"book\"?",
 		"answers": ["A) Caderno", "B) Escola", "C) Livro", "D) Mesa"],
 		"correct": 2
 	},
 	{
-		"prompt": "What does \"Good morning\" mean?",
+		"prompt": "O que significa \"Good morning\"?",
 		"answers": ["A) Boa noite", "B) Boa tarde", "C) Bom dia", "D) Até amanhã"],
 		"correct": 2
 	},
 	{
-		"prompt": "What does \"What is your name?\" mean?",
+		"prompt": "O que significa \"What is your name?\"?",
 		"answers": ["A) Qual é o seu nome?", "B) Onde você mora?", "C) Quantos anos você tem?", "D) Como você está?"],
 		"correct": 0
 	}
@@ -85,7 +76,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	interaction_active = true
 	interaction_label.hide()
 	DialogueUI.show_sequence(
-		"Mr. John",
+		"Professor John",
 		dialogue_lines,
 		Callable(self, "_start_quiz")
 	)
@@ -93,11 +84,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _start_quiz() -> void:
 	DialogueUI.show_quiz(
-		"Mr. John",
+		"Professor John",
 		questions,
 		Callable(self, "_on_quiz_answer"),
 		Callable(self, "_on_quiz_finished"),
-		"You won! Great job!\nYou answered correctly!"
+		"Muito bem! Você concluiu o desafio."
 	)
 
 func _on_quiz_answer(_question_index: int, _is_correct: bool) -> void:

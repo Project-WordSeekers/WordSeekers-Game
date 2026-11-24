@@ -109,7 +109,7 @@ offset_left = 4.0
 offset_top = 2.0
 offset_right = 336.0
 offset_bottom = 25.0
-text = "What is the correct translation of \"library\"?"
+text = "Qual é a tradução de \"library\"?"
 
 [node name="AnswerButton1" type="Button" parent="UI/QuizPanel" unique_id=843787988]
 layout_mode = 0
@@ -150,9 +150,7 @@ offset_left = 115.0
 offset_top = 30.0
 offset_right = 155.0
 offset_bottom = 53.0
-text = "You won! 🎉
-Great job!
-You answered correctly!"
+text = "Muito bem! Você concluiu o desafio."
 
 [node name="Paredes" type="StaticBody2D" parent="." unique_id=600319386]
 

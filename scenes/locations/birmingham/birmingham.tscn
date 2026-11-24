@@ -416,9 +416,9 @@ shape = SubResource("WorldMapExitShape")
 
 [node name="CityGuide" parent="." instance=ExtResource("CityGuideScene")]
 position = Vector2(817, 642)
-speaker_name = "Birmingham Guide"
+speaker_name = "Guia de Birmingham"
 npc_id = "birmingham_town_guide"
-dialogue_text = "Welcome to Birmingham! You can study at the library and explore the museum."
+dialogue_text = "Boas-vindas a Birmingham! Você pode estudar na biblioteca e explorar o museu."
 
 [node name="CityMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("theme")

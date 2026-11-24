@@ -48,7 +48,26 @@ func apply_selected_appearance() -> void:
 	walk_frame_count = 3
 	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 
+var endgame_cinematic := false
+
+func _begin_endgame() -> void:
+	endgame_cinematic = true
+	var viewport := get_viewport()
+	var original := viewport.canvas_transform
+	for frame in range(18):
+		var shake := original
+		shake.origin += Vector2(randf_range(-9, 9), randf_range(-7, 7)) * (1.0 - frame / 18.0)
+		viewport.canvas_transform = shake
+		await get_tree().create_timer(0.045).timeout
+	viewport.canvas_transform = original
+	SceneTransition.change_scene_to_file("res://scenes/minigames/vocabullary_eater.tscn")
+
 func _process(delta: float) -> void:
+	if endgame_cinematic:
+		return
+	if not moving and not GameHUD.is_modal_open() and not DialogueUI.is_open() and GameState.endgame_ready():
+		_begin_endgame()
+		return
 	if _wait_interact_release and not Input.is_action_pressed("interact"):
 		_wait_interact_release = false
 	if moving:

@@ -20,7 +20,7 @@ func _ready() -> void:
 	_on_health_changed(GameState.player_health, GameState.MAX_HEALTH)
 	_on_dictionary_changed(
 		GameState.dictionary_owned,
-		GameState.dictionary_uses,
+			GameState.dictionary_uses,
 		GameState.DICTIONARY_MAX_USES
 	)
 	help_overlay.hide()
@@ -80,7 +80,7 @@ func _toggle_inventory() -> void:
 
 func _refresh_inventory_text() -> void:
 	inventory_header.visible = GameState.dictionary_owned
-	if not GameState.dictionary_owned and GameState.magnifier_uses < 0:
+	if not GameState.dictionary_owned and GameState.magnifier_uses < 0 and not GameState.knowledge_scroll_owned:
 		inventory_content.text = "Mochila vazia."
 		return
 
@@ -89,13 +89,21 @@ func _refresh_inventory_text() -> void:
 		inventory_content.text = "%s\n\n%s\n\nUsos durante quizzes: %d/%d\nPressione T (Translate) durante um quiz para usar." % [
 			GameState.DICTIONARY_NAME,
 			GameState.DICTIONARY_DESCRIPTION,
-		GameState.dictionary_uses,
+			GameState.dictionary_uses,
 			GameState.DICTIONARY_MAX_USES
 		]
 	if GameState.magnifier_uses >= 0:
 		if GameState.dictionary_owned:
 			inventory_content.text += "\n\n"
 		inventory_content.text += "Lupa — %d/%d usos\nDestaca a primeira letra de uma palavra no caça-palavras." % [GameState.magnifier_uses, GameState.MAGNIFIER_MAX_USES]
+
+	if GameState.knowledge_scroll_owned:
+		var total: int = GameState.KNOWLEDGE_NPCS.data.size()
+		var completed := GameState.knowledge_dialogues_completed()
+		var percentage := floori(100.0 * completed / maxi(total, 1))
+		if not inventory_content.text.is_empty():
+			inventory_content.text += "\n\n"
+		inventory_content.text += "Pergaminho do Conhecimento (Scroll of Knowledge)\nHabitantes: %d%% (%d/%d)\nMonstros encontrados: %d/%d" % [percentage, completed, total, GameState.encountered_monster_ids.size(), GameState.MONSTER_GOAL]
 
 func _on_health_changed(current_hp: int, max_hp: int) -> void:
 	hp_bar.max_value = max_hp
@@ -128,6 +136,7 @@ func _update_visibility_for_scene() -> void:
 	var is_non_gameplay: bool = (
 		scene_path == "res://scenes/ui/intro/intro.tscn"
 		or scene_path == "res://scenes/ui/character_selection/character_selection.tscn"
+		or scene_path == "res://scenes/ui/end_credits.tscn"
 	)
 	hud_root.visible = not is_non_gameplay
 	if is_non_gameplay:

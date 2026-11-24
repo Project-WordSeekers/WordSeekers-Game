@@ -29,7 +29,7 @@ func _on_pool_body_entered(body: Node2D) -> void:
 
 	GameState.restore_full_health()
 	_show_message(
-		"The warm spring water restores your strength!\n(A água termal restaurou sua vida: %d/%d)"
+		"A água termal restaurou sua vida (%d/%d)."
 		% [GameState.player_health, GameState.MAX_HEALTH]
 	)
 
